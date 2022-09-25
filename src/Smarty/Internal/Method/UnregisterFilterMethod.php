@@ -25,7 +25,7 @@ class UnregisterFilterMethod extends RegisterFilterMethod
      * @param callback|string                                                 $callback
      *
      * @return \Smarty|\Smarty\Internal\Template
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function unregisterFilter(\Smarty\Internal\TemplateBase $obj, $type, $callback)
     {

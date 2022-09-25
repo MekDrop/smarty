@@ -42,7 +42,7 @@ class ExpressionPrint extends \Smarty\Internal\CompileBase
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
     {
@@ -119,7 +119,7 @@ class ExpressionPrint extends \Smarty\Internal\CompileBase
                             $output = $result;
                         } else {
                             // not found, throw exception
-                            throw new \SmartyException("Unable to load variable filter '{$name}'");
+                            throw new \Smarty\Exception\SmartyException("Unable to load variable filter '{$name}'");
                         }
                     }
                 }
@@ -148,7 +148,7 @@ class ExpressionPrint extends \Smarty\Internal\CompileBase
      * @param string                                $output   embedded output
      *
      * @return string
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     private function compile_variable_filter(\Smarty\Internal\TemplateCompilerBase $compiler, $name, $output)
     {

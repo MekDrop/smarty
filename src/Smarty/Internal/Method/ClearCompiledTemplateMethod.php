@@ -32,7 +32,7 @@ class ClearCompiledTemplateMethod
      * @param integer $exp_time      expiration time
      *
      * @return int number of template files deleted
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function clearCompiledTemplate(\Smarty $smarty, $resource_name = null, $compile_id = null, $exp_time = null)
     {

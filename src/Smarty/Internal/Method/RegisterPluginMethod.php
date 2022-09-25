@@ -23,9 +23,6 @@ class RegisterPluginMethod
     /**
      * Registers plugin to be used in templates
      *
-     * @api  Smarty::registerPlugin()
-     * @link https://www.smarty.net/docs/en/api.register.plugin.tpl
-     *
      * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param string                                                          $type       plugin type
      * @param string                                                          $name       name of template tag
@@ -35,7 +32,10 @@ class RegisterPluginMethod
      * @param mixed                                                           $cache_attr caching attributes if any
      *
      * @return \Smarty|\Smarty\Internal\Template
-     * @throws \SmartyException              when the plugin tag is invalid
+     * @throws \Smarty\Exception\SmartyException              when the plugin tag is invalid
+     *@api  Smarty::registerPlugin()
+     * @link https://www.smarty.net/docs/en/api.register.plugin.tpl
+     *
      */
     public function registerPlugin(
         \Smarty\Internal\TemplateBase $obj,
@@ -47,11 +47,11 @@ class RegisterPluginMethod
     ) {
         $smarty = $obj->_getSmartyObj();
         if (isset($smarty->registered_plugins[ $type ][ $name ])) {
-            throw new \SmartyException("Plugin tag '{$name}' already registered");
+            throw new \Smarty\Exception\SmartyException("Plugin tag '{$name}' already registered");
         } elseif (!is_callable($callback)) {
-            throw new \SmartyException("Plugin '{$name}' not callable");
+            throw new \Smarty\Exception\SmartyException("Plugin '{$name}' not callable");
         } elseif ($cacheable && $cache_attr) {
-            throw new \SmartyException("Cannot set caching attributes for plugin '{$name}' when it is cacheable.");
+            throw new \Smarty\Exception\SmartyException("Cannot set caching attributes for plugin '{$name}' when it is cacheable.");
         } else {
             $smarty->registered_plugins[ $type ][ $name ] = array($callback, (bool)$cacheable, (array)$cache_attr);
         }

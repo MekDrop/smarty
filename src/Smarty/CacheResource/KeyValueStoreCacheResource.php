@@ -202,7 +202,7 @@ abstract class KeyValueStoreCacheResource extends \Smarty\CacheResource
      * @param integer $exp_time      expiration time [being ignored]
      *
      * @return int number of cache files deleted [always -1]
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      * @uses   buildCachedFilepath() to generate the CacheID
      * @uses   invalidate() to mark CacheIDs parent chain as outdated
      * @uses   delete() to remove CacheID from cache
@@ -224,7 +224,7 @@ abstract class KeyValueStoreCacheResource extends \Smarty\CacheResource
      * @param string $resource_name template name
      *
      * @return string filepath of cache file
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     protected function getTemplateUid(\Smarty $smarty, $resource_name)
     {

@@ -70,7 +70,7 @@ abstract class CustomResource extends \Smarty\Resource
      * @param \Smarty\Template\SourceTemplate $source source object
      *
      * @return string                 template source
-     * @throws \SmartyException        if source cannot be loaded
+     * @throws \Smarty\Exception\SmartyException        if source cannot be loaded
      */
     public function getContent(\Smarty\Template\SourceTemplate $source)
     {
@@ -78,7 +78,7 @@ abstract class CustomResource extends \Smarty\Resource
         if (isset($content)) {
             return $content;
         }
-        throw new \SmartyException("Unable to read template {$source->type} '{$source->name}'");
+        throw new \Smarty\Exception\SmartyException("Unable to read template {$source->type} '{$source->name}'");
     }
 
     /**

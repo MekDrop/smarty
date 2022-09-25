@@ -23,13 +23,13 @@ class RegisterDefaultTemplateHandlerMethod
     /**
      * Register template default handler
      *
-     * @api Smarty::registerDefaultTemplateHandler()
-     *
      * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param callable                                                        $callback class/method name
      *
      * @return \Smarty|\Smarty\Internal\Template
-     * @throws \SmartyException              if $callback is not callable
+     * @throws \Smarty\Exception\SmartyException              if $callback is not callable
+     *@api Smarty::registerDefaultTemplateHandler()
+     *
      */
     public function registerDefaultTemplateHandler(\Smarty\Internal\TemplateBase $obj, $callback)
     {
@@ -37,7 +37,7 @@ class RegisterDefaultTemplateHandlerMethod
         if (is_callable($callback)) {
             $smarty->default_template_handler_func = $callback;
         } else {
-            throw new \SmartyException('Default template handler not callable');
+            throw new \Smarty\Exception\SmartyException('Default template handler not callable');
         }
         return $obj;
     }
@@ -47,7 +47,7 @@ class RegisterDefaultTemplateHandlerMethod
      *
      * @param \Smarty\Template\SourceTemplate $source
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public static function _getDefaultTemplate(\Smarty\Template\SourceTemplate $source)
     {
@@ -66,7 +66,7 @@ class RegisterDefaultTemplateHandlerMethod
             if ($source->exists) {
                 $source->timestamp = filemtime($_return);
             } else {
-                throw new \SmartyException(
+                throw new \Smarty\Exception\SmartyException(
                     'Default handler: Unable to load ' .
                     ($source->isConfig ? 'config' : 'template') .
                     " default file '{$_return}' for '{$source->type}:{$source->name}'"
@@ -81,7 +81,7 @@ class RegisterDefaultTemplateHandlerMethod
             $source->handler = \Smarty\Resource::load($source->smarty, 'eval');
         } else {
             $source->exists = false;
-            throw new \SmartyException(
+            throw new \Smarty\Exception\SmartyException(
                 'Default handler: No ' . ($source->isConfig ? 'config' : 'template') .
                 " default content for '{$source->type}:{$source->name}'"
             );

@@ -28,7 +28,7 @@ class MustCompileMethod
      * @param \Smarty\Internal\Template $_template
      *
      * @return bool
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function mustCompile(\Smarty\Internal\Template $_template)
     {
@@ -38,7 +38,7 @@ class MustCompileMethod
             } else {
                 $parent_resource = '';
             }
-            throw new \SmartyException("Unable to load template {$_template->source->type} '{$_template->source->name}'{$parent_resource}");
+            throw new \Smarty\Exception\SmartyException("Unable to load template {$_template->source->type} '{$_template->source->name}'{$parent_resource}");
         }
         if ($_template->mustCompile === null) {
             $_template->mustCompile = (!$_template->source->handler->uncompiled &&

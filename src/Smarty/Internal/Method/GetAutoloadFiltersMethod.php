@@ -25,7 +25,7 @@ class GetAutoloadFiltersMethod extends \Smarty\Internal\Method\SetAutoloadFilter
      *
      * @return array array( 'type1' => array( 'filter1', 'filter2', … ) ) or array( 'filter1', 'filter2', …) if $type
      *                was specified
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function getAutoloadFilters(\Smarty\Internal\TemplateBase $obj, $type = null)
     {

@@ -30,8 +30,6 @@ class SetAutoloadFiltersMethod
     /**
      * Set autoload filters
      *
-     * @api Smarty::setAutoloadFilters()
-     *
      * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param array                                                           $filters filters to load automatically
      * @param string                                                          $type    "pre", "output", … specify
@@ -41,7 +39,9 @@ class SetAutoloadFiltersMethod
      *                                                                                 appropriate types
      *
      * @return \Smarty|\Smarty\Internal\Template
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
+     *@api Smarty::setAutoloadFilters()
+     *
      */
     public function setAutoloadFilters(\Smarty\Internal\TemplateBase $obj, $filters, $type = null)
     {
@@ -63,12 +63,12 @@ class SetAutoloadFiltersMethod
      *
      * @param string $type
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function _checkFilterType($type)
     {
         if (!isset($this->filterTypes[ $type ])) {
-            throw new \SmartyException("Illegal filter type '{$type}'");
+            throw new \Smarty\Exception\SmartyException("Illegal filter type '{$type}'");
         }
     }
 }

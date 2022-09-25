@@ -19,7 +19,7 @@ class CacheModifyRuntime
      * @param string                    $content
      *
      * @throws \Exception
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function cacheModifiedCheck(\Smarty\Template\CachedTemplate $cached, \Smarty\Internal\Template $_template, $content)
     {

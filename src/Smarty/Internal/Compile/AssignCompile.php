@@ -45,7 +45,7 @@ class AssignCompile extends \Smarty\Internal\CompileBase
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
-     * @throws \SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyCompilerException
      */
     public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
     {

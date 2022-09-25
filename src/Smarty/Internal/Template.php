@@ -145,7 +145,7 @@ class Template extends \Smarty\Internal\TemplateBase
      *                                                                                        seconds
      * @param bool                                                         $_isConfig
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function __construct(
         $template_resource,
@@ -182,7 +182,7 @@ class Template extends \Smarty\Internal\TemplateBase
      *
      * @return string
      * @throws \Exception
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function render($no_output_filter = true, $display = null)
     {
@@ -194,7 +194,7 @@ class Template extends \Smarty\Internal\TemplateBase
         }
         // checks if template exists
         if (!$this->source->exists) {
-            throw new \SmartyException(
+            throw new \Smarty\Exception\SmartyException(
                 "Unable to load template '{$this->source->type}:{$this->source->name}'" .
                 ($this->_isSubTpl() ? " in '{$this->parent->template_resource}'" : '')
             );
@@ -275,7 +275,7 @@ class Template extends \Smarty\Internal\TemplateBase
      * @param string  $content_func   function name
      *
      * @throws \Exception
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function _subTemplateRender(
         $template,
@@ -444,7 +444,7 @@ class Template extends \Smarty\Internal\TemplateBase
      *
      * @param array $plugins required plugins
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function _checkPlugins($plugins)
     {
@@ -467,7 +467,7 @@ class Template extends \Smarty\Internal\TemplateBase
                 if (false !== $this->smarty->loadPlugin($name)) {
                     $checked[ $name ] = true;
                 } else {
-                    throw new \SmartyException("Plugin '{$name}' not callable");
+                    throw new \Smarty\Exception\SmartyException("Plugin '{$name}' not callable");
                 }
             }
         }
@@ -483,7 +483,7 @@ class Template extends \Smarty\Internal\TemplateBase
      * @param bool                      $cache      flag if called from cache file
      *
      * @return bool flag if compiled or cache file is valid
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function _decodeProperties(\Smarty\Internal\Template $tpl, $properties, $cache = false)
     {
@@ -577,7 +577,7 @@ class Template extends \Smarty\Internal\TemplateBase
      * Get unique template id
      *
      * @return string
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function _getTemplateId()
     {
@@ -588,11 +588,11 @@ class Template extends \Smarty\Internal\TemplateBase
     /**
      * runtime error not matching capture tags
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function capture_error()
     {
-        throw new \SmartyException("Not matching {capture} open/close in '{$this->template_resource}'");
+        throw new \Smarty\Exception\SmartyException("Not matching {capture} open/close in '{$this->template_resource}'");
     }
 
     /**
@@ -642,7 +642,7 @@ class Template extends \Smarty\Internal\TemplateBase
     /**
      * Load compiler object
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function loadCompiler()
     {
@@ -681,7 +681,7 @@ class Template extends \Smarty\Internal\TemplateBase
      * @param string $property_name property name
      *
      * @return mixed|\Smarty\Template\CachedTemplate
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function __get($property_name)
     {
@@ -701,7 +701,7 @@ class Template extends \Smarty\Internal\TemplateBase
                     return $this->smarty->$property_name;
                 }
         }
-        throw new \SmartyException("template property '$property_name' does not exist.");
+        throw new \Smarty\Exception\SmartyException("template property '$property_name' does not exist.");
     }
 
     /**
@@ -710,7 +710,7 @@ class Template extends \Smarty\Internal\TemplateBase
      * @param string $property_name property name
      * @param mixed  $value         value
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function __set($property_name, $value)
     {
@@ -727,7 +727,7 @@ class Template extends \Smarty\Internal\TemplateBase
                     return;
                 }
         }
-        throw new \SmartyException("invalid template property '$property_name'.");
+        throw new \Smarty\Exception\SmartyException("invalid template property '$property_name'.");
     }
 
     /**

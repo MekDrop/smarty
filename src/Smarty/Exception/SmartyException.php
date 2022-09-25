@@ -6,7 +6,7 @@ namespace Smarty\Exception;
  *
  * @package Smarty
  */
-class SmartyException extends Exception
+class SmartyException extends \Exception
 {
     public static $escape = false;
 

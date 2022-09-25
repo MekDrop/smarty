@@ -64,7 +64,7 @@ class UpdateCacheRuntime
      * @param \Smarty\Internal\Template $_template
      * @param bool                     $no_output_filter
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function removeNoCacheHash(
         \Smarty\Template\CachedTemplate $cached,

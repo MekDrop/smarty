@@ -22,7 +22,7 @@
  *
  * @return string
  * @uses   smarty_make_timestamp()
- * @throws \SmartyException
+ * @throws \Smarty\Exception\SmartyException
  */
 function smarty_function_html_select_time($params, \Smarty\Internal\Template $template)
 {

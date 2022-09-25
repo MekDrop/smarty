@@ -25,7 +25,7 @@ class UnloadFilterMethod extends LoadFilterMethod
      * @param string                                                          $name filter name
      *
      * @return \Smarty\Internal\TemplateBase
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function unloadFilter(\Smarty\Internal\TemplateBase $obj, $type, $name)
     {

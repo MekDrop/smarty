@@ -23,15 +23,15 @@ class GetTagsMethod
     /**
      * Return array of tag/attributes of all tags used by an template
      *
-     * @api  Smarty::getTags()
-     * @link https://www.smarty.net/docs/en/api.get.tags.tpl
-     *
      * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param null|string|\Smarty\Internal\Template                            $template
      *
      * @return array of tag/attributes
      * @throws \Exception
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
+     *@link https://www.smarty.net/docs/en/api.get.tags.tpl
+     *
+     * @api  Smarty::getTags()
      */
     public function getTags(\Smarty\Internal\TemplateBase $obj, $template = null)
     {
@@ -46,7 +46,7 @@ class GetTagsMethod
             $tpl = new $smarty->template_class($template, $smarty);
             // checks if template exists
             if (!$tpl->source->exists) {
-                throw new \SmartyException("Unable to load template {$tpl->source->type} '{$tpl->source->name}'");
+                throw new \Smarty\Exception\SmartyException("Unable to load template {$tpl->source->type} '{$tpl->source->name}'");
             }
         }
         if (isset($tpl)) {
@@ -60,6 +60,6 @@ class GetTagsMethod
             $tpl->compiler->compileTemplate($tpl);
             return $tpl->_cache[ 'used_tags' ];
         }
-        throw new \SmartyException('Missing template specification');
+        throw new \Smarty\Exception\SmartyException('Missing template specification');
     }
 }

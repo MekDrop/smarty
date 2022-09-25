@@ -23,13 +23,13 @@ class RegisterDefaultConfigHandlerMethod
     /**
      * Register config default handler
      *
-     * @api Smarty::registerDefaultConfigHandler()
-     *
      * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param callable                                                        $callback class/method name
      *
      * @return \Smarty|\Smarty\Internal\Template
-     * @throws \SmartyException              if $callback is not callable
+     * @throws \Smarty\Exception\SmartyException              if $callback is not callable
+     *@api Smarty::registerDefaultConfigHandler()
+     *
      */
     public function registerDefaultConfigHandler(\Smarty\Internal\TemplateBase $obj, $callback)
     {
@@ -37,7 +37,7 @@ class RegisterDefaultConfigHandlerMethod
         if (is_callable($callback)) {
             $smarty->default_config_handler_func = $callback;
         } else {
-            throw new \SmartyException('Default config handler not callable');
+            throw new \Smarty\Exception\SmartyException('Default config handler not callable');
         }
         return $obj;
     }

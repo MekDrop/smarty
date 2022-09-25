@@ -36,8 +36,8 @@ class FunctionObject extends \Smarty\Internal\CompileBase
      * @param string                                $method    name of method to call
      *
      * @return string compiled code
-     * @throws \SmartyCompilerException
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter, $tag, $method)
     {

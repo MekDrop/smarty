@@ -40,7 +40,7 @@
  * @param \Smarty\Internal\Template $template
  *
  * @return string
- * @throws \SmartyException
+ * @throws \Smarty\Exception\SmartyException
  */
 function smarty_function_html_select_date($params, \Smarty\Internal\Template $template)
 {

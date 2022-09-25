@@ -196,7 +196,7 @@ class Debug extends \Smarty\Internal\Data
      * @param bool                            $full
      *
      * @throws \Exception
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function display_debug($obj, $full = false)
     {

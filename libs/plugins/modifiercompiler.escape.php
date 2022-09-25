@@ -18,7 +18,7 @@
  * @param \Smarty\Internal\TemplateCompilerBase $compiler
  *
  * @return string with compiled code
- * @throws \SmartyException
+ * @throws \Smarty\Exception\SmartyException
  */
 function smarty_modifiercompiler_escape($params, \Smarty\Internal\TemplateCompilerBase $compiler)
 {
@@ -91,7 +91,7 @@ function smarty_modifiercompiler_escape($params, \Smarty\Internal\TemplateCompil
                        $params[ 0 ] .
                        ', array("\\\\" => "\\\\\\\\", "\'" => "\\\\\'", "\"" => "\\\\\"", "\\r" => "\\\\r", "\\n" => "\\\n", "</" => "<\/", "<!--" => "<\!--", "<s" => "<\s", "<S" => "<\S" ))';
         }
-    } catch (\SmartyException $e) {
+    } catch (\Smarty\Exception\SmartyException $e) {
         // pass through to regular plugin fallback
     }
     // could not optimize |escape call, so fallback to regular plugin

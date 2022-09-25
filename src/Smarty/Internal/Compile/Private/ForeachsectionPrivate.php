@@ -78,7 +78,7 @@ class ForeachSectionPrivate extends \Smarty\Internal\CompileBase
      * @param array                                 $attributes
      * @param \Smarty\Internal\TemplateCompilerBase $compiler
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function scanForProperties($attributes, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
@@ -166,7 +166,7 @@ class ForeachSectionPrivate extends \Smarty\Internal\CompileBase
      *
      * @param \Smarty\Internal\TemplateCompilerBase $compiler
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function matchParentTemplateSource(\Smarty\Internal\TemplateCompilerBase $compiler)
     {
@@ -211,7 +211,7 @@ class ForeachSectionPrivate extends \Smarty\Internal\CompileBase
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
-     * @throws \SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyCompilerException
      */
     public function compileSpecialVariable($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
     {

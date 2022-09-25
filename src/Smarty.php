@@ -683,7 +683,7 @@ class Smarty extends \Smarty\Internal\TemplateBase
      * @param string $resource_name template name
      *
      * @return bool status
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function templateExists($resource_name)
     {
@@ -698,7 +698,7 @@ class Smarty extends \Smarty\Internal\TemplateBase
      * @param string|\Smarty\Security $security_class if a string is used, it must be class-name
      *
      * @return \Smarty                 current Smarty instance for chaining
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function enableSecurity($security_class = null)
     {
@@ -963,7 +963,7 @@ class Smarty extends \Smarty\Internal\TemplateBase
      * @param boolean $do_clone   flag is Smarty object shall be cloned
      *
      * @return \Smarty\Internal\Template template object
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function createTemplate($template, $cache_id = null, $compile_id = null, $parent = null, $do_clone = true)
     {
@@ -1026,7 +1026,7 @@ class Smarty extends \Smarty\Internal\TemplateBase
      * @param bool   $check       check if already loaded
      *
      * @return string |boolean filepath of loaded file or false
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function loadPlugin($plugin_name, $check = true)
     {
@@ -1043,7 +1043,7 @@ class Smarty extends \Smarty\Internal\TemplateBase
      * @param \Smarty\Internal\Template $template
      *
      * @return string
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function _getTemplateId(
         $template_name,

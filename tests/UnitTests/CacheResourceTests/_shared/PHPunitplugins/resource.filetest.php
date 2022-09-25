@@ -8,7 +8,7 @@ class Smarty_Resource_Filetest extends \Smarty\Internal\Resource\FileResource
      * @param \Smarty\Template\SourceTemplate $source source object
      * @param \Smarty\Internal\Template|null $_template template object
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function populate(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template = null)
     {

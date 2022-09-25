@@ -1,5 +1,6 @@
 <?php
 
+namespace Smarty\Exception;
 /**
  * Smarty compiler exception class
  *
@@ -22,6 +23,7 @@ class SmartyCompilerException extends \Smarty\Exception\SmartyException
     {
         $this->line = $line;
     }
+
     /**
      * The template source snippet relating to the error
      *

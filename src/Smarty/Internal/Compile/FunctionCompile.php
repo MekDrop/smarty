@@ -49,7 +49,7 @@ class FunctionCompile extends \Smarty\Internal\CompileBase
      * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return bool true
-     * @throws \SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyCompilerException
      */
     public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {

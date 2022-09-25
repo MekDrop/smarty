@@ -38,14 +38,14 @@ class LiteralsMethod
     /**
      * Add literals
      *
-     * @api Smarty::addLiterals()
-     *
      * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param array|string                                                    $literals literal or list of literals
      *                                                                                  to addto add
      *
      * @return \Smarty|\Smarty\Internal\Template
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
+     *@api Smarty::addLiterals()
+     *
      */
     public function addLiterals(\Smarty\Internal\TemplateBase $obj, $literals = null)
     {
@@ -58,14 +58,14 @@ class LiteralsMethod
     /**
      * Set literals
      *
-     * @api Smarty::setLiterals()
-     *
      * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param array|string                                                    $literals literal or list of literals
      *                                                                                  to setto set
      *
      * @return \Smarty|\Smarty\Internal\Template
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
+     *@api Smarty::setLiterals()
+     *
      */
     public function setLiterals(\Smarty\Internal\TemplateBase $obj, $literals = null)
     {
@@ -84,7 +84,7 @@ class LiteralsMethod
      * @param \Smarty $smarty
      * @param array   $literals
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     private function set(\Smarty $smarty, $literals)
     {
@@ -92,7 +92,7 @@ class LiteralsMethod
         $error = isset($literals[ $smarty->left_delimiter ]) ? array($smarty->left_delimiter) : array();
         $error = isset($literals[ $smarty->right_delimiter ]) ? $error[] = $smarty->right_delimiter : $error;
         if (!empty($error)) {
-            throw new \SmartyException(
+            throw new \Smarty\Exception\SmartyException(
                 'User defined literal(s) "' . $error .
                 '" may not be identical with left or right delimiter'
             );

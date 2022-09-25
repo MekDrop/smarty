@@ -120,12 +120,12 @@ class Smarty_CacheResource_Pdo extends Smarty_CacheResource_Custom
      * @param string $table    : table (or view) name
      * @param string $database : optional - if table is located in another db
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function __construct(PDO $pdo, $table, $database = null)
     {
         if (is_null($table)) {
-            throw new \SmartyException("Table name for caching can't be null");
+            throw new \Smarty\Exception\SmartyException("Table name for caching can't be null");
         }
         $this->pdo = $pdo;
         $this->table = $table;

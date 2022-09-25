@@ -97,7 +97,7 @@ class CompiledTemplate extends BaseResource
         // checks if template exists
         if (!$_template->source->exists) {
             $type = $_template->source->isConfig ? 'config' : 'template';
-            throw new \SmartyException("Unable to load {$type} '{$_template->source->type}:{$_template->source->name}'");
+            throw new \Smarty\Exception\SmartyException("Unable to load {$type} '{$_template->source->type}:{$_template->source->name}'");
         }
         if ($_template->smarty->debugging) {
             if (!isset($_template->smarty->_debug)) {
@@ -205,7 +205,7 @@ class CompiledTemplate extends BaseResource
      * @param string                   $code      compiled code
      *
      * @return bool success
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function write(\Smarty\Internal\Template $_template, $code)
     {

@@ -109,9 +109,9 @@ abstract class TemplateBase extends \Smarty\Internal\Data
      * @param mixed  $compile_id compile id to be used with this template
      * @param object $parent     next higher level of Smarty variables
      *
-     * @throws \Exception
-     * @throws \SmartyException
      * @return string rendered template output
+     * @throws \Smarty\Exception\SmartyException
+     * @throws \Exception
      */
     public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null)
     {
@@ -128,7 +128,7 @@ abstract class TemplateBase extends \Smarty\Internal\Data
      * @param object $parent     next higher level of Smarty variables
      *
      * @throws \Exception
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function display($template = null, $cache_id = null, $compile_id = null, $parent = null)
     {
@@ -139,9 +139,6 @@ abstract class TemplateBase extends \Smarty\Internal\Data
     /**
      * test if cache is valid
      *
-     * @api  Smarty::isCached()
-     * @link https://www.smarty.net/docs/en/api.is.cached.tpl
-     *
      * @param null|string|\Smarty\Internal\Template $template   the resource handle of the template file or template
      *                                                          object
      * @param mixed                                 $cache_id   cache id to be used with this template
@@ -150,7 +147,10 @@ abstract class TemplateBase extends \Smarty\Internal\Data
      *
      * @return bool cache status
      * @throws \Exception
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
+     *@link https://www.smarty.net/docs/en/api.is.cached.tpl
+     *
+     * @api  Smarty::isCached()
      */
     public function isCached($template = null, $cache_id = null, $compile_id = null, $parent = null)
     {
@@ -168,7 +168,7 @@ abstract class TemplateBase extends \Smarty\Internal\Data
      *
      * @return mixed
      * @throws \Exception
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     private function _execute($template, $cache_id, $compile_id, $parent, $function)
     {
@@ -176,14 +176,14 @@ abstract class TemplateBase extends \Smarty\Internal\Data
         $saveVars = true;
         if ($template === null) {
             if (!$this->_isTplObj()) {
-                throw new \SmartyException($function . '():Missing \'$template\' parameter');
+                throw new \Smarty\Exception\SmartyException($function . '():Missing \'$template\' parameter');
             } else {
                 $template = $this;
             }
         } elseif (is_object($template)) {
             /* @var \Smarty\Internal\Template $template */
             if (!isset($template->_objType) || !$template->_isTplObj()) {
-                throw new \SmartyException($function . '():Template object expected');
+                throw new \Smarty\Exception\SmartyException($function . '():Template object expected');
             }
         } else {
             // get template object
@@ -277,9 +277,6 @@ abstract class TemplateBase extends \Smarty\Internal\Data
     /**
      * Registers plugin to be used in templates
      *
-     * @api  Smarty::registerPlugin()
-     * @link https://www.smarty.net/docs/en/api.register.plugin.tpl
-     *
      * @param string   $type       plugin type
      * @param string   $name       name of template tag
      * @param callable $callback   PHP callback to register
@@ -287,7 +284,10 @@ abstract class TemplateBase extends \Smarty\Internal\Data
      * @param mixed    $cache_attr caching attributes if any
      *
      * @return \Smarty|\Smarty\Internal\Template
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
+     *@link https://www.smarty.net/docs/en/api.register.plugin.tpl
+     *
+     * @api  Smarty::registerPlugin()
      */
     public function registerPlugin($type, $name, $callback, $cacheable = true, $cache_attr = null)
     {
@@ -297,14 +297,14 @@ abstract class TemplateBase extends \Smarty\Internal\Data
     /**
      * load a filter of specified type and name
      *
-     * @api  Smarty::loadFilter()
-     * @link https://www.smarty.net/docs/en/api.load.filter.tpl
-     *
      * @param string $type filter type
      * @param string $name filter name
      *
      * @return bool
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
+     *@api  Smarty::loadFilter()
+     * @link https://www.smarty.net/docs/en/api.load.filter.tpl
+     *
      */
     public function loadFilter($type, $name)
     {
@@ -314,15 +314,15 @@ abstract class TemplateBase extends \Smarty\Internal\Data
     /**
      * Registers a filter function
      *
-     * @api  Smarty::registerFilter()
-     * @link https://www.smarty.net/docs/en/api.register.filter.tpl
-     *
      * @param string      $type filter type
      * @param callable    $callback
      * @param string|null $name optional filter name
      *
      * @return \Smarty|\Smarty\Internal\Template
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
+     *@link https://www.smarty.net/docs/en/api.register.filter.tpl
+     *
+     * @api  Smarty::registerFilter()
      */
     public function registerFilter($type, $callback, $name = null)
     {
@@ -332,9 +332,6 @@ abstract class TemplateBase extends \Smarty\Internal\Data
     /**
      * Registers object to be used in templates
      *
-     * @api  Smarty::registerObject()
-     * @link https://www.smarty.net/docs/en/api.register.object.tpl
-     *
      * @param string $object_name
      * @param object $object                     the referenced PHP object to register
      * @param array  $allowed_methods_properties list of allowed methods (empty = all)
@@ -342,7 +339,10 @@ abstract class TemplateBase extends \Smarty\Internal\Data
      * @param array  $block_methods              list of block-methods
      *
      * @return \Smarty|\Smarty\Internal\Template
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
+     *@link https://www.smarty.net/docs/en/api.register.object.tpl
+     *
+     * @api  Smarty::registerObject()
      */
     public function registerObject(
         $object_name,

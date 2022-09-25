@@ -56,14 +56,14 @@ class Undefined
      * @param array  $args argument array
      *
      * @return mixed
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function __call($name, $args)
     {
         if (isset($this->class)) {
-            throw new \SmartyException("undefined extension class '{$this->class}'");
+            throw new \Smarty\Exception\SmartyException("undefined extension class '{$this->class}'");
         } else {
-            throw new \SmartyException(get_class($args[ 0 ]) . "->{$name}() undefined method");
+            throw new \Smarty\Exception\SmartyException(get_class($args[ 0 ]) . "->{$name}() undefined method");
         }
     }
 }

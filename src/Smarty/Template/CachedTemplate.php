@@ -88,7 +88,7 @@ class CachedTemplate extends BaseResource
      *
      * @param \Smarty\Internal\Template $_template template object
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function __construct(\Smarty\Internal\Template $_template)
     {

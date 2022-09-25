@@ -478,14 +478,14 @@ class Security
      * @param string $stream_name
      *
      * @return boolean         true if stream is trusted
-     * @throws \SmartyException if stream is not trusted
+     * @throws \Smarty\Exception\SmartyException if stream is not trusted
      */
     public function isTrustedStream($stream_name)
     {
         if (isset($this->streams) && (empty($this->streams) || in_array($stream_name, $this->streams))) {
             return true;
         }
-        throw new \SmartyException("stream '{$stream_name}' not allowed by security setting");
+        throw new Exception\SmartyException("stream '{$stream_name}' not allowed by security setting");
     }
 
     /**
@@ -495,7 +495,7 @@ class Security
      * @param null|bool $isConfig
      *
      * @return bool true if directory is trusted
-     * @throws \SmartyException if directory is not trusted
+     * @throws \Smarty\Exception\SmartyException if directory is not trusted
      */
     public function isTrustedResourceDir($filepath, $isConfig = null)
     {
@@ -542,7 +542,7 @@ class Security
      * @param string $uri
      *
      * @return boolean         true if URI is trusted
-     * @throws \SmartyException if URI is not trusted
+     * @throws \Smarty\Exception\SmartyException if URI is not trusted
      * @uses   $trusted_uri for list of patterns to match against $uri
      */
     public function isTrustedUri($uri)
@@ -556,7 +556,7 @@ class Security
                 }
             }
         }
-        throw new \SmartyException("URI '{$uri}' not allowed by security setting");
+        throw new Exception\SmartyException("URI '{$uri}' not allowed by security setting");
     }
 
     /**
@@ -565,12 +565,12 @@ class Security
      * @param string $filepath
      *
      * @return boolean         true if directory is trusted
-     * @throws \SmartyException if PHP directory is not trusted
+     * @throws \Smarty\Exception\SmartyException if PHP directory is not trusted
      */
     public function isTrustedPHPDir($filepath)
     {
         if (empty($this->trusted_dir)) {
-            throw new \SmartyException("directory '{$filepath}' not allowed by security setting (no trusted_dir specified)");
+            throw new Exception\SmartyException("directory '{$filepath}' not allowed by security setting (no trusted_dir specified)");
         }
         // check if index is outdated
         if (!$this->_trusted_dir || $this->_trusted_dir !== $this->trusted_dir) {
@@ -618,7 +618,7 @@ class Security
      * @param array  $dirs valid directories
      *
      * @return array|bool
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     private function _checkDir($filepath, $dirs)
     {
@@ -642,7 +642,7 @@ class Security
             }
         }
         // give up
-        throw new \SmartyException(sprintf('Smarty Security: not trusted file path \'%s\' ', $filepath));
+        throw new Exception\SmartyException(sprintf('Smarty Security: not trusted file path \'%s\' ', $filepath));
     }
 
     /**
@@ -652,7 +652,7 @@ class Security
      * @param string|\Smarty\Security $security_class if a string is used, it must be class-name
      *
      * @return \Smarty current Smarty instance for chaining
-     * @throws \SmartyException when an invalid class name is provided
+     * @throws \Smarty\Exception\SmartyException when an invalid class name is provided
      */
     public static function enableSecurity(\Smarty $smarty, $security_class)
     {
@@ -660,15 +660,15 @@ class Security
             $smarty->security_policy = $security_class;
             return $smarty;
         } elseif (is_object($security_class)) {
-            throw new \SmartyException("Class '" . get_class($security_class) . "' must extend \Smarty\Security.");
+            throw new Exception\SmartyException("Class '" . get_class($security_class) . "' must extend \Smarty\Security.");
         }
         if ($security_class === null) {
             $security_class = $smarty->security_class;
         }
         if (!class_exists($security_class)) {
-            throw new \SmartyException("Security class '$security_class' is not defined");
+            throw new Exception\SmartyException("Security class '$security_class' is not defined");
         } elseif ($security_class !== '\Smarty\Security' && !is_subclass_of($security_class, '\Smarty\Security')) {
-            throw new \SmartyException("Class '$security_class' must extend \Smarty\Security.");
+            throw new Exception\SmartyException("Class '$security_class' must extend \Smarty\Security.");
         } else {
             $smarty->security_policy = new $security_class($smarty);
         }
@@ -680,12 +680,12 @@ class Security
      *
      * @param $template
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function startTemplate($template)
     {
         if ($this->max_template_nesting > 0 && $this->_current_template_nesting++ >= $this->max_template_nesting) {
-            throw new \SmartyException("maximum template nesting level of '{$this->max_template_nesting}' exceeded when calling '{$template->template_resource}'");
+            throw new Exception\SmartyException("maximum template nesting level of '{$this->max_template_nesting}' exceeded when calling '{$template->template_resource}'");
         }
     }
 

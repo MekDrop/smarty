@@ -188,8 +188,8 @@ abstract class CacheResource
      * @param \Smarty $smarty Smarty object
      * @param string $type   name of the cache resource
      *
-     * @throws \SmartyException
      * @return \Smarty\CacheResource Cache Resource Handler
+     *@throws \Smarty\Exception\SmartyException
      */
     public static function load(\Smarty $smarty, $type = null)
     {
@@ -216,6 +216,6 @@ abstract class CacheResource
             return $smarty->_cache[ 'cacheresource_handlers' ][ $type ] = new $cache_resource_class();
         }
         // give up
-        throw new \SmartyException("Unable to load cache resource '{$type}'");
+        throw new Exception\SmartyException("Unable to load cache resource '{$type}'");
     }
 }

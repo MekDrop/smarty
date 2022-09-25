@@ -26,7 +26,7 @@ class VariableSpecial extends \Smarty\Internal\CompileBase
      * @param                                       $parameter
      *
      * @return string compiled code
-     * @throws \SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyCompilerException
      */
     public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
     {

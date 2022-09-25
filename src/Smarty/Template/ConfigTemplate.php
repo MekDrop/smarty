@@ -70,7 +70,7 @@ class ConfigTemplate extends \Smarty\Template\SourceTemplate
      * @param string                   $template_resource resource identifier
      *
      * @return \Smarty\Template\ConfigTemplate Source Object
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public static function load(
         \Smarty\Internal\Template $_template = null,
@@ -83,13 +83,13 @@ class ConfigTemplate extends \Smarty\Template\SourceTemplate
             $template_resource = $_template->template_resource;
         }
         if (empty($template_resource)) {
-            throw new \SmartyException('Source: Missing  name');
+            throw new \Smarty\Exception\SmartyException('Source: Missing  name');
         }
         // parse resource_name, load resource handler
         list($name, $type) = \Smarty\Resource::parseResourceName($template_resource, $smarty->default_config_type);
         // make sure configs are not loaded via anything smarty can't handle
         if (isset($_incompatible_resources[ $type ])) {
-            throw new \SmartyException("Unable to use resource '{$type}' for config");
+            throw new \Smarty\Exception\SmartyException("Unable to use resource '{$type}' for config");
         }
         $source = new \Smarty\Template\ConfigTemplate($smarty, $template_resource, $type, $name);
         $source->handler->populate($source, $_template);

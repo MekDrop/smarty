@@ -494,7 +494,7 @@ abstract class TemplateCompilerBase
      * @param string $code compiled code
      *
      * @return string
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function postFilter($code)
     {
@@ -514,7 +514,7 @@ abstract class TemplateCompilerBase
      * @param string $_content template source
      *
      * @return string
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function preFilter($_content)
     {
@@ -541,9 +541,9 @@ abstract class TemplateCompilerBase
      * @param array  $args      array with tag attributes
      * @param array  $parameter array with compilation parameter
      *
-     * @throws \SmartyCompilerException
-     * @throws \SmartyException
      * @return string compiled code
+     *@throws \Smarty\Exception\SmartyException
+     * @throws \Smarty\Exception\SmartyCompilerException
      */
     public function compileTag($tag, $args, $parameter = array())
     {
@@ -599,7 +599,7 @@ abstract class TemplateCompilerBase
      * @param array  $parameter
      *
      * @return string
-     * @throws \SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyCompilerException
      */
     public function compilePHPFunctionCall($name, $parameter)
     {
@@ -741,7 +741,7 @@ abstract class TemplateCompilerBase
      * @param mixed  $param3 optional parameter
      *
      * @return bool|string compiled code or false
-     * @throws \SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyCompilerException
      */
     public function callTagCompiler($tag, $args, $param1 = null, $param2 = null, $param3 = null)
     {
@@ -787,7 +787,7 @@ abstract class TemplateCompilerBase
      * @param string $plugin_type type of plugin
      *
      * @return string call name of function
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function getPlugin($plugin_name, $plugin_type)
     {
@@ -853,7 +853,7 @@ abstract class TemplateCompilerBase
      * @param string $plugin_type type of plugin
      *
      * @return bool true if found
-     * @throws \SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyCompilerException
      */
     public function getPluginFromDefaultHandler($tag, $plugin_type)
     {
@@ -1020,7 +1020,7 @@ abstract class TemplateCompilerBase
      * @param array $validScopes
      *
      * @return int|string
-     * @throws \SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyCompilerException
      */
     public function convertScope($_attr, $validScopes)
     {
@@ -1067,7 +1067,7 @@ abstract class TemplateCompilerBase
      * @param string    $line    line-number
      * @param null|bool $tagline if true the line number of last tag
      *
-     * @throws \SmartyCompilerException when an unexpected token is found
+     * @throws \Smarty\Exception\SmartyCompilerException when an unexpected token is found
      */
     public function trigger_template_error($args = null, $line = null, $tagline = null)
     {
@@ -1133,7 +1133,7 @@ abstract class TemplateCompilerBase
             echo ob_get_clean();
             flush();
         }
-        $e = new \SmartyCompilerException($error_text);
+        $e = new \Smarty\Exception\SmartyCompilerException($error_text);
         $e->setLine($line);
         $e->source = trim(preg_replace('![\t\r\n]+!', ' ', $match[ $line - 1 ]));
         $e->desc = $args;
@@ -1226,7 +1226,7 @@ abstract class TemplateCompilerBase
      *  leave double quoted string
      *  - throw exception if block in string was not closed
      *
-     * @throws \SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyCompilerException
      */
     public function leaveDoubleQuote()
     {
@@ -1449,9 +1449,9 @@ abstract class TemplateCompilerBase
      * @param array  $args      array with tag attributes
      * @param array  $parameter array with compilation parameter
      *
-     * @throws \SmartyCompilerException
-     * @throws \SmartyException
      * @return string compiled code
+     *@throws \Smarty\Exception\SmartyException
+     * @throws \Smarty\Exception\SmartyCompilerException
      */
     private function compileTag2($tag, $args, $parameter)
     {
@@ -1603,7 +1603,7 @@ abstract class TemplateCompilerBase
                                 return $plugin_object->compile($args, $this);
                             }
                         }
-                        throw new \SmartyException("Plugin '{$tag}' not callable");
+                        throw new \Smarty\Exception\SmartyException("Plugin '{$tag}' not callable");
                     } else {
                         if ($function = $this->getPlugin($tag, $plugin_type)) {
                             if (!isset($this->smarty->security_policy)
@@ -1738,7 +1738,7 @@ abstract class TemplateCompilerBase
                             return $plugin_object->compile($args, $this);
                         }
                     }
-                    throw new \SmartyException("Plugin '{$tag}' not callable");
+                    throw new \Smarty\Exception\SmartyException("Plugin '{$tag}' not callable");
                 }
             }
             $this->trigger_template_error("unknown tag '{$tag}'", null, true);

@@ -102,7 +102,7 @@ class InheritanceRuntime
      * @param null|string               $func     function call name of inline template
      *
      * @throws \Exception
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function endChild(\Smarty\Internal\Template $tpl, $template = null, $uid = null, $func = null)
     {
@@ -139,7 +139,7 @@ class InheritanceRuntime
      * @param string                    $name
      * @param int|null                  $tplIndex index of outer level {block} if nested
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function instanceBlock(\Smarty\Internal\Template $tpl, $className, $name, $tplIndex = null)
     {
@@ -165,7 +165,7 @@ class InheritanceRuntime
      * @param \Smarty\Internal\Block      $block
      * @param \Smarty\Internal\Block|null $parent
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function process(
         \Smarty\Internal\Template $tpl,
@@ -209,7 +209,7 @@ class InheritanceRuntime
      * @param \Smarty\Internal\Block    $block
      *
      * @return null|string block content
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function callChild(\Smarty\Internal\Template $tpl, \Smarty\Internal\Block $block)
     {
@@ -226,14 +226,14 @@ class InheritanceRuntime
      * @param string                    $tag
      *
      * @return null|string  block content
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function callParent(\Smarty\Internal\Template $tpl, \Smarty\Internal\Block $block, $tag)
     {
         if (isset($block->parent)) {
             $this->callBlock($block->parent, $tpl);
         } else {
-            throw new \SmartyException("inheritance: illegal '{$tag}' used in child template '{$tpl->inheritance->sources[$block->tplIndex]->filepath}' block '{$block->name}'");
+            throw new \Smarty\Exception\SmartyException("inheritance: illegal '{$tag}' used in child template '{$tpl->inheritance->sources[$block->tplIndex]->filepath}' block '{$block->name}'");
         }
     }
 

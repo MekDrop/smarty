@@ -74,8 +74,8 @@ class IncludeCompile extends \Smarty\Internal\CompileBase
      *
      * @return string
      * @throws \Exception
-     * @throws \SmartyCompilerException
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function compile($args, \Smarty\Internal\SmartyTemplateCompiler $compiler)
     {
@@ -288,7 +288,7 @@ class IncludeCompile extends \Smarty\Internal\CompileBase
      *
      * @return bool
      * @throws \Exception
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function compileInlineTemplate(
         \Smarty\Internal\SmartyTemplateCompiler $compiler,

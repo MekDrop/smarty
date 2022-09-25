@@ -99,7 +99,7 @@ class CompilerFile
      * @param \Smarty\Internal\Template $template
      *
      * @return bool true if compiling succeeded, false if it failed
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function compileTemplate(\Smarty\Internal\Template $template)
     {

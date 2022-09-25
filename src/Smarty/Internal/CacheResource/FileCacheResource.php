@@ -118,7 +118,7 @@ class FileCacheResource extends \Smarty\CacheResource
      * @param string                   $content   content to cache
      *
      * @return bool success
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function writeCachedContent(\Smarty\Internal\Template $_template, $content)
     {

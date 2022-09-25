@@ -6,6 +6,8 @@
  * @author  Uwe Tews
  */
 
+use Smarty\Exception\SmartyCompilerException;
+
 /**
  * class for {function} tag tests
  *

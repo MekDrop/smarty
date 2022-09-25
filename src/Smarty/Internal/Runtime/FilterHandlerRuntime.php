@@ -29,8 +29,8 @@ class FilterHandlerRuntime
      * @param string                   $content  the content which shall be processed by the filters
      * @param \Smarty\Internal\Template $template template object
      *
-     * @throws \SmartyException
      * @return string                   the filtered content
+     *@throws \Smarty\Exception\SmartyException
      */
     public function runFilter($type, $content, \Smarty\Internal\Template $template)
     {
@@ -50,11 +50,11 @@ class FilterHandlerRuntime
                         // loaded class of filter plugin
                         $callback = array($plugin_name, 'execute');
                     } else {
-                        throw new \SmartyException("Auto load {$type}-filter plugin method '{$plugin_name}::execute' not callable");
+                        throw new \Smarty\Exception\SmartyException("Auto load {$type}-filter plugin method '{$plugin_name}::execute' not callable");
                     }
                 } else {
                     // nothing found, throw exception
-                    throw new \SmartyException("Unable to auto load {$type}-filter plugin '{$plugin_name}'");
+                    throw new \Smarty\Exception\SmartyException("Unable to auto load {$type}-filter plugin '{$plugin_name}'");
                 }
                 $content = call_user_func($callback, $content, $template);
             }

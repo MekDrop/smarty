@@ -30,7 +30,7 @@ class LoadPluginMethod
      * @param bool    $check       check if already loaded
      *
      * @return bool|string
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function loadPlugin(\Smarty $smarty, $plugin_name, $check)
     {
@@ -39,7 +39,7 @@ class LoadPluginMethod
             return true;
         }
         if (!preg_match('#^smarty_((internal)|([^_]+))_(.+)$#i', $plugin_name, $match)) {
-            throw new \SmartyException("plugin {$plugin_name} is not a valid name format");
+            throw new \Smarty\Exception\SmartyException("plugin {$plugin_name} is not a valid name format");
         }
         if (!empty($match[ 2 ])) {
             $file = SMARTY_SYSPLUGINS_DIR . smarty_strtolower_ascii($plugin_name) . '.php';

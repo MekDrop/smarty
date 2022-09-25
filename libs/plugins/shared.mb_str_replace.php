@@ -72,7 +72,7 @@ if (!function_exists('smarty_mb_str_replace')) {
                 // This exception is thrown if call to mb_split failed.
                 // Usually it happens, when $search or $replace are not valid for given mb_regex_encoding().
                 // There may be other cases for it to fail, please file an issue if you find a reproducible one.
-                throw new \SmartyException("Source string is not a valid $current_charset sequence (probably)");
+                throw new \Smarty\Exception\SmartyException("Source string is not a valid $current_charset sequence (probably)");
             }
 
             $count = count($parts) - 1;

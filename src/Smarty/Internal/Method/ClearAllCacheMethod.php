@@ -31,7 +31,7 @@ class ClearAllCacheMethod
      * @param string  $type     resource type
      *
      * @return int number of cache files deleted
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function clearAllCache(\Smarty $smarty, $exp_time = null, $type = null)
     {

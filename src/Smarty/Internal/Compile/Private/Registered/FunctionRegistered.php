@@ -35,8 +35,8 @@ class FunctionRegistered extends \Smarty\Internal\CompileBase
      * @param string                                $tag       name of function
      *
      * @return string compiled code
-     * @throws \SmartyCompilerException
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter, $tag)
     {

@@ -45,14 +45,14 @@ class Smarty_Resource_Mysql extends Smarty_Resource_Custom
     /**
      * Smarty_Resource_Mysql constructor.
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function __construct()
     {
         try {
             $this->db = new PDO("mysql:dbname=test;host=127.0.0.1", "smarty");
         } catch (PDOException $e) {
-            throw new \SmartyException('Mysql Resource failed: ' . $e->getMessage());
+            throw new \Smarty\Exception\SmartyException('Mysql Resource failed: ' . $e->getMessage());
         }
         $this->fetch = $this->db->prepare('SELECT modified, source FROM templates WHERE name = :name');
         $this->mtime = $this->db->prepare('SELECT modified FROM templates WHERE name = :name');

@@ -30,17 +30,17 @@ class RegisterFilterMethod
     /**
      * Registers a filter function
      *
-     * @api  Smarty::registerFilter()
-     *
-     * @link https://www.smarty.net/docs/en/api.register.filter.tpl
-     *
      * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param string                                                          $type filter type
      * @param callback                                                        $callback
      * @param string|null                                                     $name optional filter name
      *
      * @return \Smarty|\Smarty\Internal\Template
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
+     *@api  Smarty::registerFilter()
+     *
+     * @link https://www.smarty.net/docs/en/api.register.filter.tpl
+     *
      */
     public function registerFilter(\Smarty\Internal\TemplateBase $obj, $type, $callback, $name = null)
     {
@@ -48,7 +48,7 @@ class RegisterFilterMethod
         $this->_checkFilterType($type);
         $name = isset($name) ? $name : $this->_getFilterName($callback);
         if (!is_callable($callback)) {
-            throw new \SmartyException("{$type}filter '{$name}' not callable");
+            throw new \Smarty\Exception\SmartyException("{$type}filter '{$name}' not callable");
         }
         $smarty->registered_filters[ $type ][ $name ] = $callback;
         return $obj;
@@ -78,12 +78,12 @@ class RegisterFilterMethod
      *
      * @param string $type
      *
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function _checkFilterType($type)
     {
         if (!isset($this->filterTypes[ $type ])) {
-            throw new \SmartyException("Illegal filter type '{$type}'");
+            throw new \Smarty\Exception\SmartyException("Illegal filter type '{$type}'");
         }
     }
 }

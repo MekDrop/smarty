@@ -86,8 +86,8 @@ class ForeachCompile extends ForeachSectionPrivate
      * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
-     * @throws \SmartyCompilerException
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
@@ -321,7 +321,7 @@ class ForeachcloseCompile extends \Smarty\Internal\CompileBase
      * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
-     * @throws \SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyCompilerException
      */
     public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {

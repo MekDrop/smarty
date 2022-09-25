@@ -49,8 +49,8 @@ class ExtendsCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
      * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
-     * @throws \SmartyCompilerException
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
@@ -97,8 +97,8 @@ class ExtendsCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
      * @param \Smarty\Internal\TemplateCompilerBase $compiler
      * @param null|string                           $template optional inheritance parent template
      *
-     * @throws \SmartyCompilerException
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyException
      */
     private function compileEndChild(\Smarty\Internal\TemplateCompilerBase $compiler, $template = null)
     {
@@ -124,8 +124,8 @@ class ExtendsCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
      * @param \Smarty\Internal\TemplateCompilerBase $compiler
      * @param string                                $template subtemplate name
      *
-     * @throws \SmartyCompilerException
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws \Smarty\Exception\SmartyException
      */
     private function compileInclude(\Smarty\Internal\TemplateCompilerBase $compiler, $template)
     {

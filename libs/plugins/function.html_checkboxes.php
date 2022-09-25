@@ -40,7 +40,7 @@
  *
  * @return string
  * @uses    smarty_function_escape_special_chars()
- * @throws \SmartyException
+ * @throws \Smarty\Exception\SmartyException
  */
 function smarty_function_html_checkboxes($params, \Smarty\Internal\Template $template)
 {

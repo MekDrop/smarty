@@ -48,14 +48,14 @@ class PhpResource extends FileResource
      * @param \Smarty\Template\SourceTemplate $source source object
      *
      * @return string                 template source
-     * @throws \SmartyException        if source cannot be loaded
+     * @throws \Smarty\Exception\SmartyException        if source cannot be loaded
      */
     public function getContent(\Smarty\Template\SourceTemplate $source)
     {
         if ($source->exists) {
             return '';
         }
-        throw new \SmartyException("Unable to read template {$source->type} '{$source->name}'");
+        throw new \Smarty\Exception\SmartyException("Unable to read template {$source->type} '{$source->name}'");
     }
 
     /**
@@ -84,15 +84,15 @@ class PhpResource extends FileResource
      * @param \Smarty\Internal\Template $_template template object
      *
      * @return void
-     * @throws \SmartyException          if template cannot be loaded or allow_php_templates is disabled
+     * @throws \Smarty\Exception\SmartyException          if template cannot be loaded or allow_php_templates is disabled
      */
     public function renderUncompiled(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template)
     {
         if (!$source->smarty->allow_php_templates) {
-            throw new \SmartyException('PHP templates are disabled');
+            throw new \Smarty\Exception\SmartyException('PHP templates are disabled');
         }
         if (!$source->exists) {
-            throw new \SmartyException(
+            throw new \Smarty\Exception\SmartyException(
                 "Unable to load template '{$source->type}:{$source->name}'" .
                 ($_template->_isSubTpl() ? " in '{$_template->parent->template_resource}'" : '')
             );

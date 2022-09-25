@@ -132,7 +132,7 @@ class SourceTemplate
      * @param string $type     type of resource
      * @param string $name     resource name
      *
-     * @throws   \SmartyException
+     * @throws   \Smarty\Exception\SmartyException
      * @internal param \Smarty\Resource $handler Resource Handler this source object communicates with
      */
     public function __construct(\Smarty $smarty, $resource, $type, $name)
@@ -155,7 +155,7 @@ class SourceTemplate
      * @param string                   $template_resource resource identifier
      *
      * @return \Smarty\Template\SourceTemplate Source Object
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public static function load(
         \Smarty\Internal\Template $_template = null,
@@ -167,7 +167,7 @@ class SourceTemplate
             $template_resource = $_template->template_resource;
         }
         if (empty($template_resource)) {
-            throw new \SmartyException('Source: Missing  name');
+            throw new \Smarty\Exception\SmartyException('Source: Missing  name');
         }
         // parse resource_name, load resource handler, identify unique resource name
         if (preg_match('/^([A-Za-z0-9_\-]{2,})[:]([\s\S]*)$/', $template_resource, $match)) {
@@ -206,7 +206,7 @@ class SourceTemplate
      * Get source content
      *
      * @return string
-     * @throws \SmartyException
+     * @throws \Smarty\Exception\SmartyException
      */
     public function getContent()
     {

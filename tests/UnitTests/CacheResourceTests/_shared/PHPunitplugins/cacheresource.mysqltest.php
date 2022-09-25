@@ -10,7 +10,7 @@ class Smarty_CacheResource_Mysqltest extends Smarty_CacheResource_Mysql
         try {
             $this->db = PHPUnit_Smarty::$pdo;
         } catch (PDOException $e) {
-            throw new \SmartyException('Mysql Resource failed: ' . $e->getMessage());
+            throw new \Smarty\Exception\SmartyException('Mysql Resource failed: ' . $e->getMessage());
         }
         $this->fetch = $this->db->prepare('SELECT modified, content FROM output_cache WHERE id = :id');
         $this->fetchTimestamp = $this->db->prepare('SELECT modified FROM output_cache WHERE id = :id');
