@@ -2,6 +2,9 @@
 
 namespace Smarty\Template;
 
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Debug;
+use Smarty\Internal\Template;
 use Smarty\Template\Resource\BaseResource;
 
 /**
@@ -25,13 +28,13 @@ class CompiledTemplate extends BaseResource
     /**
      * get a Compiled Object of this source
      *
-     * @param \Smarty\Internal\Template $_template template object
+     * @param Template $_template template object
      *
-     * @return \Smarty\Template\CompiledTemplate compiled object
+     * @return CompiledTemplate compiled object
      */
     public static function load($_template)
     {
-        $compiled = new \Smarty\Template\CompiledTemplate();
+        $compiled = new CompiledTemplate();
         if ($_template->source->handler->hasCompiledHandler) {
             $_template->source->handler->populateCompiledFilepath($compiled, $_template);
         } else {
@@ -43,9 +46,9 @@ class CompiledTemplate extends BaseResource
     /**
      * populate Compiled Object with compiled filepath
      *
-     * @param \Smarty\Internal\Template $_template template object
+     * @param Template $_template template object
      **/
-    public function populateCompiledFilepath(\Smarty\Internal\Template $_template)
+    public function populateCompiledFilepath(Template $_template)
     {
         $source = &$_template->source;
         $smarty = &$_template->smarty;
@@ -87,21 +90,21 @@ class CompiledTemplate extends BaseResource
     /**
      * render compiled template code
      *
-     * @param \Smarty\Internal\Template $_template
+     * @param Template $_template
      *
      * @return string
      * @throws \Exception
      */
-    public function render(\Smarty\Internal\Template $_template)
+    public function render(Template $_template)
     {
         // checks if template exists
         if (!$_template->source->exists) {
             $type = $_template->source->isConfig ? 'config' : 'template';
-            throw new \Smarty\Exception\SmartyException("Unable to load {$type} '{$_template->source->type}:{$_template->source->name}'");
+            throw new SmartyException("Unable to load {$type} '{$_template->source->type}:{$_template->source->name}'");
         }
         if ($_template->smarty->debugging) {
             if (!isset($_template->smarty->_debug)) {
-                $_template->smarty->_debug = new \Smarty\Internal\Debug();
+                $_template->smarty->_debug = new Debug();
             }
             $_template->smarty->_debug->start_render($_template);
         }
@@ -128,11 +131,11 @@ class CompiledTemplate extends BaseResource
     /**
      * load compiled template or compile from source
      *
-     * @param \Smarty\Internal\Template $_smarty_tpl do not change variable name, is used by compiled template
+     * @param Template $_smarty_tpl do not change variable name, is used by compiled template
      *
      * @throws \Exception
      */
-    public function process(\Smarty\Internal\Template $_smarty_tpl)
+    public function process(Template $_smarty_tpl)
     {
         $source = &$_smarty_tpl->source;
         $smarty = &$_smarty_tpl->smarty;
@@ -166,11 +169,11 @@ class CompiledTemplate extends BaseResource
     /**
      * compile template from source
      *
-     * @param \Smarty\Internal\Template $_template
+     * @param Template $_template
      *
      * @throws \Exception
      */
-    public function compileTemplateSource(\Smarty\Internal\Template $_template)
+    public function compileTemplateSource(Template $_template)
     {
         $this->file_dependency = array();
         $this->includes = array();
@@ -201,13 +204,13 @@ class CompiledTemplate extends BaseResource
     /**
      * Write compiled code by handler
      *
-     * @param \Smarty\Internal\Template $_template template object
+     * @param Template $_template template object
      * @param string                   $code      compiled code
      *
      * @return bool success
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    public function write(\Smarty\Internal\Template $_template, $code)
+    public function write(Template $_template, $code)
     {
         if (!$_template->source->handler->recompiled) {
             if ($_template->smarty->ext->_writeFile->writeFile($this->filepath, $code, $_template->smarty) === true) {
@@ -225,11 +228,11 @@ class CompiledTemplate extends BaseResource
     /**
      * Read compiled content from handler
      *
-     * @param \Smarty\Internal\Template $_template template object
+     * @param Template $_template template object
      *
      * @return string content
      */
-    public function read(\Smarty\Internal\Template $_template)
+    public function read(Template $_template)
     {
         if (!$_template->source->handler->recompiled) {
             return file_get_contents($this->filepath);
@@ -241,9 +244,9 @@ class CompiledTemplate extends BaseResource
      * Load fresh compiled template by including the PHP file
      * HHVM requires a work around because of a PHP incompatibility
      *
-     * @param \Smarty\Internal\Template $_smarty_tpl do not change variable name, is used by compiled template
+     * @param Template $_smarty_tpl do not change variable name, is used by compiled template
      */
-    private function loadCompiledTemplate(\Smarty\Internal\Template $_smarty_tpl)
+    private function loadCompiledTemplate(Template $_smarty_tpl)
     {
         if (function_exists('opcache_invalidate')
             && (!function_exists('ini_get') || strlen(ini_get("opcache.restrict_api")) < 1)

@@ -10,6 +10,11 @@
 
 namespace Smarty\Internal\Resource;
 
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Resource;
+use Smarty\Template\SourceTemplate;
+
 /**
  * Smarty Internal Plugin Resource File
  * Implements the file system as resource for Smarty templates
@@ -17,17 +22,17 @@ namespace Smarty\Internal\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class FileResource extends \Smarty\Resource
+class FileResource extends Resource
 {
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param \Smarty\Template\SourceTemplate   $source    source object
-     * @param \Smarty\Internal\Template $_template template object
+     * @param SourceTemplate   $source    source object
+     * @param Template $_template template object
      *
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    public function populate(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template = null)
+    public function populate(SourceTemplate $source, Template $_template = null)
     {
         $source->filepath = $this->buildFilepath($source, $_template);
         if ($source->filepath !== false) {
@@ -48,9 +53,9 @@ class FileResource extends \Smarty\Resource
     /**
      * populate Source Object with timestamp and exists from Resource
      *
-     * @param \Smarty\Template\SourceTemplate $source source object
+     * @param SourceTemplate $source source object
      */
-    public function populateTimestamp(\Smarty\Template\SourceTemplate $source)
+    public function populateTimestamp(SourceTemplate $source)
     {
         if (!$source->exists) {
             $source->timestamp = $source->exists = is_file($source->filepath);
@@ -63,17 +68,17 @@ class FileResource extends \Smarty\Resource
     /**
      * Load template's source from file into current template object
      *
-     * @param \Smarty\Template\SourceTemplate $source source object
+     * @param SourceTemplate $source source object
      *
      * @return string                 template source
-     * @throws \Smarty\Exception\SmartyException        if source cannot be loaded
+     * @throws SmartyException        if source cannot be loaded
      */
-    public function getContent(\Smarty\Template\SourceTemplate $source)
+    public function getContent(SourceTemplate $source)
     {
         if ($source->exists) {
             return file_get_contents($source->filepath);
         }
-        throw new \Smarty\Exception\SmartyException(
+        throw new SmartyException(
             'Unable to read ' . ($source->isConfig ? 'config' : 'template') .
             " {$source->type} '{$source->name}'"
         );
@@ -82,11 +87,11 @@ class FileResource extends \Smarty\Resource
     /**
      * Determine basename for compiled filename
      *
-     * @param \Smarty\Template\SourceTemplate $source source object
+     * @param SourceTemplate $source source object
      *
      * @return string                 resource's basename
      */
-    public function getBasename(\Smarty\Template\SourceTemplate $source)
+    public function getBasename(SourceTemplate $source)
     {
         return basename($source->filepath);
     }
@@ -94,13 +99,13 @@ class FileResource extends \Smarty\Resource
     /**
      * build template filepath by traversing the template_dir array
      *
-     * @param \Smarty\Template\SourceTemplate   $source    source object
-     * @param \Smarty\Internal\Template $_template template object
+     * @param SourceTemplate   $source    source object
+     * @param Template $_template template object
      *
      * @return string fully qualified filepath
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    protected function buildFilepath(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template = null)
+    protected function buildFilepath(SourceTemplate $source, Template $_template = null)
     {
         $file = $source->name;
         // absolute file ?
@@ -115,7 +120,7 @@ class FileResource extends \Smarty\Resource
             if ($_template->parent->source->type !== 'file' && $_template->parent->source->type !== 'extends'
                 && !isset($_template->parent->_cache[ 'allow_relative_path' ])
             ) {
-                throw new \Smarty\Exception\SmartyException("Template '{$file}' cannot be relative to template of resource type '{$_template->parent->source->type}'");
+                throw new SmartyException("Template '{$file}' cannot be relative to template of resource type '{$_template->parent->source->type}'");
             }
             // normalize path
             $path =

@@ -5,6 +5,9 @@
  * @package    Smarty
  * @subpackage PluginsShared
  */
+
+use Smarty\Exception\SmartyException;
+
 /**
  * evaluate compiler parameter
  *
@@ -13,7 +16,7 @@
  * @param mixed   $default value to be returned if the parameter is not present
  *
  * @return mixed evaluated value of parameter or $default
- * @throws \Smarty\Exception\SmartyException if parameter is not a literal (but an expression, variable, …)
+ * @throws SmartyException if parameter is not a literal (but an expression, variable, …)
  * @author Rodney Rehm
  */
 function smarty_literal_compiler_param($params, $index, $default = null)
@@ -24,7 +27,7 @@ function smarty_literal_compiler_param($params, $index, $default = null)
     }
     // test if param is a literal
     if (!preg_match('/^([\'"]?)[a-zA-Z0-9-]+(\\1)$/', $params[ $index ])) {
-        throw new \Smarty\Exception\SmartyException(
+        throw new SmartyException(
             '$param[' . $index .
             '] is not a literal and is thus not evaluatable at compile time'
         );

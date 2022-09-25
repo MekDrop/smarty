@@ -32,6 +32,17 @@
  * set SMARTY_DIR to absolute path to Smarty library files.
  * Sets SMARTY_DIR only if user application has not already defined it.
  */
+
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Debug;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+use Smarty\Internal\TestInstall;
+use Smarty\Resource;
+use Smarty\Security as SmartySecurity;
+use Smarty\Template\SourceTemplate;
+use Smarty\Variable;
+
 if (!defined('SMARTY_DIR')) {
     /**
      *
@@ -102,7 +113,7 @@ require_once SMARTY_SYSPLUGINS_DIR . 'smarty_internal_resource_file.php';
  * @method int compileAllConfig(string $extension = '.conf', bool $force_compile = false, int $time_limit = 0, $max_errors = null)
  * @method int clearCompiledTemplate($resource_name = null, $compile_id = null, $exp_time = null)
  */
-class Smarty extends \Smarty\Internal\TemplateBase
+class Smarty extends TemplateBase
 {
     /**
      * smarty version
@@ -350,12 +361,12 @@ class Smarty extends \Smarty\Internal\TemplateBase
      * @var string
      * @see \Smarty\Security
      */
-    public $security_class = '\Smarty\Security';
+    public $security_class = SmartySecurity::class;
 
     /**
      * implementation of security class
      *
-     * @var \Smarty\Security
+     * @var SmartySecurity
      */
     public $security_policy = null;
 
@@ -574,7 +585,7 @@ class Smarty extends \Smarty\Internal\TemplateBase
     /**
      * Debug object
      *
-     * @var \Smarty\Internal\Debug
+     * @var Debug
      */
     public $_debug = null;
 
@@ -667,7 +678,7 @@ class Smarty extends \Smarty\Internal\TemplateBase
         }
         $this->start_time = microtime(true);
         if (isset($_SERVER[ 'SCRIPT_NAME' ])) {
-            Smarty::$global_tpl_vars[ 'SCRIPT_NAME' ] = new \Smarty\Variable($_SERVER[ 'SCRIPT_NAME' ]);
+            Smarty::$global_tpl_vars[ 'SCRIPT_NAME' ] = new Variable($_SERVER[ 'SCRIPT_NAME' ]);
         }
         // Check if we're running on windows
         Smarty::$_IS_WINDOWS = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
@@ -683,26 +694,26 @@ class Smarty extends \Smarty\Internal\TemplateBase
      * @param string $resource_name template name
      *
      * @return bool status
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
     public function templateExists($resource_name)
     {
         // create source object
-        $source = \Smarty\Template\SourceTemplate::load(null, $this, $resource_name);
+        $source = SourceTemplate::load(null, $this, $resource_name);
         return $source->exists;
     }
 
     /**
      * Loads security class and enables security
      *
-     * @param string|\Smarty\Security $security_class if a string is used, it must be class-name
+     * @param string|SmartySecurity $security_class if a string is used, it must be class-name
      *
      * @return \Smarty                 current Smarty instance for chaining
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
     public function enableSecurity($security_class = null)
     {
-        \Smarty\Security::enableSecurity($this, $security_class);
+        SmartySecurity::enableSecurity($this, $security_class);
         return $this;
     }
 
@@ -962,8 +973,8 @@ class Smarty extends \Smarty\Internal\TemplateBase
      * @param object  $parent     next higher level of Smarty variables
      * @param boolean $do_clone   flag is Smarty object shall be cloned
      *
-     * @return \Smarty\Internal\Template template object
-     * @throws \Smarty\Exception\SmartyException
+     * @return Template template object
+     * @throws SmartyException
      */
     public function createTemplate($template, $cache_id = null, $compile_id = null, $parent = null, $do_clone = true)
     {
@@ -982,17 +993,17 @@ class Smarty extends \Smarty\Internal\TemplateBase
         }
         $_templateId = $this->_getTemplateId($template, $cache_id, $compile_id);
         $tpl = null;
-        if ($this->caching && isset(\Smarty\Internal\Template::$isCacheTplObj[ $_templateId ])) {
-            $tpl = $do_clone ? clone \Smarty\Internal\Template::$isCacheTplObj[ $_templateId ] :
-                \Smarty\Internal\Template::$isCacheTplObj[ $_templateId ];
+        if ($this->caching && isset(Template::$isCacheTplObj[ $_templateId ])) {
+            $tpl = $do_clone ? clone Template::$isCacheTplObj[ $_templateId ] :
+                Template::$isCacheTplObj[ $_templateId ];
             $tpl->inheritance = null;
             $tpl->tpl_vars = $tpl->config_vars = array();
-        } elseif (!$do_clone && isset(\Smarty\Internal\Template::$tplObjCache[ $_templateId ])) {
-            $tpl = clone \Smarty\Internal\Template::$tplObjCache[ $_templateId ];
+        } elseif (!$do_clone && isset(Template::$tplObjCache[ $_templateId ])) {
+            $tpl = clone Template::$tplObjCache[ $_templateId ];
             $tpl->inheritance = null;
             $tpl->tpl_vars = $tpl->config_vars = array();
         } else {
-            /* @var \Smarty\Internal\Template $tpl */
+            /* @var Template $tpl */
             $tpl = new $this->template_class($template, $this, null, $cache_id, $compile_id, null, null);
             $tpl->templateId = $_templateId;
         }
@@ -1004,11 +1015,11 @@ class Smarty extends \Smarty\Internal\TemplateBase
         if (!empty($data) && is_array($data)) {
             // set up variable values
             foreach ($data as $_key => $_val) {
-                $tpl->tpl_vars[ $_key ] = new \Smarty\Variable($_val);
+                $tpl->tpl_vars[ $_key ] = new Variable($_val);
             }
         }
         if ($this->debugging || $this->debugging_ctrl === 'URL') {
-            $tpl->smarty->_debug = new \Smarty\Internal\Debug();
+            $tpl->smarty->_debug = new Debug();
             // check URL debugging control
             if (!$this->debugging && $this->debugging_ctrl === 'URL') {
                 $tpl->smarty->_debug->debugUrl($tpl->smarty);
@@ -1026,7 +1037,7 @@ class Smarty extends \Smarty\Internal\TemplateBase
      * @param bool   $check       check if already loaded
      *
      * @return string |boolean filepath of loaded file or false
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
     public function loadPlugin($plugin_name, $check = true)
     {
@@ -1040,17 +1051,17 @@ class Smarty extends \Smarty\Internal\TemplateBase
      * @param null|mixed                $cache_id
      * @param null|mixed                $compile_id
      * @param null                      $caching
-     * @param \Smarty\Internal\Template $template
+     * @param Template $template
      *
      * @return string
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
     public function _getTemplateId(
         $template_name,
         $cache_id = null,
         $compile_id = null,
         $caching = null,
-        \Smarty\Internal\Template $template = null
+        Template $template = null
     ) {
         $template_name = (strpos($template_name, ':') === false) ? "{$this->default_resource_type}:{$template_name}" :
             $template_name;
@@ -1059,7 +1070,7 @@ class Smarty extends \Smarty\Internal\TemplateBase
         $caching = (int)($caching === null ? $this->caching : $caching);
         if ((isset($template) && strpos($template_name, ':.') !== false) || $this->allow_ambiguous_resources) {
             $_templateId =
-                \Smarty\Resource::getUniqueTemplateName((isset($template) ? $template : $this), $template_name) .
+                Resource::getUniqueTemplateName((isset($template) ? $template : $this), $template_name) .
                 "#{$cache_id}#{$compile_id}#{$caching}";
         } else {
             $_templateId = $this->_joined_template_dir . "#{$template_name}#{$cache_id}#{$compile_id}#{$caching}";
@@ -1119,8 +1130,8 @@ class Smarty extends \Smarty\Internal\TemplateBase
      */
     public function _clearTemplateCache()
     {
-        \Smarty\Internal\Template::$isCacheTplObj = array();
-        \Smarty\Internal\Template::$tplObjCache = array();
+        Template::$isCacheTplObj = array();
+        Template::$tplObjCache = array();
     }
 
     /**
@@ -1286,7 +1297,7 @@ class Smarty extends \Smarty\Internal\TemplateBase
      */
     public function testInstall(&$errors = null)
     {
-        \Smarty\Internal\TestInstall::testInstall($this, $errors);
+        TestInstall::testInstall($this, $errors);
     }
 
     /**

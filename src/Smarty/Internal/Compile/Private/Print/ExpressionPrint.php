@@ -10,13 +10,17 @@
 
 namespace Smarty\Internal\Compile\Private\Print;
 
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile Print Expression Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class ExpressionPrint extends \Smarty\Internal\CompileBase
+class ExpressionPrint extends CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -38,13 +42,13 @@ class ExpressionPrint extends \Smarty\Internal\CompileBase
      * Compiles code for generating output from any expression
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
+     * @param TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, TemplateCompilerBase $compiler, $parameter)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
@@ -119,7 +123,7 @@ class ExpressionPrint extends \Smarty\Internal\CompileBase
                             $output = $result;
                         } else {
                             // not found, throw exception
-                            throw new \Smarty\Exception\SmartyException("Unable to load variable filter '{$name}'");
+                            throw new SmartyException("Unable to load variable filter '{$name}'");
                         }
                     }
                 }
@@ -143,14 +147,14 @@ class ExpressionPrint extends \Smarty\Internal\CompileBase
     }
 
     /**
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      * @param string                                $name     name of variable filter
      * @param string                                $output   embedded output
      *
      * @return string
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    private function compile_variable_filter(\Smarty\Internal\TemplateCompilerBase $compiler, $name, $output)
+    private function compile_variable_filter(TemplateCompilerBase $compiler, $name, $output)
     {
         $function = $compiler->getPlugin($name, 'variablefilter');
         if ($function) {

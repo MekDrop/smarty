@@ -1,4 +1,7 @@
 <?php
+
+use Smarty\Internal\Debug;
+
 /**
  * Smarty PHPunit basic core function tests
  *
@@ -33,7 +36,7 @@ class LoadPluginTest extends PHPUnit_Smarty
      */
     public function testLoadPluginSmartyInternalDebug()
     {
-        $this->assertTrue($this->smarty->loadPlugin('\\Smarty\\Internal\\Debug') == true);
+        $this->assertTrue($this->smarty->loadPlugin(Debug::class) == true);
     }
 
     /**

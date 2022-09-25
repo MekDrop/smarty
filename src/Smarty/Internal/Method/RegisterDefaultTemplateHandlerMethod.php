@@ -2,6 +2,13 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+use Smarty\Resource;
+use Smarty\Template\SourceTemplate;
+
 /**
  * Smarty Method RegisterDefaultTemplateHandler
  *
@@ -23,21 +30,21 @@ class RegisterDefaultTemplateHandlerMethod
     /**
      * Register template default handler
      *
-     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
+     * @param TemplateBase|Template|Smarty $obj
      * @param callable                                                        $callback class/method name
      *
-     * @return \Smarty|\Smarty\Internal\Template
-     * @throws \Smarty\Exception\SmartyException              if $callback is not callable
-     *@api Smarty::registerDefaultTemplateHandler()
+     * @return Smarty|Template
+     * @throws SmartyException              if $callback is not callable
      *
+     * @api Smarty::registerDefaultTemplateHandler()
      */
-    public function registerDefaultTemplateHandler(\Smarty\Internal\TemplateBase $obj, $callback)
+    public function registerDefaultTemplateHandler(TemplateBase $obj, $callback)
     {
         $smarty = $obj->_getSmartyObj();
         if (is_callable($callback)) {
             $smarty->default_template_handler_func = $callback;
         } else {
-            throw new \Smarty\Exception\SmartyException('Default template handler not callable');
+            throw new SmartyException('Default template handler not callable');
         }
         return $obj;
     }
@@ -45,11 +52,11 @@ class RegisterDefaultTemplateHandlerMethod
     /**
      * get default content from template or config resource handler
      *
-     * @param \Smarty\Template\SourceTemplate $source
+     * @param SourceTemplate $source
      *
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    public static function _getDefaultTemplate(\Smarty\Template\SourceTemplate $source)
+    public static function _getDefaultTemplate(SourceTemplate $source)
     {
         if ($source->isConfig) {
             $default_handler = $source->smarty->default_config_handler_func;
@@ -66,7 +73,7 @@ class RegisterDefaultTemplateHandlerMethod
             if ($source->exists) {
                 $source->timestamp = filemtime($_return);
             } else {
-                throw new \Smarty\Exception\SmartyException(
+                throw new SmartyException(
                     'Default handler: Unable to load ' .
                     ($source->isConfig ? 'config' : 'template') .
                     " default file '{$_return}' for '{$source->type}:{$source->name}'"
@@ -78,10 +85,10 @@ class RegisterDefaultTemplateHandlerMethod
             $source->content = $_content;
             $source->exists = true;
             $source->uid = $source->name = sha1($_content);
-            $source->handler = \Smarty\Resource::load($source->smarty, 'eval');
+            $source->handler = Resource::load($source->smarty, 'eval');
         } else {
             $source->exists = false;
-            throw new \Smarty\Exception\SmartyException(
+            throw new SmartyException(
                 'Default handler: No ' . ($source->isConfig ? 'config' : 'template') .
                 " default content for '{$source->type}:{$source->name}'"
             );

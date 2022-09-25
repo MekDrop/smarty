@@ -5,6 +5,10 @@
  * @package    Smarty
  * @subpackage PluginsFunction
  */
+
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+
 /**
  * Smarty {html_select_time} function plugin
  * Type:     function
@@ -18,13 +22,13 @@
  *
  * @param array                     $params parameters
  *
- * @param \Smarty\Internal\Template $template
+ * @param Template $template
  *
  * @return string
  * @uses   smarty_make_timestamp()
- * @throws \Smarty\Exception\SmartyException
+ * @throws SmartyException
  */
-function smarty_function_html_select_time($params, \Smarty\Internal\Template $template)
+function smarty_function_html_select_time($params, Template $template)
 {
     $template->_checkPlugins(
         array(

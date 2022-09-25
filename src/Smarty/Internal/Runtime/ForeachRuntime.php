@@ -2,6 +2,9 @@
 
 namespace Smarty\Internal\Runtime;
 
+use Smarty\Internal\Template;
+use Smarty\Variable;
+
 /**
  * Foreach Runtime Methods count(), init(), restore()
  *
@@ -24,7 +27,7 @@ class ForeachRuntime
      *  - init item and key variables, named foreach property data if required
      *  - count total if required
      *
-     * @param \Smarty\Internal\Template $tpl
+     * @param Template $tpl
      * @param mixed                     $from       values to loop over
      * @param string                    $item       variable name
      * @param bool                      $needTotal  flag if we need to count values
@@ -35,7 +38,7 @@ class ForeachRuntime
      * @return mixed $from
      */
     public function init(
-        \Smarty\Internal\Template $tpl,
+        Template $tpl,
         $from,
         $item,
         $needTotal = false,
@@ -64,7 +67,7 @@ class ForeachRuntime
                 $tpl->tpl_vars[ $item ]
             );
         }
-        $tpl->tpl_vars[ $item ] = new \Smarty\Variable(null, $tpl->isRenderingCache);
+        $tpl->tpl_vars[ $item ] = new Variable(null, $tpl->isRenderingCache);
         if ($total === 0) {
             $from = null;
         } else {
@@ -75,7 +78,7 @@ class ForeachRuntime
                         $tpl->tpl_vars[ $key ]
                     );
                 }
-                $tpl->tpl_vars[ $key ] = new \Smarty\Variable(null, $tpl->isRenderingCache);
+                $tpl->tpl_vars[ $key ] = new Variable(null, $tpl->isRenderingCache);
             }
         }
         if ($needTotal) {
@@ -102,7 +105,7 @@ class ForeachRuntime
             if (isset($properties[ 'show' ])) {
                 $namedProp[ 'show' ] = ($total > 0);
             }
-            $tpl->tpl_vars[ $namedVar ] = new \Smarty\Variable($namedProp);
+            $tpl->tpl_vars[ $namedVar ] = new Variable($namedProp);
         }
         $this->stack[] = $saveVars;
         return $from;
@@ -139,10 +142,10 @@ class ForeachRuntime
      *
      * will be called by {break n} or {continue n} for the required number of levels
      *
-     * @param \Smarty\Internal\Template $tpl
+     * @param Template $tpl
      * @param int                       $levels number of levels
      */
-    public function restore(\Smarty\Internal\Template $tpl, $levels = 1)
+    public function restore(Template $tpl, $levels = 1)
     {
         while ($levels) {
             $saveVars = array_pop($this->stack);

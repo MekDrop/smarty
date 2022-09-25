@@ -2,6 +2,11 @@
 
 namespace Smarty\Internal\Runtime;
 
+use Exception;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Template\CachedTemplate;
+
 /**
  * Inline Runtime Methods render, setSourceByUid, setupSubTemplate
  *
@@ -14,14 +19,14 @@ class CacheModifyRuntime
     /**
      * check client side cache
      *
-     * @param \Smarty\Template\CachedTemplate   $cached
-     * @param \Smarty\Internal\Template $_template
+     * @param CachedTemplate   $cached
+     * @param Template $_template
      * @param string                    $content
      *
-     * @throws \Exception
-     * @throws \Smarty\Exception\SmartyException
+     * @throws Exception
+     * @throws SmartyException
      */
-    public function cacheModifiedCheck(\Smarty\Template\CachedTemplate $cached, \Smarty\Internal\Template $_template, $content)
+    public function cacheModifiedCheck(CachedTemplate $cached, Template $_template, $content)
     {
         $_isCached = $_template->isCached() && !$_template->compiled->has_nocache_code;
         $_last_modified_date =

@@ -10,25 +10,29 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile Ldelim Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class LdelimCompile extends \Smarty\Internal\CompileBase
+class LdelimCompile extends CompileBase
 {
     /**
      * Compiles code for the {ldelim} tag
      * This tag does output the left delimiter
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws SmartyCompilerException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         $_attr = $this->getAttributes($compiler, $args);
         if ($_attr[ 'nocache' ] === true) {

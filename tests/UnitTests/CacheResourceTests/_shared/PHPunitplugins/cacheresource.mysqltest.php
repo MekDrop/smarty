@@ -1,5 +1,8 @@
 <?php
 
+use Smarty\Exception\SmartyException;
+use Smarty\Template\CachedTemplate;
+
 require_once SMARTY_DIR . '../demo/plugins/cacheresource.mysql.php';
 
 class Smarty_CacheResource_Mysqltest extends Smarty_CacheResource_Mysql
@@ -10,7 +13,7 @@ class Smarty_CacheResource_Mysqltest extends Smarty_CacheResource_Mysql
         try {
             $this->db = PHPUnit_Smarty::$pdo;
         } catch (PDOException $e) {
-            throw new \Smarty\Exception\SmartyException('Mysql Resource failed: ' . $e->getMessage());
+            throw new SmartyException('Mysql Resource failed: ' . $e->getMessage());
         }
         $this->fetch = $this->db->prepare('SELECT modified, content FROM output_cache WHERE id = :id');
         $this->fetchTimestamp = $this->db->prepare('SELECT modified FROM output_cache WHERE id = :id');
@@ -18,7 +21,7 @@ class Smarty_CacheResource_Mysqltest extends Smarty_CacheResource_Mysql
             VALUES  (:id, :name, :cache_id, :compile_id, :content)');
     }
 
-    public function hasLock(Smarty $smarty, \Smarty\Template\CachedTemplate $cached)
+    public function hasLock(Smarty $smarty, CachedTemplate $cached)
     {
         if ($this->lockTime) {
             $this->lockTime--;

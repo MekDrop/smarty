@@ -2,6 +2,11 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Internal\Data;
+use Smarty\Internal\Template;
+use Smarty\Variable;
+
 /**
  * Smarty Method AppendByRef
  *
@@ -16,21 +21,21 @@ class AppendByRefMethod
     /**
      * appends values to template variables by reference
      *
-     * @api  Smarty::appendByRef()
-     * @link https://www.smarty.net/docs/en/api.append.by.ref.tpl
-     *
-     * @param \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty $data
+     * @param Data|Template|Smarty $data
      * @param string                                                  $tpl_var the template variable name
      * @param mixed                                                   &$value  the referenced value to append
      * @param bool                                                    $merge   flag if array elements shall be merged
      *
-     * @return \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty
+     * @return Data|Template|Smarty
+     * @link https://www.smarty.net/docs/en/api.append.by.ref.tpl
+     *
+     * @api  Smarty::appendByRef()
      */
-    public static function appendByRef(\Smarty\Internal\Data $data, $tpl_var, &$value, $merge = false)
+    public static function appendByRef(Data $data, $tpl_var, &$value, $merge = false)
     {
         if ($tpl_var !== '' && isset($value)) {
             if (!isset($data->tpl_vars[ $tpl_var ])) {
-                $data->tpl_vars[ $tpl_var ] = new \Smarty\Variable();
+                $data->tpl_vars[ $tpl_var ] = new Variable();
             }
             if (!is_array($data->tpl_vars[ $tpl_var ]->value)) {
                 settype($data->tpl_vars[ $tpl_var ]->value, 'array');

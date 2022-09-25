@@ -10,6 +10,10 @@
 
 namespace Smarty\Internal\Runtime;
 
+use Smarty;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Create code frame for compiled and cached templates
  */
@@ -18,23 +22,23 @@ class CodeFrameRuntime
     /**
      * Create code frame for compiled and cached templates
      *
-     * @param \Smarty\Internal\Template              $_template
-     * @param string                                $content   optional template content
-     * @param string                                $functions compiled template function and block code
-     * @param bool                                  $cache     flag for cache file
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler
+     * @param Template $_template
+     * @param string $content optional template content
+     * @param string $functions compiled template function and block code
+     * @param bool $cache flag for cache file
+     * @param TemplateCompilerBase|null $compiler
      *
      * @return string
      */
     public function create(
-        \Smarty\Internal\Template $_template,
+        Template $_template,
         $content = '',
         $functions = '',
         $cache = false,
-        \Smarty\Internal\TemplateCompilerBase $compiler = null
+        TemplateCompilerBase $compiler = null
     ) {
         // build property code
-        $properties[ 'version' ] = \Smarty::SMARTY_VERSION;
+        $properties[ 'version' ] = Smarty::SMARTY_VERSION;
         $properties[ 'unifunc' ] = 'content_' . str_replace(array('.', ','), '_', uniqid('', true));
         if (!$cache) {
             $properties[ 'has_nocache_code' ] = $_template->compiled->has_nocache_code;
@@ -51,11 +55,11 @@ class CodeFrameRuntime
 	        date("Y-m-d H:i:s"),
 	        str_replace('*/', '* /', $_template->source->filepath)
         );
-        $output .= "/* @var \Smarty\Internal\Template \$_smarty_tpl */\n";
+        $output .= "/* @var \\".Template::class." \$_smarty_tpl */\n";
         $dec = "\$_smarty_tpl->_decodeProperties(\$_smarty_tpl, " . var_export($properties, true) . ',' .
                ($cache ? 'true' : 'false') . ')';
         $output .= "if ({$dec}) {\n";
-        $output .= "function {$properties['unifunc']} (\Smarty\Internal\Template \$_smarty_tpl) {\n";
+        $output .= "function {$properties['unifunc']} (\\".Template::class." \$_smarty_tpl) {\n";
         if (!$cache && !empty($compiler->tpl_function)) {
             $output .= '$_smarty_tpl->smarty->ext->_tplFunction->registerTplFunctions($_smarty_tpl, ';
             $output .= var_export($compiler->tpl_function, true);

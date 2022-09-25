@@ -8,6 +8,10 @@
 
 namespace Smarty\Template;
 
+use Smarty\CacheResource;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Debug;
+use Smarty\Internal\Template;
 use Smarty\Template\Resource\BaseResource;
 
 /**
@@ -30,7 +34,7 @@ class CachedTemplate extends BaseResource
     /**
      * CacheResource Handler
      *
-     * @var \Smarty\CacheResource
+     * @var CacheResource
      */
     public $handler = null;
 
@@ -65,7 +69,7 @@ class CachedTemplate extends BaseResource
     /**
      * Source Object
      *
-     * @var \Smarty\Template\SourceTemplate
+     * @var SourceTemplate
      */
     public $source = null;
 
@@ -86,29 +90,29 @@ class CachedTemplate extends BaseResource
     /**
      * create Cached Object container
      *
-     * @param \Smarty\Internal\Template $_template template object
+     * @param Template $_template template object
      *
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    public function __construct(\Smarty\Internal\Template $_template)
+    public function __construct(Template $_template)
     {
         $this->compile_id = $_template->compile_id;
         $this->cache_id = $_template->cache_id;
         $this->source = $_template->source;
-        if (!class_exists('\Smarty\CacheResource', false)) {
+        if (!class_exists('\\Smarty\\CacheResource', false)) {
             include SMARTY_SYSPLUGINS_DIR . 'smarty_cacheresource.php';
         }
-        $this->handler = \Smarty\CacheResource::load($_template->smarty);
+        $this->handler = CacheResource::load($_template->smarty);
     }
 
     /**
-     * @param \Smarty\Internal\Template $_template
+     * @param Template $_template
      *
-     * @return \Smarty\Template\CachedTemplate
+     * @return CachedTemplate
      */
-    public static function load(\Smarty\Internal\Template $_template)
+    public static function load(Template $_template)
     {
-        $_template->cached = new \Smarty\Template\CachedTemplate($_template);
+        $_template->cached = new CachedTemplate($_template);
         $_template->cached->handler->populate($_template->cached, $_template);
         // caching enabled ?
         if (!$_template->caching || $_template->source->handler->recompiled
@@ -121,17 +125,17 @@ class CachedTemplate extends BaseResource
     /**
      * Render cache template
      *
-     * @param \Smarty\Internal\Template $_template
+     * @param Template $_template
      * @param bool                      $no_output_filter
      *
      * @throws \Exception
      */
-    public function render(\Smarty\Internal\Template $_template, $no_output_filter = true)
+    public function render(Template $_template, $no_output_filter = true)
     {
         if ($this->isCached($_template)) {
             if ($_template->smarty->debugging) {
                 if (!isset($_template->smarty->_debug)) {
-                    $_template->smarty->_debug = new \Smarty\Internal\Debug();
+                    $_template->smarty->_debug = new Debug();
                 }
                 $_template->smarty->_debug->start_cache($_template);
             }
@@ -151,11 +155,11 @@ class CachedTemplate extends BaseResource
     /**
      * Check if cache is valid, lock cache if required
      *
-     * @param \Smarty\Internal\Template $_template
+     * @param Template $_template
      *
      * @return bool flag true if cache is valid
      */
-    public function isCached(\Smarty\Internal\Template $_template)
+    public function isCached(Template $_template)
     {
         if ($this->valid !== null) {
             return $this->valid;
@@ -229,10 +233,10 @@ class CachedTemplate extends BaseResource
     /**
      * Process cached template
      *
-     * @param \Smarty\Internal\Template $_template template object
+     * @param Template $_template template object
      * @param bool                     $update    flag if called because cache update
      */
-    public function process(\Smarty\Internal\Template $_template, $update = false)
+    public function process(Template $_template, $update = false)
     {
         if ($this->handler->process($_template, $this, $update) === false) {
             $this->valid = false;
@@ -247,11 +251,11 @@ class CachedTemplate extends BaseResource
     /**
      * Read cache content from handler
      *
-     * @param \Smarty\Internal\Template $_template template object
+     * @param Template $_template template object
      *
      * @return string|false content
      */
-    public function read(\Smarty\Internal\Template $_template)
+    public function read(Template $_template)
     {
         if (!$_template->source->handler->recompiled) {
             return $this->handler->readCachedContent($_template);

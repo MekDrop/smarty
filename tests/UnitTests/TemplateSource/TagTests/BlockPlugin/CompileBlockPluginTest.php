@@ -1,4 +1,7 @@
 <?php
+
+use Smarty\Exception\SmartyException;
+
 /**
  * Smarty PHPunit tests compilation of block plugins
  *
@@ -76,7 +79,7 @@ class CompileBlockPluginTest extends PHPUnit_Smarty
      */
     public function testBlockPluginRegisteredFunction2()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('block tag \'blockplugintest\' not callable');
         $this->assertEquals('block test', $this->smarty->fetch('registered.tpl'));
     }
@@ -103,7 +106,7 @@ class CompileBlockPluginTest extends PHPUnit_Smarty
      */
     public function testBlockPluginRegisteredStatic2()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('block tag \'blockpluginstatic\' not callable');
         $this->assertEquals('static block test', $this->smarty->fetch('registered_static.tpl'));
     }
@@ -130,7 +133,7 @@ class CompileBlockPluginTest extends PHPUnit_Smarty
      */
     public function testBlockPluginRegisteredMethod2()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('block tag \'blockpluginmethod\' not callable');
         $this->assertEquals('method block test', $this->smarty->fetch('registered_method.tpl'));
     }
@@ -157,7 +160,7 @@ class CompileBlockPluginTest extends PHPUnit_Smarty
      */
     public function testBlockPluginRegisteredObject2()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('block tag \'myobject\' not callable');
         $this->assertEquals('object block test', $this->smarty->fetch('registered_object.tpl'));
     }

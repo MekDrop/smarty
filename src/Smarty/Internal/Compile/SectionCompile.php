@@ -10,7 +10,12 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Exception\SmartyException;
 use Smarty\Internal\Compile\Private\ForeachSectionPrivate;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+use Smarty\Variable;
 
 /**
  * Smarty Internal Plugin Compile Section Class
@@ -86,13 +91,13 @@ class SectionCompile extends ForeachSectionPrivate
      * Compiles code for the {section} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyCompilerException
+     * @throws SmartyException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         $compiler->loopNesting++;
         // check and get attributes
@@ -362,7 +367,7 @@ class SectionCompile extends ForeachSectionPrivate
             $output .= "{$local}{$key} = {$code};\n";
         }
         $_vars = 'array(' . join(', ', $initNamedProperty) . ')';
-        $output .= "{$sectionVar} = new \Smarty\Variable({$_vars});\n";
+        $output .= "{$sectionVar} = new \\".Variable::class."({$_vars});\n";
         $cond_code = "{$propValue['total']} !== 0";
         if ($propType[ 'total' ] === 0) {
             if ($propValue[ 'total' ] === 0) {
@@ -409,17 +414,17 @@ class SectionCompile extends ForeachSectionPrivate
  * @package    Smarty
  * @subpackage Compiler
  */
-class SectionelseCompile extends \Smarty\Internal\CompileBase
+class SectionelseCompile extends CompileBase
 {
     /**
      * Compiles code for the {sectionelse} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
@@ -435,17 +440,17 @@ class SectionelseCompile extends \Smarty\Internal\CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class SectioncloseCompile extends \Smarty\Internal\CompileBase
+class SectioncloseCompile extends CompileBase
 {
     /**
      * Compiles code for the {/section} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         $compiler->loopNesting--;
         // must endblock be nocache?

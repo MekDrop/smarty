@@ -10,25 +10,29 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile If Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class IfCompile extends \Smarty\Internal\CompileBase
+class IfCompile extends CompileBase
 {
     /**
      * Compiles code for the {if} tag
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
+     * @param TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws SmartyCompilerException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, TemplateCompilerBase $compiler, $parameter)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
@@ -52,7 +56,7 @@ class IfCompile extends \Smarty\Internal\CompileBase
             $_output = "<?php {$prefixVar} = {$parameter[ 'if condition' ][ 'value' ]};?>\n";
             $assignAttr = array();
             $assignAttr[][ 'value' ] = $prefixVar;
-            $assignCompiler = new \Smarty\Internal\Compile\AssignCompile();
+            $assignCompiler = new AssignCompile();
             if (is_array($parameter[ 'if condition' ][ 'var' ])) {
                 $assignAttr[][ 'var' ] = $parameter[ 'if condition' ][ 'var' ][ 'var' ];
                 $_output .= $assignCompiler->compile(
@@ -78,17 +82,17 @@ class IfCompile extends \Smarty\Internal\CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class ElseCompile extends \Smarty\Internal\CompileBase
+class ElseCompile extends CompileBase
 {
     /**
      * Compiles code for the {else} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         list($nesting, $compiler->tag_nocache) = $this->closeTag($compiler, array('if', 'elseif'));
         $this->openTag($compiler, 'else', array($nesting, $compiler->tag_nocache));
@@ -102,19 +106,19 @@ class ElseCompile extends \Smarty\Internal\CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class ElseifCompile extends \Smarty\Internal\CompileBase
+class ElseifCompile extends CompileBase
 {
     /**
      * Compiles code for the {elseif} tag
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
+     * @param TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws SmartyCompilerException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, TemplateCompilerBase $compiler, $parameter)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
@@ -137,7 +141,7 @@ class ElseifCompile extends \Smarty\Internal\CompileBase
             }
             $prefixVar = $compiler->getNewPrefixVariable();
             $assignCode = "<?php {$prefixVar} = {$parameter[ 'if condition' ][ 'value' ]};?>\n";
-            $assignCompiler = new \Smarty\Internal\Compile\AssignCompile();
+            $assignCompiler = new AssignCompile();
             $assignAttr = array();
             $assignAttr[][ 'value' ] = $prefixVar;
             if (is_array($parameter[ 'if condition' ][ 'var' ])) {
@@ -183,17 +187,17 @@ class ElseifCompile extends \Smarty\Internal\CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class IfcloseCompile extends \Smarty\Internal\CompileBase
+class IfcloseCompile extends CompileBase
 {
     /**
      * Compiles code for the {/if} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         // must endblock be nocache?
         if ($compiler->nocache) {

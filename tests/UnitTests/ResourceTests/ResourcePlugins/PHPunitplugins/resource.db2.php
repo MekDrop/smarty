@@ -10,9 +10,13 @@
  * -------------------------------------------------------------
  */
 
-class Smarty_Resource_Db2 extends Smarty_Resource_Recompiled
+use Smarty\Internal\Template;
+use Smarty\Resource\RecompiledResource;
+use Smarty\Template\SourceTemplate;
+
+class Smarty_Resource_Db2 extends RecompiledResource
 {
-    public function populate(Smarty_Template_Source $source, \Smarty\Internal\Template $_template = null)
+    public function populate(SourceTemplate $source, Template $_template = null)
     {
         $source->filepath = 'db2:';
         $source->uid = sha1($source->resource);
@@ -20,7 +24,7 @@ class Smarty_Resource_Db2 extends Smarty_Resource_Recompiled
         $source->exists = true;
     }
 
-    public function getContent(Smarty_Template_Source $source)
+    public function getContent(SourceTemplate $source)
     {
         return '{$x="hello world"}{$x}';
     }

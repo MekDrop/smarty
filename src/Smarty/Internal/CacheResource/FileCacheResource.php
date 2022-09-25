@@ -10,6 +10,11 @@
 
 namespace Smarty\Internal\CacheResource;
 
+use Smarty\CacheResource;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Template\CachedTemplate;
+
 /**
  * This class does contain all necessary methods for the HTML cache on file system
  * Implements the file system as resource for the HTML cache Version ussing nocache inserts.
@@ -18,17 +23,17 @@ namespace Smarty\Internal\CacheResource;
  * @subpackage Cacher
  * @internal
  */
-class FileCacheResource extends \Smarty\CacheResource
+class FileCacheResource extends CacheResource
 {
     /**
      * populate Cached Object with meta data from Resource
      *
-     * @param \Smarty\Template\CachedTemplate   $cached    cached object
-     * @param \Smarty\Internal\Template $_template template object
+     * @param CachedTemplate   $cached    cached object
+     * @param Template $_template template object
      *
      * @return void
      */
-    public function populate(\Smarty\Template\CachedTemplate $cached, \Smarty\Internal\Template $_template)
+    public function populate(CachedTemplate $cached, Template $_template)
     {
         $source = &$_template->source;
         $smarty = &$_template->smarty;
@@ -76,11 +81,11 @@ class FileCacheResource extends \Smarty\CacheResource
     /**
      * populate Cached Object with timestamp and exists from Resource
      *
-     * @param \Smarty\Template\CachedTemplate $cached cached object
+     * @param CachedTemplate $cached cached object
      *
      * @return void
      */
-    public function populateTimestamp(\Smarty\Template\CachedTemplate $cached)
+    public function populateTimestamp(CachedTemplate $cached)
     {
         $cached->timestamp = $cached->exists = is_file($cached->filepath);
         if ($cached->exists) {
@@ -91,15 +96,15 @@ class FileCacheResource extends \Smarty\CacheResource
     /**
      * Read the cached template and process its header
      *
-     * @param \Smarty\Internal\Template $_smarty_tpl do not change variable name, is used by compiled template
-     * @param \Smarty\Template\CachedTemplate    $cached      cached object
+     * @param Template $_smarty_tpl do not change variable name, is used by compiled template
+     * @param CachedTemplate    $cached      cached object
      * @param bool                      $update      flag if called because cache update
      *
      * @return boolean true or false if the cached content does not exist
      */
     public function process(
-        \Smarty\Internal\Template $_smarty_tpl,
-        \Smarty\Template\CachedTemplate $cached = null,
+        Template $_smarty_tpl,
+        CachedTemplate $cached = null,
         $update = false
     ) {
         $_smarty_tpl->cached->valid = false;
@@ -114,13 +119,13 @@ class FileCacheResource extends \Smarty\CacheResource
     /**
      * Write the rendered template output to cache
      *
-     * @param \Smarty\Internal\Template $_template template object
+     * @param Template $_template template object
      * @param string                   $content   content to cache
      *
      * @return bool success
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    public function writeCachedContent(\Smarty\Internal\Template $_template, $content)
+    public function writeCachedContent(Template $_template, $content)
     {
         if ($_template->smarty->ext->_writeFile->writeFile(
                 $_template->cached->filepath,
@@ -148,11 +153,11 @@ class FileCacheResource extends \Smarty\CacheResource
     /**
      * Read cached template from cache
      *
-     * @param \Smarty\Internal\Template $_template template object
+     * @param Template $_template template object
      *
      * @return string  content
      */
-    public function readCachedContent(\Smarty\Internal\Template $_template)
+    public function readCachedContent(Template $_template)
     {
         if (is_file($_template->cached->filepath)) {
             return file_get_contents($_template->cached->filepath);
@@ -193,11 +198,11 @@ class FileCacheResource extends \Smarty\CacheResource
      * Check is cache is locked for this template
      *
      * @param \Smarty                 $smarty Smarty object
-     * @param \Smarty\Template\CachedTemplate $cached cached object
+     * @param CachedTemplate $cached cached object
      *
      * @return boolean true or false if cache is locked
      */
-    public function hasLock(\Smarty $smarty, \Smarty\Template\CachedTemplate $cached)
+    public function hasLock(\Smarty $smarty, CachedTemplate $cached)
     {
         clearstatcache(true, $cached->lock_id ?? '');
         if (null !== $cached->lock_id && is_file($cached->lock_id)) {
@@ -212,11 +217,11 @@ class FileCacheResource extends \Smarty\CacheResource
      * Lock cache for this template
      *
      * @param \Smarty                 $smarty Smarty object
-     * @param \Smarty\Template\CachedTemplate $cached cached object
+     * @param CachedTemplate $cached cached object
      *
      * @return bool|void
      */
-    public function acquireLock(\Smarty $smarty, \Smarty\Template\CachedTemplate $cached)
+    public function acquireLock(\Smarty $smarty, CachedTemplate $cached)
     {
         $cached->is_locked = true;
         touch($cached->lock_id);
@@ -226,11 +231,11 @@ class FileCacheResource extends \Smarty\CacheResource
      * Unlock cache for this template
      *
      * @param \Smarty                 $smarty Smarty object
-     * @param \Smarty\Template\CachedTemplate $cached cached object
+     * @param CachedTemplate $cached cached object
      *
      * @return bool|void
      */
-    public function releaseLock(\Smarty $smarty, \Smarty\Template\CachedTemplate $cached)
+    public function releaseLock(\Smarty $smarty, CachedTemplate $cached)
     {
         $cached->is_locked = false;
         @unlink($cached->lock_id);

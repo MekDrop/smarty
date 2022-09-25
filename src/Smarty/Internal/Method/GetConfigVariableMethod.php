@@ -2,6 +2,10 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Internal\Data;
+use Smarty\Internal\Template;
+
 /**
  * Smarty Method GetConfigVariable
  *
@@ -23,13 +27,13 @@ class GetConfigVariableMethod
     /**
      * gets  a config variable value
      *
-     * @param \Smarty|\Smarty\Internal\Data|\Smarty\Internal\Template $data
+     * @param Smarty|Data|Template $data
      * @param string                                                  $varName the name of the config variable
      * @param bool                                                    $errorEnable
      *
      * @return null|string  the value of the config variable
      */
-    public function getConfigVariable(\Smarty\Internal\Data $data, $varName = null, $errorEnable = true)
+    public function getConfigVariable(Data $data, $varName = null, $errorEnable = true)
     {
         return $data->ext->configLoad->_getConfigVariable($data, $varName, $errorEnable);
     }

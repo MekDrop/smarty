@@ -10,26 +10,32 @@
 
 namespace Smarty\Internal\Compile\Private;
 
+use Smarty;
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile Modifier Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class ModifierPrivate extends \Smarty\Internal\CompileBase
+class ModifierPrivate extends CompileBase
 {
     /**
      * Compiles code for modifier execution
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
+     * @param TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyCompilerException
+     * @throws SmartyException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, TemplateCompilerBase $compiler, $parameter)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);

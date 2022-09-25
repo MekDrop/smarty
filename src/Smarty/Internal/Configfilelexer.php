@@ -11,6 +11,8 @@
 
 namespace Smarty\Internal;
 
+use Smarty\Internal\Config\File\CompilerFile;
+
 /**
  * \Smarty\Internal\Configfilelexer
  *
@@ -120,7 +122,7 @@ class Configfilelexer
     /**
      * compiler object
      *
-     * @var \Smarty\Internal\Config\File\CompilerFile
+     * @var CompilerFile
      */
     private $compiler = null;
 
@@ -156,9 +158,9 @@ class Configfilelexer
      * constructor
      *
      * @param   string                             $data template source
-     * @param \Smarty\Internal\Config\File\CompilerFile $compiler
+     * @param CompilerFile $compiler
      */
-    public function __construct($data, \Smarty\Internal\Config\File\CompilerFile $compiler)
+    public function __construct($data, CompilerFile $compiler)
     {
         $this->data = $data . "\n"; //now all lines are \n-terminated
         $this->dataLength = strlen($data);
@@ -303,24 +305,24 @@ class Configfilelexer
 
     public function yy_r1_1()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_COMMENTSTART;
+        $this->token = Configfileparser::TPC_COMMENTSTART;
         $this->yypushstate(self::COMMENT);
     }
 
     public function yy_r1_2()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_OPENB;
+        $this->token = Configfileparser::TPC_OPENB;
         $this->yypushstate(self::SECTION);
     }
 
     public function yy_r1_3()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_CLOSEB;
+        $this->token = Configfileparser::TPC_CLOSEB;
     }
 
     public function yy_r1_4()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_EQUAL;
+        $this->token = Configfileparser::TPC_EQUAL;
         $this->yypushstate(self::VALUE);
     } // end function
 
@@ -331,17 +333,17 @@ class Configfilelexer
 
     public function yy_r1_6()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_NEWLINE;
+        $this->token = Configfileparser::TPC_NEWLINE;
     }
 
     public function yy_r1_7()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_ID;
+        $this->token = Configfileparser::TPC_ID;
     }
 
     public function yy_r1_8()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_OTHER;
+        $this->token = Configfileparser::TPC_OTHER;
     }
 
     public function yylex2()
@@ -408,31 +410,31 @@ class Configfilelexer
 
     public function yy_r2_2()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_FLOAT;
+        $this->token = Configfileparser::TPC_FLOAT;
         $this->yypopstate();
     }
 
     public function yy_r2_3()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_INT;
+        $this->token = Configfileparser::TPC_INT;
         $this->yypopstate();
     }
 
     public function yy_r2_4()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_TRIPPLE_QUOTES;
+        $this->token = Configfileparser::TPC_TRIPPLE_QUOTES;
         $this->yypushstate(self::TRIPPLE);
     }
 
     public function yy_r2_5()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_SINGLE_QUOTED_STRING;
+        $this->token = Configfileparser::TPC_SINGLE_QUOTED_STRING;
         $this->yypopstate();
     }
 
     public function yy_r2_6()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_DOUBLE_QUOTED_STRING;
+        $this->token = Configfileparser::TPC_DOUBLE_QUOTED_STRING;
         $this->yypopstate();
     } // end function
 
@@ -444,20 +446,20 @@ class Configfilelexer
             $this->yypushstate(self::NAKED_STRING_VALUE);
             return true; //reprocess in new state
         } else {
-            $this->token = \Smarty\Internal\Configfileparser::TPC_BOOL;
+            $this->token = Configfileparser::TPC_BOOL;
             $this->yypopstate();
         }
     }
 
     public function yy_r2_8()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_NAKED_STRING;
+        $this->token = Configfileparser::TPC_NAKED_STRING;
         $this->yypopstate();
     }
 
     public function yy_r2_9()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_NAKED_STRING;
+        $this->token = Configfileparser::TPC_NAKED_STRING;
         $this->value = '';
         $this->yypopstate();
     } // end function
@@ -520,7 +522,7 @@ class Configfilelexer
 
     public function yy_r3_1()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_NAKED_STRING;
+        $this->token = Configfileparser::TPC_NAKED_STRING;
         $this->yypopstate();
     }
 
@@ -587,12 +589,12 @@ class Configfilelexer
 
     public function yy_r4_2()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_NAKED_STRING;
+        $this->token = Configfileparser::TPC_NAKED_STRING;
     } // end function
 
     public function yy_r4_3()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_NEWLINE;
+        $this->token = Configfileparser::TPC_NEWLINE;
         $this->yypopstate();
     }
 
@@ -654,12 +656,12 @@ class Configfilelexer
 
     public function yy_r5_1()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_DOT;
+        $this->token = Configfileparser::TPC_DOT;
     }
 
     public function yy_r5_2()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_SECTION;
+        $this->token = Configfileparser::TPC_SECTION;
         $this->yypopstate();
     } // end function
 
@@ -721,7 +723,7 @@ class Configfilelexer
 
     public function yy_r6_1()
     {
-        $this->token = \Smarty\Internal\Configfileparser::TPC_TRIPPLE_QUOTES_END;
+        $this->token = Configfileparser::TPC_TRIPPLE_QUOTES_END;
         $this->yypopstate();
         $this->yypushstate(self::START);
     }
@@ -736,6 +738,6 @@ class Configfilelexer
             $this->compiler->trigger_config_file_error('missing or misspelled literal closing tag');
         }
         $this->value = substr($this->data, $this->counter, $to - $this->counter);
-        $this->token = \Smarty\Internal\Configfileparser::TPC_TRIPPLE_TEXT;
+        $this->token = Configfileparser::TPC_TRIPPLE_TEXT;
     }
 }

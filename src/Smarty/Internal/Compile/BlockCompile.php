@@ -10,12 +10,19 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty\Internal\Block;
+use Smarty\Internal\Compile\Shared\InheritanceShared;
+use Smarty\Internal\ParseTree\TagParseTree;
+use Smarty\Internal\ParseTree\TemplateParseTree;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile Block Class
  *
  * @author Uwe Tews <uwe.tews@googlemail.com>
  */
-class BlockCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
+class BlockCompile extends InheritanceShared
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -53,10 +60,10 @@ class BlockCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
      * Compiles code for the {block} tag
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
+     * @param TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, TemplateCompilerBase $compiler, $parameter)
     {
         if (!isset($compiler->_cache[ 'blockNesting' ])) {
             $compiler->_cache[ 'blockNesting' ] = 0;
@@ -87,7 +94,7 @@ class BlockCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
         );
         $compiler->saveRequiredPlugins(true);
         $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
-        $compiler->parser->current_buffer = new \Smarty\Internal\ParseTree\TemplateParseTree();
+        $compiler->parser->current_buffer = new TemplateParseTree();
         $compiler->template->compiled->has_nocache_code = false;
         $compiler->suppressNocacheProcessing = true;
     }
@@ -96,18 +103,18 @@ class BlockCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
 /**
  * Smarty Internal Plugin Compile BlockClose Class
  */
-class BlockcloseCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
+class BlockcloseCompile extends InheritanceShared
 {
     /**
      * Compiles code for the {/block} tag
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
+     * @param TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return bool true
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, TemplateCompilerBase $compiler, $parameter)
     {
         list($_attr, $_nocache, $_buffer, $_has_nocache_code, $_caching) = $this->closeTag($compiler, array('block'));
         // init block parameter
@@ -125,15 +132,15 @@ class BlockcloseCompile extends \Smarty\Internal\Compile\Shared\InheritanceShare
         // get compiled block code
         $_functionCode = $compiler->parser->current_buffer;
         // setup buffer for template function code
-        $compiler->parser->current_buffer = new \Smarty\Internal\ParseTree\TemplateParseTree();
+        $compiler->parser->current_buffer = new TemplateParseTree();
         $output = "<?php\n";
         $output .= $compiler->cStyleComment(" {block {$_name}} ") . "\n";
-        $output .= "class {$_className} extends \\".\Smarty\Internal\Block::class."\n";
+        $output .= "class {$_className} extends \\". Block::class."\n";
         $output .= "{\n";
         foreach ($_block as $property => $value) {
             $output .= "public \${$property} = " . var_export($value, true) . ";\n";
         }
-        $output .= "public function callBlock(\\".\Smarty\Internal\Template::class." \$_smarty_tpl) {\n";
+        $output .= "public function callBlock(\\". Template::class." \$_smarty_tpl) {\n";
         $output .= $compiler->compileRequiredPlugins();
         $compiler->restoreRequiredPlugins();
         if ($compiler->template->compiled->has_nocache_code) {
@@ -145,7 +152,7 @@ class BlockcloseCompile extends \Smarty\Internal\Compile\Shared\InheritanceShare
         $output .= "?>\n";
         $compiler->parser->current_buffer->append_subtree(
             $compiler->parser,
-            new \Smarty\Internal\ParseTree\TagParseTree(
+            new TagParseTree(
                 $compiler->parser,
                 $output
             )
@@ -161,13 +168,13 @@ class BlockcloseCompile extends \Smarty\Internal\Compile\Shared\InheritanceShare
         $output .= "?>\n";
         $compiler->parser->current_buffer->append_subtree(
             $compiler->parser,
-            new \Smarty\Internal\ParseTree\TagParseTree(
+            new TagParseTree(
                 $compiler->parser,
                 $output
             )
         );
         $compiler->blockOrFunctionCode .= $compiler->parser->current_buffer->to_smarty_php($compiler->parser);
-        $compiler->parser->current_buffer = new \Smarty\Internal\ParseTree\TemplateParseTree();
+        $compiler->parser->current_buffer = new TemplateParseTree();
         // restore old status
         $compiler->template->compiled->has_nocache_code = $_has_nocache_code;
         $compiler->tag_nocache = $compiler->nocache;

@@ -10,13 +10,18 @@
 
 namespace Smarty\Internal\Compile\Private\Object;
 
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile Object Function Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class FunctionObject extends \Smarty\Internal\CompileBase
+class FunctionObject extends CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -30,16 +35,16 @@ class FunctionObject extends \Smarty\Internal\CompileBase
      * Compiles code for the execution of function plugin
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
+     * @param TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      * @param string                                $tag       name of function
      * @param string                                $method    name of method to call
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyCompilerException
+     * @throws SmartyException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter, $tag, $method)
+    public function compile($args, TemplateCompilerBase $compiler, $parameter, $tag, $method)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);

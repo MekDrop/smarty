@@ -10,7 +10,9 @@
 
 namespace Smarty\Internal\Resource;
 
+use Smarty\Internal\Template;
 use Smarty\Resource\RecompiledResource;
+use Smarty\Template\SourceTemplate;
 
 /**
  * Smarty Internal Plugin Resource Eval
@@ -25,12 +27,12 @@ class EvalResource extends RecompiledResource
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param \Smarty\Template\SourceTemplate   $source    source object
-     * @param \Smarty\Internal\Template $_template template object
+     * @param SourceTemplate   $source    source object
+     * @param Template $_template template object
      *
      * @return void
      */
-    public function populate(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template = null)
+    public function populate(SourceTemplate $source, Template $_template = null)
     {
         $source->uid = $source->filepath = sha1($source->name);
         $source->timestamp = $source->exists = true;
@@ -41,11 +43,11 @@ class EvalResource extends RecompiledResource
      *
      * @uses decode() to decode base64 and urlencoded template_resources
      *
-     * @param \Smarty\Template\SourceTemplate $source source object
+     * @param SourceTemplate $source source object
      *
      * @return string                 template source
      */
-    public function getContent(\Smarty\Template\SourceTemplate $source)
+    public function getContent(SourceTemplate $source)
     {
         return $this->decode($source->name);
     }
@@ -87,11 +89,11 @@ class EvalResource extends RecompiledResource
     /**
      * Determine basename for compiled filename
      *
-     * @param \Smarty\Template\SourceTemplate $source source object
+     * @param SourceTemplate $source source object
      *
      * @return string                 resource's basename
      */
-    public function getBasename(\Smarty\Template\SourceTemplate $source)
+    public function getBasename(SourceTemplate $source)
     {
         return '';
     }

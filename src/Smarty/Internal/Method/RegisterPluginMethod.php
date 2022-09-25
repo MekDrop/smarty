@@ -2,6 +2,11 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+
 /**
  * Smarty Method RegisterPlugin
  *
@@ -23,7 +28,7 @@ class RegisterPluginMethod
     /**
      * Registers plugin to be used in templates
      *
-     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
+     * @param TemplateBase|Template|Smarty $obj
      * @param string                                                          $type       plugin type
      * @param string                                                          $name       name of template tag
      * @param callback                                                        $callback   PHP callback to register
@@ -31,14 +36,14 @@ class RegisterPluginMethod
      *                                                                                    function is cache able
      * @param mixed                                                           $cache_attr caching attributes if any
      *
-     * @return \Smarty|\Smarty\Internal\Template
-     * @throws \Smarty\Exception\SmartyException              when the plugin tag is invalid
-     *@api  Smarty::registerPlugin()
-     * @link https://www.smarty.net/docs/en/api.register.plugin.tpl
+     * @return Smarty|Template
+     * @throws SmartyException              when the plugin tag is invalid
      *
+     * @api  Smarty::registerPlugin()
+     * @link https://www.smarty.net/docs/en/api.register.plugin.tpl
      */
     public function registerPlugin(
-        \Smarty\Internal\TemplateBase $obj,
+        TemplateBase $obj,
         $type,
         $name,
         $callback,
@@ -47,11 +52,11 @@ class RegisterPluginMethod
     ) {
         $smarty = $obj->_getSmartyObj();
         if (isset($smarty->registered_plugins[ $type ][ $name ])) {
-            throw new \Smarty\Exception\SmartyException("Plugin tag '{$name}' already registered");
+            throw new SmartyException("Plugin tag '{$name}' already registered");
         } elseif (!is_callable($callback)) {
-            throw new \Smarty\Exception\SmartyException("Plugin '{$name}' not callable");
+            throw new SmartyException("Plugin '{$name}' not callable");
         } elseif ($cacheable && $cache_attr) {
-            throw new \Smarty\Exception\SmartyException("Cannot set caching attributes for plugin '{$name}' when it is cacheable.");
+            throw new SmartyException("Cannot set caching attributes for plugin '{$name}' when it is cacheable.");
         } else {
             $smarty->registered_plugins[ $type ][ $name ] = array($callback, (bool)$cacheable, (array)$cache_attr);
         }

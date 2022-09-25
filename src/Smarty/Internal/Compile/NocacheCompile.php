@@ -10,13 +10,16 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile Nocache Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class NocacheCompile extends \Smarty\Internal\CompileBase
+class NocacheCompile extends CompileBase
 {
     /**
      * Array of names of valid option flags
@@ -30,11 +33,11 @@ class NocacheCompile extends \Smarty\Internal\CompileBase
      * This tag does not generate compiled output. It only sets a compiler flag.
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return bool
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         $_attr = $this->getAttributes($compiler, $args);
         $this->openTag($compiler, 'nocache', array($compiler->nocache));
@@ -52,18 +55,18 @@ class NocacheCompile extends \Smarty\Internal\CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Nocacheclose extends \Smarty\Internal\CompileBase
+class Nocacheclose extends CompileBase
 {
     /**
      * Compiles code for the {/nocache} tag
      * This tag does not generate compiled output. It only sets a compiler flag.
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return bool
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         $_attr = $this->getAttributes($compiler, $args);
         // leave nocache mode

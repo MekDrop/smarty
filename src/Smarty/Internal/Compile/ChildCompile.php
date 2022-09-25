@@ -10,12 +10,16 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile Child Class
  *
  * @author Uwe Tews <uwe.tews@googlemail.com>
  */
-class ChildCompile extends \Smarty\Internal\CompileBase
+class ChildCompile extends CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -43,13 +47,13 @@ class ChildCompile extends \Smarty\Internal\CompileBase
      * Compiles code for the {child} tag
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
+     * @param TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws SmartyCompilerException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, TemplateCompilerBase $compiler, $parameter)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);

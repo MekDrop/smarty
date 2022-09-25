@@ -1,4 +1,7 @@
 <?php
+
+use Smarty\Exception\SmartyException;
+
 /**
  * Smarty PHPunit tests compiler errors
  *
@@ -30,7 +33,7 @@ class CompileErrorTest extends PHPUnit_Smarty
      */
     public function testNoneExistingTemplateError()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('no.tpl');
         $this->smarty->fetch('eval:{include file=\'no.tpl\'}');
     }

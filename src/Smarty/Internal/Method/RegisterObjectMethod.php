@@ -2,6 +2,11 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+
 /**
  * Smarty Method RegisterObject
  *
@@ -23,7 +28,7 @@ class RegisterObjectMethod
     /**
      * Registers object to be used in templates
      *
-     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
+     * @param TemplateBase|Template|Smarty $obj
      * @param string                                                          $object_name
      * @param object                                                          $object                     the
      *                                                                                                    referenced
@@ -47,14 +52,14 @@ class RegisterObjectMethod
      * @param array                                                           $block_methods              list of
      *                                                                                                    block-methods
      *
-     * @return \Smarty|\Smarty\Internal\Template
-     * @throws \Smarty\Exception\SmartyException
-     *@api  Smarty::registerObject()
-     * @link https://www.smarty.net/docs/en/api.register.object.tpl
+     * @return Smarty|Template
+     * @throws SmartyException
      *
+     * @api  Smarty::registerObject()
+     * @link https://www.smarty.net/docs/en/api.register.object.tpl
      */
     public function registerObject(
-        \Smarty\Internal\TemplateBase $obj,
+        TemplateBase $obj,
         $object_name,
         $object,
         $allowed_methods_properties = array(),
@@ -66,7 +71,7 @@ class RegisterObjectMethod
         if (!empty($allowed_methods_properties)) {
             foreach ((array)$allowed_methods_properties as $method) {
                 if (!is_callable(array($object, $method)) && !property_exists($object, $method)) {
-                    throw new \Smarty\Exception\SmartyException("Undefined method or property '$method' in registered object");
+                    throw new SmartyException("Undefined method or property '$method' in registered object");
                 }
             }
         }
@@ -74,7 +79,7 @@ class RegisterObjectMethod
         if (!empty($block_methods)) {
             foreach ((array)$block_methods as $method) {
                 if (!is_callable(array($object, $method))) {
-                    throw new \Smarty\Exception\SmartyException("Undefined method '$method' in registered object");
+                    throw new SmartyException("Undefined method '$method' in registered object");
                 }
             }
         }

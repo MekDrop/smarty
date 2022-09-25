@@ -2,6 +2,11 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Internal\Data;
+use Smarty\Internal\Template;
+use Smarty\Variable;
+
 /**
  * Smarty Method AssignGlobal
  *
@@ -23,21 +28,21 @@ class AssignGlobalMethod
     /**
      * assigns a global Smarty variable
      *
-     * @param \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty $data
+     * @param Data|Template|Smarty $data
      * @param string                                                  $varName the global variable name
      * @param mixed                                                   $value   the value to assign
      * @param boolean                                                 $nocache if true any output of this variable will
      *                                                                         be not cached
      *
-     * @return \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty
+     * @return Data|Template|Smarty
      */
-    public function assignGlobal(\Smarty\Internal\Data $data, $varName, $value = null, $nocache = false)
+    public function assignGlobal(Data $data, $varName, $value = null, $nocache = false)
     {
         if ($varName !== '') {
-            \Smarty::$global_tpl_vars[ $varName ] = new \Smarty\Variable($value, $nocache);
+            Smarty::$global_tpl_vars[ $varName ] = new Variable($value, $nocache);
             $ptr = $data;
             while ($ptr->_isTplObj()) {
-                $ptr->tpl_vars[ $varName ] = clone \Smarty::$global_tpl_vars[ $varName ];
+                $ptr->tpl_vars[ $varName ] = clone Smarty::$global_tpl_vars[ $varName ];
                 $ptr = $ptr->parent;
             }
         }

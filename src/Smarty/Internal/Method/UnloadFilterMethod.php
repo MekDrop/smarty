@@ -2,6 +2,11 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+
 /**
  * Smarty Method UnloadFilter
  *
@@ -16,18 +21,17 @@ class UnloadFilterMethod extends LoadFilterMethod
     /**
      * load a filter of specified type and name
      *
-     * @api  Smarty::unloadFilter()
-     *
-     * @link https://www.smarty.net/docs/en/api.unload.filter.tpl
-     *
-     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
+     * @param TemplateBase|Template|Smarty $obj
      * @param string                                                          $type filter type
      * @param string                                                          $name filter name
      *
-     * @return \Smarty\Internal\TemplateBase
-     * @throws \Smarty\Exception\SmartyException
+     * @return TemplateBase
+     * @throws SmartyException
+     *
+     * @link https://www.smarty.net/docs/en/api.unload.filter.tpl
+     * @api  Smarty::unloadFilter()
      */
-    public function unloadFilter(\Smarty\Internal\TemplateBase $obj, $type, $name)
+    public function unloadFilter(TemplateBase $obj, $type, $name)
     {
         $smarty = $obj->_getSmartyObj();
         $this->_checkFilterType($type);

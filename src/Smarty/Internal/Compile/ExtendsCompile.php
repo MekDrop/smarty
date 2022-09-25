@@ -10,13 +10,20 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Compile\Shared\InheritanceShared;
+use Smarty\Internal\ParseTree\TagParseTree;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile extend Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class ExtendsCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
+class ExtendsCompile extends InheritanceShared
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -46,13 +53,13 @@ class ExtendsCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
      * Compiles code for the {extends} tag extends: resource
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyCompilerException
+     * @throws SmartyException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
@@ -94,13 +101,13 @@ class ExtendsCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
     /**
      * Add code for inheritance endChild() method to end of template
      *
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler
+     * @param TemplateCompilerBase $compiler
      * @param null|string                           $template optional inheritance parent template
      *
-     * @throws \Smarty\Exception\SmartyCompilerException
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyCompilerException
+     * @throws SmartyException
      */
-    private function compileEndChild(\Smarty\Internal\TemplateCompilerBase $compiler, $template = null)
+    private function compileEndChild(TemplateCompilerBase $compiler, $template = null)
     {
         $inlineUids = '';
         if (isset($template) && $compiler->smarty->merge_compiled_includes) {
@@ -109,7 +116,7 @@ class ExtendsCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
                 $inlineUids = $match[ 1 ];
             }
         }
-        $compiler->parser->template_postfix[] = new \Smarty\Internal\ParseTree\TagParseTree(
+        $compiler->parser->template_postfix[] = new TagParseTree(
             $compiler->parser,
             '<?php $_smarty_tpl->inheritance->endChild($_smarty_tpl' .
             (isset($template) ?
@@ -121,15 +128,15 @@ class ExtendsCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
     /**
      * Add code for including subtemplate to end of template
      *
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler
+     * @param TemplateCompilerBase $compiler
      * @param string                                $template subtemplate name
      *
-     * @throws \Smarty\Exception\SmartyCompilerException
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyCompilerException
+     * @throws SmartyException
      */
-    private function compileInclude(\Smarty\Internal\TemplateCompilerBase $compiler, $template)
+    private function compileInclude(TemplateCompilerBase $compiler, $template)
     {
-        $compiler->parser->template_postfix[] = new \Smarty\Internal\ParseTree\TagParseTree(
+        $compiler->parser->template_postfix[] = new TagParseTree(
             $compiler->parser,
             $compiler->compileTag(
                 'include',
@@ -144,11 +151,11 @@ class ExtendsCompile extends \Smarty\Internal\Compile\Shared\InheritanceShared
     /**
      * Create source code for {extends} from source components array
      *
-     * @param \Smarty\Internal\Template $template
+     * @param Template $template
      *
      * @return string
      */
-    public static function extendsSourceArrayCode(\Smarty\Internal\Template $template)
+    public static function extendsSourceArrayCode(Template $template)
     {
         $resources = array();
         foreach ($template->source->components as $source) {

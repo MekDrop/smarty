@@ -1,16 +1,21 @@
 <?php
 
-class Smarty_Resource_Filetest extends \Smarty\Internal\Resource\FileResource
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Resource\FileResource;
+use Smarty\Internal\Template;
+use Smarty\Template\SourceTemplate;
+
+class Smarty_Resource_Filetest extends FileResource
 {
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param \Smarty\Template\SourceTemplate $source source object
-     * @param \Smarty\Internal\Template|null $_template template object
+     * @param SourceTemplate $source source object
+     * @param Template|null $_template template object
      *
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    public function populate(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template = null)
+    public function populate(SourceTemplate $source, Template $_template = null)
     {
         parent::populate($source, $_template);
         if ($source->exists) {

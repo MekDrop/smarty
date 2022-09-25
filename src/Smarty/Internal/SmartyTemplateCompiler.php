@@ -10,13 +10,15 @@
 
 namespace Smarty\Internal;
 
+use Smarty\Exception\SmartyCompilerException;
+
 /**
  * Class SmartyTemplateCompiler
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class SmartyTemplateCompiler extends \Smarty\Internal\TemplateCompilerBase
+class SmartyTemplateCompiler extends TemplateCompilerBase
 {
     /**
      * Lexer class name
@@ -82,7 +84,7 @@ class SmartyTemplateCompiler extends \Smarty\Internal\TemplateCompilerBase
      * @param bool  $isTemplateSource
      *
      * @return bool true if compiling succeeded, false if it failed
-     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws SmartyCompilerException
      */
     protected function doCompile($_content, $isTemplateSource = false)
     {

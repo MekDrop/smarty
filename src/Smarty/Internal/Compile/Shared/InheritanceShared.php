@@ -10,21 +10,24 @@
 
 namespace Smarty\Internal\Compile\Shared;
 
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile Shared Inheritance Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class InheritanceShared extends \Smarty\Internal\CompileBase
+class InheritanceShared extends CompileBase
 {
     /**
      * Compile inheritance initialization code as prefix
      *
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler
+     * @param TemplateCompilerBase $compiler
      * @param bool|false                            $initChildSequence if true force child template
      */
-    public static function postCompile(\Smarty\Internal\TemplateCompilerBase $compiler, $initChildSequence = false)
+    public static function postCompile(TemplateCompilerBase $compiler, $initChildSequence = false)
     {
         $compiler->prefixCompiledCode .= "<?php \$_smarty_tpl->_loadInheritance();\n\$_smarty_tpl->inheritance->init(\$_smarty_tpl, " .
                                          var_export($initChildSequence, true) . ");\n?>\n";
@@ -33,14 +36,14 @@ class InheritanceShared extends \Smarty\Internal\CompileBase
     /**
      * Register post compile callback to compile inheritance initialization code
      *
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler
+     * @param TemplateCompilerBase $compiler
      * @param bool|false                            $initChildSequence if true force child template
      */
-    public function registerInit(\Smarty\Internal\TemplateCompilerBase $compiler, $initChildSequence = false)
+    public function registerInit(TemplateCompilerBase $compiler, $initChildSequence = false)
     {
         if ($initChildSequence || !isset($compiler->_cache[ 'inheritanceInit' ])) {
             $compiler->registerPostCompileCallback(
-                array('\Smarty\Internal\Compile\Shared\InheritanceShared', 'postCompile'),
+                array(__CLASS__, 'postCompile'),
                 array($initChildSequence),
                 'inheritanceInit',
                 $initChildSequence

@@ -2,6 +2,11 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+use Smarty\Resource;
+
 /**
  * Smarty Method RegisterResource
  *
@@ -23,16 +28,17 @@ class RegisterResourceMethod
     /**
      * Registers a resource to fetch a template
      *
+     * @param TemplateBase|Template|Smarty $obj
+     * @param string                                                          $name name of resource type
+     * @param Resource                                           $resource_handler instance of \Smarty\Resource
+     *
+     * @return Smarty|Template
+     *
      * @api  Smarty::registerResource()
      * @link https://www.smarty.net/docs/en/api.register.resource.tpl
      *
-     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
-     * @param string                                                          $name             name of resource type
-     * @param \Smarty\Resource                                           $resource_handler instance of \Smarty\Resource
-     *
-     * @return \Smarty|\Smarty\Internal\Template
      */
-    public function registerResource(\Smarty\Internal\TemplateBase $obj, $name, \Smarty\Resource $resource_handler)
+    public function registerResource(TemplateBase $obj, $name, Resource $resource_handler)
     {
         $smarty = $obj->_getSmartyObj();
         $smarty->registered_resources[ $name ] = $resource_handler;

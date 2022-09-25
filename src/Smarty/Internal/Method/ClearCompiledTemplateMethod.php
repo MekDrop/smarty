@@ -2,6 +2,10 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+
 /**
  * Smarty Method ClearCompiledTemplate
  *
@@ -26,15 +30,15 @@ class ClearCompiledTemplateMethod
      * @api  Smarty::clearCompiledTemplate()
      * @link https://www.smarty.net/docs/en/api.clear.compiled.template.tpl
      *
-     * @param \Smarty $smarty
+     * @param Smarty $smarty
      * @param string  $resource_name template name
      * @param string  $compile_id    compile id
      * @param integer $exp_time      expiration time
      *
      * @return int number of template files deleted
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    public function clearCompiledTemplate(\Smarty $smarty, $resource_name = null, $compile_id = null, $exp_time = null)
+    public function clearCompiledTemplate(Smarty $smarty, $resource_name = null, $compile_id = null, $exp_time = null)
     {
         // clear template objects cache
         $smarty->_clearTemplateCache();
@@ -46,8 +50,8 @@ class ClearCompiledTemplateMethod
         $_dir_sep = $smarty->use_sub_dirs ? DIRECTORY_SEPARATOR : '^';
         if (isset($resource_name)) {
             $_save_stat = $smarty->caching;
-            $smarty->caching = \Smarty::CACHING_OFF;
-            /* @var \Smarty\Internal\Template $tpl */
+            $smarty->caching = Smarty::CACHING_OFF;
+            /* @var Template $tpl */
             $tpl = $smarty->createTemplate($resource_name);
             $smarty->caching = $_save_stat;
             if (!$tpl->source->handler->uncompiled && !$tpl->source->handler->recompiled && $tpl->source->exists) {

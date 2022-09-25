@@ -10,13 +10,18 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty;
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile Assign Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class AssignCompile extends \Smarty\Internal\CompileBase
+class AssignCompile extends CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -41,13 +46,13 @@ class AssignCompile extends \Smarty\Internal\CompileBase
      * Compiles code for the {assign} tag
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
+     * @param TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws SmartyCompilerException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, TemplateCompilerBase $compiler, $parameter)
     {
         // the following must be assigned at runtime because it will be overwritten in \Smarty\Internal\Compile\AppendCompile
         $this->required_attributes = array('var', 'value');

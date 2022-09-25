@@ -2,7 +2,13 @@
 
 namespace Smarty\Internal;
 
+use Smarty\Internal\ParseTree\CodeParseTree;
 use Smarty\Internal\ParseTree\DqContentParseTree;
+use Smarty\Internal\ParseTree\DqParseTree;
+use Smarty\Internal\ParseTree\TagParseTree;
+use Smarty\Internal\ParseTree\TemplateParseTree;
+use Smarty\Internal\ParseTree\TextParseTree;
+use Smarty\Security;
 
 class TP_yyStackEntry
 {
@@ -67,21 +73,21 @@ class Templateparser
     /**
      * root parse tree buffer
      *
-     * @var \Smarty\Internal\ParseTree\TemplateParseTree
+     * @var TemplateParseTree
      */
     public $root_buffer;
 
     /**
      * current parse tree object
      *
-     * @var \Smarty\Internal\ParseTree
+     * @var ParseTree
      */
     public $current_buffer;
 
     /**
      * lexer object
      *
-     * @var \Smarty\Internal\Templatelexer
+     * @var Templatelexer
      */
     public $lex;
 
@@ -101,7 +107,7 @@ class Templateparser
     /**
      * compiler object
      *
-     * @var \Smarty\Internal\TemplateCompilerBase
+     * @var TemplateCompilerBase
      */
     public $compiler = null;
 
@@ -115,7 +121,7 @@ class Templateparser
     /**
      * template object
      *
-     * @var \Smarty\Internal\Template
+     * @var Template
      */
     public $template = null;
 
@@ -129,38 +135,38 @@ class Templateparser
     /**
      * security object
      *
-     * @var \Smarty\Security
+     * @var Security
      */
     public $security = null;
 
     /**
      * template prefix array
      *
-     * @var \Smarty\Internal\ParseTree[]
+     * @var ParseTree[]
      */
     public $template_prefix = array();
 
     /**
      * template prefix array
      *
-     * @var \Smarty\Internal\ParseTree[]
+     * @var ParseTree[]
      */
     public $template_postfix = array();
 
     /**
      * constructor
      *
-     * @param \Smarty\Internal\Templatelexer        $lex
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler
+     * @param Templatelexer $lex
+     * @param TemplateCompilerBase $compiler
      */
-    public function __construct(\Smarty\Internal\Templatelexer $lex, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function __construct(Templatelexer $lex, TemplateCompilerBase $compiler)
     {
         $this->lex = $lex;
         $this->compiler = $compiler;
         $this->template = $this->compiler->template;
         $this->smarty = $this->template->smarty;
         $this->security = isset($this->smarty->security_policy) ? $this->smarty->security_policy : false;
-        $this->current_buffer = $this->root_buffer = new \Smarty\Internal\ParseTree\TemplateParseTree();
+        $this->current_buffer = $this->root_buffer = new TemplateParseTree();
     }
 
      /**
@@ -170,7 +176,7 @@ class Templateparser
      */
     public function insertPhpCode($code)
     {
-        $this->current_buffer->append_subtree($this, new \Smarty\Internal\ParseTree\TagParseTree($this, $code));
+        $this->current_buffer->append_subtree($this, new TagParseTree($this, $code));
     }
 
     /**
@@ -192,7 +198,7 @@ class Templateparser
      *
      * @param string $code
      *
-     * @return \Smarty\Internal\ParseTree\TagParseTree
+     * @return TagParseTree
      */
     public function mergePrefixCode($code)
     {
@@ -202,7 +208,7 @@ class Templateparser
         }
         $this->compiler->prefix_code = array();
         $tmp .= $code;
-        return new \Smarty\Internal\ParseTree\TagParseTree($this, $this->compiler->processNocacheCode($tmp, true));
+        return new TagParseTree($this, $this->compiler->processNocacheCode($tmp, true));
     }
 
 
@@ -2041,7 +2047,7 @@ public static $yy_action = array(
             $this->current_buffer->append_subtree($this, null);
          }
 
-         $this->current_buffer->append_subtree($this, new \Smarty\Internal\ParseTree\TextParseTree($text, $this->strip));
+         $this->current_buffer->append_subtree($this, new TextParseTree($text, $this->strip));
     }
 // line 250 "../smarty/lexer/smarty_internal_templateparser.y"
     public function yy_r2(){
@@ -2053,7 +2059,7 @@ public static $yy_action = array(
     }
 // line 259 "../smarty/lexer/smarty_internal_templateparser.y"
     public function yy_r4(){
-       $this->current_buffer->append_subtree($this, new \Smarty\Internal\ParseTree\TextParseTree($this->yystack[$this->yyidx + -1]->minor));
+       $this->current_buffer->append_subtree($this, new TextParseTree($this->yystack[$this->yyidx + -1]->minor));
     }
 // line 264 "../smarty/lexer/smarty_internal_templateparser.y"
     public function yy_r5(){
@@ -2740,23 +2746,23 @@ public static $yy_action = array(
     }
 // line 1235 "../smarty/lexer/smarty_internal_templateparser.y"
     public function yy_r178(){
-    $this->_retvalue = new \Smarty\Internal\ParseTree\DqParseTree($this, $this->yystack[$this->yyidx + 0]->minor);
+    $this->_retvalue = new DqParseTree($this, $this->yystack[$this->yyidx + 0]->minor);
     }
 // line 1239 "../smarty/lexer/smarty_internal_templateparser.y"
     public function yy_r179(){
-    $this->_retvalue = new \Smarty\Internal\ParseTree\CodeParseTree('(string)'.$this->yystack[$this->yyidx + -1]->minor);
+    $this->_retvalue = new CodeParseTree('(string)'.$this->yystack[$this->yyidx + -1]->minor);
     }
 // line 1243 "../smarty/lexer/smarty_internal_templateparser.y"
     public function yy_r180(){
-    $this->_retvalue = new \Smarty\Internal\ParseTree\CodeParseTree('(string)('.$this->yystack[$this->yyidx + -1]->minor.')');
+    $this->_retvalue = new CodeParseTree('(string)('.$this->yystack[$this->yyidx + -1]->minor.')');
     }
 // line 1247 "../smarty/lexer/smarty_internal_templateparser.y"
     public function yy_r181(){
-    $this->_retvalue = new \Smarty\Internal\ParseTree\CodeParseTree('(string)$_smarty_tpl->tpl_vars[\''. substr($this->yystack[$this->yyidx + 0]->minor,1) .'\']->value');
+    $this->_retvalue = new CodeParseTree('(string)$_smarty_tpl->tpl_vars[\''. substr($this->yystack[$this->yyidx + 0]->minor,1) .'\']->value');
     }
 // line 1259 "../smarty/lexer/smarty_internal_templateparser.y"
     public function yy_r184(){
-    $this->_retvalue = new \Smarty\Internal\ParseTree\TagParseTree($this, $this->yystack[$this->yyidx + 0]->minor);
+    $this->_retvalue = new TagParseTree($this, $this->yystack[$this->yyidx + 0]->minor);
     }
 // line 1263 "../smarty/lexer/smarty_internal_templateparser.y"
     public function yy_r185(){

@@ -4,6 +4,11 @@
  *
  */
 
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Test Case Fixture
  */
@@ -163,7 +168,7 @@ class PHPUnit_Smarty extends PHPUnit\Framework\TestCase
                 PHPUnit_Smarty::$pdo = new PDO(DB_DSN, DB_USER, DB_PASSWD);
             }
             catch (PDOException $e) {
-                throw new \Smarty\Exception\SmartyException('Mysql Resource failed: ' . $e->getMessage());
+                throw new SmartyException('Mysql Resource failed: ' . $e->getMessage());
             }
             $timezone = date_default_timezone_get();
             $j = PHPUnit_Smarty::$pdo->exec("SET time_zone = '{$timezone}';");
@@ -352,7 +357,7 @@ KEY `name` (`name`)
     /**
      * Return source path
      *
-     * @param \Smarty\Internal\TemplateBase $tpl  template object
+     * @param TemplateBase $tpl  template object
      * @param null|string                  $name optional template name
      * @param null|string                  $type optional template type
      * @param null|string                  $dir  optional template folder
@@ -384,7 +389,7 @@ KEY `name` (`name`)
     /**
      * Build template uid
      *
-     * @param \Smarty\Internal\TemplateBase $tpl  template object
+     * @param TemplateBase $tpl  template object
      * @param null|string                  $value
      * @param null|string                  $name optional template name
      * @param null|string                  $type optional template type
@@ -457,13 +462,13 @@ KEY `name` (`name`)
     /**
      * Return base name
      *
-     * @param \Smarty\Internal\Template|\Smarty\Internal\TemplateBase $tpl  template object
-     * @param null|string                                             $name optional template name
-     * @param null|string                                             $type optional template type
+     * @param Template|TemplateBase $tpl  template object
+     * @param null|string           $name optional template name
+     * @param null|string           $type optional template type
      *
      * @return null|string
      */
-    public function getBasename(\Smarty\Internal\Template $tpl, $name = null, $type = null)
+    public function getBasename(Template $tpl, $name = null, $type = null)
     {
         $name = isset($name) ? $name : $tpl->source->name;
         $type = isset($type) ? $type : $tpl->source->type;
@@ -487,7 +492,7 @@ KEY `name` (`name`)
     /**
      * Return compiled file path
      *
-     * @param \Smarty\Internal\Template|\Smarty\Internal\TemplateBase $tpl        template object
+     * @param Template|TemplateBase $tpl        template object
      * @param bool                                                    $sub        use sub directory flag
      * @param bool                                                    $caching    caching flag
      * @param null|string                                             $compile_id optional compile id
@@ -498,8 +503,8 @@ KEY `name` (`name`)
      * @return string
      * @throws \Exception
      */
-    public function buildCompiledPath(\Smarty\Internal\Template $tpl, $sub = true, $caching = false, $compile_id = null,
-                                      $name = null, $type = null, $dir = null)
+    public function buildCompiledPath(Template $tpl, $sub = true, $caching = false, $compile_id = null,
+                                               $name = null, $type = null, $dir = null)
     {
         $sep = DIRECTORY_SEPARATOR;
         $_compile_id = isset($compile_id) ? preg_replace('![^\w\|]+!', '_', $compile_id) : null;
@@ -546,7 +551,7 @@ KEY `name` (`name`)
     /**
      * Return cache file path
      *
-     * @param \Smarty\Internal\TemplateBase $tpl        template object
+     * @param TemplateBase $tpl        template object
      * @param bool                         $sub        use sub directory flag
      * @param null|string                  $cache_id   optional cache id
      * @param null|string                  $compile_id optional compile id
@@ -618,11 +623,11 @@ KEY `name` (`name`)
      * prefilter to insert test number
      *
      * @param  string                   $source
-     * @param \Smarty\Internal\Template $tpl
+     * @param Template $tpl
      *
      * @return string
      */
-    public function prefilterTest($source, \Smarty\Internal\Template $tpl)
+    public function prefilterTest($source, Template $tpl)
     {
         return str_replace('#test#', "test:{\$test nocache} compiled:{$tpl->getTemplateVars('test')} rendered:{\$test}",
                            $source);
@@ -650,10 +655,10 @@ KEY `name` (`name`)
      */
     protected function tearDown(): void
     {
-        if (class_exists('\Smarty\Internal\TemplateCompilerBase') &&
-            isset(\Smarty\Internal\TemplateCompilerBase::$_tag_objects)
+        if (class_exists('\\Smarty\\Internal\\TemplateCompilerBase') &&
+            isset(TemplateCompilerBase::$_tag_objects)
         ) {
-            \Smarty\Internal\TemplateCompilerBase::$_tag_objects = array();
+            TemplateCompilerBase::$_tag_objects = array();
         }
         if (isset($this->smarty->smarty)) {
             $this->smarty->smarty = null;

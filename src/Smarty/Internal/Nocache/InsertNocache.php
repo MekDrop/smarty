@@ -10,6 +10,8 @@
 
 namespace Smarty\Internal\Nocache\Insert;
 
+use Smarty\Internal\Template;
+
 /**
  * Smarty Internal Plugin Compile Insert Class
  *
@@ -23,7 +25,7 @@ class InsertNocache
      *
      * @param string                   $_function insert function name
      * @param array                    $_attr     array with parameter
-     * @param \Smarty\Internal\Template $_template template object
+     * @param Template $_template template object
      * @param string                   $_script   script name to load or 'null'
      * @param string                   $_assign   optional variable name
      *

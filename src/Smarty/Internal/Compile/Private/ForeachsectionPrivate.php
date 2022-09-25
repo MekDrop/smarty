@@ -10,13 +10,18 @@
 
 namespace Smarty\Internal\Compile\Private;
 
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile ForeachSection Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class ForeachSectionPrivate extends \Smarty\Internal\CompileBase
+class ForeachSectionPrivate extends CompileBase
 {
     /**
      * Name of this tag
@@ -76,11 +81,11 @@ class ForeachSectionPrivate extends \Smarty\Internal\CompileBase
      * Scan sources for used tag attributes
      *
      * @param array                                 $attributes
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler
+     * @param TemplateCompilerBase $compiler
      *
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    public function scanForProperties($attributes, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function scanForProperties($attributes, TemplateCompilerBase $compiler)
     {
         $this->propertyPreg = '~(';
         $this->startOffset = 1;
@@ -154,9 +159,9 @@ class ForeachSectionPrivate extends \Smarty\Internal\CompileBase
     /**
      * Find matches in template source
      *
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler
+     * @param TemplateCompilerBase $compiler
      */
-    public function matchTemplateSource(\Smarty\Internal\TemplateCompilerBase $compiler)
+    public function matchTemplateSource(TemplateCompilerBase $compiler)
     {
         $this->matchProperty($compiler->parser->lex->data);
     }
@@ -164,11 +169,11 @@ class ForeachSectionPrivate extends \Smarty\Internal\CompileBase
     /**
      * Find matches in all parent template source
      *
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler
+     * @param TemplateCompilerBase $compiler
      *
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    public function matchParentTemplateSource(\Smarty\Internal\TemplateCompilerBase $compiler)
+    public function matchParentTemplateSource(TemplateCompilerBase $compiler)
     {
         // search parent compiler template source
         $nextCompiler = $compiler;
@@ -197,9 +202,9 @@ class ForeachSectionPrivate extends \Smarty\Internal\CompileBase
     /**
      * Find matches in {block} tag source
      *
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler
+     * @param TemplateCompilerBase $compiler
      */
-    public function matchBlockSource(\Smarty\Internal\TemplateCompilerBase $compiler)
+    public function matchBlockSource(TemplateCompilerBase $compiler)
     {
     }
 
@@ -207,13 +212,13 @@ class ForeachSectionPrivate extends \Smarty\Internal\CompileBase
      * Compiles code for the {$smarty.foreach.xxx} or {$smarty.section.xxx}tag
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
+     * @param TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws SmartyCompilerException
      */
-    public function compileSpecialVariable($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
+    public function compileSpecialVariable($args, TemplateCompilerBase $compiler, $parameter)
     {
         $tag = smarty_strtolower_ascii(trim($parameter[ 0 ], '"\''));
         $name = isset($parameter[ 1 ]) ? $compiler->getId($parameter[ 1 ]) : false;

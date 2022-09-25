@@ -1,5 +1,8 @@
 <?php
 
+use Smarty\Exception\SmartyException;
+use Smarty\Resource\CustomResource;
+
 /**
  * MySQL Resource
  * Resource Implementation based on the Custom API to use
@@ -19,40 +22,40 @@
  * @package Resource-examples
  * @author  Rodney Rehm
  */
-class Smarty_Resource_Mysql extends Smarty_Resource_Custom
+class Smarty_Resource_Mysql extends CustomResource
 {
     /**
      * PDO instance
      *
-     * @var \PDO
+     * @var PDO
      */
     protected $db;
 
     /**
      * prepared fetch() statement
      *
-     * @var \PDOStatement
+     * @var PDOStatement
      */
     protected $fetch;
 
     /**
      * prepared fetchTimestamp() statement
      *
-     * @var \PDOStatement
+     * @var PDOStatement
      */
     protected $mtime;
 
     /**
      * Smarty_Resource_Mysql constructor.
      *
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
     public function __construct()
     {
         try {
             $this->db = new PDO("mysql:dbname=test;host=127.0.0.1", "smarty");
         } catch (PDOException $e) {
-            throw new \Smarty\Exception\SmartyException('Mysql Resource failed: ' . $e->getMessage());
+            throw new SmartyException('Mysql Resource failed: ' . $e->getMessage());
         }
         $this->fetch = $this->db->prepare('SELECT modified, source FROM templates WHERE name = :name');
         $this->mtime = $this->db->prepare('SELECT modified FROM templates WHERE name = :name');

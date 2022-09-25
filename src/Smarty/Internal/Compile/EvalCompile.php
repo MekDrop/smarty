@@ -10,13 +10,15 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty\Internal\CompileBase;
+
 /**
  * Smarty Internal Plugin Compile Eval Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class EvalCompile extends \Smarty\Internal\CompileBase
+class EvalCompile extends CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

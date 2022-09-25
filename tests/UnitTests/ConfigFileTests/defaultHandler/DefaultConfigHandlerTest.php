@@ -1,4 +1,7 @@
 <?php
+
+use Smarty\Exception\SmartyException;
+
 /**
  * Smarty PHPUnit tests default config handler
  *
@@ -32,7 +35,7 @@ class DefaultConfigHandlerTest extends PHPUnit_Smarty
      */
     public function testUnknownConfigFile()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('Unable to load config \'file:foo.conf\'');
         $this->smarty->configLoad('foo.conf');
     }
@@ -42,7 +45,7 @@ class DefaultConfigHandlerTest extends PHPUnit_Smarty
      */
     public function testRegisterUnknownDefaultConfigHandler()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('Default config handler');
         $this->expectExceptionMessage('not callable');
         $this->smarty->registerDefaultConfigHandler('foo');
@@ -51,8 +54,8 @@ class DefaultConfigHandlerTest extends PHPUnit_Smarty
     /**
      * test default config handler replacement (config data)
      *
-     * @throws \Exception
-     * @throws \Smarty\Exception\SmartyException
+     * @throws Exception
+     * @throws SmartyException
      */
     public function testDefaultConfigHandlerReplacement()
     {
@@ -64,8 +67,8 @@ class DefaultConfigHandlerTest extends PHPUnit_Smarty
     /**
      * test default config handler replacement (other config file)
      *
-     * @throws \Exception
-     * @throws \Smarty\Exception\SmartyException
+     * @throws Exception
+     * @throws SmartyException
      */
     public function testDefaultConfigHandlerReplacementByConfigFile()
     {
@@ -76,7 +79,7 @@ class DefaultConfigHandlerTest extends PHPUnit_Smarty
 
     public function testDefaultConfigHandlerReplacementByConfigFileFail()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage("Unable to load config default file 'no.conf' for 'file:fo.conf'");
         $this->smarty->registerDefaultConfigHandler('configHandlerFile');
         $this->smarty->configLoad('fo.conf');
@@ -88,7 +91,7 @@ class DefaultConfigHandlerTest extends PHPUnit_Smarty
      */
     public function testDefaultConfigHandlerReplacementReturningFalse()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('Unable to load config \'file:foo.conf\'');
         $this->smarty->configLoad('foo.conf');
     }
@@ -98,7 +101,7 @@ class DefaultConfigHandlerTest extends PHPUnit_Smarty
      */
     public function testDefaultConfigHandlerReplacementReturningFalse1()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('No config default content for \'file:bla.conf\'');
         $this->smarty->registerDefaultConfigHandler('configHandlerData');
         $this->smarty->configLoad('bla.conf');

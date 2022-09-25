@@ -10,13 +10,17 @@
 
 namespace Smarty\Internal\Compile\Config;
 
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile Config Load Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class LoadConfig extends \Smarty\Internal\CompileBase
+class LoadConfig extends CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -65,12 +69,12 @@ class LoadConfig extends \Smarty\Internal\CompileBase
      * Compiles code for the {config_load} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws SmartyCompilerException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);

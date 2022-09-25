@@ -5,6 +5,10 @@
  * @package    Smarty
  * @subpackage PluginsModifierCompiler
  */
+
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty wordwrap modifier plugin
  * Type:     modifier
@@ -15,12 +19,12 @@
  * @author Uwe Tews
  *
  * @param array                                 $params parameters
- * @param \Smarty\Internal\TemplateCompilerBase $compiler
+ * @param TemplateCompilerBase $compiler
  *
  * @return string with compiled code
- * @throws \Smarty\Exception\SmartyException
+ * @throws SmartyException
  */
-function smarty_modifiercompiler_wordwrap($params, \Smarty\Internal\TemplateCompilerBase $compiler)
+function smarty_modifiercompiler_wordwrap($params, TemplateCompilerBase $compiler)
 {
     if (!isset($params[ 1 ])) {
         $params[ 1 ] = 80;

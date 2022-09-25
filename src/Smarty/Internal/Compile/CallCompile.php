@@ -10,13 +10,15 @@
 
 namespace Smarty\Internal\Call;
 
+use Smarty\Internal\CompileBase;
+
 /**
  * Smarty Internal Plugin Compile Function_Call Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class CallCompile extends \Smarty\Internal\CompileBase
+class CallCompile extends CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

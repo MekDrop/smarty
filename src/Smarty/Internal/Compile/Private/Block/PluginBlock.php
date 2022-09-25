@@ -10,13 +10,18 @@
 
 namespace Smarty\Internal\Compile\Private\Block;
 
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile Block Plugin Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class PluginBlock extends \Smarty\Internal\CompileBase
+class PluginBlock extends CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -37,16 +42,16 @@ class PluginBlock extends \Smarty\Internal\CompileBase
      * Compiles code for the execution of block plugin
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
+     * @param TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      * @param string                                $tag       name of block plugin
      * @param string                                $function  PHP function name
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyCompilerException
+     * @throws SmartyException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter, $tag, $function = null)
+    public function compile($args, TemplateCompilerBase $compiler, $parameter, $tag, $function = null)
     {
         if (!isset($tag[ 5 ]) || substr($tag, -5) !== 'close') {
             // opening tag of block plugin
@@ -104,14 +109,14 @@ class PluginBlock extends \Smarty\Internal\CompileBase
     /**
      * Setup callback and parameter array
      *
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler
+     * @param TemplateCompilerBase $compiler
      * @param array                                 $_attr attributes
      * @param string                                $tag
      * @param string                                $function
      *
      * @return array
      */
-    public function setup(\Smarty\Internal\TemplateCompilerBase $compiler, $_attr, $tag, $function)
+    public function setup(TemplateCompilerBase $compiler, $_attr, $tag, $function)
     {
         $_paramsArray = array();
         foreach ($_attr as $_key => $_value) {

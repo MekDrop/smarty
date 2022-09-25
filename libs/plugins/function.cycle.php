@@ -5,6 +5,9 @@
  * @package    Smarty
  * @subpackage PluginsFunction
  */
+
+use Smarty\Internal\Template;
+
 /**
  * Smarty {cycle} function plugin
  * Type:     function
@@ -37,7 +40,7 @@
  * @version 1.3
  *
  * @param array                    $params   parameters
- * @param \Smarty\Internal\Template $template template object
+ * @param Template $template template object
  *
  * @return string|null
  */

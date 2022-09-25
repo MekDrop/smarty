@@ -2,6 +2,8 @@
 
 namespace Smarty\Internal;
 
+use Smarty\Internal\Config\File\CompilerFile;
+
 class TPC_yyStackEntry
 {
     public $stateno;       /* The state-number */
@@ -239,7 +241,7 @@ class Configfileparser
     /**
      * compiler object
      *
-     * @var \Smarty\Internal\Config\File\CompilerFile
+     * @var CompilerFile
      */
     public $compiler = null;
 
@@ -273,7 +275,7 @@ class Configfileparser
     /**
      * lexer object
      *
-     * @var \Smarty\Internal\Configfilelexer
+     * @var Configfilelexer
      */
     private $lex;
 
@@ -303,10 +305,10 @@ class Configfileparser
     /**
      * constructor
      *
-     * @param \Smarty\Internal\Configfilelexer      $lex
-     * @param \Smarty\Internal\Config\File\CompilerFile $compiler
+     * @param Configfilelexer $lex
+     * @param CompilerFile $compiler
      */
-    public function __construct(\Smarty\Internal\Configfilelexer $lex, \Smarty\Internal\Config\File\CompilerFile $compiler)
+    public function __construct(Configfilelexer $lex, CompilerFile $compiler)
     {
         $this->lex = $lex;
         $this->smarty = $compiler->smarty;

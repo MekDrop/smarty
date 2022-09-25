@@ -2,6 +2,11 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty\Internal\Extension\HandlerExtension;
+use Smarty\Internal\Template;
+use Smarty\Template\ConfigTemplate;
+use Smarty\Template\SourceTemplate;
+
 /**
  * Smarty Method CompileAllTemplates
  *
@@ -95,15 +100,15 @@ class CompileAllTemplatesMethod
                 $_smarty = clone $smarty;
                 //
                 $_smarty->_cache = array();
-                $_smarty->ext = new \Smarty\Internal\Extension\HandlerExtension();
+                $_smarty->ext = new HandlerExtension();
                 $_smarty->ext->objType = $_smarty->_objType;
                 $_smarty->force_compile = $force_compile;
                 try {
-                    /* @var \Smarty\Internal\Template $_tpl */
+                    /* @var Template $_tpl */
                     $_tpl = new $smarty->template_class($_file, $_smarty);
                     $_tpl->caching = Smarty::CACHING_OFF;
                     $_tpl->source =
-                        $isConfig ? \Smarty\Template\ConfigTemplate::load($_tpl) : \Smarty\Template\SourceTemplate::load($_tpl);
+                        $isConfig ? ConfigTemplate::load($_tpl) : SourceTemplate::load($_tpl);
                     if ($_tpl->mustCompile()) {
                         $_tpl->compileTemplateSource();
                         $_count++;

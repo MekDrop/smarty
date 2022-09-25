@@ -2,6 +2,10 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+
 /**
  * Smarty Method UnregisterPlugin
  *
@@ -26,13 +30,13 @@ class UnregisterPluginMethod
      * @api  Smarty::unregisterPlugin()
      * @link https://www.smarty.net/docs/en/api.unregister.plugin.tpl
      *
-     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
+     * @param TemplateBase|Template|Smarty $obj
      * @param string                                                          $type plugin type
      * @param string                                                          $name name of template tag
      *
-     * @return \Smarty|\Smarty\Internal\Template
+     * @return Smarty|Template
      */
-    public function unregisterPlugin(\Smarty\Internal\TemplateBase $obj, $type, $name)
+    public function unregisterPlugin(TemplateBase $obj, $type, $name)
     {
         $smarty = $obj->_getSmartyObj();
         if (isset($smarty->registered_plugins[ $type ][ $name ])) {

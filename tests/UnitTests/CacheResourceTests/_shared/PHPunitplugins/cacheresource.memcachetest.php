@@ -1,12 +1,15 @@
 <?php
 
+use Smarty\Internal\Template;
+use Smarty\Template\CachedTemplate;
+
 require_once SMARTY_DIR . '../demo/plugins/cacheresource.memcache.php';
 
 class Smarty_CacheResource_Memcachetest extends Smarty_CacheResource_Memcache
 {
     public $lockTime = 0;
 
-    public function hasLock(Smarty $smarty, \Smarty\Template\CachedTemplate $cached)
+    public function hasLock(Smarty $smarty, CachedTemplate $cached)
     {
         if ($this->lockTime) {
             $this->lockTime--;
@@ -17,7 +20,7 @@ class Smarty_CacheResource_Memcachetest extends Smarty_CacheResource_Memcache
         return parent::hasLock($smarty, $cached);
     }
 
-    public function get(\Smarty\Internal\Template $_template)
+    public function get(Template $_template)
     {
         $this->contents = array();
         $this->timestamps = array();

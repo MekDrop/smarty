@@ -5,6 +5,10 @@
  * @package    Smarty
  * @subpackage PluginsFunction
  */
+
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+
 /**
  * Smarty {html_options} function plugin
  * Type:     function
@@ -28,13 +32,13 @@
  *
  * @param array                     $params parameters
  *
- * @param \Smarty\Internal\Template $template
+ * @param Template $template
  *
  * @return string
  * @uses   smarty_function_escape_special_chars()
- * @throws \Smarty\Exception\SmartyException
+ * @throws SmartyException
  */
-function smarty_function_html_options($params, \Smarty\Internal\Template $template)
+function smarty_function_html_options($params, Template $template)
 {
     $template->_checkPlugins(
         array(

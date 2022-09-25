@@ -9,6 +9,10 @@
 
 namespace Smarty;
 
+use Smarty;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+
 /**
  * FIXME: \Smarty\Security API
  *      - getter and setter instead of public properties would allow cultivating an internal cache properly
@@ -244,7 +248,7 @@ class Security
     protected $_include_dir = array();
 
     /**
-     * @param \Smarty $smarty
+     * @param Smarty $smarty
      */
     public function __construct($smarty)
     {
@@ -478,7 +482,7 @@ class Security
      * @param string $stream_name
      *
      * @return boolean         true if stream is trusted
-     * @throws \Smarty\Exception\SmartyException if stream is not trusted
+     * @throws SmartyException if stream is not trusted
      */
     public function isTrustedStream($stream_name)
     {
@@ -495,7 +499,7 @@ class Security
      * @param null|bool $isConfig
      *
      * @return bool true if directory is trusted
-     * @throws \Smarty\Exception\SmartyException if directory is not trusted
+     * @throws SmartyException if directory is not trusted
      */
     public function isTrustedResourceDir($filepath, $isConfig = null)
     {
@@ -542,7 +546,7 @@ class Security
      * @param string $uri
      *
      * @return boolean         true if URI is trusted
-     * @throws \Smarty\Exception\SmartyException if URI is not trusted
+     * @throws SmartyException if URI is not trusted
      * @uses   $trusted_uri for list of patterns to match against $uri
      */
     public function isTrustedUri($uri)
@@ -565,7 +569,7 @@ class Security
      * @param string $filepath
      *
      * @return boolean         true if directory is trusted
-     * @throws \Smarty\Exception\SmartyException if PHP directory is not trusted
+     * @throws SmartyException if PHP directory is not trusted
      */
     public function isTrustedPHPDir($filepath)
     {
@@ -618,7 +622,7 @@ class Security
      * @param array  $dirs valid directories
      *
      * @return array|bool
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
     private function _checkDir($filepath, $dirs)
     {
@@ -648,27 +652,27 @@ class Security
     /**
      * Loads security class and enables security
      *
-     * @param \Smarty                $smarty
-     * @param string|\Smarty\Security $security_class if a string is used, it must be class-name
+     * @param Smarty                $smarty
+     * @param string|Security $security_class if a string is used, it must be class-name
      *
-     * @return \Smarty current Smarty instance for chaining
-     * @throws \Smarty\Exception\SmartyException when an invalid class name is provided
+     * @return Smarty current Smarty instance for chaining
+     * @throws SmartyException when an invalid class name is provided
      */
-    public static function enableSecurity(\Smarty $smarty, $security_class)
+    public static function enableSecurity(Smarty $smarty, $security_class)
     {
-        if ($security_class instanceof \Smarty\Security) {
+        if ($security_class instanceof self) {
             $smarty->security_policy = $security_class;
             return $smarty;
         } elseif (is_object($security_class)) {
-            throw new Exception\SmartyException("Class '" . get_class($security_class) . "' must extend \Smarty\Security.");
+            throw new SmartyException("Class '" . get_class($security_class) . "' must extend \\". __CLASS__ .".");
         }
         if ($security_class === null) {
             $security_class = $smarty->security_class;
         }
         if (!class_exists($security_class)) {
-            throw new Exception\SmartyException("Security class '$security_class' is not defined");
-        } elseif ($security_class !== '\Smarty\Security' && !is_subclass_of($security_class, '\Smarty\Security')) {
-            throw new Exception\SmartyException("Class '$security_class' must extend \Smarty\Security.");
+            throw new SmartyException("Security class '$security_class' is not defined");
+        } elseif (ltrim($security_class, '\\') !== __CLASS__ && !is_subclass_of($security_class, __CLASS__)) {
+            throw new SmartyException("Class '$security_class' must extend \\". __CLASS__ .".");
         } else {
             $smarty->security_policy = new $security_class($smarty);
         }
@@ -680,7 +684,7 @@ class Security
      *
      * @param $template
      *
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
     public function startTemplate($template)
     {
@@ -702,9 +706,9 @@ class Security
     /**
      * Register callback functions call at start/end of template rendering
      *
-     * @param \Smarty\Internal\Template $template
+     * @param Template $template
      */
-    public function registerCallBacks(\Smarty\Internal\Template $template)
+    public function registerCallBacks(Template $template)
     {
         $template->startRenderCallbacks[] = array($this, 'startTemplate');
         $template->endRenderCallbacks[] = array($this, 'endTemplate');

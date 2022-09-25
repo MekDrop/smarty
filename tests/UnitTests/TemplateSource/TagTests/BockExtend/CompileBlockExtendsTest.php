@@ -1,4 +1,9 @@
 <?php
+
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+
 /**
  * Smarty PHPunit tests for Block Extends
  *
@@ -21,7 +26,7 @@ class CompileBlockExtendsTest extends PHPUnit_Smarty
         //$this->smarty->setMergeCompiledIncludes(true);
     }
 
-    public function compiledPrefilter($text, \Smarty\Internal\Template $tpl)
+    public function compiledPrefilter($text, Template $tpl)
     {
         return str_replace('#', $tpl->getTemplateVars('test'), $text);
     }
@@ -777,7 +782,7 @@ class CompileBlockExtendsTest extends PHPUnit_Smarty
      */
     public function testSmartyBlockParentInParent_027()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('illegal \'{$smarty.block.parent}\'');
         $this->smarty->fetch('027_parent.tpl');
     }
@@ -1096,7 +1101,7 @@ class CompileBlockExtendsTest extends PHPUnit_Smarty
      */
     public function testPostFilter_031()
     {
-        function smarty_postfilter_test031($compiled, \Smarty\Internal\Template $template)
+        function smarty_postfilter_test031($compiled, Template $template)
         {
             return str_replace("'foo'", "'bar'", $compiled);
         }
@@ -1156,7 +1161,7 @@ class CompileBlockExtendsTest extends PHPUnit_Smarty
      */
     public function testSmartyParentBlockCalledInParent_036_1()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('inheritance: illegal \'{$smarty.block.parent}\' used in child template');
         $this->smarty->fetch('036_1_parent.tpl');
     }
@@ -1165,7 +1170,7 @@ class CompileBlockExtendsTest extends PHPUnit_Smarty
      */
     public function testSmartyParentBlockCalledInParent_036_2()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('inheritance: illegal \'{block_parent}\' used in child template');
         $this->smarty->fetch('036_2_parent.tpl');
     }
@@ -1174,7 +1179,7 @@ class CompileBlockExtendsTest extends PHPUnit_Smarty
      */
     public function testSmartyParentBlockCalledInParent_036_3()
     {
-        $this->expectException('\Smarty\Exception\SmartyException');
+        $this->expectException(SmartyException::class);
         $this->expectExceptionMessage('inheritance: illegal \'{parent}\' used in child template');
         $this->smarty->fetch('036_3_parent.tpl');
     }
@@ -1184,7 +1189,7 @@ class CompileBlockExtendsTest extends PHPUnit_Smarty
      */
     public function testSmartyBlockMissigBlockName_037()
     {
-        $this->expectException('SmartyCompilerException');
+        $this->expectException(SmartyCompilerException::class);
         $this->expectExceptionMessage('$smarty.block is not defined');
         $this->smarty->fetch('037_parent.tpl');
     }

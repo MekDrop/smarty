@@ -10,12 +10,14 @@
 
 namespace Smarty\Internal\Compile\Block;
 
+use Smarty\Internal\Compile\ChildCompile;
+
 /**
  * Smarty Internal Plugin Compile Block Parent Class
  *
  * @author Uwe Tews <uwe.tews@googlemail.com>
  */
-class ParentBlock extends \Smarty\Internal\Compile\ChildCompile
+class ParentBlock extends ChildCompile
 {
     /**
      * Tag name

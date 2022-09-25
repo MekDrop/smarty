@@ -9,6 +9,11 @@
 
 namespace Smarty\Resource;
 
+use Exception;
+use Smarty\Internal\Template;
+use Smarty\Resource;
+use Smarty\Template\CompiledTemplate;
+
 /**
  * Smarty Resource Plugin
  * Base implementation for resource plugins that don't compile cache
@@ -16,7 +21,7 @@ namespace Smarty\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-abstract class RecompiledResource extends \Smarty\Resource
+abstract class RecompiledResource extends Resource
 {
     /**
      * Flag that it's an recompiled resource
@@ -35,11 +40,11 @@ abstract class RecompiledResource extends \Smarty\Resource
     /**
      * compile template from source
      *
-     * @param \Smarty\Internal\Template $_smarty_tpl do not change variable name, is used by compiled template
+     * @param Template $_smarty_tpl do not change variable name, is used by compiled template
      *
      * @throws Exception
      */
-    public function process(\Smarty\Internal\Template $_smarty_tpl)
+    public function process(Template $_smarty_tpl)
     {
         $compiled = &$_smarty_tpl->compiled;
         $compiled->file_dependency = array();
@@ -69,12 +74,12 @@ abstract class RecompiledResource extends \Smarty\Resource
     /**
      * populate Compiled Object with compiled filepath
      *
-     * @param \Smarty\Template\CompiledTemplate $compiled  compiled object
-     * @param \Smarty\Internal\Template $_template template object
+     * @param CompiledTemplate $compiled  compiled object
+     * @param Template $_template template object
      *
      * @return void
      */
-    public function populateCompiledFilepath(\Smarty\Template\CompiledTemplate $compiled, \Smarty\Internal\Template $_template)
+    public function populateCompiledFilepath(CompiledTemplate $compiled, Template $_template)
     {
         $compiled->filepath = false;
         $compiled->timestamp = false;

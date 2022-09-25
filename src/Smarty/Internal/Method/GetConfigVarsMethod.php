@@ -2,6 +2,10 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Internal\Data;
+use Smarty\Internal\Template;
+
 /**
  * Smarty Method GetConfigVars
  *
@@ -23,16 +27,16 @@ class GetConfigVarsMethod
     /**
      * Returns a single or all config variables
      *
-     * @api  Smarty::getConfigVars()
-     * @link https://www.smarty.net/docs/en/api.get.config.vars.tpl
-     *
-     * @param \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty $data
+     * @param Data|Template|Smarty $data
      * @param string                                                  $varname        variable name or null
      * @param bool                                                    $search_parents include parent templates?
      *
      * @return mixed variable value or or array of variables
+     *
+     * @api  Smarty::getConfigVars()
+     * @link https://www.smarty.net/docs/en/api.get.config.vars.tpl
      */
-    public function getConfigVars(\Smarty\Internal\Data $data, $varname = null, $search_parents = true)
+    public function getConfigVars(Data $data, $varname = null, $search_parents = true)
     {
         $_ptr = $data;
         $var_array = array();

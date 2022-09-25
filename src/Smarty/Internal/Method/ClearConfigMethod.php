@@ -2,6 +2,10 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Internal\Data;
+use Smarty\Internal\Template;
+
 /**
  * Smarty Method ClearConfig
  *
@@ -23,15 +27,16 @@ class ClearConfigMethod
     /**
      * clear a single or all config variables
      *
-     * @api  Smarty::clearConfig()
-     * @link https://www.smarty.net/docs/en/api.clear.config.tpl
-     *
-     * @param \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty $data
+     * @param Data|Template|Smarty $data
      * @param string|null                                             $name variable name or null
      *
-     * @return \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty
+     * @return Data|Template|Smarty
+     *
+     * @link https://www.smarty.net/docs/en/api.clear.config.tpl
+     *
+     * @api  Smarty::clearConfig()
      */
-    public function clearConfig(\Smarty\Internal\Data $data, $name = null)
+    public function clearConfig(Data $data, $name = null)
     {
         if (isset($name)) {
             unset($data->config_vars[ $name ]);

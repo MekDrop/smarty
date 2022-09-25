@@ -10,13 +10,16 @@
 
 namespace Smarty\Internal\Compile\Make;
 
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile Make_Nocache Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class NocacheMake extends \Smarty\Internal\CompileBase
+class NocacheMake extends CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -44,11 +47,11 @@ class NocacheMake extends \Smarty\Internal\CompileBase
      * Compiles code for the {make_nocache} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);

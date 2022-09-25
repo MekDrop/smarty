@@ -2,6 +2,11 @@
 
 namespace Smarty\Internal\Resource;
 
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Template\CompiledTemplate;
+use Smarty\Template\SourceTemplate;
+
 /**
  * Smarty Internal Plugin Resource PHP
  * Implements the file system as resource for PHP templates
@@ -45,26 +50,26 @@ class PhpResource extends FileResource
     /**
      * Load template's source from file into current template object
      *
-     * @param \Smarty\Template\SourceTemplate $source source object
+     * @param SourceTemplate $source source object
      *
      * @return string                 template source
-     * @throws \Smarty\Exception\SmartyException        if source cannot be loaded
+     * @throws SmartyException        if source cannot be loaded
      */
-    public function getContent(\Smarty\Template\SourceTemplate $source)
+    public function getContent(SourceTemplate $source)
     {
         if ($source->exists) {
             return '';
         }
-        throw new \Smarty\Exception\SmartyException("Unable to read template {$source->type} '{$source->name}'");
+        throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");
     }
 
     /**
      * populate compiled object with compiled filepath
      *
-     * @param \Smarty\Template\CompiledTemplate $compiled  compiled object
-     * @param \Smarty\Internal\Template $_template template object (is ignored)
+     * @param CompiledTemplate $compiled  compiled object
+     * @param Template $_template template object (is ignored)
      */
-    public function populateCompiledFilepath(\Smarty\Template\CompiledTemplate $compiled, \Smarty\Internal\Template $_template)
+    public function populateCompiledFilepath(CompiledTemplate $compiled, Template $_template)
     {
         $compiled->filepath = $_template->source->filepath;
         $compiled->timestamp = $_template->source->timestamp;
@@ -80,19 +85,19 @@ class PhpResource extends FileResource
     /**
      * Render and output the template (without using the compiler)
      *
-     * @param \Smarty\Template\SourceTemplate   $source    source object
-     * @param \Smarty\Internal\Template $_template template object
+     * @param SourceTemplate   $source    source object
+     * @param Template $_template template object
      *
      * @return void
-     * @throws \Smarty\Exception\SmartyException          if template cannot be loaded or allow_php_templates is disabled
+     * @throws SmartyException          if template cannot be loaded or allow_php_templates is disabled
      */
-    public function renderUncompiled(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template)
+    public function renderUncompiled(SourceTemplate $source, Template $_template)
     {
         if (!$source->smarty->allow_php_templates) {
-            throw new \Smarty\Exception\SmartyException('PHP templates are disabled');
+            throw new SmartyException('PHP templates are disabled');
         }
         if (!$source->exists) {
-            throw new \Smarty\Exception\SmartyException(
+            throw new SmartyException(
                 "Unable to load template '{$source->type}:{$source->name}'" .
                 ($_template->_isSubTpl() ? " in '{$_template->parent->template_resource}'" : '')
             );
@@ -106,7 +111,7 @@ class PhpResource extends FileResource
         /**
          *
          *
-         * @var \Smarty\Internal\Template $_smarty_template
+         * @var Template $_smarty_template
          * used in included file
          */
         $_smarty_template = $_template;

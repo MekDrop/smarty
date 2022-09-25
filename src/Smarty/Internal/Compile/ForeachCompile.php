@@ -10,7 +10,11 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Exception\SmartyException;
 use Smarty\Internal\Compile\Private\ForeachSectionPrivate;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
 
 /**
  * Smarty Internal Plugin Compile Foreach Class
@@ -83,13 +87,13 @@ class ForeachCompile extends ForeachSectionPrivate
      * Compiles code for the {foreach} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyCompilerException
+     * @throws SmartyException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         $compiler->loopNesting++;
         // init
@@ -281,17 +285,17 @@ class ForeachCompile extends ForeachSectionPrivate
  * @package    Smarty
  * @subpackage Compiler
  */
-class ForeachelseCompile extends \Smarty\Internal\CompileBase
+class ForeachelseCompile extends CompileBase
 {
     /**
      * Compiles code for the {foreachelse} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
@@ -312,18 +316,18 @@ class ForeachelseCompile extends \Smarty\Internal\CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class ForeachcloseCompile extends \Smarty\Internal\CompileBase
+class ForeachcloseCompile extends CompileBase
 {
     /**
      * Compiles code for the {/foreach} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws SmartyCompilerException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
+    public function compile($args, TemplateCompilerBase $compiler)
     {
         $compiler->loopNesting--;
         // must endblock be nocache?
@@ -338,7 +342,7 @@ class ForeachcloseCompile extends \Smarty\Internal\CompileBase
             $output .= "{$itemVar} = {$local}saved;\n";
         }
         $output .= "}\n";
-        /* @var \Smarty\Internal\Compile\ForeachCompile $foreachCompiler */
+        /* @var ForeachCompile $foreachCompiler */
         $foreachCompiler = $compiler->getTagCompiler('foreach');
         $output .= $foreachCompiler->compileRestore(1);
         $output .= "?>";

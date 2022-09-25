@@ -2,6 +2,11 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+
 /**
  * Smarty Method RegisterDefaultPluginHandler
  *
@@ -23,22 +28,22 @@ class RegisterDefaultPluginHandlerMethod
     /**
      * Registers a default plugin handler
      *
-     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
+     * @param TemplateBase|Template|Smarty $obj
      * @param callable                                                        $callback class/method name
      *
-     * @return \Smarty|\Smarty\Internal\Template
-     * @throws \Smarty\Exception\SmartyException              if $callback is not callable
-     *@api  Smarty::registerDefaultPluginHandler()
-     * @link https://www.smarty.net/docs/en/api.register.default.plugin.handler.tpl
+     * @return Smarty|Template
+     * @throws SmartyException              if $callback is not callable
      *
+     * @api  Smarty::registerDefaultPluginHandler()
+     * @link https://www.smarty.net/docs/en/api.register.default.plugin.handler.tpl
      */
-    public function registerDefaultPluginHandler(\Smarty\Internal\TemplateBase $obj, $callback)
+    public function registerDefaultPluginHandler(TemplateBase $obj, $callback)
     {
         $smarty = $obj->_getSmartyObj();
         if (is_callable($callback)) {
             $smarty->default_plugin_handler_func = $callback;
         } else {
-            throw new \Smarty\Exception\SmartyException("Default plugin handler '$callback' not callable");
+            throw new SmartyException("Default plugin handler '$callback' not callable");
         }
         return $obj;
     }

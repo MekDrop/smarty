@@ -11,6 +11,9 @@
 
 namespace Smarty\Internal\ParseTree;
 
+use Smarty\Internal\ParseTree;
+use Smarty\Internal\Templateparser;
+
 /**
  * Template element
  *
@@ -18,7 +21,7 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class TemplateParseTree extends \Smarty\Internal\ParseTree
+class TemplateParseTree extends ParseTree
 {
     /**
      * Array of template elements
@@ -37,10 +40,10 @@ class TemplateParseTree extends \Smarty\Internal\ParseTree
     /**
      * Append buffer to subtree
      *
-     * @param \Smarty\Internal\Templateparser $parser
-     * @param \Smarty\Internal\ParseTree       $subtree
+     * @param Templateparser $parser
+     * @param ParseTree       $subtree
      */
-    public function append_subtree(\Smarty\Internal\Templateparser $parser, \Smarty\Internal\ParseTree $subtree)
+    public function append_subtree(Templateparser $parser, ParseTree $subtree)
     {
         if (!empty($subtree->subtrees)) {
             $this->subtrees = array_merge($this->subtrees, $subtree->subtrees);
@@ -54,10 +57,10 @@ class TemplateParseTree extends \Smarty\Internal\ParseTree
     /**
      * Append array to subtree
      *
-     * @param \Smarty\Internal\Templateparser $parser
-     * @param \Smarty\Internal\ParseTree[]    $array
+     * @param Templateparser $parser
+     * @param ParseTree[]    $array
      */
-    public function append_array(\Smarty\Internal\Templateparser $parser, $array = array())
+    public function append_array(Templateparser $parser, $array = array())
     {
         if (!empty($array)) {
             $this->subtrees = array_merge($this->subtrees, (array)$array);
@@ -67,10 +70,10 @@ class TemplateParseTree extends \Smarty\Internal\ParseTree
     /**
      * Prepend array to subtree
      *
-     * @param \Smarty\Internal\Templateparser $parser
-     * @param \Smarty\Internal\ParseTree[]    $array
+     * @param Templateparser $parser
+     * @param ParseTree[]    $array
      */
-    public function prepend_array(\Smarty\Internal\Templateparser $parser, $array = array())
+    public function prepend_array(Templateparser $parser, $array = array())
     {
         if (!empty($array)) {
             $this->subtrees = array_merge((array)$array, $this->subtrees);
@@ -80,11 +83,11 @@ class TemplateParseTree extends \Smarty\Internal\ParseTree
     /**
      * Sanitize and merge subtree buffers together
      *
-     * @param \Smarty\Internal\Templateparser $parser
+     * @param Templateparser $parser
      *
      * @return string template code content
      */
-    public function to_smarty_php(\Smarty\Internal\Templateparser $parser)
+    public function to_smarty_php(Templateparser $parser)
     {
         $code = '';
 
@@ -138,12 +141,12 @@ class TemplateParseTree extends \Smarty\Internal\ParseTree
                 continue;
             }
 
-            if ($this->subtrees[ $key ] instanceof \Smarty\Internal\ParseTree\TextParseTree
+            if ($this->subtrees[ $key ] instanceof TextParseTree
                 && $this->subtrees[ $key ]->isToBeStripped()) {
                 $newMode = 'textstripped';
-            } elseif ($this->subtrees[ $key ] instanceof \Smarty\Internal\ParseTree\TextParseTree) {
+            } elseif ($this->subtrees[ $key ] instanceof TextParseTree) {
                 $newMode = 'text';
-            } elseif ($this->subtrees[ $key ] instanceof \Smarty\Internal\ParseTree\TagParseTree) {
+            } elseif ($this->subtrees[ $key ] instanceof TagParseTree) {
                 $newMode = 'tag';
             } else {
                 $newMode = 'other';

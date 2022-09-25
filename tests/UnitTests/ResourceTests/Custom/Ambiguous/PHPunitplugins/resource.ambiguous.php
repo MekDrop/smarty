@@ -1,12 +1,16 @@
 <?php
 
+use Smarty\Internal\Resource\FileResource;
+use Smarty\Internal\Template;
+use Smarty\Template\SourceTemplate;
+
 /**
  * Ambiguous Filename Custom Resource Example
  *
  * @package Resource-examples
  * @author  Rodney Rehm
  */
-class Smarty_Resource_Ambiguous extends Smarty_Internal_Resource_File
+class Smarty_Resource_Ambiguous extends FileResource
 {
     protected $directory;
     protected $segment;
@@ -38,10 +42,10 @@ class Smarty_Resource_Ambiguous extends Smarty_Internal_Resource_File
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param \Smarty\Template\SourceTemplate $source source object
-     * @param \Smarty\Internal\Template|null $_template template object
+     * @param SourceTemplate $source source object
+     * @param Template|null $_template template object
      */
-    public function populate(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template = null)
+    public function populate(SourceTemplate $source, Template $_template = null)
     {
         $segment = '';
         if ($this->segment) {

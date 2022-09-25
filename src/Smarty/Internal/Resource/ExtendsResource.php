@@ -10,6 +10,11 @@
 
 namespace Smarty\Internal\Resource;
 
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Resource;
+use Smarty\Template\SourceTemplate;
+
 /**
  * Smarty Internal Plugin Resource Extends
  * Implements the file system as resource for Smarty which {extend}s a chain of template files templates
@@ -17,7 +22,7 @@ namespace Smarty\Internal\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class ExtendsResource extends \Smarty\Resource
+class ExtendsResource extends Resource
 {
     /**
      * mbstring.overload flag
@@ -29,12 +34,12 @@ class ExtendsResource extends \Smarty\Resource
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param \Smarty\Template\SourceTemplate   $source    source object
-     * @param \Smarty\Internal\Template $_template template object
+     * @param SourceTemplate   $source    source object
+     * @param Template $_template template object
      *
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    public function populate(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template = null)
+    public function populate(SourceTemplate $source, Template $_template = null)
     {
         $uid = '';
         $sources = array();
@@ -42,10 +47,10 @@ class ExtendsResource extends \Smarty\Resource
         $smarty = &$source->smarty;
         $exists = true;
         foreach ($components as $component) {
-            /* @var \Smarty\Template\SourceTemplate $_s */
-            $_s = \Smarty\Template\SourceTemplate::load(null, $smarty, $component);
+            /* @var SourceTemplate $_s */
+            $_s = SourceTemplate::load(null, $smarty, $component);
             if ($_s->type === 'php') {
-                throw new \Smarty\Exception\SmartyException("Resource type {$_s->type} cannot be used with the extends resource type");
+                throw new SmartyException("Resource type {$_s->type} cannot be used with the extends resource type");
             }
             $sources[ $_s->uid ] = $_s;
             $uid .= $_s->filepath;
@@ -65,12 +70,12 @@ class ExtendsResource extends \Smarty\Resource
     /**
      * populate Source Object with timestamp and exists from Resource
      *
-     * @param \Smarty\Template\SourceTemplate $source source object
+     * @param SourceTemplate $source source object
      */
-    public function populateTimestamp(\Smarty\Template\SourceTemplate $source)
+    public function populateTimestamp(SourceTemplate $source)
     {
         $source->exists = true;
-        /* @var \Smarty\Template\SourceTemplate $_s */
+        /* @var SourceTemplate $_s */
         foreach ($source->components as $_s) {
             $source->exists = $source->exists && $_s->exists;
         }
@@ -80,19 +85,19 @@ class ExtendsResource extends \Smarty\Resource
     /**
      * Load template's source from files into current template object
      *
-     * @param \Smarty\Template\SourceTemplate $source source object
+     * @param SourceTemplate $source source object
      *
      * @return string template source
-     * @throws \Smarty\Exception\SmartyException if source cannot be loaded
+     * @throws SmartyException if source cannot be loaded
      */
-    public function getContent(\Smarty\Template\SourceTemplate $source)
+    public function getContent(SourceTemplate $source)
     {
         if (!$source->exists) {
-            throw new \Smarty\Exception\SmartyException("Unable to load template '{$source->type}:{$source->name}'");
+            throw new SmartyException("Unable to load template '{$source->type}:{$source->name}'");
         }
         $_components = array_reverse($source->components);
         $_content = '';
-        /* @var \Smarty\Template\SourceTemplate $_s */
+        /* @var SourceTemplate $_s */
         foreach ($_components as $_s) {
             // read content
             $_content .= $_s->getContent();
@@ -103,11 +108,11 @@ class ExtendsResource extends \Smarty\Resource
     /**
      * Determine basename for compiled filename
      *
-     * @param \Smarty\Template\SourceTemplate $source source object
+     * @param SourceTemplate $source source object
      *
      * @return string resource's basename
      */
-    public function getBasename(\Smarty\Template\SourceTemplate $source)
+    public function getBasename(SourceTemplate $source)
     {
         return str_replace(':', '.', basename($source->filepath));
     }

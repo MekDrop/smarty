@@ -5,6 +5,10 @@
  * @package    Smarty
  * @subpackage PluginsFunction
  */
+
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+
 /**
  * Smarty {html_image} function plugin
  * Type:     function
@@ -27,14 +31,14 @@
  * @author  credits to Duda <duda@big.hu>
  * @version 1.0
  *
- * @param array                    $params   parameters
- * @param \Smarty\Internal\Template $template template object
+ * @param array    $params   parameters
+ * @param Template $template template object
  *
- * @throws \Smarty\Exception\SmartyException
+ * @throws SmartyException
  * @return string
  * @uses    smarty_function_escape_special_chars()
  */
-function smarty_function_html_image($params, \Smarty\Internal\Template $template)
+function smarty_function_html_image($params, Template $template)
 {
     $template->_checkPlugins(
         array(
@@ -67,7 +71,7 @@ function smarty_function_html_image($params, \Smarty\Internal\Template $template
                 if (!is_array($_val)) {
                     $$_key = smarty_function_escape_special_chars($_val);
                 } else {
-                    throw new \Smarty\Exception\SmartyException(
+                    throw new SmartyException(
                         "html_image: extra attribute '{$_key}' cannot be an array",
                         E_USER_NOTICE
                     );
@@ -82,7 +86,7 @@ function smarty_function_html_image($params, \Smarty\Internal\Template $template
                 if (!is_array($_val)) {
                     $extra .= ' ' . $_key . '="' . smarty_function_escape_special_chars($_val) . '"';
                 } else {
-                    throw new \Smarty\Exception\SmartyException(
+                    throw new SmartyException(
                         "html_image: extra attribute '{$_key}' cannot be an array",
                         E_USER_NOTICE
                     );

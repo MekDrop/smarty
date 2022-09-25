@@ -10,25 +10,30 @@
 
 namespace Smarty\Internal\Compile\Private\Special;
 
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Internal\Compile\CaptureCompile;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty Internal Plugin Compile special Smarty Variable Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class VariableSpecial extends \Smarty\Internal\CompileBase
+class VariableSpecial extends CompileBase
 {
     /**
      * Compiles code for the special $smarty variables
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
+     * @param TemplateCompilerBase $compiler compiler object
      * @param                                       $parameter
      *
      * @return string compiled code
-     * @throws \Smarty\Exception\SmartyCompilerException
+     * @throws SmartyCompilerException
      */
-    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, TemplateCompilerBase $compiler, $parameter)
     {
         $_index = preg_split("/\]\[/", substr($parameter, 1, strlen($parameter) - 2));
         $variable = smarty_strtolower_ascii($compiler->getId($_index[ 0 ]));
@@ -41,18 +46,18 @@ class VariableSpecial extends \Smarty\Internal\CompileBase
             switch ($variable) {
                 case 'foreach':
                 case 'section':
-                    if (!isset(\Smarty\Internal\TemplateCompilerBase::$_tag_objects[ $variable ])) {
+                    if (!isset(TemplateCompilerBase::$_tag_objects[ $variable ])) {
                         $class = '\\Smarty\\Internal\\Compile\\' . smarty_ucfirst_ascii($variable);
-                        \Smarty\Internal\TemplateCompilerBase::$_tag_objects[ $variable ] = new $class;
+                        TemplateCompilerBase::$_tag_objects[ $variable ] = new $class;
                     }
-                    return \Smarty\Internal\TemplateCompilerBase::$_tag_objects[ $variable ]->compileSpecialVariable(
+                    return TemplateCompilerBase::$_tag_objects[ $variable ]->compileSpecialVariable(
                         array(),
                         $compiler,
                         $_index
                     );
                 case 'capture':
-                    if (class_exists('\Smarty\Internal\Compile\CaptureCompile')) {
-                        return \Smarty\Internal\Compile\CaptureCompile::compileSpecialVariable(array(), $compiler, $_index);
+                    if (class_exists('\\Smarty\\Internal\\Compile\\CaptureCompile')) {
+                        return CaptureCompile::compileSpecialVariable(array(), $compiler, $_index);
                     }
                     return '';
                 case 'now':

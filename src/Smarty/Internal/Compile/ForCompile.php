@@ -10,13 +10,16 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty\Internal\CompileBase;
+use Smarty\Variable;
+
 /**
  * Smarty Internal Plugin Compile For Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class ForCompile extends \Smarty\Internal\CompileBase
+class ForCompile extends CompileBase
 {
     /**
      * Compiles code for the {for} tag
@@ -57,7 +60,7 @@ class ForCompile extends \Smarty\Internal\CompileBase
                     $var = $_statement[ 'var' ];
                     $index = '';
                 }
-                $output .= "\$_smarty_tpl->tpl_vars[$var] = new \Smarty\Variable(null, \$_smarty_tpl->isRenderingCache);\n";
+                $output .= "\$_smarty_tpl->tpl_vars[$var] = new \\".Variable::class."(null, \$_smarty_tpl->isRenderingCache);\n";
                 $output .= "\$_smarty_tpl->tpl_vars[$var]->value{$index} = {$_statement['value']};\n";
             }
             if (is_array($_attr[ 'var' ])) {
@@ -77,7 +80,7 @@ class ForCompile extends \Smarty\Internal\CompileBase
                 $var = $_statement[ 'var' ];
                 $index = '';
             }
-            $output .= "\$_smarty_tpl->tpl_vars[$var] = new \Smarty\Variable(null, \$_smarty_tpl->isRenderingCache);";
+            $output .= "\$_smarty_tpl->tpl_vars[$var] = new \\".Variable::class."(null, \$_smarty_tpl->isRenderingCache);";
             if (isset($_attr[ 'step' ])) {
                 $output .= "\$_smarty_tpl->tpl_vars[$var]->step = $_attr[step];";
             } else {
@@ -108,7 +111,7 @@ class ForCompile extends \Smarty\Internal\CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class ForelseCompile extends \Smarty\Internal\CompileBase
+class ForelseCompile extends CompileBase
 {
     /**
      * Compiles code for the {forelse} tag
@@ -135,7 +138,7 @@ class ForelseCompile extends \Smarty\Internal\CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class ForcloseCompile extends \Smarty\Internal\CompileBase
+class ForcloseCompile extends CompileBase
 {
     /**
      * Compiles code for the {/for} tag

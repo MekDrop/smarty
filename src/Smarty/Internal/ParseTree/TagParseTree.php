@@ -11,6 +11,9 @@
 
 namespace Smarty\Internal\ParseTree;
 
+use Smarty\Internal\ParseTree;
+use Smarty\Internal\Templateparser;
+
 /**
  * A complete smarty tag.
  *
@@ -18,7 +21,7 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class TagParseTree extends \Smarty\Internal\ParseTree
+class TagParseTree extends ParseTree
 {
     /**
      * Saved block nesting level
@@ -30,10 +33,10 @@ class TagParseTree extends \Smarty\Internal\ParseTree
     /**
      * Create parse tree buffer for Smarty tag
      *
-     * @param \Smarty\Internal\Templateparser $parser parser object
+     * @param Templateparser $parser parser object
      * @param string                          $data   content
      */
-    public function __construct(\Smarty\Internal\Templateparser $parser, $data)
+    public function __construct(Templateparser $parser, $data)
     {
         $this->data = $data;
         $this->saved_block_nesting = $parser->block_nesting_level;
@@ -42,11 +45,11 @@ class TagParseTree extends \Smarty\Internal\ParseTree
     /**
      * Return buffer content
      *
-     * @param \Smarty\Internal\Templateparser $parser
+     * @param Templateparser $parser
      *
      * @return string content
      */
-    public function to_smarty_php(\Smarty\Internal\Templateparser $parser)
+    public function to_smarty_php(Templateparser $parser)
     {
         return $this->data;
     }
@@ -54,11 +57,11 @@ class TagParseTree extends \Smarty\Internal\ParseTree
     /**
      * Return complied code that loads the evaluated output of buffer content into a temporary variable
      *
-     * @param \Smarty\Internal\Templateparser $parser
+     * @param Templateparser $parser
      *
      * @return string template code
      */
-    public function assign_to_var(\Smarty\Internal\Templateparser $parser)
+    public function assign_to_var(Templateparser $parser)
     {
         $var = $parser->compiler->getNewPrefixVariable();
         $tmp = $parser->compiler->appendCode('<?php ob_start();?>', $this->data);

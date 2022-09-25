@@ -11,6 +11,9 @@
 
 namespace Smarty\Internal\ParseTree;
 
+use Smarty\Internal\ParseTree;
+use Smarty\Internal\Templateparser;
+
 /**
  * Raw chars as part of a double quoted string.
  *
@@ -18,7 +21,7 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class DqContentParseTree extends \Smarty\Internal\ParseTree
+class DqContentParseTree extends ParseTree
 {
     /**
      * Create parse tree buffer with string content
@@ -33,11 +36,11 @@ class DqContentParseTree extends \Smarty\Internal\ParseTree
     /**
      * Return content as double quoted string
      *
-     * @param \Smarty\Internal\Templateparser $parser
+     * @param Templateparser $parser
      *
      * @return string doubled quoted string
      */
-    public function to_smarty_php(\Smarty\Internal\Templateparser $parser)
+    public function to_smarty_php(Templateparser $parser)
     {
         return '"' . $this->data . '"';
     }

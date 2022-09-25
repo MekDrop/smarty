@@ -2,6 +2,32 @@
 
 namespace Smarty\Internal\Extension;
 
+use Smarty\Internal\Data;
+use Smarty\Internal\Method\AppendByRefMethod;
+use Smarty\Internal\Method\AppendMethod;
+use Smarty\Internal\Method\AssignByRefMethod;
+use Smarty\Internal\Method\AssignGlobalMethod;
+use Smarty\Internal\Method\GetTemplateVarsMethod;
+use Smarty\Internal\Method\LoadFilterMethod;
+use Smarty\Internal\Method\LoadPluginMethod;
+use Smarty\Internal\Method\RegisterFilterMethod;
+use Smarty\Internal\Method\RegisterObjectMethod;
+use Smarty\Internal\Method\RegisterPluginMethod;
+use Smarty\Internal\Runtime\CacheModifyRuntime;
+use Smarty\Internal\Runtime\CacheResourceFileRuntime;
+use Smarty\Internal\Runtime\CaptureRuntime;
+use Smarty\Internal\Runtime\CodeFrameRuntime;
+use Smarty\Internal\Runtime\FilterHandlerRuntime;
+use Smarty\Internal\Runtime\ForeachRuntime;
+use Smarty\Internal\Runtime\GetIncludePathRuntime;
+use Smarty\Internal\Runtime\Make\NocacheMake;
+use Smarty\Internal\Runtime\TplFunctionRuntime;
+use Smarty\Internal\Runtime\UpdateCacheRuntime;
+use Smarty\Internal\Runtime\UpdateScopeRuntime;
+use Smarty\Internal\Runtime\WriteFileRuntime;
+use Smarty\Internal\Undefined;
+use Smarty\Template\CachedTemplate;
+
 /**
  * Smarty Extension handler
  *
@@ -12,31 +38,31 @@ namespace Smarty\Internal\Extension;
  * @author     Uwe Tews
  *
  * Runtime extensions
- * @property   \Smarty\Internal\Runtime\CacheModifyRuntime       $_cacheModify
- * @property   \Smarty\Internal\Runtime\CacheResourceFileRuntime $_cacheResourceFile
- * @property   \Smarty\Internal\Runtime\CaptureRuntime           $_capture
- * @property   \Smarty\Internal\Runtime\CodeFrameRuntime         $_codeFrame
- * @property   \Smarty\Internal\Runtime\FilterHandlerRuntime     $_filterHandler
- * @property   \Smarty\Internal\Runtime\ForeachRuntime           $_foreach
- * @property   \Smarty\Internal\Runtime\GetIncludePathRuntime    $_getIncludePath
- * @property   \Smarty\Internal\Runtime\Make\NocacheMake      $_make_nocache
- * @property   \Smarty\Internal\Runtime\UpdateCacheRuntime       $_updateCache
- * @property   \Smarty\Internal\Runtime\UpdateScopeRuntime       $_updateScope
- * @property   \Smarty\Internal\Runtime\TplFunctionRuntime       $_tplFunction
- * @property   \Smarty\Internal\Runtime\WriteFileRuntime         $_writeFile
+ * @property   CacheModifyRuntime       $_cacheModify
+ * @property   CacheResourceFileRuntime $_cacheResourceFile
+ * @property   CaptureRuntime           $_capture
+ * @property   CodeFrameRuntime         $_codeFrame
+ * @property   FilterHandlerRuntime     $_filterHandler
+ * @property   ForeachRuntime           $_foreach
+ * @property   GetIncludePathRuntime    $_getIncludePath
+ * @property   NocacheMake      $_make_nocache
+ * @property   UpdateCacheRuntime       $_updateCache
+ * @property   UpdateScopeRuntime       $_updateScope
+ * @property   TplFunctionRuntime       $_tplFunction
+ * @property   WriteFileRuntime         $_writeFile
  *
  * Method extensions
- * @property   \Smarty\Internal\Method\GetTemplateVarsMethod    $getTemplateVars
- * @property   \Smarty\Internal\Method\AppendMethod             $append
- * @property   \Smarty\Internal\Method\AppendByRefMethod        $appendByRef
- * @property   \Smarty\Internal\Method\AssignGlobalMethod       $assignGlobal
- * @property   \Smarty\Internal\Method\AssignByRefMethod        $assignByRef
- * @property   \Smarty\Internal\Method\LoadFilterMethod         $loadFilter
- * @property   \Smarty\Internal\Method\LoadPluginMethod         $loadPlugin
- * @property   \Smarty\Internal\Method\RegisterFilterMethod     $registerFilter
- * @property   \Smarty\Internal\Method\RegisterObjectMethod     $registerObject
- * @property   \Smarty\Internal\Method\RegisterPluginMethod     $registerPlugin
- * @property   mixed|\Smarty\Template\CachedTemplate             configLoad
+ * @property   GetTemplateVarsMethod    $getTemplateVars
+ * @property   AppendMethod             $append
+ * @property   AppendByRefMethod        $appendByRef
+ * @property   AssignGlobalMethod       $assignGlobal
+ * @property   AssignByRefMethod        $assignByRef
+ * @property   LoadFilterMethod         $loadFilter
+ * @property   LoadPluginMethod         $loadPlugin
+ * @property   RegisterFilterMethod     $registerFilter
+ * @property   RegisterObjectMethod     $registerObject
+ * @property   RegisterPluginMethod     $registerPlugin
+ * @property   mixed|CachedTemplate             configLoad
  */
 class HandlerExtension
 {
@@ -59,13 +85,13 @@ class HandlerExtension
     /**
      * Call external Method
      *
-     * @param \Smarty\Internal\Data $data
+     * @param Data $data
      * @param string                $name external method names
      * @param array                 $args argument array
      *
      * @return mixed
      */
-    public function _callExternalMethod(\Smarty\Internal\Data $data, $name, $args)
+    public function _callExternalMethod(Data $data, $name, $args)
     {
         /* @var \Smarty $data ->smarty */
         $smarty = isset($data->smarty) ? $data->smarty : $data;
@@ -133,7 +159,7 @@ class HandlerExtension
         if (isset($callback) && $callback[ 0 ]->objMap | $data->_objType) {
             return call_user_func_array($callback, $args);
         }
-        return call_user_func_array(array(new \Smarty\Internal\Undefined(), $name), $args);
+        return call_user_func_array(array(new Undefined(), $name), $args);
     }
 
     /**
@@ -155,7 +181,7 @@ class HandlerExtension
      *
      * @param string $property_name property name
      *
-     * @return mixed|\Smarty\Template\CachedTemplate
+     * @return mixed|CachedTemplate
      */
     public function __get($property_name)
     {
@@ -166,7 +192,7 @@ class HandlerExtension
             $class = '\\Smarty\\Internal\\Method\\' . $this->upperCase($property_name);
         }
         if (!class_exists($class)) {
-            return $this->$property_name = new \Smarty\Internal\Undefined($class);
+            return $this->$property_name = new Undefined($class);
         }
         return $this->$property_name = new $class();
     }
@@ -193,6 +219,6 @@ class HandlerExtension
      */
     public function __call($name, $args)
     {
-        return call_user_func_array(array(new \Smarty\Internal\Undefined(), $name), array($this));
+        return call_user_func_array(array(new Undefined(), $name), array($this));
     }
 }

@@ -1,5 +1,11 @@
 <?php
 
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Resource\ExtendsResource;
+use Smarty\Internal\Template;
+use Smarty\Resource;
+use Smarty\Template\SourceTemplate;
+
 /**
  * Extends All Resource
  * Resource Implementation modifying the extends-Resource to walk
@@ -8,31 +14,31 @@
  * @package Resource-examples
  * @author  Rodney Rehm
  */
-class Smarty_Resource_Extendsall extends Smarty_Internal_Resource_Extends
+class Smarty_Resource_Extendsall extends ExtendsResource
 {
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param Smarty_Template_Source   $source    source object
-     * @param \Smarty\Internal\Template $_template template object
+     * @param SourceTemplate $source    source object
+     * @param Template|null  $_template template object
      *
      * @return void
      */
-    public function populate(Smarty_Template_Source $source, \Smarty\Internal\Template $_template = null)
+    public function populate(SourceTemplate $source, Template $_template = null)
     {
         $uid = '';
         $sources = array();
         $timestamp = 0;
         foreach ($source->smarty->getTemplateDir() as $key => $directory) {
             try {
-                $s = Smarty_Resource::source(null, $source->smarty, 'file:' . '[' . $key . ']' . $source->name);
+                $s = Resource::source(null, $source->smarty, 'file:' . '[' . $key . ']' . $source->name);
                 if (!$s->exists) {
                     continue;
                 }
                 $sources[ $s->uid ] = $s;
                 $uid .= $s->filepath;
                 $timestamp = $s->timestamp > $timestamp ? $s->timestamp : $timestamp;
-            } catch (\Smarty\Exception\SmartyException $e) {
+            } catch (SmartyException $e) {
             }
         }
         if (!$sources) {

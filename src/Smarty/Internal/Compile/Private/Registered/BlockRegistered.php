@@ -11,6 +11,7 @@
 namespace Smarty\Internal\Compile\Private\Registered;
 
 use Smarty\Internal\Compile\Private\Block\PluginBlock;
+use Smarty\Internal\TemplateCompilerBase;
 
 /**
  * Smarty Internal Plugin Compile Registered Block Class
@@ -23,14 +24,14 @@ class BlockRegistered extends PluginBlock
     /**
      * Setup callback, parameter array and nocache mode
      *
-     * @param \Smarty\Internal\TemplateCompilerBase $compiler
+     * @param TemplateCompilerBase $compiler
      * @param array                                 $_attr attributes
      * @param string                                $tag
      * @param null                                  $function
      *
      * @return array
      */
-    public function setup(\Smarty\Internal\TemplateCompilerBase $compiler, $_attr, $tag, $function)
+    public function setup(TemplateCompilerBase $compiler, $_attr, $tag, $function)
     {
         if (isset($compiler->smarty->registered_plugins[ \Smarty::PLUGIN_BLOCK ][ $tag ])) {
             $tag_info = $compiler->smarty->registered_plugins[ \Smarty::PLUGIN_BLOCK ][ $tag ];

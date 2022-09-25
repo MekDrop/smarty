@@ -1,4 +1,7 @@
 <?php
+
+use Smarty\Exception\SmartyException;
+
 /**
  * Smarty PHPunit tests resource plugins
  *
@@ -143,7 +146,7 @@ if (MysqlResourceEnable == true) {
         *
         */
         public function testUnknownTemplate() {
-            $this->expectException('\Smarty\Exception\SmartyException');
+            $this->expectException(SmartyException::class);
             $this->expectExceptionMessage('Unable to load template \'mysqlstest:foo.tpl\'');
             $this->assertEquals('foo', $this->smarty->fetch('mysqlstest:foo.tpl'));
         }

@@ -10,13 +10,23 @@
 
 namespace Smarty\Internal\Compile;
 
+use Exception;
+use Smarty\Exception\SmartyCompilerException;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\CompileBase;
+use Smarty\Internal\SmartyTemplateCompiler;
+use Smarty\Internal\Template;
+use Smarty\Resource;
+use Smarty\Template\CompiledTemplate;
+use Smarty\Variable;
+
 /**
  * Smarty Internal Plugin Compile Include Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class IncludeCompile extends \Smarty\Internal\CompileBase
+class IncludeCompile extends CompileBase
 {
     /**
      * caching mode to create nocache code but no cache file
@@ -70,14 +80,14 @@ class IncludeCompile extends \Smarty\Internal\CompileBase
      * Compiles code for the {include} tag
      *
      * @param array                                  $args     array with attributes from parser
-     * @param \Smarty\Internal\SmartyTemplateCompiler $compiler compiler object
+     * @param SmartyTemplateCompiler $compiler compiler object
      *
      * @return string
-     * @throws \Exception
-     * @throws \Smarty\Exception\SmartyCompilerException
-     * @throws \Smarty\Exception\SmartyException
+     * @throws Exception
+     * @throws SmartyCompilerException
+     * @throws SmartyException
      */
-    public function compile($args, \Smarty\Internal\SmartyTemplateCompiler $compiler)
+    public function compile($args, SmartyTemplateCompiler $compiler)
     {
         $uid = $t_hash = null;
         // check and get attributes
@@ -89,7 +99,7 @@ class IncludeCompile extends \Smarty\Internal\CompileBase
         if (preg_match('/^([\'"])(([A-Za-z0-9_\-]{2,})[:])?(([^$()]+)|(.+))\1$/', $source_resource, $match)) {
             $type = !empty($match[ 3 ]) ? $match[ 3 ] : $compiler->template->smarty->default_resource_type;
             $name = !empty($match[ 5 ]) ? $match[ 5 ] : $match[ 6 ];
-            $handler = \Smarty\Resource::load($compiler->smarty, $type);
+            $handler = Resource::load($compiler->smarty, $type);
             if ($handler->recompiled || $handler->uncompiled) {
                 $variable_template = true;
             }
@@ -202,7 +212,7 @@ class IncludeCompile extends \Smarty\Internal\CompileBase
             // we must observe different compile_id and caching
             $t_hash = sha1($c_id . ($_caching ? '--caching' : '--nocaching'));
             $compiler->smarty->allow_ambiguous_resources = true;
-            /* @var \Smarty\Internal\Template $tpl */
+            /* @var Template $tpl */
             $tpl = new $compiler->smarty->template_class(
                 trim($fullResourceName, '"\''),
                 $compiler->smarty,
@@ -240,7 +250,7 @@ class IncludeCompile extends \Smarty\Internal\CompileBase
             }
             if (!empty($_attr) && $_caching === 9999 && $compiler->template->caching) {
                 $_vars_nc = "foreach ($_vars as \$ik => \$iv) {\n";
-                $_vars_nc .= "\$_smarty_tpl->tpl_vars[\$ik] =  new \Smarty\Variable(\$iv);\n";
+                $_vars_nc .= "\$_smarty_tpl->tpl_vars[\$ik] =  new \\".Variable::class."(\$iv);\n";
                 $_vars_nc .= "}\n";
                 $_output .= substr($compiler->processNocacheCode('<?php ' . $_vars_nc . "?>\n", true), 6, -3);
             }
@@ -282,17 +292,16 @@ class IncludeCompile extends \Smarty\Internal\CompileBase
     /**
      * Compile inline sub template
      *
-     * @param \\Smarty\Internal\SmartyTemplateCompiler $compiler
-     * @param \Smarty\Internal\Template               $tpl
-     * @param string                                  $t_hash
+     * @param SmartyTemplateCompiler $compiler
+     * @param Template $tpl
+     * @param string $t_hash
      *
      * @return bool
-     * @throws \Exception
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
     public function compileInlineTemplate(
-        \Smarty\Internal\SmartyTemplateCompiler $compiler,
-        \Smarty\Internal\Template $tpl,
+        SmartyTemplateCompiler $compiler,
+        Template $tpl,
         $t_hash
     ) {
         $uid = $tpl->source->type . $tpl->source->uid;
@@ -301,7 +310,7 @@ class IncludeCompile extends \Smarty\Internal\CompileBase
             if (isset($compiler->template->inheritance)) {
                 $tpl->inheritance = clone $compiler->template->inheritance;
             }
-            $tpl->compiled = new \Smarty\Template\CompiledTemplate();
+            $tpl->compiled = new CompiledTemplate();
             $tpl->compiled->nocache_hash = $compiler->parent_compiler->template->compiled->nocache_hash;
             $tpl->loadCompiler();
             // save unique function name
@@ -321,7 +330,7 @@ class IncludeCompile extends \Smarty\Internal\CompileBase
             // get compiled code
             $compiled_code = "<?php\n\n";
             $compiled_code .= $compiler->cStyleComment(" Start inline template \"{$sourceInfo}\" =============================") . "\n";
-            $compiled_code .= "function {$tpl->compiled->unifunc} (\Smarty\Internal\Template \$_smarty_tpl) {\n";
+            $compiled_code .= "function {$tpl->compiled->unifunc} (\\".Template::class." \$_smarty_tpl) {\n";
             $compiled_code .= "?>\n" . $tpl->compiler->compileTemplateSource($tpl, null, $compiler->parent_compiler);
             $compiled_code .= "<?php\n";
             $compiled_code .= "}\n?>\n";

@@ -1,4 +1,7 @@
 <?php
+
+use Smarty\Exception\SmartyException;
+
 /**
  * Smarty PHPunit tests of modifier
  *
@@ -45,7 +48,7 @@ class PluginFunctionFetchTest extends PHPUnit_Smarty
 */
   public function testFetchInvalidUri()
   {
-      $this->expectException('\Smarty\Exception\SmartyException');
+      $this->expectException(SmartyException::class);
       $this->expectExceptionMessage('{fetch} cannot read resource \'https://foo.smarty.net/foo.dat\'');
       $this->smarty->fetch('string:{fetch file="https://foo.smarty.net/foo.dat"}');
   }
@@ -58,7 +61,7 @@ class PluginFunctionFetchTest extends PHPUnit_Smarty
   */
   public function testFetchSecurity()
   {
-      $this->expectException('\Smarty\Exception\SmartyException');
+      $this->expectException(SmartyException::class);
       $this->expectExceptionMessage('not trusted file path');
       $this->cleanDirs();
       $dir=$this->smarty->getTemplateDir();
@@ -73,7 +76,7 @@ class PluginFunctionFetchTest extends PHPUnit_Smarty
   */
   public function testFetchSecurity2()
   {
-      $this->expectException('\Smarty\Exception\SmartyException');
+      $this->expectException(SmartyException::class);
       $this->expectExceptionMessage('not trusted file path');
       $this->cleanDirs();
       $this->smarty->getTemplateDir();

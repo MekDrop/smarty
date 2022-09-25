@@ -10,7 +10,11 @@
 /**
  * Load and register Smarty Autoloader
  */
-if (!class_exists('\Smarty\Autoloader')) {
+
+use Smarty\Autoloader;
+
+if (!class_exists('\\Smarty\\Autoloader')) {
     include dirname(__FILE__) . '/Autoloader.php';
 }
-\Smarty\Autoloader::register(true);
+
+Autoloader::register(true);

@@ -5,6 +5,9 @@
  * @package    Smarty
  * @subpackage PluginsModifierCompiler
  */
+
+use Smarty\Internal\TemplateCompilerBase;
+
 /**
  * Smarty unescape modifier plugin
  * Type:     modifier
@@ -14,11 +17,11 @@
  * @author Rodney Rehm
  *
  * @param array $params parameters
- * @param \Smarty\Internal\TemplateCompilerBase $compiler
+ * @param TemplateCompilerBase $compiler
  *
  * @return string with compiled code
  */
-function smarty_modifiercompiler_unescape($params, \Smarty\Internal\TemplateCompilerBase $compiler)
+function smarty_modifiercompiler_unescape($params, TemplateCompilerBase $compiler)
 {
     $compiler->template->_checkPlugins(
         array(

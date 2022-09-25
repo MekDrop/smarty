@@ -2,6 +2,10 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty\Internal\Data;
+use Smarty\Internal\Template;
+use Smarty\Variable;
+
 /**
  * Smarty Method AssignByRef
  *
@@ -16,18 +20,18 @@ class AssignByRefMethod
     /**
      * assigns values to template variables by reference
      *
-     * @param \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty $data
+     * @param Data|Template|\Smarty $data
      * @param string                                                  $tpl_var the template variable name
      * @param                                                         $value
      * @param boolean                                                 $nocache if true any output of this variable will
      *                                                                         be not cached
      *
-     * @return \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty
+     * @return Data|Template|\Smarty
      */
-    public function assignByRef(\Smarty\Internal\Data $data, $tpl_var, &$value, $nocache)
+    public function assignByRef(Data $data, $tpl_var, &$value, $nocache)
     {
         if ($tpl_var !== '') {
-            $data->tpl_vars[ $tpl_var ] = new \Smarty\Variable(null, $nocache);
+            $data->tpl_vars[ $tpl_var ] = new Variable(null, $nocache);
             $data->tpl_vars[ $tpl_var ]->value = &$value;
             if ($data->_isTplObj() && $data->scope) {
                 $data->ext->_updateScope->_updateScope($data, $tpl_var);

@@ -5,6 +5,10 @@
  * @package    Smarty
  * @subpackage PluginsFunction
  */
+
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+
 /**
  * Smarty {html_radios} function plugin
  * File:       function.html_radios.php
@@ -35,14 +39,14 @@
  * @author  credits to Monte Ohrt <monte at ohrt dot com>
  * @version 1.0
  *
- * @param array                    $params   parameters
- * @param \Smarty\Internal\Template $template template object
+ * @param array    $params   parameters
+ * @param Template $template template object
  *
  * @return string
  * @uses    smarty_function_escape_special_chars()
- * @throws \Smarty\Exception\SmartyException
+ * @throws SmartyException
  */
-function smarty_function_html_radios($params, \Smarty\Internal\Template $template)
+function smarty_function_html_radios($params, Template $template)
 {
     $template->_checkPlugins(
         array(

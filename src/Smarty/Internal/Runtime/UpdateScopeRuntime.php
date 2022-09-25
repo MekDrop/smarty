@@ -2,6 +2,9 @@
 
 namespace Smarty\Internal\Runtime;
 
+use Smarty;
+use Smarty\Internal\Template;
+
 /**
  * Runtime Extension updateScope
  *
@@ -14,11 +17,11 @@ class UpdateScopeRuntime
     /**
      * Update new assigned template or config variable in other effected scopes
      *
-     * @param \Smarty\Internal\Template $tpl      data object
+     * @param Template $tpl      data object
      * @param string|null              $varName  variable name
      * @param int                      $tagScope tag scope to which bubble up variable value
      */
-    public function _updateScope(\Smarty\Internal\Template $tpl, $varName, $tagScope = 0)
+    public function _updateScope(Template $tpl, $varName, $tagScope = 0)
     {
         if ($tagScope) {
             $this->_updateVarStack($tpl, $varName);
@@ -45,12 +48,12 @@ class UpdateScopeRuntime
     /**
      * Get array of objects which needs to be updated  by given scope value
      *
-     * @param \Smarty\Internal\Template $tpl
+     * @param Template $tpl
      * @param int                      $mergedScope merged tag and template scope to which bubble up variable value
      *
      * @return array
      */
-    public function _getAffectedScopes(\Smarty\Internal\Template $tpl, $mergedScope)
+    public function _getAffectedScopes(Template $tpl, $mergedScope)
     {
         $_stack = array();
         $ptr = $tpl->parent;
@@ -87,10 +90,10 @@ class UpdateScopeRuntime
      * Update variable in other scope
      *
      * @param array                     $tpl_vars template variable array
-     * @param \Smarty\Internal\Template $from
+     * @param Template $from
      * @param string                    $varName  variable name
      */
-    public function _updateVariableInOtherScope(&$tpl_vars, \Smarty\Internal\Template $from, $varName)
+    public function _updateVariableInOtherScope(&$tpl_vars, Template $from, $varName)
     {
         if (!isset($tpl_vars[ $varName ])) {
             $tpl_vars[ $varName ] = clone $from->tpl_vars[ $varName ];
@@ -103,10 +106,10 @@ class UpdateScopeRuntime
     /**
      * Update variable in template local variable stack
      *
-     * @param \Smarty\Internal\Template $tpl
+     * @param Template $tpl
      * @param string|null               $varName variable name or null for config variables
      */
-    public function _updateVarStack(\Smarty\Internal\Template $tpl, $varName)
+    public function _updateVarStack(Template $tpl, $varName)
     {
         $i = 0;
         while (isset($tpl->_cache[ 'varStack' ][ $i ])) {

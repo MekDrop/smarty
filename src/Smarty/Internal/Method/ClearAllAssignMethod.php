@@ -2,6 +2,9 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty\Internal\Data;
+use Smarty\Internal\Template;
+
 /**
  * Smarty Method ClearAllAssign
  *
@@ -23,14 +26,14 @@ class ClearAllAssignMethod
     /**
      * clear all the assigned template variables.
      *
+     * @param Data|Template|\Smarty $data
+     *
+     * @return Data|Template|\Smarty
+     *
      * @api  Smarty::clearAllAssign()
      * @link https://www.smarty.net/docs/en/api.clear.all.assign.tpl
-     *
-     * @param \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty $data
-     *
-     * @return \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty
      */
-    public function clearAllAssign(\Smarty\Internal\Data $data)
+    public function clearAllAssign(Data $data)
     {
         $data->tpl_vars = array();
         return $data;

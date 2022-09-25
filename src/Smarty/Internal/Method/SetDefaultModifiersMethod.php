@@ -2,6 +2,10 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+
 /**
  * Smarty Method SetDefaultModifiers
  *
@@ -23,15 +27,14 @@ class SetDefaultModifiersMethod
     /**
      * Set default modifiers
      *
+     * @param TemplateBase|Template|Smarty $obj
+     * @param array|string $modifiers modifier or list of modifiers to set
+     *
+     * @return Smarty|Template
+     *
      * @api Smarty::setDefaultModifiers()
-     *
-     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
-     * @param array|string                                                    $modifiers modifier or list of modifiers
-     *                                                                                   to set
-     *
-     * @return \Smarty|\Smarty\Internal\Template
      */
-    public function setDefaultModifiers(\Smarty\Internal\TemplateBase $obj, $modifiers)
+    public function setDefaultModifiers(TemplateBase $obj, $modifiers)
     {
         $smarty = $obj->_getSmartyObj();
         $smarty->default_modifiers = (array)$modifiers;

@@ -2,6 +2,9 @@
 
 namespace Smarty\Template\Resource;
 
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+
 /**
  * Smarty Template Resource Base Object
  *
@@ -93,19 +96,19 @@ abstract class BaseResource
     /**
      * Process resource
      *
-     * @param \Smarty\Internal\Template $_template template object
+     * @param Template $_template template object
      */
-    abstract public function process(\Smarty\Internal\Template $_template);
+    abstract public function process(Template $_template);
 
     /**
      * get rendered template content by calling compiled or cached template code
      *
-     * @param \Smarty\Internal\Template $_template
+     * @param Template $_template
      * @param string                    $unifunc function with template code
      *
      * @throws \Exception
      */
-    public function getRenderedTemplateCode(\Smarty\Internal\Template $_template, $unifunc = null)
+    public function getRenderedTemplateCode(Template $_template, $unifunc = null)
     {
         $smarty = &$_template->smarty;
         $_template->isRenderingCache = $this->isCache;
@@ -115,7 +118,7 @@ abstract class BaseResource
                 $unifunc = $this->unifunc;
             }
             if (empty($unifunc) || !function_exists($unifunc)) {
-                throw new \Smarty\Exception\SmartyException("Invalid compiled template for '{$_template->template_resource}'");
+                throw new SmartyException("Invalid compiled template for '{$_template->template_resource}'");
             }
             if ($_template->startRenderCallbacks) {
                 foreach ($_template->startRenderCallbacks as $callback) {

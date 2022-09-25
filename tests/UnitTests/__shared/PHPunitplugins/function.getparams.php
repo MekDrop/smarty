@@ -6,6 +6,8 @@
  * @subpackage PHPunitPlugin
  */
 
+use Smarty\Internal\Template;
+
 /**
  * Smarty {gatparams}
  *
@@ -14,7 +16,7 @@
  *
  * @return string
  */
-function smarty_function_getparams($params, \Smarty\Internal\Template $template)
+function smarty_function_getparams($params, Template $template)
 {
     return var_export($params, true);
 }

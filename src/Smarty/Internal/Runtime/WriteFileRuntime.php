@@ -9,6 +9,9 @@
 
 namespace Smarty\Internal\Runtime;
 
+use Smarty;
+use Smarty\Exception\SmartyException;
+
 /**
  * Smarty Internal Write File Class
  *
@@ -25,7 +28,7 @@ class WriteFileRuntime
      * @param Smarty $smarty    smarty instance
      *
      * @return boolean true
-     *@throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
     public function writeFile($_filepath, $_contents, Smarty $smarty)
     {
@@ -45,7 +48,7 @@ class WriteFileRuntime
                 clearstatcache();
                 if (++$i === 3) {
                     error_reporting($_error_reporting);
-                    throw new \Smarty\Exception\SmartyException("unable to create directory {$_dirpath}");
+                    throw new SmartyException("unable to create directory {$_dirpath}");
                 }
                 sleep(1);
             }
@@ -54,7 +57,7 @@ class WriteFileRuntime
         $_tmp_file = $_dirpath . DIRECTORY_SEPARATOR . str_replace(array('.', ','), '_', uniqid('wrt', true));
         if (!file_put_contents($_tmp_file, $_contents)) {
             error_reporting($_error_reporting);
-            throw new \Smarty\Exception\SmartyException("unable to write file {$_tmp_file}");
+            throw new SmartyException("unable to write file {$_tmp_file}");
         }
         /*
          * Windows' rename() fails if the destination exists,
@@ -84,7 +87,7 @@ class WriteFileRuntime
         }
         if (!$success) {
             error_reporting($_error_reporting);
-            throw new \Smarty\Exception\SmartyException("unable to write file {$_filepath}");
+            throw new SmartyException("unable to write file {$_filepath}");
         }
         // set file permissions
         chmod($_filepath, 0644);

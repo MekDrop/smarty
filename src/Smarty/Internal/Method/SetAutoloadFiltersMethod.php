@@ -2,6 +2,11 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+
 /**
  * Smarty Method SetAutoloadFilters
  *
@@ -30,7 +35,7 @@ class SetAutoloadFiltersMethod
     /**
      * Set autoload filters
      *
-     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
+     * @param TemplateBase|Template|Smarty $obj
      * @param array                                                           $filters filters to load automatically
      * @param string                                                          $type    "pre", "output", … specify
      *                                                                                 the filter type to set.
@@ -38,12 +43,12 @@ class SetAutoloadFiltersMethod
      *                                                                                 $filters' keys as the
      *                                                                                 appropriate types
      *
-     * @return \Smarty|\Smarty\Internal\Template
-     * @throws \Smarty\Exception\SmartyException
-     *@api Smarty::setAutoloadFilters()
+     * @return Smarty|Template
+     * @throws SmartyException
      *
+     * @api Smarty::setAutoloadFilters()
      */
-    public function setAutoloadFilters(\Smarty\Internal\TemplateBase $obj, $filters, $type = null)
+    public function setAutoloadFilters(TemplateBase $obj, $filters, $type = null)
     {
         $smarty = $obj->_getSmartyObj();
         if ($type !== null) {
@@ -63,12 +68,12 @@ class SetAutoloadFiltersMethod
      *
      * @param string $type
      *
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
     public function _checkFilterType($type)
     {
         if (!isset($this->filterTypes[ $type ])) {
-            throw new \Smarty\Exception\SmartyException("Illegal filter type '{$type}'");
+            throw new SmartyException("Illegal filter type '{$type}'");
         }
     }
 }

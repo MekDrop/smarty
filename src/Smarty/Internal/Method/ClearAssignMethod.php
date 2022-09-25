@@ -2,6 +2,9 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty\Internal\Data;
+use Smarty\Internal\Template;
+
 /**
  * Smarty Method ClearAssign
  *
@@ -23,15 +26,15 @@ class ClearAssignMethod
     /**
      * clear the given assigned template variable(s).
      *
-     * @api  Smarty::clearAssign()
-     * @link https://www.smarty.net/docs/en/api.clear.assign.tpl
-     *
-     * @param \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty $data
+     * @param Data|Template|\Smarty $data
      * @param string|array                                            $tpl_var the template variable(s) to clear
      *
-     * @return \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty
+     * @return Data|Template|\Smarty
+     *
+     * @link https://www.smarty.net/docs/en/api.clear.assign.tpl
+     * @api  Smarty::clearAssign()
      */
-    public function clearAssign(\Smarty\Internal\Data $data, $tpl_var)
+    public function clearAssign(Data $data, $tpl_var)
     {
         if (is_array($tpl_var)) {
             foreach ($tpl_var as $curr_var) {

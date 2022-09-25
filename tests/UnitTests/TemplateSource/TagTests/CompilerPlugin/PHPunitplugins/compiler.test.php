@@ -1,7 +1,9 @@
 <?php
 
 // compiler.test.php
-class smarty_compiler_test extends \Smarty\Internal\CompileBase
+use Smarty\Internal\CompileBase;
+
+class smarty_compiler_test extends CompileBase
 {
     public function compile($args, $compiler)
     {
@@ -16,7 +18,7 @@ class smarty_compiler_test extends \Smarty\Internal\CompileBase
 }
 
 // compiler.testclose.php
-class smarty_compiler_testclose extends \Smarty\Internal\CompileBase
+class smarty_compiler_testclose extends CompileBase
 {
     public function compile($args, $compiler)
     {

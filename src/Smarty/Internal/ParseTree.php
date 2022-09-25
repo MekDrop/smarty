@@ -35,11 +35,11 @@ abstract class ParseTree
     /**
      * Return buffer
      *
-     * @param \Smarty\Internal\Templateparser $parser
+     * @param Templateparser $parser
      *
      * @return string buffer content
      */
-    abstract public function to_smarty_php(\Smarty\Internal\Templateparser $parser);
+    abstract public function to_smarty_php(Templateparser $parser);
 
     /**
      * Template data object destructor

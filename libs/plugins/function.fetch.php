@@ -5,6 +5,10 @@
  * @package    Smarty
  * @subpackage PluginsFunction
  */
+
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+
 /**
  * Smarty {fetch} plugin
  * Type:     function
@@ -16,9 +20,9 @@
  * @author Monte Ohrt <monte at ohrt dot com>
  *
  * @param array                    $params   parameters
- * @param \Smarty\Internal\Template $template template object
+ * @param Template $template template object
  *
- * @throws \Smarty\Exception\SmartyException
+ * @throws SmartyException
  * @return string|null if the assign parameter is passed, Smarty assigns the result to a template variable
  */
 function smarty_function_fetch($params, $template)
@@ -193,7 +197,7 @@ function smarty_function_fetch($params, $template)
     } else {
         $content = @file_get_contents($params[ 'file' ]);
         if ($content === false) {
-            throw new \Smarty\Exception\SmartyException("{fetch} cannot read resource '" . $params[ 'file' ] . "'");
+            throw new SmartyException("{fetch} cannot read resource '" . $params[ 'file' ] . "'");
         }
     }
     if (!empty($params[ 'assign' ])) {

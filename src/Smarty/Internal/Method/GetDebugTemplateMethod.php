@@ -2,6 +2,10 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+
 /**
  * Smarty Method GetDebugTemplate
  *
@@ -23,13 +27,13 @@ class GetDebugTemplateMethod
     /**
      * return name of debugging template
      *
-     * @api Smarty::getDebugTemplate()
-     *
-     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
+     * @param TemplateBase|Template|Smarty $obj
      *
      * @return string
+     *
+     * @api Smarty::getDebugTemplate()
      */
-    public function getDebugTemplate(\Smarty\Internal\TemplateBase $obj)
+    public function getDebugTemplate(TemplateBase $obj)
     {
         $smarty = $obj->_getSmartyObj();
         return $smarty->debug_tpl;

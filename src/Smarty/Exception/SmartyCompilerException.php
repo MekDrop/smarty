@@ -6,7 +6,7 @@ namespace Smarty\Exception;
  *
  * @package Smarty
  */
-class SmartyCompilerException extends \Smarty\Exception\SmartyException
+class SmartyCompilerException extends SmartyException
 {
     /**
      * @return string

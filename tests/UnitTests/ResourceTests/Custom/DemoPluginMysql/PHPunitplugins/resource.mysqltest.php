@@ -1,4 +1,7 @@
 <?php
+
+use Smarty\Exception\SmartyException;
+
 require_once SMARTY_DIR . '../demo/plugins/resource.mysql.php';
 
 class Smarty_Resource_Mysqltest extends Smarty_Resource_Mysql
@@ -10,7 +13,7 @@ class Smarty_Resource_Mysqltest extends Smarty_Resource_Mysql
         }
         catch
             (PDOException $e) {
-                throw new \Smarty\Exception\SmartyException('Mysql Resource failed: ' . $e->getMessage());
+                throw new SmartyException('Mysql Resource failed: ' . $e->getMessage());
             }
         $this->fetch = $this->db->prepare('SELECT modified, source FROM templates WHERE name = :name');
         $this->mtime = $this->db->prepare('SELECT modified FROM templates WHERE name = :name');

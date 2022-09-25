@@ -5,6 +5,10 @@
  * @package    Smarty
  * @subpackage PluginsFunction
  */
+
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+
 /**
  * Smarty {html_select_date} plugin
  * Type:     function
@@ -37,12 +41,12 @@
  *
  * @param array                     $params parameters
  *
- * @param \Smarty\Internal\Template $template
+ * @param Template $template
  *
  * @return string
- * @throws \Smarty\Exception\SmartyException
+ * @throws SmartyException
  */
-function smarty_function_html_select_date($params, \Smarty\Internal\Template $template)
+function smarty_function_html_select_date($params, Template $template)
 {
     $template->_checkPlugins(
         array(

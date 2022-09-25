@@ -2,6 +2,9 @@
 
 namespace Smarty\Internal\ParseTree;
 
+use Smarty\Internal\ParseTree;
+use Smarty\Internal\Templateparser;
+
 /**
  * Smarty Internal Plugin Templateparser Parse Tree
  * These are classes to build parse tree in the template parser
@@ -16,7 +19,7 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class TextParseTree extends \Smarty\Internal\ParseTree
+class TextParseTree extends ParseTree
 {
 
     /**
@@ -48,11 +51,11 @@ class TextParseTree extends \Smarty\Internal\ParseTree
     /**
      * Return buffer content
      *
-     * @param \Smarty\Internal\Templateparser $parser
+     * @param Templateparser $parser
      *
      * @return string text
      */
-    public function to_smarty_php(\Smarty\Internal\Templateparser $parser)
+    public function to_smarty_php(Templateparser $parser)
     {
         return $this->data;
     }

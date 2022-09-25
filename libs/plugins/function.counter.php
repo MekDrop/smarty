@@ -5,6 +5,9 @@
  * @package    Smarty
  * @subpackage PluginsFunction
  */
+
+use Smarty\Internal\Template;
+
 /**
  * Smarty {counter} function plugin
  * Type:     function
@@ -16,7 +19,7 @@
  *         (Smarty online manual)
  *
  * @param array                    $params   parameters
- * @param \Smarty\Internal\Template $template template object
+ * @param Template $template template object
  *
  * @return string|null
  */

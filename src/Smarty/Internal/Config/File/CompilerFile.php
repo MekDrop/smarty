@@ -11,6 +11,13 @@
 
 namespace Smarty\Internal\Config\File;
 
+use Smarty;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\ConfigFileLexer;
+use Smarty\Internal\ConfigFileParser;
+use Smarty\Internal\Debug;
+use Smarty\Internal\Template;
+
 /**
  * Main config file compiler class
  *
@@ -57,7 +64,7 @@ class CompilerFile
     /**
      * Smarty object
      *
-     * @var \Smarty\Internal\Template object
+     * @var Template object
      */
     public $template;
 
@@ -96,12 +103,12 @@ class CompilerFile
     /**
      * Method to compile Smarty config source.
      *
-     * @param \Smarty\Internal\Template $template
+     * @param Template $template
      *
      * @return bool true if compiling succeeded, false if it failed
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
-    public function compileTemplate(\Smarty\Internal\Template $template)
+    public function compileTemplate(Template $template)
     {
         $this->template = $template;
         $this->template->compiled->file_dependency[ $this->template->source->uid ] =
@@ -112,12 +119,12 @@ class CompilerFile
             );
         if ($this->smarty->debugging) {
             if (!isset($this->smarty->_debug)) {
-                $this->smarty->_debug = new \Smarty\Internal\Debug();
+                $this->smarty->_debug = new Debug();
             }
             $this->smarty->_debug->start_compile($this->template);
         }
         // init the lexer/parser to compile the config file
-        /* @var \Smarty\Internal\ConfigFileLexer $this->lex */
+        /* @var ConfigFileLexer $this->lex */
         $this->lex = new $this->lexer_class(
             str_replace(
                 array(
@@ -129,7 +136,7 @@ class CompilerFile
             ) . "\n",
             $this
         );
-        /* @var \Smarty\Internal\ConfigFileParser $this->parser */
+        /* @var ConfigFileParser $this->parser */
         $this->parser = new $this->parser_class($this->lex, $this);
         if (function_exists('mb_internal_encoding')
             && function_exists('ini_get')

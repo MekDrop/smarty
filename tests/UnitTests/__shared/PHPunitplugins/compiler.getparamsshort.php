@@ -6,6 +6,8 @@
  * @subpackage PHPunitPlugin
  */
 
+use Smarty\Internal\CompileBase;
+
 /**
  * Smarty {getparams}
  *
@@ -14,7 +16,7 @@
  *
  * @return string
  */
-class smarty_compiler_getparamsshort extends \Smarty\Internal\CompileBase
+class smarty_compiler_getparamsshort extends CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

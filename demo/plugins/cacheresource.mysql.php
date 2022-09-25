@@ -1,5 +1,8 @@
 <?php
 
+use Smarty\CacheResource\CustomCacheResource;
+use Smarty\Exception\SmartyException;
+
 /**
  * MySQL CacheResource
  * CacheResource Implementation based on the Custom API to use
@@ -22,39 +25,39 @@
  * @package CacheResource-examples
  * @author  Rodney Rehm
  */
-class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom
+class Smarty_CacheResource_Mysql extends CustomCacheResource
 {
     /**
-     * @var \PDO
+     * @var PDO
      */
     protected $db;
 
     /**
-     * @var \PDOStatement
+     * @var PDOStatement
      */
     protected $fetch;
 
     /**
-     * @var \PDOStatement
+     * @var PDOStatement
      */
     protected $fetchTimestamp;
 
     /**
-     * @var \PDOStatement
+     * @var PDOStatement
      */
     protected $save;
 
     /**
      * Smarty_CacheResource_Mysql constructor.
      *
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      */
     public function __construct()
     {
         try {
             $this->db = new PDO("mysql:dbname=test;host=127.0.0.1", "smarty");
         } catch (PDOException $e) {
-            throw new \Smarty\Exception\SmartyException('Mysql Resource failed: ' . $e->getMessage());
+            throw new SmartyException('Mysql Resource failed: ' . $e->getMessage());
         }
         $this->fetch = $this->db->prepare('SELECT modified, content FROM output_cache WHERE id = :id');
         $this->fetchTimestamp = $this->db->prepare('SELECT modified FROM output_cache WHERE id = :id');

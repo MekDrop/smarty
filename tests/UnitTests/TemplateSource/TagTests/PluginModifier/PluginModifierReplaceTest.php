@@ -2,6 +2,8 @@
 
 namespace UnitTests\TemplateSource\TagTests\PluginModifier;
 
+use Smarty\Exception\SmartyException;
+
 /**
  * class for modifier tests
  *
@@ -18,7 +20,7 @@ class PluginModifierReplaceTest extends \PHPUnit_Smarty
 
     /**
      * @return void
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
      *
      * @dataProvider replaceDataProvider
      */

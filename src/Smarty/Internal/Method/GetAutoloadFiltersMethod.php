@@ -2,6 +2,11 @@
 
 namespace Smarty\Internal\Method;
 
+use Smarty;
+use Smarty\Exception\SmartyException;
+use Smarty\Internal\Template;
+use Smarty\Internal\TemplateBase;
+
 /**
  * Smarty Method GetAutoloadFilters
  *
@@ -11,23 +16,23 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class GetAutoloadFiltersMethod extends \Smarty\Internal\Method\SetAutoloadFilters
+class GetAutoloadFiltersMethod extends SetAutoloadFiltersMethod
 {
     /**
      * Get autoload filters
      *
-     * @api Smarty::getAutoloadFilters()
-     *
-     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
-     * @param string                                                          $type type of filter to get auto loads
+     * @param TemplateBase|Template|Smarty $obj
+     * @param string $type type of filter to get auto loads
      *                                                                              for. Defaults to all autoload
      *                                                                              filters
      *
      * @return array array( 'type1' => array( 'filter1', 'filter2', … ) ) or array( 'filter1', 'filter2', …) if $type
      *                was specified
-     * @throws \Smarty\Exception\SmartyException
+     * @throws SmartyException
+     *
+     * @api Smarty::getAutoloadFilters()
      */
-    public function getAutoloadFilters(\Smarty\Internal\TemplateBase $obj, $type = null)
+    public function getAutoloadFilters(TemplateBase $obj, $type = null)
     {
         $smarty = $obj->_getSmartyObj();
         if ($type !== null) {
