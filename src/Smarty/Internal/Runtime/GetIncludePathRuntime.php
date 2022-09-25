@@ -15,7 +15,7 @@ namespace Smarty\Internal\Runtime;
  * @package    Smarty
  * @subpackage PluginsInternal
  */
-class GetIncludePath
+class GetIncludePathRuntime
 {
     /**
      * include path cache

@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class RegisterDefaultPluginHandler
+class RegisterDefaultPluginHandlerMethod
 {
     /**
      * Valid for Smarty and template object

@@ -15,7 +15,7 @@ namespace Smarty\Internal\Runtime;
  * @package    Smarty
  * @subpackage PluginsInternal
  */
-class CacheResourceFile
+class CacheResourceFileRuntime
 {
     /**
      * Empty cache for a specific template

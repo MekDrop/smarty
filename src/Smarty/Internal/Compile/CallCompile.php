@@ -16,7 +16,7 @@ namespace Smarty\Internal\Call;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Call extends Smarty_Internal_CompileBase
+class CallCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

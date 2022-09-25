@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Insert extends Smarty_Internal_CompileBase
+class InsertCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

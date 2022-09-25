@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Assign extends Smarty_Internal_CompileBase
+class AssignCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

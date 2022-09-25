@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class ClearAllAssign
+class ClearAllAssignMethod
 {
     /**
      * Valid for all objects

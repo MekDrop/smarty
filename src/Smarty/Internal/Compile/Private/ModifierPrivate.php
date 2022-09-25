@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile\Private;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Modifier extends Smarty_Internal_CompileBase
+class ModifierPrivate extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for modifier execution

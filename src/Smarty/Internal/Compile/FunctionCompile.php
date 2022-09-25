@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Function extends Smarty_Internal_CompileBase
+class FunctionCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -85,7 +85,7 @@ class Function extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase
+class FunctioncloseCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiler object

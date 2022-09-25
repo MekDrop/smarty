@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Extends extends Smarty_Internal_Compile_Shared_Inheritance
+class ExtendsCompile extends Smarty_Internal_Compile_Shared_Inheritance
 {
     /**
      * Attribute definition: Overwrites base class.

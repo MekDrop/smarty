@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class GetTemplateVars
+class GetTemplateVarsMethod
 {
     /**
      * Valid for all objects

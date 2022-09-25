@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class GetDefaultModifiers
+class GetDefaultModifiersMethod
 {
     /**
      * Valid for Smarty and template object

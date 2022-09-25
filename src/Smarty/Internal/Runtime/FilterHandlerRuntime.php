@@ -16,7 +16,7 @@ namespace Smarty\Internal\Runtime;
  * @package    Smarty
  * @subpackage PluginsInternal
  */
-class FilterHandler
+class FilterHandlerRuntime
 {
     /**
      * Run filters over content

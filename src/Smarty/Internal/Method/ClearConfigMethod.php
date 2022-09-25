@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class ClearConfig
+class ClearConfigMethod
 {
     /**
      * Valid for all objects

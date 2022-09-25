@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class GetGlobal
+class GetGlobalMethod
 {
     /**
      * Valid for all objects

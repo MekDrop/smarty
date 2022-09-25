@@ -15,7 +15,7 @@ namespace Smarty\CacheResource;
  * @subpackage Cacher
  * @author     Rodney Rehm
  */
-abstract class Custom extends Smarty_CacheResource
+abstract class CustomCacheResource extends Smarty_CacheResource
 {
     /**
      * fetch cached content and its modification time from data source

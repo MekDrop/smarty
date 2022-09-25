@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class ConfigLoad
+class ConfigLoadMethod
 {
     /**
      * Valid for all objects

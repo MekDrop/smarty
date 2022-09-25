@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile\Private;
  * @package    Smarty
  * @subpackage Compiler
  */
-class ForeachSection extends Smarty_Internal_CompileBase
+class ForeachSectionPrivate extends Smarty_Internal_CompileBase
 {
     /**
      * Name of this tag

@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile\Make;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Nocache extends Smarty_Internal_CompileBase
+class NocacheMake extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

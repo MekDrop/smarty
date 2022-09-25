@@ -18,7 +18,7 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class DqContent extends Smarty_Internal_ParseTree
+class DqContentParseTree extends Smarty_Internal_ParseTree
 {
     /**
      * Create parse tree buffer with string content

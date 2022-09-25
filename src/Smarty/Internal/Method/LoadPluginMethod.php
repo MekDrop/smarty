@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class LoadPlugin
+class LoadPluginMethod
 {
     /**
      * Cache of searched plugin files

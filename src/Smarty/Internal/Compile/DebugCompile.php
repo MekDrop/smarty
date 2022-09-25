@@ -17,7 +17,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Debug extends Smarty_Internal_CompileBase
+class DebugCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {debug} tag

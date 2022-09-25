@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile\Private\Registered;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Block extends Smarty_Internal_Compile_Private_Block_Plugin
+class BlockRegistered extends Smarty_Internal_Compile_Private_Block_Plugin
 {
     /**
      * Setup callback, parameter array and nocache mode

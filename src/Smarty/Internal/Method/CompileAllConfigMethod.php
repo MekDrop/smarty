@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class CompileAllConfig extends Smarty_Internal_Method_CompileAllTemplates
+class CompileAllConfigMethod extends Smarty_Internal_Method_CompileAllTemplates
 {
     /**
      * Compile all config files

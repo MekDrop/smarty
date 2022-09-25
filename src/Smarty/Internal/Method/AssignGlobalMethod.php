@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class AssignGlobal
+class AssignGlobalMethod
 {
     /**
      * Valid for all objects

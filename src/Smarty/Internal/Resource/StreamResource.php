@@ -19,7 +19,7 @@ namespace Smarty\Internal\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class Stream extends Smarty_Resource_Recompiled
+class StreamResource extends Smarty_Resource_Recompiled
 {
     /**
      * populate Source Object with meta data from Resource

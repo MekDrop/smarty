@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Section extends Smarty_Internal_Compile_Private_ForeachSection
+class SectionCompile extends Smarty_Internal_Compile_Private_ForeachSection
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -407,7 +407,7 @@ class Section extends Smarty_Internal_Compile_Private_ForeachSection
  * @package    Smarty
  * @subpackage Compiler
  */
-class Sectionelse extends Smarty_Internal_CompileBase
+class SectionelseCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {sectionelse} tag
@@ -433,7 +433,7 @@ class Sectionelse extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Sectionclose extends Smarty_Internal_CompileBase
+class SectioncloseCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {/section} tag

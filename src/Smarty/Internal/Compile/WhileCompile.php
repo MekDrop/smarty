@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class While extends Smarty_Internal_CompileBase
+class WhileCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {while} tag
@@ -79,7 +79,7 @@ class While extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Whileclose extends Smarty_Internal_CompileBase
+class WhilecloseCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {/while} tag

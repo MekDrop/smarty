@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Nocache extends Smarty_Internal_CompileBase
+class NocacheCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Array of names of valid option flags

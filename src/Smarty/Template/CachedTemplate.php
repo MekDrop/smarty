@@ -16,7 +16,7 @@ namespace Smarty\Template;
  * @subpackage TemplateResources
  * @author     Rodney Rehm
  */
-class Cached extends Smarty_Template_Resource_Base
+class CachedTemplate extends Smarty_Template_Resource_Base
 {
     /**
      * Cache Is Valid

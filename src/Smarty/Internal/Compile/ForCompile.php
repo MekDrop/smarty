@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class For extends Smarty_Internal_CompileBase
+class ForCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {for} tag
@@ -108,7 +108,7 @@ class For extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase
+class ForelseCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {forelse} tag
@@ -135,7 +135,7 @@ class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Forclose extends Smarty_Internal_CompileBase
+class ForcloseCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {/for} tag

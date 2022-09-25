@@ -10,7 +10,7 @@ namespace Smarty\Template;
  * @subpackage TemplateResources
  * @author     Rodney Rehm
  */
-class Source
+class SourceTemplate
 {
     /**
      * Unique Template ID

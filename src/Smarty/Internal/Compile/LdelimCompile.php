@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Ldelim extends Smarty_Internal_CompileBase
+class LdelimCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {ldelim} tag

@@ -18,7 +18,7 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class Code extends Smarty_Internal_ParseTree
+class CodeParseTree extends Smarty_Internal_ParseTree
 {
     /**
      * Create parse tree buffer for code fragment

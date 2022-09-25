@@ -9,7 +9,7 @@ namespace Smarty\Internal\Runtime\Make;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Nocache
+class NocacheMake
 {
     /**
      * Save current variable value while rendering compiled template and inject nocache code to

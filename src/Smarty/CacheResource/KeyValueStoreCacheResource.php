@@ -30,7 +30,7 @@ namespace Smarty\CacheResource;
  * @subpackage Cacher
  * @author     Rodney Rehm
  */
-abstract class KeyValueStore extends Smarty_CacheResource
+abstract class KeyValueStoreCacheResource extends Smarty_CacheResource
 {
     /**
      * cache for contents

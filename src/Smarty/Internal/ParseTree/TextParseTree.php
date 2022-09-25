@@ -16,7 +16,7 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class Text extends Smarty_Internal_ParseTree
+class TextParseTree extends Smarty_Internal_ParseTree
 {
 
     /**

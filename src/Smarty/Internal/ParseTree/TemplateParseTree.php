@@ -18,7 +18,7 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class Template extends Smarty_Internal_ParseTree
+class TemplateParseTree extends Smarty_Internal_ParseTree
 {
     /**
      * Array of template elements

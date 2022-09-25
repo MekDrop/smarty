@@ -17,7 +17,7 @@ namespace Smarty\Internal\Config\File;
  * @package    Smarty
  * @subpackage Config
  */
-class Compiler
+class CompilerFile
 {
     /**
      * Lexer class name

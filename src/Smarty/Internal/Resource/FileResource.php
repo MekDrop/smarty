@@ -17,7 +17,7 @@ namespace Smarty\Internal\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class File extends Smarty_Resource
+class FileResource extends Smarty_Resource
 {
     /**
      * populate Source Object with meta data from Resource

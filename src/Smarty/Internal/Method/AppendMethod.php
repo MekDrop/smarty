@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Append
+class AppendMethod
 {
     /**
      * Valid for all objects

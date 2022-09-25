@@ -11,7 +11,7 @@ namespace Smarty\Template;
  * @author     Rodney Rehm
  * @property   string $content compiled content
  */
-class Compiled extends Smarty_Template_Resource_Base
+class CompiledTemplate extends Smarty_Template_Resource_Base
 {
     /**
      * nocache hash

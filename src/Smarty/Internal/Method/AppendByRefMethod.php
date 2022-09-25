@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class AppendByRef
+class AppendByRefMethod
 {
     /**
      * appends values to template variables by reference

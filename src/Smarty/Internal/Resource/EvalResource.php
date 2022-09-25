@@ -18,7 +18,7 @@ namespace Smarty\Internal\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class Eval extends Smarty_Resource_Recompiled
+class EvalResource extends Smarty_Resource_Recompiled
 {
     /**
      * populate Source Object with meta data from Resource

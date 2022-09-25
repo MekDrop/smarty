@@ -16,7 +16,7 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class Dq extends Smarty_Internal_ParseTree
+class DqParseTree extends Smarty_Internal_ParseTree
 {
     /**
      * Create parse tree buffer for double quoted string subtrees

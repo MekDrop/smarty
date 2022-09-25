@@ -14,7 +14,7 @@ namespace Smarty\Internal\Runtime;
  * Class Smarty_Internal_Extension_CodeFrame
  * Create code frame for compiled and cached templates
  */
-class CodeFrame
+class CodeFrameRuntime
 {
     /**
      * Create code frame for compiled and cached templates

@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Foreach extends Smarty_Internal_Compile_Private_ForeachSection
+class ForeachCompile extends Smarty_Internal_Compile_Private_ForeachSection
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -279,7 +279,7 @@ class Foreach extends Smarty_Internal_Compile_Private_ForeachSection
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase
+class ForeachelseCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {foreachelse} tag
@@ -310,7 +310,7 @@ class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Foreachclose extends Smarty_Internal_CompileBase
+class ForeachcloseCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {/foreach} tag

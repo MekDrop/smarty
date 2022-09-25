@@ -9,7 +9,7 @@ namespace Smarty\Internal\Runtime;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  **/
-class UpdateScope
+class UpdateScopeRuntime
 {
     /**
      * Update new assigned template or config variable in other effected scopes

@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile\Config;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Load extends Smarty_Internal_CompileBase
+class LoadConfig extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

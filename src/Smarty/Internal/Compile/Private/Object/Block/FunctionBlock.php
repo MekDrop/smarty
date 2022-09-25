@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile\Private\Object\Block;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Function extends Smarty_Internal_Compile_Private_Block_Plugin
+class FunctionBlock extends Smarty_Internal_Compile_Private_Block_Plugin
 {
     /**
      * Setup callback and parameter array

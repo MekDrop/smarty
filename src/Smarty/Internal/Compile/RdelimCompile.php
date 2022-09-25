@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Rdelim extends Smarty_Internal_Compile_Ldelim
+class RdelimCompile extends Smarty_Internal_Compile_Ldelim
 {
     /**
      * Compiles code for the {rdelim} tag

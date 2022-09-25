@@ -15,7 +15,7 @@ namespace Smarty\Internal\Runtime;
  * @package    Smarty
  * @subpackage PluginsInternal
  */
-class WriteFile
+class WriteFileRuntime
 {
     /**
      * Writes file in a safe way to disk

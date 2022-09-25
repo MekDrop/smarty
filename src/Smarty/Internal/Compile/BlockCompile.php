@@ -15,7 +15,7 @@ namespace Smarty\Internal\Compile;
  *
  * @author Uwe Tews <uwe.tews@googlemail.com>
  */
-class Block extends Smarty_Internal_Compile_Shared_Inheritance
+class BlockCompile extends Smarty_Internal_Compile_Shared_Inheritance
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -96,7 +96,7 @@ class Block extends Smarty_Internal_Compile_Shared_Inheritance
 /**
  * Smarty Internal Plugin Compile BlockClose Class
  */
-class Blockclose extends Smarty_Internal_Compile_Shared_Inheritance
+class BlockcloseCompile extends Smarty_Internal_Compile_Shared_Inheritance
 {
     /**
      * Compiles code for the {/block} tag

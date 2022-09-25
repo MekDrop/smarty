@@ -1,6 +1,6 @@
 <?php
 
-namespace Smarty\Undefined\Variable;
+namespace Smarty\Undefined;
 
 /**
  * class for undefined variable object
@@ -9,7 +9,7 @@ namespace Smarty\Undefined\Variable;
  * @package    Smarty
  * @subpackage Template
  */
-class Variable extends Smarty_Variable
+class VariableUndefined extends Smarty_Variable
 {
     /**
      * Returns null for not existing properties

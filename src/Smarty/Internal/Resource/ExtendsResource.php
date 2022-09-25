@@ -17,7 +17,7 @@ namespace Smarty\Internal\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class Extends extends Smarty_Resource
+class ExtendsResource extends Smarty_Resource
 {
     /**
      * mbstring.overload flag

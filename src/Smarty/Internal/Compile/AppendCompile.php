@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Append extends Smarty_Internal_Compile_Assign
+class AppendCompile extends Smarty_Internal_Compile_Assign
 {
     /**
      * Compiles code for the {append} tag

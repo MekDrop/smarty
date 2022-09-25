@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class UnloadFilter extends Smarty_Internal_Method_LoadFilter
+class UnloadFilterMethod extends Smarty_Internal_Method_LoadFilter
 {
     /**
      * load a filter of specified type and name

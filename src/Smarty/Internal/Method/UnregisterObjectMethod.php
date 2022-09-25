@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class UnregisterObject
+class UnregisterObjectMethod
 {
     /**
      * Valid for Smarty and template object

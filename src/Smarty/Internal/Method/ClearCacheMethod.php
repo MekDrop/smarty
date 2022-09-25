@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class ClearCache
+class ClearCacheMethod
 {
     /**
      * Valid for Smarty object

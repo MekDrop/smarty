@@ -38,7 +38,7 @@ namespace Smarty\Internal\Extension;
  * @property   Smarty_Internal_Method_RegisterPlugin     $registerPlugin
  * @property   mixed|\Smarty_Template_Cached             configLoad
  */
-class Handler
+class HandlerExtension
 {
     public $objType = null;
 

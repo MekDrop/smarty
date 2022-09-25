@@ -11,7 +11,7 @@ namespace Smarty\Internal\Resource;
  * @author     Uwe Tews
  * @author     Rodney Rehm
  */
-class Php extends Smarty_Internal_Resource_File
+class PhpResource extends Smarty_Internal_Resource_File
 {
     /**
      * Flag that it's an uncompiled resource

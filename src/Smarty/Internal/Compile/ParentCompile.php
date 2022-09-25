@@ -15,7 +15,7 @@ namespace Smarty\Internal\Compile;
  *
  * @author Uwe Tews <uwe.tews@googlemail.com>
  */
-class Parent extends Smarty_Internal_Compile_Child
+class ParentCompile extends Smarty_Internal_Compile_Child
 {
     /**
      * Tag name

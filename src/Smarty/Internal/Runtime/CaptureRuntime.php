@@ -9,7 +9,7 @@ namespace Smarty\Internal\Runtime;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Capture
+class CaptureRuntime
 {
     /**
      * Flag that this instance  will not be cached

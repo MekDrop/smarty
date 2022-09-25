@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class SetDefaultModifiers
+class SetDefaultModifiersMethod
 {
     /**
      * Valid for Smarty and template object

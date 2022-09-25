@@ -9,7 +9,7 @@ namespace Smarty\Internal\Runtime;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  **/
-class TplFunction
+class TplFunctionRuntime
 {
     /**
      * Call template function

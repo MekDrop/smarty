@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class UnregisterFilter extends Smarty_Internal_Method_RegisterFilter
+class UnregisterFilterMethod extends Smarty_Internal_Method_RegisterFilter
 {
     /**
      * Unregisters a filter function

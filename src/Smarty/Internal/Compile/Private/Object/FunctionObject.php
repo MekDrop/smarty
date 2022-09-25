@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile\Private\Object;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Function extends Smarty_Internal_CompileBase
+class FunctionObject extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

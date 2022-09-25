@@ -16,7 +16,7 @@ namespace Smarty\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-abstract class Recompiled extends Smarty_Resource
+abstract class RecompiledResource extends Smarty_Resource
 {
     /**
      * Flag that it's an recompiled resource

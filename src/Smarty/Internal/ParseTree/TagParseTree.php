@@ -18,7 +18,7 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class Tag extends Smarty_Internal_ParseTree
+class TagParseTree extends Smarty_Internal_ParseTree
 {
     /**
      * Saved block nesting level

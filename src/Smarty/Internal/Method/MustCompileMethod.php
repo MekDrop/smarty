@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class MustCompile
+class MustCompileMethod
 {
     /**
      * Valid for template object

@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile\Private\Print;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Expression extends Smarty_Internal_CompileBase
+class ExpressionPrint extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

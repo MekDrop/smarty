@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Include extends Smarty_Internal_CompileBase
+class IncludeCompile extends Smarty_Internal_CompileBase
 {
     /**
      * caching mode to create nocache code but no cache file

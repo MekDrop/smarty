@@ -18,7 +18,7 @@ namespace Smarty\Internal\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class String extends Smarty_Resource
+class StringResource extends Smarty_Resource
 {
     /**
      * populate Source Object with meta data from Resource

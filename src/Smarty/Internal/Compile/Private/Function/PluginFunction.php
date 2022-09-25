@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile\Private\Function;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Plugin extends Smarty_Internal_CompileBase
+class PluginFunction extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class RegisterFilter
+class RegisterFilterMethod
 {
     /**
      * Valid for Smarty and template object

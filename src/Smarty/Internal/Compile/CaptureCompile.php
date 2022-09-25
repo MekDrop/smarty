@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Capture extends Smarty_Internal_CompileBase
+class CaptureCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -82,7 +82,7 @@ class Capture extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class CaptureClose extends Smarty_Internal_CompileBase
+class CaptureCloseCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {/capture} tag

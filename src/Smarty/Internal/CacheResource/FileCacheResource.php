@@ -17,7 +17,7 @@ namespace Smarty\Internal\CacheResource;
  * @package    Smarty
  * @subpackage Cacher
  */
-class File extends Smarty_CacheResource
+class FileCacheResource extends Smarty_CacheResource
 {
     /**
      * populate Cached Object with meta data from Resource

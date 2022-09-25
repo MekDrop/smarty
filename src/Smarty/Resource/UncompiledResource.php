@@ -16,7 +16,7 @@ namespace Smarty\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-abstract class Uncompiled extends Smarty_Resource
+abstract class UncompiledResource extends Smarty_Resource
 {
     /**
      * Flag that it's an uncompiled resource

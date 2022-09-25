@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile\Private\Special;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Variable extends Smarty_Internal_CompileBase
+class VariableSpecial extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the special $smarty variables

@@ -9,7 +9,7 @@ namespace Smarty\Internal\Runtime;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  **/
-class Inheritance
+class InheritanceRuntime
 {
     /**
      * State machine

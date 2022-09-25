@@ -15,7 +15,7 @@ namespace Smarty\Internal\Compile;
  *
  * @author Uwe Tews <uwe.tews@googlemail.com>
  */
-class Child extends Smarty_Internal_CompileBase
+class ChildCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

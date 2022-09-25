@@ -16,7 +16,7 @@ namespace Smarty\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-abstract class Custom extends Smarty_Resource
+abstract class CustomResource extends Smarty_Resource
 {
     /**
      * fetch template and its modification time from data source

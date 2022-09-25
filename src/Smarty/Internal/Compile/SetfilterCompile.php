@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Setfilter extends Smarty_Internal_CompileBase
+class SetfilterCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for setfilter tag
@@ -43,7 +43,7 @@ class Setfilter extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Setfilterclose extends Smarty_Internal_CompileBase
+class SetfiltercloseCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {/setfilter} tag

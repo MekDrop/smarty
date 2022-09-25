@@ -16,7 +16,7 @@ namespace Smarty\Internal\Nocache\Insert;
  * @package    Smarty
  * @subpackage Compiler
  */
-class Insert
+class InsertNocache
 {
     /**
      * Compiles code for the {insert} tag into cache file

@@ -17,7 +17,7 @@ namespace Smarty\Template;
  * @subpackage TemplateResources
  * @author     Uwe Tews
  */
-class Config extends Smarty_Template_Source
+class ConfigTemplate extends Smarty_Template_Source
 {
     /**
      * array of section names, single section or null

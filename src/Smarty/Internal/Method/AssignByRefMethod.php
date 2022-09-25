@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class AssignByRef
+class AssignByRefMethod
 {
     /**
      * assigns values to template variables by reference

@@ -9,7 +9,7 @@ namespace Smarty\Template\Resource;
  * @subpackage TemplateResources
  * @author     Rodney Rehm
  */
-abstract class Base
+abstract class BaseResource
 {
     /**
      * Compiled Filepath

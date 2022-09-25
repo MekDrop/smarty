@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class If extends Smarty_Internal_CompileBase
+class IfCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {if} tag
@@ -78,7 +78,7 @@ class If extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Else extends Smarty_Internal_CompileBase
+class ElseCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {else} tag
@@ -102,7 +102,7 @@ class Smarty_Internal_Compile_Else extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Elseif extends Smarty_Internal_CompileBase
+class ElseifCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {elseif} tag
@@ -183,7 +183,7 @@ class Smarty_Internal_Compile_Elseif extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Ifclose extends Smarty_Internal_CompileBase
+class IfcloseCompile extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {/if} tag
