@@ -7,13 +7,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Runtime;
+
 /**
  * Smarty Internal Runtime Cache Resource File Class
  *
  * @package    Smarty
  * @subpackage PluginsInternal
  */
-class Smarty_Internal_Runtime_CacheResourceFile
+class CacheResourceFile
 {
     /**
      * Empty cache for a specific template

@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Method;
+
 /**
  * Smarty Method CompileAllConfig
  *
@@ -9,7 +11,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Smarty_Internal_Method_CompileAllConfig extends Smarty_Internal_Method_CompileAllTemplates
+class CompileAllConfig extends Smarty_Internal_Method_CompileAllTemplates
 {
     /**
      * Compile all config files

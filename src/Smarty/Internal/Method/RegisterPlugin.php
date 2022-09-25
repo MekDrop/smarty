@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Method;
+
 /**
  * Smarty Method RegisterPlugin
  *
@@ -9,7 +11,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Smarty_Internal_Method_RegisterPlugin
+class RegisterPlugin
 {
     /**
      * Valid for Smarty and template object

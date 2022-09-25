@@ -9,6 +9,8 @@
  * @author     Rodney Rehm
  */
 
+namespace Smarty\Internal\Resource;
+
 /**
  * Smarty Internal Plugin Resource Stream
  * Implements the streams as resource for Smarty template
@@ -17,7 +19,7 @@
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class Smarty_Internal_Resource_Stream extends Smarty_Resource_Recompiled
+class Stream extends Smarty_Resource_Recompiled
 {
     /**
      * populate Source Object with meta data from Resource

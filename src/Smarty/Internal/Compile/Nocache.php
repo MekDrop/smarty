@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Nocache Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Nocache extends Smarty_Internal_CompileBase
+class Nocache extends Smarty_Internal_CompileBase
 {
     /**
      * Array of names of valid option flags
@@ -50,7 +52,7 @@ class Smarty_Internal_Compile_Nocache extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Nocacheclose extends Smarty_Internal_CompileBase
+class Nocacheclose extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {/nocache} tag

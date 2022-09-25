@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Method;
+
 /**
  * Smarty Method AddAutoloadFilters
  *
@@ -9,7 +11,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Smarty_Internal_Method_AddAutoloadFilters extends Smarty_Internal_Method_SetAutoloadFilters
+class AddAutoloadFilters extends Smarty_Internal_Method_SetAutoloadFilters
 {
     /**
      * Add autoload filters

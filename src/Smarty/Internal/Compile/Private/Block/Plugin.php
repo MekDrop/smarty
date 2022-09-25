@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile\Private\Block;
+
 /**
  * Smarty Internal Plugin Compile Block Plugin Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Private_Block_Plugin extends Smarty_Internal_CompileBase
+class Plugin extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile While Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_While extends Smarty_Internal_CompileBase
+class While extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {while} tag
@@ -77,7 +79,7 @@ class Smarty_Internal_Compile_While extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Whileclose extends Smarty_Internal_CompileBase
+class Whileclose extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {/while} tag

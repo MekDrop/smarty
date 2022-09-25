@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Method;
+
 /**
  * Smarty Method UnloadFilter
  *
@@ -9,7 +11,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Smarty_Internal_Method_UnloadFilter extends Smarty_Internal_Method_LoadFilter
+class UnloadFilter extends Smarty_Internal_Method_LoadFilter
 {
     /**
      * load a filter of specified type and name

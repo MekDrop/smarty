@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Capture Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase
+class Capture extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -80,7 +82,7 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_CaptureClose extends Smarty_Internal_CompileBase
+class CaptureClose extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {/capture} tag

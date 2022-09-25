@@ -6,6 +6,8 @@
  * Time: 06:08
  */
 
+namespace Smarty\Template;
+
 /**
  * Smarty Resource Data Object
  * Cache Data Container for Template Files
@@ -14,7 +16,7 @@
  * @subpackage TemplateResources
  * @author     Rodney Rehm
  */
-class Smarty_Template_Cached extends Smarty_Template_Resource_Base
+class Cached extends Smarty_Template_Resource_Base
 {
     /**
      * Cache Is Valid

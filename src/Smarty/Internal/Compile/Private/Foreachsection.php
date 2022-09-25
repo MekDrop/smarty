@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile\Private;
+
 /**
  * Smarty Internal Plugin Compile ForeachSection Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Private_ForeachSection extends Smarty_Internal_CompileBase
+class ForeachSection extends Smarty_Internal_CompileBase
 {
     /**
      * Name of this tag

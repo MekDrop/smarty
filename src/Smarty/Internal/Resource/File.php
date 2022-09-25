@@ -8,6 +8,8 @@
  * @author     Rodney Rehm
  */
 
+namespace Smarty\Internal\Resource;
+
 /**
  * Smarty Internal Plugin Resource File
  * Implements the file system as resource for Smarty templates
@@ -15,7 +17,7 @@
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class Smarty_Internal_Resource_File extends Smarty_Resource
+class File extends Smarty_Resource
 {
     /**
      * populate Source Object with meta data from Resource

@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Runtime;
+
 /**
  * TplFunction Runtime Methods callTemplateFunction
  *
@@ -7,7 +9,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  **/
-class Smarty_Internal_Runtime_TplFunction
+class TplFunction
 {
     /**
      * Call template function

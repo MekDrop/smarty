@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile\Config;
+
 /**
  * Smarty Internal Plugin Compile Config Load Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Config_Load extends Smarty_Internal_CompileBase
+class Load extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

@@ -7,13 +7,15 @@
  * @author     Monte Ohrt
  */
 
+namespace Smarty\Internal\Runtime;
+
 /**
  * Smarty Internal Read Include Path Class
  *
  * @package    Smarty
  * @subpackage PluginsInternal
  */
-class Smarty_Internal_Runtime_GetIncludePath
+class GetIncludePath
 {
     /**
      * include path cache

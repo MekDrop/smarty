@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Runtime;
+
 /**
  * Inline Runtime Methods render, setSourceByUid, setupSubTemplate
  *
@@ -7,7 +9,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  **/
-class Smarty_Internal_Runtime_CacheModify
+class CacheModify
 {
     /**
      * check client side cache

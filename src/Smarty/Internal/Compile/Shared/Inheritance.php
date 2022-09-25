@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile\Shared;
+
 /**
  * Smarty Internal Plugin Compile Shared Inheritance Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Shared_Inheritance extends Smarty_Internal_CompileBase
+class Inheritance extends Smarty_Internal_CompileBase
 {
     /**
      * Compile inheritance initialization code as prefix

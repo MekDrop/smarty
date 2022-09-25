@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Runtime;
+
 /**
  * Runtime Extension Capture
  *
@@ -7,7 +9,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Smarty_Internal_Runtime_Capture
+class Capture
 {
     /**
      * Flag that this instance  will not be cached

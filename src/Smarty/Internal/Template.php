@@ -8,6 +8,8 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal;
+
 /**
  * Main class with template data structures and methods
  *
@@ -24,7 +26,7 @@
  *
  * @method bool mustCompile()
  */
-class Smarty_Internal_Template extends Smarty_Internal_TemplateBase
+class Template extends Smarty_Internal_TemplateBase
 {
     /**
      * Template object cache

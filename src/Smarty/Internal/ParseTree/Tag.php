@@ -9,6 +9,8 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\ParseTree;
+
 /**
  * A complete smarty tag.
  *
@@ -16,7 +18,7 @@
  * @subpackage Compiler
  * @ignore
  */
-class Smarty_Internal_ParseTree_Tag extends Smarty_Internal_ParseTree
+class Tag extends Smarty_Internal_ParseTree
 {
     /**
      * Saved block nesting level

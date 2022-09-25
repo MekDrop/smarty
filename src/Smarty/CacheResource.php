@@ -6,6 +6,8 @@
  * @subpackage Cacher
  */
 
+namespace Smarty;
+
 /**
  * Cache Handler API
  *
@@ -13,7 +15,7 @@
  * @subpackage Cacher
  * @author     Rodney Rehm
  */
-abstract class Smarty_CacheResource
+abstract class CacheResource
 {
     /**
      * resource types provided by the core

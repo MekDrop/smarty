@@ -6,6 +6,8 @@
  * @subpackage Cacher
  */
 
+namespace Smarty\CacheResource;
+
 /**
  * Smarty Cache Handler Base for Key/Value Storage Implementations
  * This class implements the functionality required to use simple key/value stores
@@ -28,7 +30,7 @@
  * @subpackage Cacher
  * @author     Rodney Rehm
  */
-abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource
+abstract class KeyValueStore extends Smarty_CacheResource
 {
     /**
      * cache for contents

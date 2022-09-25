@@ -9,6 +9,8 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal;
+
 /**
  * Smarty_Internal_Configfilelexer
  *
@@ -19,7 +21,7 @@
  * @subpackage Compiler
  * @author     Uwe Tews
  */
-class Smarty_Internal_Configfilelexer
+class Configfilelexer
 {
     const START              = 1;
     const VALUE              = 2;

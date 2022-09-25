@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Call;
+
 /**
  * Smarty Internal Plugin Compile Function_Call Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase
+class Call extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

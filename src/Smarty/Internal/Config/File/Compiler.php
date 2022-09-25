@@ -9,13 +9,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Config\File;
+
 /**
  * Main config file compiler class
  *
  * @package    Smarty
  * @subpackage Config
  */
-class Smarty_Internal_Config_File_Compiler
+class Compiler
 {
     /**
      * Lexer class name

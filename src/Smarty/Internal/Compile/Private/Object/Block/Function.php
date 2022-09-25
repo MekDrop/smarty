@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile\Private\Object\Block;
+
 /**
  * Smarty Internal Plugin Compile Object Block Function Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Private_Object_Block_Function extends Smarty_Internal_Compile_Private_Block_Plugin
+class Function extends Smarty_Internal_Compile_Private_Block_Plugin
 {
     /**
      * Setup callback and parameter array

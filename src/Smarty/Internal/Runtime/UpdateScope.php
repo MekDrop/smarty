@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Runtime;
+
 /**
  * Runtime Extension updateScope
  *
@@ -7,7 +9,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  **/
-class Smarty_Internal_Runtime_UpdateScope
+class UpdateScope
 {
     /**
      * Update new assigned template or config variable in other effected scopes

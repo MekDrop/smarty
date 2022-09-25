@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile\Make;
+
 /**
  * Smarty Internal Plugin Compile Make_Nocache Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Make_Nocache extends Smarty_Internal_CompileBase
+class Nocache extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Resource;
+
 /**
  * Smarty Internal Plugin Resource PHP
  * Implements the file system as resource for PHP templates
@@ -9,7 +11,7 @@
  * @author     Uwe Tews
  * @author     Rodney Rehm
  */
-class Smarty_Internal_Resource_Php extends Smarty_Internal_Resource_File
+class Php extends Smarty_Internal_Resource_File
 {
     /**
      * Flag that it's an uncompiled resource

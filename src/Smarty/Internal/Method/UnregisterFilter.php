@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Method;
+
 /**
  * Smarty Method UnregisterFilter
  *
@@ -9,7 +11,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Smarty_Internal_Method_UnregisterFilter extends Smarty_Internal_Method_RegisterFilter
+class UnregisterFilter extends Smarty_Internal_Method_RegisterFilter
 {
     /**
      * Unregisters a filter function

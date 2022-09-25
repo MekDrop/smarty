@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Assign Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase
+class Assign extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

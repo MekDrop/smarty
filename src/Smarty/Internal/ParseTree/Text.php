@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\ParseTree;
+
 /**
  * Smarty Internal Plugin Templateparser Parse Tree
  * These are classes to build parse tree in the template parser
@@ -14,7 +16,7 @@
  * @subpackage Compiler
  * @ignore
  */
-class Smarty_Internal_ParseTree_Text extends Smarty_Internal_ParseTree
+class Text extends Smarty_Internal_ParseTree
 {
 
     /**

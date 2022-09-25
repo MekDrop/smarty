@@ -8,6 +8,8 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal;
+
 /**
  * Class with shared smarty/template methods
  *
@@ -46,7 +48,7 @@
  * @method Smarty_Internal_TemplateBase unregisterFilter(string $type, mixed $callback)
  * @method Smarty_Internal_TemplateBase unregisterResource(string $name)
  */
-abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data
+abstract class TemplateBase extends Smarty_Internal_Data
 {
     /**
      * Set this if you want different sets of cache files for the same

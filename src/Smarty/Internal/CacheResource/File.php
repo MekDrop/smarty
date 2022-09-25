@@ -8,6 +8,8 @@
  * @author     Rodney Rehm
  */
 
+namespace Smarty\Internal\CacheResource;
+
 /**
  * This class does contain all necessary methods for the HTML cache on file system
  * Implements the file system as resource for the HTML cache Version ussing nocache inserts.
@@ -15,7 +17,7 @@
  * @package    Smarty
  * @subpackage Cacher
  */
-class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
+class File extends Smarty_CacheResource
 {
     /**
      * populate Cached Object with meta data from Resource

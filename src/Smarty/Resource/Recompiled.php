@@ -7,6 +7,8 @@
  * @author     Rodney Rehm
  */
 
+namespace Smarty\Resource;
+
 /**
  * Smarty Resource Plugin
  * Base implementation for resource plugins that don't compile cache
@@ -14,7 +16,7 @@
  * @package    Smarty
  * @subpackage TemplateResources
  */
-abstract class Smarty_Resource_Recompiled extends Smarty_Resource
+abstract class Recompiled extends Smarty_Resource
 {
     /**
      * Flag that it's an recompiled resource

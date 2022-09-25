@@ -8,6 +8,8 @@
  * @author     Rodney Rehm
  */
 
+namespace Smarty\Internal\Resource;
+
 /**
  * Smarty Internal Plugin Resource String
  * Implements the strings as resource for Smarty template
@@ -16,7 +18,7 @@
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class Smarty_Internal_Resource_String extends Smarty_Resource
+class String extends Smarty_Resource
 {
     /**
      * populate Source Object with meta data from Resource

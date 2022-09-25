@@ -8,11 +8,13 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Runtime;
+
 /**
  * Class Smarty_Internal_Extension_CodeFrame
  * Create code frame for compiled and cached templates
  */
-class Smarty_Internal_Runtime_CodeFrame
+class CodeFrame
 {
     /**
      * Create code frame for compiled and cached templates

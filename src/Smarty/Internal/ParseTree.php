@@ -9,12 +9,14 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal;
+
 /**
  * @package    Smarty
  * @subpackage Compiler
  * @ignore
  */
-abstract class Smarty_Internal_ParseTree
+abstract class ParseTree
 {
     /**
      * Buffer content

@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile\Private\Print;
+
 /**
  * Smarty Internal Plugin Compile Print Expression Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_CompileBase
+class Expression extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

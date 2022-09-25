@@ -8,12 +8,14 @@
  * file that was distributed with this source code.
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Block Class
  *
  * @author Uwe Tews <uwe.tews@googlemail.com>
  */
-class Smarty_Internal_Compile_Block extends Smarty_Internal_Compile_Shared_Inheritance
+class Block extends Smarty_Internal_Compile_Shared_Inheritance
 {
     /**
      * Attribute definition: Overwrites base class.
@@ -94,7 +96,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_Compile_Shared_Inher
 /**
  * Smarty Internal Plugin Compile BlockClose Class
  */
-class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_Compile_Shared_Inheritance
+class Blockclose extends Smarty_Internal_Compile_Shared_Inheritance
 {
     /**
      * Compiles code for the {/block} tag

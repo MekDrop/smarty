@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Append Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Append extends Smarty_Internal_Compile_Assign
+class Append extends Smarty_Internal_Compile_Assign
 {
     /**
      * Compiles code for the {append} tag

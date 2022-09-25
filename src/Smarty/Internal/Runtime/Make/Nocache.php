@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Runtime\Make;
+
 /**
  * {make_nocache} Runtime Methods save(), store()
  *
@@ -7,7 +9,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Smarty_Internal_Runtime_Make_Nocache
+class Nocache
 {
     /**
      * Save current variable value while rendering compiled template and inject nocache code to

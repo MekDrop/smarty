@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal;
+
 /**
  * Smarty Internal Plugin Debug Class
  *
  * @package    Smarty
  * @subpackage Debug
  */
-class Smarty_Internal_Debug extends Smarty_Internal_Data
+class Debug extends Smarty_Internal_Data
 {
     /**
      * template data

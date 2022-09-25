@@ -8,6 +8,8 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal;
+
 /**
  * Base class with template and variable methods
  *
@@ -29,7 +31,7 @@
  * @method Smarty_Internal_Data clearConfig(string $varName = null)
  * @method Smarty_Internal_Data configLoad(string $config_file, mixed $sections = null, string $scope = 'local')
  */
-abstract class Smarty_Internal_Data
+abstract class Data
 {
     /**
      * This object type (Smarty = 1, template = 2, data = 4)

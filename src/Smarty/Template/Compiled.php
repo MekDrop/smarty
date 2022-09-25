@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Template;
+
 /**
  * Smarty Resource Data Object
  * Meta Data Container for Template Files
@@ -9,7 +11,7 @@
  * @author     Rodney Rehm
  * @property   string $content compiled content
  */
-class Smarty_Template_Compiled extends Smarty_Template_Resource_Base
+class Compiled extends Smarty_Template_Resource_Base
 {
     /**
      * nocache hash

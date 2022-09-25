@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile\Private\Object;
+
 /**
  * Smarty Internal Plugin Compile Object Function Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_CompileBase
+class Function extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile For Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase
+class For extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {for} tag

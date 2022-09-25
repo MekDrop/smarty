@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Include Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase
+class Include extends Smarty_Internal_CompileBase
 {
     /**
      * caching mode to create nocache code but no cache file

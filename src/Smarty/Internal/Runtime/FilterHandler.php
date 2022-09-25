@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Runtime;
+
 /**
  * Class for filter processing
  *
  * @package    Smarty
  * @subpackage PluginsInternal
  */
-class Smarty_Internal_Runtime_FilterHandler
+class FilterHandler
 {
     /**
      * Run filters over content

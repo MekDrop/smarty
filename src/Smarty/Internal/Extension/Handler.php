@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Extension;
+
 /**
  * Smarty Extension handler
  *
@@ -36,7 +38,7 @@
  * @property   Smarty_Internal_Method_RegisterPlugin     $registerPlugin
  * @property   mixed|\Smarty_Template_Cached             configLoad
  */
-class Smarty_Internal_Extension_Handler
+class Handler
 {
     public $objType = null;
 

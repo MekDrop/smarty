@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Template;
+
 /**
  * Smarty Resource Data Object
  * Meta Data Container for Template Files
@@ -8,7 +10,7 @@
  * @subpackage TemplateResources
  * @author     Rodney Rehm
  */
-class Smarty_Template_Source
+class Source
 {
     /**
      * Unique Template ID

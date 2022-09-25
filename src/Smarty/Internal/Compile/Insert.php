@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Insert Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase
+class Insert extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

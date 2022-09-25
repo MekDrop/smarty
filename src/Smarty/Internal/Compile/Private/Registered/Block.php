@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile\Private\Registered;
+
 /**
  * Smarty Internal Plugin Compile Registered Block Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Private_Registered_Block extends Smarty_Internal_Compile_Private_Block_Plugin
+class Block extends Smarty_Internal_Compile_Private_Block_Plugin
 {
     /**
      * Setup callback, parameter array and nocache mode

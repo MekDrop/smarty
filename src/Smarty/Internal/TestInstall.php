@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal;
+
 /**
  * TestInstall class
  *
  * @package    Smarty
  * @subpackage Utilities
  */
-class Smarty_Internal_TestInstall
+class TestInstall
 {
     /**
      * diagnose Smarty setup

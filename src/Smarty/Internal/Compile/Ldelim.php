@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Ldelim Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Ldelim extends Smarty_Internal_CompileBase
+class Ldelim extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {ldelim} tag

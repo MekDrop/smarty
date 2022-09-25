@@ -7,6 +7,8 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Template;
+
 /**
  * Smarty Config Resource Data Object
  * Meta Data Container for Template Files
@@ -15,7 +17,7 @@
  * @subpackage TemplateResources
  * @author     Uwe Tews
  */
-class Smarty_Template_Config extends Smarty_Template_Source
+class Config extends Smarty_Template_Source
 {
     /**
      * array of section names, single section or null

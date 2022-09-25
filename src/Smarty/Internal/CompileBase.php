@@ -7,13 +7,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal;
+
 /**
  * This class does extend all internal compile plugins
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-abstract class Smarty_Internal_CompileBase
+abstract class CompileBase
 {
     /**
      * Array of names of required attribute required by tag

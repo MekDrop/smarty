@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty;
+
 /**
  * class for the Smarty variable object
  * This class defines the Smarty variable object
@@ -7,7 +9,7 @@
  * @package    Smarty
  * @subpackage Template
  */
-class Smarty_Variable
+class Variable
 {
     /**
      * template variable

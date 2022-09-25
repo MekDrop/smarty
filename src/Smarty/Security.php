@@ -6,6 +6,9 @@
  * @subpackage Security
  * @author     Uwe Tews
  */
+
+namespace Smarty;
+
 /**
  * FIXME: Smarty_Security API
  *      - getter and setter instead of public properties would allow cultivating an internal cache properly
@@ -16,10 +19,11 @@
  *        as this would lead to (severe) performance penalty! how should this be handled?
  */
 
+
 /**
  * This class does contain the security settings
  */
-class Smarty_Security
+class Security
 {
 
     /**

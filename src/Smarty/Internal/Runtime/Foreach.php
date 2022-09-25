@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Runtime;
+
 /**
  * Foreach Runtime Methods count(), init(), restore()
  *
@@ -7,7 +9,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Smarty_Internal_Runtime_Foreach
+class Foreach
 {
     /**
      * Stack of saved variables

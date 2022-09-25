@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal;
+
 class TP_yyStackEntry
 {
     public $stateno;       /* The state-number */
@@ -20,7 +22,7 @@ class TP_yyStackEntry
 * 
 * @author Uwe Tews <uwe.tews@googlemail.com>
 */
-class Smarty_Internal_Templateparser
+class Templateparser
 {
 // line 23 "../smarty/lexer/smarty_internal_templateparser.y"
 

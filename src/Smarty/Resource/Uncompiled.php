@@ -7,6 +7,8 @@
  * @author     Rodney Rehm
  */
 
+namespace Smarty\Resource;
+
 /**
  * Smarty Resource Plugin
  * Base implementation for resource plugins that don't use the compiler
@@ -14,7 +16,7 @@
  * @package    Smarty
  * @subpackage TemplateResources
  */
-abstract class Smarty_Resource_Uncompiled extends Smarty_Resource
+abstract class Uncompiled extends Smarty_Resource
 {
     /**
      * Flag that it's an uncompiled resource

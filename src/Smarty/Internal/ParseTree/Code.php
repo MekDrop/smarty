@@ -9,6 +9,8 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\ParseTree;
+
 /**
  * Code fragment inside a tag .
  *
@@ -16,7 +18,7 @@
  * @subpackage Compiler
  * @ignore
  */
-class Smarty_Internal_ParseTree_Code extends Smarty_Internal_ParseTree
+class Code extends Smarty_Internal_ParseTree
 {
     /**
      * Create parse tree buffer for code fragment

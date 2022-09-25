@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Continue Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Continue extends Smarty_Internal_Compile_Break
+class Continue extends Smarty_Internal_Compile_Break
 {
     /**
      * Tag name

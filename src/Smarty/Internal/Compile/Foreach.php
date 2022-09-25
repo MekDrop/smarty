@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Foreach Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Foreach extends Smarty_Internal_Compile_Private_ForeachSection
+class Foreach extends Smarty_Internal_Compile_Private_ForeachSection
 {
     /**
      * Attribute definition: Overwrites base class.

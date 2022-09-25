@@ -8,12 +8,14 @@
  * file that was distributed with this source code.
  */
 
+namespace Smarty\Internal\Compile\Block;
+
 /**
  * Smarty Internal Plugin Compile Block Child Class
  *
  * @author Uwe Tews <uwe.tews@googlemail.com>
  */
-class Smarty_Internal_Compile_Block_Child extends Smarty_Internal_Compile_Child
+class Child extends Smarty_Internal_Compile_Child
 {
     /**
      * Tag name

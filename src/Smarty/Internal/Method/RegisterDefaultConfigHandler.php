@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal\Method;
+
 /**
  * Smarty Method RegisterDefaultConfigHandler
  *
@@ -9,7 +11,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Smarty_Internal_Method_RegisterDefaultConfigHandler
+class RegisterDefaultConfigHandler
 {
     /**
      * Valid for Smarty and template object

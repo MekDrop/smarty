@@ -7,6 +7,8 @@
  * @ignore
  */
 
+namespace Smarty\Internal\ParseTree;
+
 /**
  * Double quoted string inside a tag.
  *
@@ -14,7 +16,7 @@
  * @subpackage Compiler
  * @ignore
  */
-class Smarty_Internal_ParseTree_Dq extends Smarty_Internal_ParseTree
+class Dq extends Smarty_Internal_ParseTree
 {
     /**
      * Create parse tree buffer for double quoted string subtrees

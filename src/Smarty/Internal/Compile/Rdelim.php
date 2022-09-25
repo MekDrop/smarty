@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Rdelim Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Rdelim extends Smarty_Internal_Compile_Ldelim
+class Rdelim extends Smarty_Internal_Compile_Ldelim
 {
     /**
      * Compiles code for the {rdelim} tag

@@ -9,6 +9,8 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\ParseTree;
+
 /**
  * Template element
  *
@@ -16,7 +18,7 @@
  * @subpackage Compiler
  * @ignore
  */
-class Smarty_Internal_ParseTree_Template extends Smarty_Internal_ParseTree
+class Template extends Smarty_Internal_ParseTree
 {
     /**
      * Array of template elements

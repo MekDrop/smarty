@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile If Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_If extends Smarty_Internal_CompileBase
+class If extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {if} tag

@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Template\Resource;
+
 /**
  * Smarty Template Resource Base Object
  *
@@ -7,7 +9,7 @@
  * @subpackage TemplateResources
  * @author     Rodney Rehm
  */
-abstract class Smarty_Template_Resource_Base
+abstract class Base
 {
     /**
      * Compiled Filepath

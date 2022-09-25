@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+namespace Smarty\Internal;
+
 /**
  * Smarty_Internal_Templatelexer
  * This is the template file lexer.
@@ -16,7 +18,7 @@
  *
  * @author Uwe Tews <uwe.tews@googlemail.com>
  */
-class Smarty_Internal_Templatelexer
+class Templatelexer
 {
     /**
      * Source

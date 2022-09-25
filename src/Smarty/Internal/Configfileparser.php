@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal;
+
 class TPC_yyStackEntry
 {
     public $stateno;       /* The state-number */
@@ -21,7 +23,7 @@ class TPC_yyStackEntry
  * @subpackage Compiler
  * @author     Uwe Tews
  */
-class Smarty_Internal_Configfileparser
+class Configfileparser
 {
     // line 25 "../smarty/lexer/smarty_internal_configfileparser.y"
     const TPC_OPENB                = 1;

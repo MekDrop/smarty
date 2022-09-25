@@ -7,13 +7,15 @@
  * @author     Monte Ohrt
  */
 
+namespace Smarty\Internal\Runtime;
+
 /**
  * Smarty Internal Write File Class
  *
  * @package    Smarty
  * @subpackage PluginsInternal
  */
-class Smarty_Internal_Runtime_WriteFile
+class WriteFile
 {
     /**
      * Writes file in a safe way to disk

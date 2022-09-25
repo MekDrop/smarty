@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal;
+
 /**
  * Smarty {block} tag class
  *
@@ -7,7 +9,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Smarty_Internal_Block
+class Block
 {
     /**
      * Block name

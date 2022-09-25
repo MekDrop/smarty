@@ -1,5 +1,7 @@
 <?php
 
+namespace Smarty\Internal;
+
 /**
  * Smarty Internal Undefined
  *
@@ -9,7 +11,7 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class Smarty_Internal_Undefined
+class Undefined
 {
     /**
      * Name of undefined extension class

@@ -8,6 +8,8 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal;
+
 /**
  * Main abstract compiler class
  *
@@ -19,7 +21,7 @@
  * @method   registerPostCompileCallback($callback, $parameter = array(), $key = null, $replace = false)
  * @method   unregisterPostCompileCallback($key)
  */
-abstract class Smarty_Internal_TemplateCompilerBase
+abstract class TemplateCompilerBase
 {
     /**
      * compile tag objects cache

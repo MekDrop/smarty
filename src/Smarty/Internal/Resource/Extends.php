@@ -8,6 +8,8 @@
  * @author     Rodney Rehm
  */
 
+namespace Smarty\Internal\Resource;
+
 /**
  * Smarty Internal Plugin Resource Extends
  * Implements the file system as resource for Smarty which {extend}s a chain of template files templates
@@ -15,7 +17,7 @@
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class Smarty_Internal_Resource_Extends extends Smarty_Resource
+class Extends extends Smarty_Resource
 {
     /**
      * mbstring.overload flag

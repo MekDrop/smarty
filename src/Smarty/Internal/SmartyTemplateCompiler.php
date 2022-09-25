@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal;
+
 /**
  * Class SmartyTemplateCompiler
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_SmartyTemplateCompiler extends Smarty_Internal_TemplateCompilerBase
+class SmartyTemplateCompiler extends Smarty_Internal_TemplateCompilerBase
 {
     /**
      * Lexer class name

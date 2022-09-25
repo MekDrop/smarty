@@ -9,6 +9,8 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\ParseTree;
+
 /**
  * Raw chars as part of a double quoted string.
  *
@@ -16,7 +18,7 @@
  * @subpackage Compiler
  * @ignore
  */
-class Smarty_Internal_ParseTree_DqContent extends Smarty_Internal_ParseTree
+class DqContent extends Smarty_Internal_ParseTree
 {
     /**
      * Create parse tree buffer with string content

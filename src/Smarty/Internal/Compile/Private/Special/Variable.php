@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile\Private\Special;
+
 /**
  * Smarty Internal Plugin Compile special Smarty Variable Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_CompileBase
+class Variable extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the special $smarty variables

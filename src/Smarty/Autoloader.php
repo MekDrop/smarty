@@ -5,6 +5,8 @@
  * @package Smarty
  */
 
+namespace Smarty;
+
 
 if (!defined('SMARTY_HELPER_FUNCTIONS_LOADED')) {
 	include dirname(__FILE__) . '/functions.php';
@@ -23,7 +25,7 @@ if (!defined('SMARTY_HELPER_FUNCTIONS_LOADED')) {
  *
  *                  $smarty = new Smarty();
  */
-class Smarty_Autoloader
+class Autoloader
 {
     /**
      * Filepath to Smarty root

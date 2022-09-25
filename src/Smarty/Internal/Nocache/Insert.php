@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Nocache\Insert;
+
 /**
  * Smarty Internal Plugin Compile Insert Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Nocache_Insert
+class Insert
 {
     /**
      * Compiles code for the {insert} tag into cache file

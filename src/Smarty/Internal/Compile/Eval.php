@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Eval Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase
+class Eval extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

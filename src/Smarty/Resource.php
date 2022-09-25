@@ -7,6 +7,8 @@
  * @author     Rodney Rehm
  */
 
+namespace Smarty;
+
 /**
  * Smarty Resource Plugin
  * Base implementation for resource plugins
@@ -18,7 +20,7 @@
  * @method populateCompiledFilepath(Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template)
  * @method process(Smarty_Internal_Template $_smarty_tpl)
  */
-abstract class Smarty_Resource
+abstract class Resource
 {
     /**
      * resource types provided by the core

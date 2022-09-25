@@ -8,13 +8,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Break Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Break extends Smarty_Internal_CompileBase
+class Break extends Smarty_Internal_CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.

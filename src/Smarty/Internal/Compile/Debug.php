@@ -9,13 +9,15 @@
  * @author     Uwe Tews
  */
 
+namespace Smarty\Internal\Compile;
+
 /**
  * Smarty Internal Plugin Compile Debug Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Debug extends Smarty_Internal_CompileBase
+class Debug extends Smarty_Internal_CompileBase
 {
     /**
      * Compiles code for the {debug} tag
