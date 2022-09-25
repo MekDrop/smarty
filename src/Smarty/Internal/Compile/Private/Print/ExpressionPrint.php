@@ -16,13 +16,13 @@ namespace Smarty\Internal\Compile\Private\Print;
  * @package    Smarty
  * @subpackage Compiler
  */
-class ExpressionPrint extends Smarty_Internal_CompileBase
+class ExpressionPrint extends \Smarty\Internal\CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $optional_attributes = array('assign');
 
@@ -30,7 +30,7 @@ class ExpressionPrint extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $option_flags = array('nocache', 'nofilter');
 
@@ -38,13 +38,13 @@ class ExpressionPrint extends Smarty_Internal_CompileBase
      * Compiles code for generating output from any expression
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string
      * @throws \SmartyException
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
@@ -95,11 +95,11 @@ class ExpressionPrint extends Smarty_Internal_CompileBase
                 }
                 // autoescape html
                 if ($compiler->template->smarty->escape_html) {
-                    $output = "htmlspecialchars((string) {$output}, ENT_QUOTES, '" . addslashes(Smarty::$_CHARSET) . "')";
+                    $output = "htmlspecialchars((string) {$output}, ENT_QUOTES, '" . addslashes(\Smarty::$_CHARSET) . "')";
                 }
                 // loop over registered filters
-                if (!empty($compiler->template->smarty->registered_filters[ Smarty::FILTER_VARIABLE ])) {
-                    foreach ($compiler->template->smarty->registered_filters[ Smarty::FILTER_VARIABLE ] as $key =>
+                if (!empty($compiler->template->smarty->registered_filters[ \Smarty::FILTER_VARIABLE ])) {
+                    foreach ($compiler->template->smarty->registered_filters[ \Smarty::FILTER_VARIABLE ] as $key =>
                         $function) {
                         if (!is_array($function)) {
                             $output = "{$function}({$output},\$_smarty_tpl)";
@@ -112,14 +112,14 @@ class ExpressionPrint extends Smarty_Internal_CompileBase
                     }
                 }
                 // auto loaded filters
-                if (isset($compiler->smarty->autoload_filters[ Smarty::FILTER_VARIABLE ])) {
-                    foreach ((array)$compiler->template->smarty->autoload_filters[ Smarty::FILTER_VARIABLE ] as $name) {
+                if (isset($compiler->smarty->autoload_filters[ \Smarty::FILTER_VARIABLE ])) {
+                    foreach ((array)$compiler->template->smarty->autoload_filters[ \Smarty::FILTER_VARIABLE ] as $name) {
                         $result = $this->compile_variable_filter($compiler, $name, $output);
                         if ($result !== false) {
                             $output = $result;
                         } else {
                             // not found, throw exception
-                            throw new SmartyException("Unable to load variable filter '{$name}'");
+                            throw new \SmartyException("Unable to load variable filter '{$name}'");
                         }
                     }
                 }
@@ -143,14 +143,14 @@ class ExpressionPrint extends Smarty_Internal_CompileBase
     }
 
     /**
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      * @param string                                $name     name of variable filter
      * @param string                                $output   embedded output
      *
      * @return string
      * @throws \SmartyException
      */
-    private function compile_variable_filter(Smarty_Internal_TemplateCompilerBase $compiler, $name, $output)
+    private function compile_variable_filter(\Smarty\Internal\TemplateCompilerBase $compiler, $name, $output)
     {
         $function = $compiler->getPlugin($name, 'variablefilter');
         if ($function) {

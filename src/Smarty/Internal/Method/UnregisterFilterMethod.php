@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class UnregisterFilterMethod extends Smarty_Internal_Method_RegisterFilter
+class UnregisterFilterMethod extends RegisterFilterMethod
 {
     /**
      * Unregisters a filter function
@@ -20,14 +20,14 @@ class UnregisterFilterMethod extends Smarty_Internal_Method_RegisterFilter
      *
      * @link https://www.smarty.net/docs/en/api.unregister.filter.tpl
      *
-     * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
+     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param string                                                          $type filter type
      * @param callback|string                                                 $callback
      *
-     * @return \Smarty|\Smarty_Internal_Template
+     * @return \Smarty|\Smarty\Internal\Template
      * @throws \SmartyException
      */
-    public function unregisterFilter(Smarty_Internal_TemplateBase $obj, $type, $callback)
+    public function unregisterFilter(\Smarty\Internal\TemplateBase $obj, $type, $callback)
     {
         $smarty = $obj->_getSmartyObj();
         $this->_checkFilterType($type);

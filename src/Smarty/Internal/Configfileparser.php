@@ -239,7 +239,7 @@ class Configfileparser
     /**
      * compiler object
      *
-     * @var Smarty_Internal_Config_File_Compiler
+     * @var \Smarty\Internal\Config\File\CompilerFile
      */
     public $compiler = null;
 
@@ -273,7 +273,7 @@ class Configfileparser
     /**
      * lexer object
      *
-     * @var Smarty_Internal_Configfilelexer
+     * @var \Smarty\Internal\Configfilelexer
      */
     private $lex;
 
@@ -303,10 +303,10 @@ class Configfileparser
     /**
      * constructor
      *
-     * @param Smarty_Internal_Configfilelexer      $lex
-     * @param Smarty_Internal_Config_File_Compiler $compiler
+     * @param \Smarty\Internal\Configfilelexer      $lex
+     * @param \Smarty\Internal\Config\File\CompilerFile $compiler
      */
-    public function __construct(Smarty_Internal_Configfilelexer $lex, Smarty_Internal_Config_File_Compiler $compiler)
+    public function __construct(\Smarty\Internal\Configfilelexer $lex, \Smarty\Internal\Config\File\CompilerFile $compiler)
     {
         $this->lex = $lex;
         $this->smarty = $compiler->smarty;

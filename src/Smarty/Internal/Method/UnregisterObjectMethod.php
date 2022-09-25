@@ -26,12 +26,12 @@ class UnregisterObjectMethod
      * @api  Smarty::unregisterObject()
      * @link https://www.smarty.net/docs/en/api.unregister.object.tpl
      *
-     * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
+     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param string                                                          $object_name name of object
      *
-     * @return \Smarty|\Smarty_Internal_Template
+     * @return \Smarty|\Smarty\Internal\Template
      */
-    public function unregisterObject(Smarty_Internal_TemplateBase $obj, $object_name)
+    public function unregisterObject(\Smarty\Internal\TemplateBase $obj, $object_name)
     {
         $smarty = $obj->_getSmartyObj();
         if (isset($smarty->registered_objects[ $object_name ])) {

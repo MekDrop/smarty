@@ -49,14 +49,14 @@ class Block
     /**
      * Inheritance child block
      *
-     * @var Smarty_Internal_Block|null
+     * @var \Smarty\Internal\Block|null
      */
     public $child = null;
 
     /**
      * Inheritance calling parent block
      *
-     * @var Smarty_Internal_Block|null
+     * @var \Smarty\Internal\Block|null
      */
     public $parent = null;
 
@@ -68,7 +68,7 @@ class Block
     public $tplIndex = 0;
 
     /**
-     * Smarty_Internal_Block constructor.
+     * \Smarty\Internal\Block constructor.
      * - if outer level {block} of child template ($state === 1) save it as child root block
      * - otherwise process inheritance and render
      *
@@ -84,9 +84,9 @@ class Block
     /**
      * Compiled block code overloaded by {block} class
      *
-     * @param \Smarty_Internal_Template $tpl
+     * @param \Smarty\Internal\Template $tpl
      */
-    public function callBlock(Smarty_Internal_Template $tpl)
+    public function callBlock(\Smarty\Internal\Template $tpl)
     {
     }
 }

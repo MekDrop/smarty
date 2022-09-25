@@ -6,7 +6,7 @@ class Smarty_CacheResource_Memcachetest extends Smarty_CacheResource_Memcache
 {
     public $lockTime = 0;
 
-    public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)
+    public function hasLock(Smarty $smarty, \Smarty\Template\CachedTemplate $cached)
     {
         if ($this->lockTime) {
             $this->lockTime--;
@@ -17,7 +17,7 @@ class Smarty_CacheResource_Memcachetest extends Smarty_CacheResource_Memcache
         return parent::hasLock($smarty, $cached);
     }
 
-    public function get(Smarty_Internal_Template $_template)
+    public function get(\Smarty\Internal\Template $_template)
     {
         $this->contents = array();
         $this->timestamps = array();

@@ -10,28 +10,30 @@
 
 namespace Smarty\Internal\Compile\Private\Registered;
 
+use Smarty\Internal\Compile\Private\Block\PluginBlock;
+
 /**
  * Smarty Internal Plugin Compile Registered Block Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class BlockRegistered extends Smarty_Internal_Compile_Private_Block_Plugin
+class BlockRegistered extends PluginBlock
 {
     /**
      * Setup callback, parameter array and nocache mode
      *
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler
      * @param array                                 $_attr attributes
      * @param string                                $tag
      * @param null                                  $function
      *
      * @return array
      */
-    public function setup(Smarty_Internal_TemplateCompilerBase $compiler, $_attr, $tag, $function)
+    public function setup(\Smarty\Internal\TemplateCompilerBase $compiler, $_attr, $tag, $function)
     {
-        if (isset($compiler->smarty->registered_plugins[ Smarty::PLUGIN_BLOCK ][ $tag ])) {
-            $tag_info = $compiler->smarty->registered_plugins[ Smarty::PLUGIN_BLOCK ][ $tag ];
+        if (isset($compiler->smarty->registered_plugins[ \Smarty::PLUGIN_BLOCK ][ $tag ])) {
+            $tag_info = $compiler->smarty->registered_plugins[ \Smarty::PLUGIN_BLOCK ][ $tag ];
             $callback = $tag_info[ 0 ];
             if (is_array($callback)) {
                 if (is_object($callback[ 0 ])) {
@@ -48,7 +50,7 @@ class BlockRegistered extends Smarty_Internal_Compile_Private_Block_Plugin
                 $callback = array("\$_smarty_tpl->smarty->registered_plugins['block']['{$tag}'][0]", '');
             }
         } else {
-            $tag_info = $compiler->default_handler_plugins[ Smarty::PLUGIN_BLOCK ][ $tag ];
+            $tag_info = $compiler->default_handler_plugins[ \Smarty::PLUGIN_BLOCK ][ $tag ];
             $callback = $tag_info[ 0 ];
             if (is_array($callback)) {
                 $callable = "array('{$callback[0]}', '{$callback[1]}')";

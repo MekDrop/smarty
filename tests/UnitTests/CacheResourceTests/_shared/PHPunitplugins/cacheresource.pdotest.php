@@ -7,7 +7,7 @@ class Smarty_CacheResource_Pdotest extends Smarty_CacheResource_Pdo
     public $lockTime = 0;
 
 
-    public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)
+    public function hasLock(Smarty $smarty, \Smarty\Template\CachedTemplate $cached)
     {
         if ($this->lockTime) {
             $this->lockTime--;

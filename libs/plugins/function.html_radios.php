@@ -36,13 +36,13 @@
  * @version 1.0
  *
  * @param array                    $params   parameters
- * @param Smarty_Internal_Template $template template object
+ * @param \Smarty\Internal\Template $template template object
  *
  * @return string
  * @uses    smarty_function_escape_special_chars()
  * @throws \SmartyException
  */
-function smarty_function_html_radios($params, Smarty_Internal_Template $template)
+function smarty_function_html_radios($params, \Smarty\Internal\Template $template)
 {
     $template->_checkPlugins(
         array(

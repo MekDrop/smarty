@@ -16,13 +16,13 @@ namespace Smarty\Internal\Call;
  * @package    Smarty
  * @subpackage Compiler
  */
-class CallCompile extends Smarty_Internal_CompileBase
+class CallCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $required_attributes = array('name');
 
@@ -30,7 +30,7 @@ class CallCompile extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $shorttag_order = array('name');
 
@@ -38,7 +38,7 @@ class CallCompile extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $optional_attributes = array('_any');
 

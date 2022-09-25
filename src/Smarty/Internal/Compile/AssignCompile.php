@@ -16,13 +16,13 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class AssignCompile extends Smarty_Internal_CompileBase
+class AssignCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $option_flags = array('nocache', 'noscope');
 
@@ -41,15 +41,15 @@ class AssignCompile extends Smarty_Internal_CompileBase
      * Compiles code for the {assign} tag
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
      * @throws \SmartyCompilerException
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
     {
-        // the following must be assigned at runtime because it will be overwritten in Smarty_Internal_Compile_Append
+        // the following must be assigned at runtime because it will be overwritten in \Smarty\Internal\Compile\AppendCompile
         $this->required_attributes = array('var', 'value');
         $this->shorttag_order = array('var', 'value');
         $this->optional_attributes = array('scope');

@@ -34,7 +34,7 @@ class ClearCompiledTemplateMethod
      * @return int number of template files deleted
      * @throws \SmartyException
      */
-    public function clearCompiledTemplate(Smarty $smarty, $resource_name = null, $compile_id = null, $exp_time = null)
+    public function clearCompiledTemplate(\Smarty $smarty, $resource_name = null, $compile_id = null, $exp_time = null)
     {
         // clear template objects cache
         $smarty->_clearTemplateCache();
@@ -46,8 +46,8 @@ class ClearCompiledTemplateMethod
         $_dir_sep = $smarty->use_sub_dirs ? DIRECTORY_SEPARATOR : '^';
         if (isset($resource_name)) {
             $_save_stat = $smarty->caching;
-            $smarty->caching = Smarty::CACHING_OFF;
-            /* @var Smarty_Internal_Template $tpl */
+            $smarty->caching = \Smarty::CACHING_OFF;
+            /* @var \Smarty\Internal\Template $tpl */
             $tpl = $smarty->createTemplate($resource_name);
             $smarty->caching = $_save_stat;
             if (!$tpl->source->handler->uncompiled && !$tpl->source->handler->recompiled && $tpl->source->exists) {
@@ -69,12 +69,12 @@ class ClearCompiledTemplateMethod
         }
         $_count = 0;
         try {
-            $_compileDirs = new RecursiveDirectoryIterator($_dir);
+            $_compileDirs = new \RecursiveDirectoryIterator($_dir);
             // NOTE: UnexpectedValueException thrown for PHP >= 5.3
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return 0;
         }
-        $_compile = new RecursiveIteratorIterator($_compileDirs, RecursiveIteratorIterator::CHILD_FIRST);
+        $_compile = new \RecursiveIteratorIterator($_compileDirs, \RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($_compile as $_file) {
             if (substr(basename($_file->getPathname()), 0, 1) === '.') {
                 continue;

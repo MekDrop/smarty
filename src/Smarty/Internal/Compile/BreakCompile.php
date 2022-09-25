@@ -16,13 +16,13 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class BreakCompile extends Smarty_Internal_CompileBase
+class BreakCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $optional_attributes = array('levels');
 
@@ -30,12 +30,12 @@ class BreakCompile extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $shorttag_order = array('levels');
 
     /**
-     * Tag name may be overloaded by Smarty_Internal_Compile_Continue
+     * Tag name may be overloaded by \Smarty\Internal\Compile\ContinueCompile
      *
      * @var string
      */
@@ -45,12 +45,12 @@ class BreakCompile extends Smarty_Internal_CompileBase
      * Compiles code for the {break} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      * @throws \SmartyCompilerException
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
         list($levels, $foreachLevels) = $this->checkLevels($args, $compiler);
         $output = "<?php ";
@@ -58,7 +58,7 @@ class BreakCompile extends Smarty_Internal_CompileBase
             $foreachLevels--;
         }
         if ($foreachLevels > 0) {
-            /* @var Smarty_Internal_Compile_Foreach $foreachCompiler */
+            /* @var \Smarty\Internal\Compile\ForeachCompile $foreachCompiler */
             $foreachCompiler = $compiler->getTagCompiler('foreach');
             $output .= $foreachCompiler->compileRestore($foreachLevels);
         }
@@ -70,12 +70,12 @@ class BreakCompile extends Smarty_Internal_CompileBase
      * check attributes and return array of break and foreach levels
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return array
      * @throws \SmartyCompilerException
      */
-    public function checkLevels($args, Smarty_Internal_TemplateCompilerBase $compiler)
+    public function checkLevels($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
         static $_is_loopy = array('for' => true, 'foreach' => true, 'while' => true, 'section' => true);
         // check and get attributes

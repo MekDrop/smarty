@@ -10,19 +10,21 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty\Internal\Nocache\Insert\InsertNocache;
+
 /**
  * Smarty Internal Plugin Compile Insert Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class InsertCompile extends Smarty_Internal_CompileBase
+class InsertCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $required_attributes = array('name');
 
@@ -30,7 +32,7 @@ class InsertCompile extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $shorttag_order = array('name');
 
@@ -38,7 +40,7 @@ class InsertCompile extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $optional_attributes = array('_any');
 
@@ -46,13 +48,13 @@ class InsertCompile extends Smarty_Internal_CompileBase
      * Compiles code for the {insert} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      * @throws \SmartyCompilerException
      * @throws \SmartyException
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
@@ -76,7 +78,7 @@ class InsertCompile extends Smarty_Internal_CompileBase
             if (isset($compiler->template->tpl_vars[ $var ])) {
                 $compiler->template->tpl_vars[ $var ]->nocache = true;
             } else {
-                $compiler->template->tpl_vars[ $var ] = new Smarty_Variable(null, true);
+                $compiler->template->tpl_vars[ $var ] = new \Smarty\Variable(null, true);
             }
         }
         if (isset($_attr[ 'script' ])) {
@@ -142,13 +144,13 @@ class InsertCompile extends Smarty_Internal_CompileBase
         // call insert
         if (isset($_assign)) {
             if ($_smarty_tpl->caching && !$nocacheParam) {
-                $_output .= "echo Smarty_Internal_Nocache_Insert::compile ('{$_function}',{$_params}, \$_smarty_tpl, '{$_filepath}',{$_assign});?>";
+                $_output .= "echo \\".InsertNocache::class."::compile ('{$_function}',{$_params}, \$_smarty_tpl, '{$_filepath}',{$_assign});?>";
             } else {
                 $_output .= "\$_smarty_tpl->assign({$_assign} , {$_function} ({$_params},\$_smarty_tpl), true);?>";
             }
         } else {
             if ($_smarty_tpl->caching && !$nocacheParam) {
-                $_output .= "echo Smarty_Internal_Nocache_Insert::compile ('{$_function}',{$_params}, \$_smarty_tpl, '{$_filepath}');?>";
+                $_output .= "echo \\".InsertNocache::class."::compile ('{$_function}',{$_params}, \$_smarty_tpl, '{$_filepath}');?>";
             } else {
                 $_output .= "echo {$_function}({$_params},\$_smarty_tpl);?>";
             }

@@ -12,7 +12,7 @@
 namespace Smarty\Internal;
 
 /**
- * Smarty_Internal_Configfilelexer
+ * \Smarty\Internal\Configfilelexer
  *
  * This is the config file lexer.
  * It is generated from the smarty_internal_configfilelexer.plex file
@@ -82,7 +82,7 @@ class Configfilelexer
     /**
      * Smarty object
      *
-     * @var Smarty
+     * @var \Smarty
      */
     public $smarty = null;
 
@@ -120,7 +120,7 @@ class Configfilelexer
     /**
      * compiler object
      *
-     * @var Smarty_Internal_Config_File_Compiler
+     * @var \Smarty\Internal\Config\File\CompilerFile
      */
     private $compiler = null;
 
@@ -156,9 +156,9 @@ class Configfilelexer
      * constructor
      *
      * @param   string                             $data template source
-     * @param Smarty_Internal_Config_File_Compiler $compiler
+     * @param \Smarty\Internal\Config\File\CompilerFile $compiler
      */
-    public function __construct($data, Smarty_Internal_Config_File_Compiler $compiler)
+    public function __construct($data, \Smarty\Internal\Config\File\CompilerFile $compiler)
     {
         $this->data = $data . "\n"; //now all lines are \n-terminated
         $this->dataLength = strlen($data);
@@ -264,7 +264,7 @@ class Configfilelexer
                     $yymatches = array_filter($yymatches);
                 }
                 if (empty($yymatches)) {
-                    throw new Exception('Error: lexing failed because a rule matched' .
+                    throw new \Exception('Error: lexing failed because a rule matched' .
                                         ' an empty string.  Input "' . substr(
                                             $this->data,
                                             $this->counter,
@@ -294,7 +294,7 @@ class Configfilelexer
                     continue;
                 }
             } else {
-                throw new Exception('Unexpected input at line' . $this->line .
+                throw new \Exception('Unexpected input at line' . $this->line .
                                     ': ' . $this->data[ $this->counter ]);
             }
             break;
@@ -303,24 +303,24 @@ class Configfilelexer
 
     public function yy_r1_1()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_COMMENTSTART;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_COMMENTSTART;
         $this->yypushstate(self::COMMENT);
     }
 
     public function yy_r1_2()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_OPENB;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_OPENB;
         $this->yypushstate(self::SECTION);
     }
 
     public function yy_r1_3()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_CLOSEB;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_CLOSEB;
     }
 
     public function yy_r1_4()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_EQUAL;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_EQUAL;
         $this->yypushstate(self::VALUE);
     } // end function
 
@@ -331,17 +331,17 @@ class Configfilelexer
 
     public function yy_r1_6()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_NEWLINE;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_NEWLINE;
     }
 
     public function yy_r1_7()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_ID;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_ID;
     }
 
     public function yy_r1_8()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_OTHER;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_OTHER;
     }
 
     public function yylex2()
@@ -364,7 +364,7 @@ class Configfilelexer
                     $yymatches = array_filter($yymatches);
                 }
                 if (empty($yymatches)) {
-                    throw new Exception('Error: lexing failed because a rule matched' .
+                    throw new \Exception('Error: lexing failed because a rule matched' .
                                         ' an empty string.  Input "' . substr(
                                             $this->data,
                                             $this->counter,
@@ -394,7 +394,7 @@ class Configfilelexer
                     continue;
                 }
             } else {
-                throw new Exception('Unexpected input at line' . $this->line .
+                throw new \Exception('Unexpected input at line' . $this->line .
                                     ': ' . $this->data[ $this->counter ]);
             }
             break;
@@ -408,31 +408,31 @@ class Configfilelexer
 
     public function yy_r2_2()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_FLOAT;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_FLOAT;
         $this->yypopstate();
     }
 
     public function yy_r2_3()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_INT;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_INT;
         $this->yypopstate();
     }
 
     public function yy_r2_4()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_TRIPPLE_QUOTES;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_TRIPPLE_QUOTES;
         $this->yypushstate(self::TRIPPLE);
     }
 
     public function yy_r2_5()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_SINGLE_QUOTED_STRING;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_SINGLE_QUOTED_STRING;
         $this->yypopstate();
     }
 
     public function yy_r2_6()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_DOUBLE_QUOTED_STRING;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_DOUBLE_QUOTED_STRING;
         $this->yypopstate();
     } // end function
 
@@ -444,20 +444,20 @@ class Configfilelexer
             $this->yypushstate(self::NAKED_STRING_VALUE);
             return true; //reprocess in new state
         } else {
-            $this->token = Smarty_Internal_Configfileparser::TPC_BOOL;
+            $this->token = \Smarty\Internal\Configfileparser::TPC_BOOL;
             $this->yypopstate();
         }
     }
 
     public function yy_r2_8()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_NAKED_STRING;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_NAKED_STRING;
         $this->yypopstate();
     }
 
     public function yy_r2_9()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_NAKED_STRING;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_NAKED_STRING;
         $this->value = '';
         $this->yypopstate();
     } // end function
@@ -511,7 +511,7 @@ class Configfilelexer
                     continue;
                 }
             } else {
-                throw new Exception('Unexpected input at line' . $this->line .
+                throw new \Exception('Unexpected input at line' . $this->line .
                                     ': ' . $this->data[ $this->counter ]);
             }
             break;
@@ -520,7 +520,7 @@ class Configfilelexer
 
     public function yy_r3_1()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_NAKED_STRING;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_NAKED_STRING;
         $this->yypopstate();
     }
 
@@ -543,7 +543,7 @@ class Configfilelexer
                     $yymatches = array_filter($yymatches);
                 }
                 if (empty($yymatches)) {
-                    throw new Exception('Error: lexing failed because a rule matched' .
+                    throw new \Exception('Error: lexing failed because a rule matched' .
                                         ' an empty string.  Input "' . substr(
                                             $this->data,
                                             $this->counter,
@@ -573,7 +573,7 @@ class Configfilelexer
                     continue;
                 }
             } else {
-                throw new Exception('Unexpected input at line' . $this->line .
+                throw new \Exception('Unexpected input at line' . $this->line .
                                     ': ' . $this->data[ $this->counter ]);
             }
             break;
@@ -587,12 +587,12 @@ class Configfilelexer
 
     public function yy_r4_2()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_NAKED_STRING;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_NAKED_STRING;
     } // end function
 
     public function yy_r4_3()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_NEWLINE;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_NEWLINE;
         $this->yypopstate();
     }
 
@@ -615,7 +615,7 @@ class Configfilelexer
                     $yymatches = array_filter($yymatches);
                 }
                 if (empty($yymatches)) {
-                    throw new Exception('Error: lexing failed because a rule matched' .
+                    throw new \Exception('Error: lexing failed because a rule matched' .
                                         ' an empty string.  Input "' . substr(
                                             $this->data,
                                             $this->counter,
@@ -645,7 +645,7 @@ class Configfilelexer
                     continue;
                 }
             } else {
-                throw new Exception('Unexpected input at line' . $this->line .
+                throw new \Exception('Unexpected input at line' . $this->line .
                                     ': ' . $this->data[ $this->counter ]);
             }
             break;
@@ -654,12 +654,12 @@ class Configfilelexer
 
     public function yy_r5_1()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_DOT;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_DOT;
     }
 
     public function yy_r5_2()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_SECTION;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_SECTION;
         $this->yypopstate();
     } // end function
 
@@ -682,7 +682,7 @@ class Configfilelexer
                     $yymatches = array_filter($yymatches);
                 }
                 if (empty($yymatches)) {
-                    throw new Exception('Error: lexing failed because a rule matched' .
+                    throw new \Exception('Error: lexing failed because a rule matched' .
                                         ' an empty string.  Input "' . substr(
                                             $this->data,
                                             $this->counter,
@@ -712,7 +712,7 @@ class Configfilelexer
                     continue;
                 }
             } else {
-                throw new Exception('Unexpected input at line' . $this->line .
+                throw new \Exception('Unexpected input at line' . $this->line .
                                     ': ' . $this->data[ $this->counter ]);
             }
             break;
@@ -721,7 +721,7 @@ class Configfilelexer
 
     public function yy_r6_1()
     {
-        $this->token = Smarty_Internal_Configfileparser::TPC_TRIPPLE_QUOTES_END;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_TRIPPLE_QUOTES_END;
         $this->yypopstate();
         $this->yypushstate(self::START);
     }
@@ -736,6 +736,6 @@ class Configfilelexer
             $this->compiler->trigger_config_file_error('missing or misspelled literal closing tag');
         }
         $this->value = substr($this->data, $this->counter, $to - $this->counter);
-        $this->token = Smarty_Internal_Configfileparser::TPC_TRIPPLE_TEXT;
+        $this->token = \Smarty\Internal\Configfileparser::TPC_TRIPPLE_TEXT;
     }
 }

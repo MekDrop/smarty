@@ -16,13 +16,13 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class FunctionCompile extends Smarty_Internal_CompileBase
+class FunctionCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $required_attributes = array('name');
 
@@ -30,7 +30,7 @@ class FunctionCompile extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $shorttag_order = array('name');
 
@@ -38,7 +38,7 @@ class FunctionCompile extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $optional_attributes = array('_any');
 
@@ -46,12 +46,12 @@ class FunctionCompile extends Smarty_Internal_CompileBase
      * Compiles code for the {function} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return bool true
      * @throws \SmartyCompilerException
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
@@ -72,7 +72,7 @@ class FunctionCompile extends Smarty_Internal_CompileBase
         );
         $this->openTag($compiler, 'function', $save);
         // Init temporary context
-        $compiler->parser->current_buffer = new Smarty_Internal_ParseTree_Template();
+        $compiler->parser->current_buffer = new \Smarty\Internal\ParseTree\TemplateParseTree();
         $compiler->template->compiled->has_nocache_code = false;
         $compiler->saveRequiredPlugins(true);
         return true;
@@ -85,7 +85,7 @@ class FunctionCompile extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class FunctioncloseCompile extends Smarty_Internal_CompileBase
+class FunctioncloseCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Compiler object
@@ -98,11 +98,11 @@ class FunctioncloseCompile extends Smarty_Internal_CompileBase
      * Compiles code for the {/function} tag
      *
      * @param array                                        $args     array with attributes from parser
-     * @param object|\Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param object|\Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return bool true
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
         $this->compiler = $compiler;
         $saved_data = $this->closeTag($compiler, array('function'));
@@ -130,7 +130,7 @@ class FunctioncloseCompile extends Smarty_Internal_CompileBase
         }
         $_functionCode = $compiler->parser->current_buffer;
         // setup buffer for template function code
-        $compiler->parser->current_buffer = new Smarty_Internal_ParseTree_Template();
+        $compiler->parser->current_buffer = new \Smarty\Internal\ParseTree\TemplateParseTree();
         $_funcName = "smarty_template_function_{$_name}_{$compiler->template->compiled->nocache_hash}";
         $_funcNameCaching = $_funcName . '_nocache';
         if ($compiler->template->compiled->has_nocache_code) {
@@ -138,19 +138,19 @@ class FunctioncloseCompile extends Smarty_Internal_CompileBase
             $output = "<?php\n";
             $output .= $compiler->cStyleComment(" {$_funcNameCaching} ") . "\n";
             $output .= "if (!function_exists('{$_funcNameCaching}')) {\n";
-            $output .= "function {$_funcNameCaching} (Smarty_Internal_Template \$_smarty_tpl,\$params) {\n";
+            $output .= "function {$_funcNameCaching} (\Smarty\Internal\Template \$_smarty_tpl,\$params) {\n";
             $output .= "ob_start();\n";
             $output .= $compiler->compileRequiredPlugins();
             $output .= "\$_smarty_tpl->compiled->has_nocache_code = true;\n";
             $output .= $_paramsCode;
-            $output .= "foreach (\$params as \$key => \$value) {\n\$_smarty_tpl->tpl_vars[\$key] = new Smarty_Variable(\$value, \$_smarty_tpl->isRenderingCache);\n}\n";
+            $output .= "foreach (\$params as \$key => \$value) {\n\$_smarty_tpl->tpl_vars[\$key] = new \Smarty\Variable(\$value, \$_smarty_tpl->isRenderingCache);\n}\n";
             $output .= "\$params = var_export(\$params, true);\n";
             $output .= "echo \"/*%%SmartyNocache:{$compiler->template->compiled->nocache_hash}%%*/<?php ";
-            $output .= "\\\$_smarty_tpl->smarty->ext->_tplFunction->saveTemplateVariables(\\\$_smarty_tpl, '{$_name}');\nforeach (\$params as \\\$key => \\\$value) {\n\\\$_smarty_tpl->tpl_vars[\\\$key] = new Smarty_Variable(\\\$value, \\\$_smarty_tpl->isRenderingCache);\n}\n?>";
+            $output .= "\\\$_smarty_tpl->smarty->ext->_tplFunction->saveTemplateVariables(\\\$_smarty_tpl, '{$_name}');\nforeach (\$params as \\\$key => \\\$value) {\n\\\$_smarty_tpl->tpl_vars[\\\$key] = new \Smarty\Variable(\\\$value, \\\$_smarty_tpl->isRenderingCache);\n}\n?>";
             $output .= "/*/%%SmartyNocache:{$compiler->template->compiled->nocache_hash}%%*/\";?>";
             $compiler->parser->current_buffer->append_subtree(
                 $compiler->parser,
-                new Smarty_Internal_ParseTree_Tag(
+                new \Smarty\Internal\ParseTree\TagParseTree(
                     $compiler->parser,
                     $output
                 )
@@ -165,12 +165,12 @@ class FunctioncloseCompile extends Smarty_Internal_CompileBase
             $output .= "?>\n";
             $compiler->parser->current_buffer->append_subtree(
                 $compiler->parser,
-                new Smarty_Internal_ParseTree_Tag(
+                new \Smarty\Internal\ParseTree\TagParseTree(
                     $compiler->parser,
                     $output
                 )
             );
-            $_functionCode = new Smarty_Internal_ParseTree_Tag(
+            $_functionCode = new \Smarty\Internal\ParseTree\TagParseTree(
                 $compiler->parser,
                 preg_replace_callback(
                     "/((<\?php )?echo '\/\*%%SmartyNocache:{$compiler->template->compiled->nocache_hash}%%\*\/([\S\s]*?)\/\*\/%%SmartyNocache:{$compiler->template->compiled->nocache_hash}%%\*\/';(\?>\n)?)/",
@@ -183,15 +183,15 @@ class FunctioncloseCompile extends Smarty_Internal_CompileBase
         $output = "<?php\n";
         $output .= $compiler->cStyleComment(" {$_funcName} ") . "\n";
         $output .= "if (!function_exists('{$_funcName}')) {\n";
-        $output .= "function {$_funcName}(Smarty_Internal_Template \$_smarty_tpl,\$params) {\n";
+        $output .= "function {$_funcName}(\Smarty\Internal\Template \$_smarty_tpl,\$params) {\n";
         $output .= $_paramsCode;
-        $output .= "foreach (\$params as \$key => \$value) {\n\$_smarty_tpl->tpl_vars[\$key] = new Smarty_Variable(\$value, \$_smarty_tpl->isRenderingCache);\n}\n";
+        $output .= "foreach (\$params as \$key => \$value) {\n\$_smarty_tpl->tpl_vars[\$key] = new \Smarty\Variable(\$value, \$_smarty_tpl->isRenderingCache);\n}\n";
         $output .= $compiler->compileCheckPlugins(array_merge($compiler->required_plugins[ 'compiled' ],
             $compiler->required_plugins[ 'nocache' ]));
         $output .= "?>\n";
         $compiler->parser->current_buffer->append_subtree(
             $compiler->parser,
-            new Smarty_Internal_ParseTree_Tag(
+            new \Smarty\Internal\ParseTree\TagParseTree(
                 $compiler->parser,
                 $output
             )
@@ -202,7 +202,7 @@ class FunctioncloseCompile extends Smarty_Internal_CompileBase
         $output .= "?>\n";
         $compiler->parser->current_buffer->append_subtree(
             $compiler->parser,
-            new Smarty_Internal_ParseTree_Tag(
+            new \Smarty\Internal\ParseTree\TagParseTree(
                 $compiler->parser,
                 $output
             )

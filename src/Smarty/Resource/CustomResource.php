@@ -16,7 +16,7 @@ namespace Smarty\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-abstract class CustomResource extends Smarty_Resource
+abstract class CustomResource extends \Smarty\Resource
 {
     /**
      * fetch template and its modification time from data source
@@ -44,10 +44,10 @@ abstract class CustomResource extends Smarty_Resource
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param Smarty_Template_Source   $source    source object
-     * @param Smarty_Internal_Template $_template template object
+     * @param \Smarty\Template\SourceTemplate   $source    source object
+     * @param \Smarty\Internal\Template $_template template object
      */
-    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = null)
+    public function populate(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template = null)
     {
         $source->filepath = $source->type . ':' . $this->generateSafeName($source->name);
         $source->uid = sha1($source->type . ':' . $source->name);
@@ -67,28 +67,28 @@ abstract class CustomResource extends Smarty_Resource
     /**
      * Load template's source into current template object
      *
-     * @param Smarty_Template_Source $source source object
+     * @param \Smarty\Template\SourceTemplate $source source object
      *
      * @return string                 template source
-     * @throws SmartyException        if source cannot be loaded
+     * @throws \SmartyException        if source cannot be loaded
      */
-    public function getContent(Smarty_Template_Source $source)
+    public function getContent(\Smarty\Template\SourceTemplate $source)
     {
         $this->fetch($source->name, $content, $timestamp);
         if (isset($content)) {
             return $content;
         }
-        throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");
+        throw new \SmartyException("Unable to read template {$source->type} '{$source->name}'");
     }
 
     /**
      * Determine basename for compiled filename
      *
-     * @param Smarty_Template_Source $source source object
+     * @param \Smarty\Template\SourceTemplate $source source object
      *
      * @return string                 resource's basename
      */
-    public function getBasename(Smarty_Template_Source $source)
+    public function getBasename(\Smarty\Template\SourceTemplate $source)
     {
         return basename($this->generateSafeName($source->name));
     }

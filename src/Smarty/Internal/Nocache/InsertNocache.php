@@ -23,7 +23,7 @@ class InsertNocache
      *
      * @param string                   $_function insert function name
      * @param array                    $_attr     array with parameter
-     * @param Smarty_Internal_Template $_template template object
+     * @param \Smarty\Internal\Template $_template template object
      * @param string                   $_script   script name to load or 'null'
      * @param string                   $_assign   optional variable name
      *

@@ -27,7 +27,7 @@ class ExtendsResourceTest extends PHPUnit_Smarty
         $this->cleanDirs();
     }
 
-    public function compiledPrefilter($text, Smarty_Internal_Template $tpl)
+    public function compiledPrefilter($text, \Smarty\Internal\Template $tpl)
     {
         return str_replace('#', $tpl->getTemplateVars('test'), $text);
     }

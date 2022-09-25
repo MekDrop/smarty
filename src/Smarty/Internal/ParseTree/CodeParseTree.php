@@ -18,7 +18,7 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class CodeParseTree extends Smarty_Internal_ParseTree
+class CodeParseTree extends \Smarty\Internal\ParseTree
 {
     /**
      * Create parse tree buffer for code fragment
@@ -33,11 +33,11 @@ class CodeParseTree extends Smarty_Internal_ParseTree
     /**
      * Return buffer content in parentheses
      *
-     * @param \Smarty_Internal_Templateparser $parser
+     * @param \Smarty\Internal\Templateparser $parser
      *
      * @return string content
      */
-    public function to_smarty_php(Smarty_Internal_Templateparser $parser)
+    public function to_smarty_php(\Smarty\Internal\Templateparser $parser)
     {
         return sprintf('(%s)', $this->data);
     }

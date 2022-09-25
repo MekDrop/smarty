@@ -37,12 +37,12 @@
  *
  * @param array                     $params parameters
  *
- * @param \Smarty_Internal_Template $template
+ * @param \Smarty\Internal\Template $template
  *
  * @return string
  * @throws \SmartyException
  */
-function smarty_function_html_select_date($params, Smarty_Internal_Template $template)
+function smarty_function_html_select_date($params, \Smarty\Internal\Template $template)
 {
     $template->_checkPlugins(
         array(

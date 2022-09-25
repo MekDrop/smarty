@@ -16,19 +16,19 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class RdelimCompile extends Smarty_Internal_Compile_Ldelim
+class RdelimCompile extends LdelimCompile
 {
     /**
      * Compiles code for the {rdelim} tag
      * This tag does output the right delimiter.
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      * @throws \SmartyCompilerException
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
         parent::compile($args, $compiler);
         return $compiler->smarty->right_delimiter;

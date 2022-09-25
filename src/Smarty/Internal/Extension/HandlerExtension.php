@@ -12,31 +12,31 @@ namespace Smarty\Internal\Extension;
  * @author     Uwe Tews
  *
  * Runtime extensions
- * @property   Smarty_Internal_Runtime_CacheModify       $_cacheModify
- * @property   Smarty_Internal_Runtime_CacheResourceFile $_cacheResourceFile
- * @property   Smarty_Internal_Runtime_Capture           $_capture
- * @property   Smarty_Internal_Runtime_CodeFrame         $_codeFrame
- * @property   Smarty_Internal_Runtime_FilterHandler     $_filterHandler
- * @property   Smarty_Internal_Runtime_Foreach           $_foreach
- * @property   Smarty_Internal_Runtime_GetIncludePath    $_getIncludePath
- * @property   Smarty_Internal_Runtime_Make_Nocache      $_make_nocache
- * @property   Smarty_Internal_Runtime_UpdateCache       $_updateCache
- * @property   Smarty_Internal_Runtime_UpdateScope       $_updateScope
- * @property   Smarty_Internal_Runtime_TplFunction       $_tplFunction
- * @property   Smarty_Internal_Runtime_WriteFile         $_writeFile
+ * @property   \Smarty\Internal\Runtime\CacheModifyRuntime       $_cacheModify
+ * @property   \Smarty\Internal\Runtime\CacheResourceFileRuntime $_cacheResourceFile
+ * @property   \Smarty\Internal\Runtime\CaptureRuntime           $_capture
+ * @property   \Smarty\Internal\Runtime\CodeFrameRuntime         $_codeFrame
+ * @property   \Smarty\Internal\Runtime\FilterHandlerRuntime     $_filterHandler
+ * @property   \Smarty\Internal\Runtime\ForeachRuntime           $_foreach
+ * @property   \Smarty\Internal\Runtime\GetIncludePathRuntime    $_getIncludePath
+ * @property   \Smarty\Internal\Runtime\Make\NocacheMake      $_make_nocache
+ * @property   \Smarty\Internal\Runtime\UpdateCacheRuntime       $_updateCache
+ * @property   \Smarty\Internal\Runtime\UpdateScopeRuntime       $_updateScope
+ * @property   \Smarty\Internal\Runtime\TplFunctionRuntime       $_tplFunction
+ * @property   \Smarty\Internal\Runtime\WriteFileRuntime         $_writeFile
  *
  * Method extensions
- * @property   Smarty_Internal_Method_GetTemplateVars    $getTemplateVars
- * @property   Smarty_Internal_Method_Append             $append
- * @property   Smarty_Internal_Method_AppendByRef        $appendByRef
- * @property   Smarty_Internal_Method_AssignGlobal       $assignGlobal
- * @property   Smarty_Internal_Method_AssignByRef        $assignByRef
- * @property   Smarty_Internal_Method_LoadFilter         $loadFilter
- * @property   Smarty_Internal_Method_LoadPlugin         $loadPlugin
- * @property   Smarty_Internal_Method_RegisterFilter     $registerFilter
- * @property   Smarty_Internal_Method_RegisterObject     $registerObject
- * @property   Smarty_Internal_Method_RegisterPlugin     $registerPlugin
- * @property   mixed|\Smarty_Template_Cached             configLoad
+ * @property   \Smarty\Internal\Method\GetTemplateVarsMethod    $getTemplateVars
+ * @property   \Smarty\Internal\Method\AppendMethod             $append
+ * @property   \Smarty\Internal\Method\AppendByRefMethod        $appendByRef
+ * @property   \Smarty\Internal\Method\AssignGlobalMethod       $assignGlobal
+ * @property   \Smarty\Internal\Method\AssignByRefMethod        $assignByRef
+ * @property   \Smarty\Internal\Method\LoadFilterMethod         $loadFilter
+ * @property   \Smarty\Internal\Method\LoadPluginMethod         $loadPlugin
+ * @property   \Smarty\Internal\Method\RegisterFilterMethod     $registerFilter
+ * @property   \Smarty\Internal\Method\RegisterObjectMethod     $registerObject
+ * @property   \Smarty\Internal\Method\RegisterPluginMethod     $registerPlugin
+ * @property   mixed|\Smarty\Template\CachedTemplate             configLoad
  */
 class HandlerExtension
 {
@@ -59,15 +59,15 @@ class HandlerExtension
     /**
      * Call external Method
      *
-     * @param \Smarty_Internal_Data $data
+     * @param \Smarty\Internal\Data $data
      * @param string                $name external method names
      * @param array                 $args argument array
      *
      * @return mixed
      */
-    public function _callExternalMethod(Smarty_Internal_Data $data, $name, $args)
+    public function _callExternalMethod(\Smarty\Internal\Data $data, $name, $args)
     {
-        /* @var Smarty $data ->smarty */
+        /* @var \Smarty $data ->smarty */
         $smarty = isset($data->smarty) ? $data->smarty : $data;
         if (!isset($smarty->ext->$name)) {
             if (preg_match('/^((set|get)|(.*?))([A-Z].*)$/', $name, $match)) {
@@ -75,7 +75,7 @@ class HandlerExtension
                 if (!isset($smarty->ext->$basename) && isset($this->_property_info[ $basename ])
                     && is_string($this->_property_info[ $basename ])
                 ) {
-                    $class = 'Smarty_Internal_Method_' . $this->_property_info[ $basename ];
+                    $class = '\\Smarty\\Internal\\Method\\' . $this->_property_info[ $basename ];
                     if (class_exists($class)) {
                         $classObj = new $class();
                         $methodes = get_class_methods($classObj);
@@ -85,7 +85,7 @@ class HandlerExtension
                     }
                 }
                 if (!empty($match[ 2 ]) && !isset($smarty->ext->$name)) {
-                    $class = 'Smarty_Internal_Method_' . $this->upperCase($name);
+                    $class = '\\Smarty\\Internal\\Method\\' . $this->upperCase($name);
                     if (!class_exists($class)) {
                         $objType = $data->_objType;
                         $propertyType = false;
@@ -133,7 +133,7 @@ class HandlerExtension
         if (isset($callback) && $callback[ 0 ]->objMap | $data->_objType) {
             return call_user_func_array($callback, $args);
         }
-        return call_user_func_array(array(new Smarty_Internal_Undefined(), $name), $args);
+        return call_user_func_array(array(new \Smarty\Internal\Undefined(), $name), $args);
     }
 
     /**
@@ -155,18 +155,18 @@ class HandlerExtension
      *
      * @param string $property_name property name
      *
-     * @return mixed|Smarty_Template_Cached
+     * @return mixed|\Smarty\Template\CachedTemplate
      */
     public function __get($property_name)
     {
         // object properties of runtime template extensions will start with '_'
         if ($property_name[ 0 ] === '_') {
-            $class = 'Smarty_Internal_Runtime' . $this->upperCase($property_name);
+            $class = '\\Smarty\\Internal\\Runtime' . $this->upperCase($property_name);
         } else {
-            $class = 'Smarty_Internal_Method_' . $this->upperCase($property_name);
+            $class = '\\Smarty\\Internal\\Method\\' . $this->upperCase($property_name);
         }
         if (!class_exists($class)) {
-            return $this->$property_name = new Smarty_Internal_Undefined($class);
+            return $this->$property_name = new \Smarty\Internal\Undefined($class);
         }
         return $this->$property_name = new $class();
     }
@@ -193,6 +193,6 @@ class HandlerExtension
      */
     public function __call($name, $args)
     {
-        return call_user_func_array(array(new Smarty_Internal_Undefined(), $name), array($this));
+        return call_user_func_array(array(new \Smarty\Internal\Undefined(), $name), array($this));
     }
 }

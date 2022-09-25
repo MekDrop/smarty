@@ -14,7 +14,7 @@
  *
  * @return string
  */
-function smarty_function_getparams($params, Smarty_Internal_Template $template)
+function smarty_function_getparams($params, \Smarty\Internal\Template $template)
 {
     return var_export($params, true);
 }

@@ -14,13 +14,13 @@
  *
  * @return string
  */
-class smarty_compiler_getparamsshort extends Smarty_Internal_CompileBase
+class smarty_compiler_getparamsshort extends \Smarty\Internal\CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $required_attributes = array();
 
@@ -28,14 +28,14 @@ class smarty_compiler_getparamsshort extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $optional_attributes = array('_any');
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $shorttag_order = array('s1', 's2', 's3');
 

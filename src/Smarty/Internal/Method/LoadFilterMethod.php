@@ -34,14 +34,14 @@ class LoadFilterMethod
      *
      * @link https://www.smarty.net/docs/en/api.load.filter.tpl
      *
-     * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
+     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param string                                                          $type filter type
      * @param string                                                          $name filter name
      *
      * @return bool
-     * @throws SmartyException if filter could not be loaded
+     * @throws \SmartyException if filter could not be loaded
      */
-    public function loadFilter(Smarty_Internal_TemplateBase $obj, $type, $name)
+    public function loadFilter(\Smarty\Internal\TemplateBase $obj, $type, $name)
     {
         $smarty = $obj->_getSmartyObj();
         $this->_checkFilterType($type);
@@ -60,7 +60,7 @@ class LoadFilterMethod
                 return true;
             }
         }
-        throw new SmartyException("{$type}filter '{$name}' not found or callable");
+        throw new \SmartyException("{$type}filter '{$name}' not found or callable");
     }
 
     /**
@@ -73,7 +73,7 @@ class LoadFilterMethod
     public function _checkFilterType($type)
     {
         if (!isset($this->filterTypes[ $type ])) {
-            throw new SmartyException("Illegal filter type '{$type}'");
+            throw new \SmartyException("Illegal filter type '{$type}'");
         }
     }
 }

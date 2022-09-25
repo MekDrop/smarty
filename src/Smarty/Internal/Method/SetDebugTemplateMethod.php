@@ -25,17 +25,17 @@ class SetDebugTemplateMethod
      *
      * @api Smarty::setDebugTemplate()
      *
-     * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
+     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param string                                                          $tpl_name
      *
-     * @return \Smarty|\Smarty_Internal_Template
-     * @throws SmartyException if file is not readable
+     * @return \Smarty|\Smarty\Internal\Template
+     * @throws \SmartyException if file is not readable
      */
-    public function setDebugTemplate(Smarty_Internal_TemplateBase $obj, $tpl_name)
+    public function setDebugTemplate(\Smarty\Internal\TemplateBase $obj, $tpl_name)
     {
         $smarty = $obj->_getSmartyObj();
         if (!is_readable($tpl_name)) {
-            throw new SmartyException("Unknown file '{$tpl_name}'");
+            throw new \SmartyException("Unknown file '{$tpl_name}'");
         }
         $smarty->debug_tpl = $tpl_name;
         return $obj;

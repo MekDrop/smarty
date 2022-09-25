@@ -26,16 +26,16 @@ class AppendMethod
      * @api  Smarty::append()
      * @link https://www.smarty.net/docs/en/api.append.tpl
      *
-     * @param \Smarty_Internal_Data|\Smarty_Internal_Template|\Smarty $data
+     * @param \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty $data
      * @param array|string                                            $tpl_var the template variable name(s)
      * @param mixed                                                   $value   the value to append
      * @param bool                                                    $merge   flag if array elements shall be merged
      * @param bool                                                    $nocache if true any output of this variable will
      *                                                                         be not cached
      *
-     * @return \Smarty_Internal_Data|\Smarty_Internal_Template|\Smarty
+     * @return \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty
      */
-    public function append(Smarty_Internal_Data $data, $tpl_var, $value = null, $merge = false, $nocache = false)
+    public function append(\Smarty\Internal\Data $data, $tpl_var, $value = null, $merge = false, $nocache = false)
     {
         if (is_array($tpl_var)) {
             // $tpl_var is an array, ignore $value
@@ -48,14 +48,14 @@ class AppendMethod
             if ($tpl_var !== '' && isset($value)) {
                 if (!isset($data->tpl_vars[ $tpl_var ])) {
                     $tpl_var_inst = $data->ext->getTemplateVars->_getVariable($data, $tpl_var, null, true, false);
-                    if ($tpl_var_inst instanceof Smarty_Undefined_Variable) {
-                        $data->tpl_vars[ $tpl_var ] = new Smarty_Variable(null, $nocache);
+                    if ($tpl_var_inst instanceof \Smarty\Undefined\VariableUndefined) {
+                        $data->tpl_vars[ $tpl_var ] = new \Smarty\Variable(null, $nocache);
                     } else {
                         $data->tpl_vars[ $tpl_var ] = clone $tpl_var_inst;
                     }
                 }
                 if (!(is_array($data->tpl_vars[ $tpl_var ]->value)
-                      || $data->tpl_vars[ $tpl_var ]->value instanceof ArrayAccess)
+                      || $data->tpl_vars[ $tpl_var ]->value instanceof \ArrayAccess)
                 ) {
                     settype($data->tpl_vars[ $tpl_var ]->value, 'array');
                 }

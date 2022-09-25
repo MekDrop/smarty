@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class ContinueCompile extends Smarty_Internal_Compile_Break
+class ContinueCompile extends BreakCompile
 {
     /**
      * Tag name

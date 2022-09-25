@@ -10,19 +10,21 @@
 
 namespace Smarty\Internal\Compile;
 
+use Smarty\Internal\Compile\Private\ForeachSectionPrivate;
+
 /**
  * Smarty Internal Plugin Compile Section Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class SectionCompile extends Smarty_Internal_Compile_Private_ForeachSection
+class SectionCompile extends ForeachSectionPrivate
 {
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $required_attributes = array('name', 'loop');
 
@@ -30,7 +32,7 @@ class SectionCompile extends Smarty_Internal_Compile_Private_ForeachSection
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $shorttag_order = array('name', 'loop');
 
@@ -38,7 +40,7 @@ class SectionCompile extends Smarty_Internal_Compile_Private_ForeachSection
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $optional_attributes = array('start', 'step', 'max', 'show', 'properties');
 
@@ -84,13 +86,13 @@ class SectionCompile extends Smarty_Internal_Compile_Private_ForeachSection
      * Compiles code for the {section} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      * @throws \SmartyCompilerException
      * @throws \SmartyException
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
         $compiler->loopNesting++;
         // check and get attributes
@@ -360,7 +362,7 @@ class SectionCompile extends Smarty_Internal_Compile_Private_ForeachSection
             $output .= "{$local}{$key} = {$code};\n";
         }
         $_vars = 'array(' . join(', ', $initNamedProperty) . ')';
-        $output .= "{$sectionVar} = new Smarty_Variable({$_vars});\n";
+        $output .= "{$sectionVar} = new \Smarty\Variable({$_vars});\n";
         $cond_code = "{$propValue['total']} !== 0";
         if ($propType[ 'total' ] === 0) {
             if ($propValue[ 'total' ] === 0) {
@@ -407,17 +409,17 @@ class SectionCompile extends Smarty_Internal_Compile_Private_ForeachSection
  * @package    Smarty
  * @subpackage Compiler
  */
-class SectionelseCompile extends Smarty_Internal_CompileBase
+class SectionelseCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Compiles code for the {sectionelse} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
@@ -433,17 +435,17 @@ class SectionelseCompile extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class SectioncloseCompile extends Smarty_Internal_CompileBase
+class SectioncloseCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Compiles code for the {/section} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
         $compiler->loopNesting--;
         // must endblock be nocache?

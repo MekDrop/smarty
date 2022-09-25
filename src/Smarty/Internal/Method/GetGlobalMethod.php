@@ -25,12 +25,12 @@ class GetGlobalMethod
      *
      * @api Smarty::getGlobal()
      *
-     * @param \Smarty_Internal_Data $data
+     * @param \Smarty\Internal\Data $data
      * @param string                $varName variable name or null
      *
      * @return string|array variable value or or array of variables
      */
-    public function getGlobal(Smarty_Internal_Data $data, $varName = null)
+    public function getGlobal(\Smarty\Internal\Data $data, $varName = null)
     {
         if (isset($varName)) {
             if (isset(Smarty::$global_tpl_vars[ $varName ])) {

@@ -16,7 +16,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class ForCompile extends Smarty_Internal_CompileBase
+class ForCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Compiles code for the {for} tag
@@ -57,7 +57,7 @@ class ForCompile extends Smarty_Internal_CompileBase
                     $var = $_statement[ 'var' ];
                     $index = '';
                 }
-                $output .= "\$_smarty_tpl->tpl_vars[$var] = new Smarty_Variable(null, \$_smarty_tpl->isRenderingCache);\n";
+                $output .= "\$_smarty_tpl->tpl_vars[$var] = new \Smarty\Variable(null, \$_smarty_tpl->isRenderingCache);\n";
                 $output .= "\$_smarty_tpl->tpl_vars[$var]->value{$index} = {$_statement['value']};\n";
             }
             if (is_array($_attr[ 'var' ])) {
@@ -77,7 +77,7 @@ class ForCompile extends Smarty_Internal_CompileBase
                 $var = $_statement[ 'var' ];
                 $index = '';
             }
-            $output .= "\$_smarty_tpl->tpl_vars[$var] = new Smarty_Variable(null, \$_smarty_tpl->isRenderingCache);";
+            $output .= "\$_smarty_tpl->tpl_vars[$var] = new \Smarty\Variable(null, \$_smarty_tpl->isRenderingCache);";
             if (isset($_attr[ 'step' ])) {
                 $output .= "\$_smarty_tpl->tpl_vars[$var]->step = $_attr[step];";
             } else {
@@ -108,7 +108,7 @@ class ForCompile extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class ForelseCompile extends Smarty_Internal_CompileBase
+class ForelseCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Compiles code for the {forelse} tag
@@ -135,7 +135,7 @@ class ForelseCompile extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class ForcloseCompile extends Smarty_Internal_CompileBase
+class ForcloseCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Compiles code for the {/for} tag

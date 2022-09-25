@@ -16,9 +16,9 @@ namespace Smarty;
  * @package    Smarty
  * @subpackage TemplateResources
  *
- * @method renderUncompiled(Smarty_Template_Source $source, Smarty_Internal_Template $_template)
- * @method populateCompiledFilepath(Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template)
- * @method process(Smarty_Internal_Template $_smarty_tpl)
+ * @method renderUncompiled(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template)
+ * @method populateCompiledFilepath(\Smarty\Template\CompiledTemplate $compiled, \Smarty\Internal\Template $_template)
+ * @method process(\Smarty\Internal\Template $_smarty_tpl)
  */
 abstract class Resource
 {
@@ -63,8 +63,8 @@ abstract class Resource
      * @param Smarty $smarty smarty object
      * @param string $type   name of the resource
      *
-     * @throws SmartyException
-     * @return Smarty_Resource Resource Handler
+     * @throws \SmartyException
+     * @return \Smarty\Resource Resource Handler
      */
     public static function load(Smarty $smarty, $type)
     {
@@ -78,11 +78,11 @@ abstract class Resource
         }
         // try sysplugins dir
         if (isset(self::$sysplugins[ $type ])) {
-            $_resource_class = 'Smarty_Internal_Resource_' . smarty_ucfirst_ascii($type);
+            $_resource_class = '\\Smarty\\Internal\\Resource\\' . smarty_ucfirst_ascii($type);
             return $smarty->_cache[ 'resource_handlers' ][ $type ] = new $_resource_class();
         }
         // try plugins dir
-        $_resource_class = 'Smarty_Resource_' . smarty_ucfirst_ascii($type);
+        $_resource_class = '\\Smarty\\Resource\\' . smarty_ucfirst_ascii($type);
         if ($smarty->loadPlugin($_resource_class)) {
             if (class_exists($_resource_class, false)) {
                 return $smarty->_cache[ 'resource_handlers' ][ $type ] = new $_resource_class();
@@ -105,11 +105,11 @@ abstract class Resource
             if (is_object($smarty->security_policy)) {
                 $smarty->security_policy->isTrustedStream($type);
             }
-            return $smarty->_cache[ 'resource_handlers' ][ $type ] = new Smarty_Internal_Resource_Stream();
+            return $smarty->_cache[ 'resource_handlers' ][ $type ] = new \Smarty\Internal\Resource\StreamResource();
         }
         // TODO: try default_(template|config)_handler
         // give up
-        throw new SmartyException("Unknown resource type '{$type}'");
+        throw new \SmartyException("Unknown resource type '{$type}'");
     }
 
     /**
@@ -139,7 +139,7 @@ abstract class Resource
     /**
      * modify template_resource according to resource handlers specifications
      *
-     * @param \Smarty_Internal_Template|\Smarty $obj               Smarty instance
+     * @param \Smarty\Internal\Template|\Smarty $obj               Smarty instance
      * @param string                            $template_resource template_resource to extract resource handler and
      *                                                             name of
      *
@@ -151,7 +151,7 @@ abstract class Resource
         $smarty = $obj->_getSmartyObj();
         list($name, $type) = self::parseResourceName($template_resource, $smarty->default_resource_type);
         // TODO: optimize for Smarty's internal resource types
-        $resource = Smarty_Resource::load($smarty, $type);
+        $resource = \Smarty\Resource::load($smarty, $type);
         // go relative to a given template?
         $_file_is_dotted = $name[ 0 ] === '.' && ($name[ 1 ] === '.' || $name[ 1 ] === '/');
         if ($obj->_isTplObj() && $_file_is_dotted
@@ -167,45 +167,45 @@ abstract class Resource
      * wrapper for backward compatibility to versions < 3.1.22
      * Either [$_template] or [$smarty, $template_resource] must be specified
      *
-     * @param Smarty_Internal_Template $_template         template object
+     * @param \Smarty\Internal\Template $_template         template object
      * @param Smarty                   $smarty            smarty object
      * @param string                   $template_resource resource identifier
      *
-     * @return \Smarty_Template_Source Source Object
+     * @return \Smarty\Template\SourceTemplate Source Object
      * @throws \SmartyException
      */
     public static function source(
-        Smarty_Internal_Template $_template = null,
+        \Smarty\Internal\Template $_template = null,
         Smarty $smarty = null,
         $template_resource = null
     ) {
-        return Smarty_Template_Source::load($_template, $smarty, $template_resource);
+        return \Smarty\Template\SourceTemplate::load($_template, $smarty, $template_resource);
     }
 
     /**
      * Load template's source into current template object
      *
-     * @param Smarty_Template_Source $source source object
+     * @param \Smarty\Template\SourceTemplate $source source object
      *
      * @return string                 template source
-     * @throws SmartyException        if source cannot be loaded
+     * @throws \SmartyException        if source cannot be loaded
      */
-    abstract public function getContent(Smarty_Template_Source $source);
+    abstract public function getContent(\Smarty\Template\SourceTemplate $source);
 
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param Smarty_Template_Source   $source    source object
-     * @param Smarty_Internal_Template $_template template object
+     * @param \Smarty\Template\SourceTemplate   $source    source object
+     * @param \Smarty\Internal\Template $_template template object
      */
-    abstract public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = null);
+    abstract public function populate(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template = null);
 
     /**
      * populate Source Object with timestamp and exists from Resource
      *
-     * @param Smarty_Template_Source $source source object
+     * @param \Smarty\Template\SourceTemplate $source source object
      */
-    public function populateTimestamp(Smarty_Template_Source $source)
+    public function populateTimestamp(\Smarty\Template\SourceTemplate $source)
     {
         // intentionally left blank
     }
@@ -243,11 +243,11 @@ abstract class Resource
     /**
      * Determine basename for compiled filename
      *
-     * @param Smarty_Template_Source $source source object
+     * @param \Smarty\Template\SourceTemplate $source source object
      *
      * @return string                 resource's basename
      */
-    public function getBasename(Smarty_Template_Source $source)
+    public function getBasename(\Smarty\Template\SourceTemplate $source)
     {
         return basename(preg_replace('![^\w]+!', '_', $source->name));
     }

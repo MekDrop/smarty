@@ -30,7 +30,7 @@ class CompileErrorTest extends PHPUnit_Smarty
      */
     public function testNoneExistingTemplateError()
     {
-        $this->expectException('SmartyException');
+        $this->expectException('\SmartyException');
         $this->expectExceptionMessage('no.tpl');
         $this->smarty->fetch('eval:{include file=\'no.tpl\'}');
     }

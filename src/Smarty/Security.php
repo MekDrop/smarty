@@ -10,12 +10,12 @@
 namespace Smarty;
 
 /**
- * FIXME: Smarty_Security API
+ * FIXME: \Smarty\Security API
  *      - getter and setter instead of public properties would allow cultivating an internal cache properly
  *      - current implementation of isTrustedResourceDir() assumes that Smarty::$template_dir and Smarty::$config_dir
  *      are immutable the cache is killed every time either of the variables change. That means that two distinct
  *      Smarty objects with differing
- *        $template_dir or $config_dir should NOT share the same Smarty_Security instance,
+ *        $template_dir or $config_dir should NOT share the same \Smarty\Security instance,
  *        as this would lead to (severe) performance penalty! how should this be handled?
  */
 
@@ -244,7 +244,7 @@ class Security
     protected $_include_dir = array();
 
     /**
-     * @param Smarty $smarty
+     * @param \Smarty $smarty
      */
     public function __construct($smarty)
     {
@@ -478,14 +478,14 @@ class Security
      * @param string $stream_name
      *
      * @return boolean         true if stream is trusted
-     * @throws SmartyException if stream is not trusted
+     * @throws \SmartyException if stream is not trusted
      */
     public function isTrustedStream($stream_name)
     {
         if (isset($this->streams) && (empty($this->streams) || in_array($stream_name, $this->streams))) {
             return true;
         }
-        throw new SmartyException("stream '{$stream_name}' not allowed by security setting");
+        throw new \SmartyException("stream '{$stream_name}' not allowed by security setting");
     }
 
     /**
@@ -542,7 +542,7 @@ class Security
      * @param string $uri
      *
      * @return boolean         true if URI is trusted
-     * @throws SmartyException if URI is not trusted
+     * @throws \SmartyException if URI is not trusted
      * @uses   $trusted_uri for list of patterns to match against $uri
      */
     public function isTrustedUri($uri)
@@ -556,7 +556,7 @@ class Security
                 }
             }
         }
-        throw new SmartyException("URI '{$uri}' not allowed by security setting");
+        throw new \SmartyException("URI '{$uri}' not allowed by security setting");
     }
 
     /**
@@ -565,12 +565,12 @@ class Security
      * @param string $filepath
      *
      * @return boolean         true if directory is trusted
-     * @throws SmartyException if PHP directory is not trusted
+     * @throws \SmartyException if PHP directory is not trusted
      */
     public function isTrustedPHPDir($filepath)
     {
         if (empty($this->trusted_dir)) {
-            throw new SmartyException("directory '{$filepath}' not allowed by security setting (no trusted_dir specified)");
+            throw new \SmartyException("directory '{$filepath}' not allowed by security setting (no trusted_dir specified)");
         }
         // check if index is outdated
         if (!$this->_trusted_dir || $this->_trusted_dir !== $this->trusted_dir) {
@@ -642,33 +642,33 @@ class Security
             }
         }
         // give up
-        throw new SmartyException(sprintf('Smarty Security: not trusted file path \'%s\' ', $filepath));
+        throw new \SmartyException(sprintf('Smarty Security: not trusted file path \'%s\' ', $filepath));
     }
 
     /**
      * Loads security class and enables security
      *
      * @param \Smarty                $smarty
-     * @param string|Smarty_Security $security_class if a string is used, it must be class-name
+     * @param string|\Smarty\Security $security_class if a string is used, it must be class-name
      *
      * @return \Smarty current Smarty instance for chaining
      * @throws \SmartyException when an invalid class name is provided
      */
-    public static function enableSecurity(Smarty $smarty, $security_class)
+    public static function enableSecurity(\Smarty $smarty, $security_class)
     {
-        if ($security_class instanceof Smarty_Security) {
+        if ($security_class instanceof \Smarty\Security) {
             $smarty->security_policy = $security_class;
             return $smarty;
         } elseif (is_object($security_class)) {
-            throw new SmartyException("Class '" . get_class($security_class) . "' must extend Smarty_Security.");
+            throw new \SmartyException("Class '" . get_class($security_class) . "' must extend \Smarty\Security.");
         }
         if ($security_class === null) {
             $security_class = $smarty->security_class;
         }
         if (!class_exists($security_class)) {
-            throw new SmartyException("Security class '$security_class' is not defined");
-        } elseif ($security_class !== 'Smarty_Security' && !is_subclass_of($security_class, 'Smarty_Security')) {
-            throw new SmartyException("Class '$security_class' must extend Smarty_Security.");
+            throw new \SmartyException("Security class '$security_class' is not defined");
+        } elseif ($security_class !== '\Smarty\Security' && !is_subclass_of($security_class, '\Smarty\Security')) {
+            throw new \SmartyException("Class '$security_class' must extend \Smarty\Security.");
         } else {
             $smarty->security_policy = new $security_class($smarty);
         }
@@ -680,12 +680,12 @@ class Security
      *
      * @param $template
      *
-     * @throws SmartyException
+     * @throws \SmartyException
      */
     public function startTemplate($template)
     {
         if ($this->max_template_nesting > 0 && $this->_current_template_nesting++ >= $this->max_template_nesting) {
-            throw new SmartyException("maximum template nesting level of '{$this->max_template_nesting}' exceeded when calling '{$template->template_resource}'");
+            throw new \SmartyException("maximum template nesting level of '{$this->max_template_nesting}' exceeded when calling '{$template->template_resource}'");
         }
     }
 
@@ -702,9 +702,9 @@ class Security
     /**
      * Register callback functions call at start/end of template rendering
      *
-     * @param \Smarty_Internal_Template $template
+     * @param \Smarty\Internal\Template $template
      */
-    public function registerCallBacks(Smarty_Internal_Template $template)
+    public function registerCallBacks(\Smarty\Internal\Template $template)
     {
         $template->startRenderCallbacks[] = array($this, 'startTemplate');
         $template->endRenderCallbacks[] = array($this, 'endTemplate');

@@ -26,11 +26,11 @@ class ClearAllAssignMethod
      * @api  Smarty::clearAllAssign()
      * @link https://www.smarty.net/docs/en/api.clear.all.assign.tpl
      *
-     * @param \Smarty_Internal_Data|\Smarty_Internal_Template|\Smarty $data
+     * @param \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty $data
      *
-     * @return \Smarty_Internal_Data|\Smarty_Internal_Template|\Smarty
+     * @return \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty
      */
-    public function clearAllAssign(Smarty_Internal_Data $data)
+    public function clearAllAssign(\Smarty\Internal\Data $data)
     {
         $data->tpl_vars = array();
         return $data;

@@ -15,12 +15,12 @@
  * @author Rodney Rehm
  *
  * @param array                                $params parameters
- * @param Smarty_Internal_TemplateCompilerBase $compiler
+ * @param \Smarty\Internal\TemplateCompilerBase $compiler
  *
  * @return string with compiled code
  * @throws \SmartyException
  */
-function smarty_modifiercompiler_escape($params, Smarty_Internal_TemplateCompilerBase $compiler)
+function smarty_modifiercompiler_escape($params, \Smarty\Internal\TemplateCompilerBase $compiler)
 {
     static $_double_encode = true;
     static $is_loaded = false;
@@ -91,7 +91,7 @@ function smarty_modifiercompiler_escape($params, Smarty_Internal_TemplateCompile
                        $params[ 0 ] .
                        ', array("\\\\" => "\\\\\\\\", "\'" => "\\\\\'", "\"" => "\\\\\"", "\\r" => "\\\\r", "\\n" => "\\\n", "</" => "<\/", "<!--" => "<\!--", "<s" => "<\s", "<S" => "<\S" ))';
         }
-    } catch (SmartyException $e) {
+    } catch (\SmartyException $e) {
         // pass through to regular plugin fallback
     }
     // could not optimize |escape call, so fallback to regular plugin

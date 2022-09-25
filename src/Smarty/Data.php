@@ -17,7 +17,7 @@ namespace Smarty;
  * @package    Smarty
  * @subpackage Template
  */
-class Data extends Smarty_Internal_Data
+class Data extends \Smarty\Internal\Data
 {
     /**
      * Counter
@@ -44,10 +44,10 @@ class Data extends Smarty_Internal_Data
      * create Smarty data object
      *
      * @param Smarty|array                    $_parent parent template
-     * @param Smarty|Smarty_Internal_Template $smarty  global smarty instance
+     * @param Smarty|\Smarty\Internal\Template $smarty  global smarty instance
      * @param string                          $name    optional data block name
      *
-     * @throws SmartyException
+     * @throws \SmartyException
      */
     public function __construct($_parent = null, $smarty = null, $name = null)
     {
@@ -61,10 +61,10 @@ class Data extends Smarty_Internal_Data
         } elseif (is_array($_parent)) {
             // set up variable values
             foreach ($_parent as $_key => $_val) {
-                $this->tpl_vars[ $_key ] = new Smarty_Variable($_val);
+                $this->tpl_vars[ $_key ] = new \Smarty\Variable($_val);
             }
         } elseif ($_parent !== null) {
-            throw new SmartyException('Wrong type for template variables');
+            throw new \SmartyException('Wrong type for template variables');
         }
     }
 }

@@ -5,7 +5,7 @@
  *
  * @package Smarty
  */
-class SmartyCompilerException extends SmartyException
+class SmartyCompilerException extends \SmartyException
 {
     /**
      * @return string

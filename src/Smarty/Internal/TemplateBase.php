@@ -19,36 +19,36 @@ namespace Smarty\Internal;
  * @property int $_objType
  *
  * The following methods will be dynamically loaded by the extension handler when they are called.
- * They are located in a corresponding Smarty_Internal_Method_xxxx class
+ * They are located in a corresponding \Smarty\Internal\Method\xxxx class
  *
- * @method Smarty_Internal_TemplateBase addAutoloadFilters(mixed $filters, string $type = null)
- * @method Smarty_Internal_TemplateBase addDefaultModifiers(mixed $modifiers)
- * @method Smarty_Internal_TemplateBase addLiterals(mixed $literals)
- * @method Smarty_Internal_TemplateBase createData(Smarty_Internal_Data $parent = null, string $name = null)
+ * @method \Smarty\Internal\TemplateBase addAutoloadFilters(mixed $filters, string $type = null)
+ * @method \Smarty\Internal\TemplateBase addDefaultModifiers(mixed $modifiers)
+ * @method \Smarty\Internal\TemplateBase addLiterals(mixed $literals)
+ * @method \Smarty\Internal\TemplateBase createData(\Smarty\Internal\Data $parent = null, string $name = null)
  * @method array getAutoloadFilters(string $type = null)
  * @method string getDebugTemplate()
  * @method array getDefaultModifier()
  * @method array getLiterals()
  * @method array getTags(mixed $template = null)
  * @method object getRegisteredObject(string $object_name)
- * @method Smarty_Internal_TemplateBase registerCacheResource(string $name, Smarty_CacheResource $resource_handler)
- * @method Smarty_Internal_TemplateBase registerClass(string $class_name, string $class_impl)
- * @method Smarty_Internal_TemplateBase registerDefaultConfigHandler(callback $callback)
- * @method Smarty_Internal_TemplateBase registerDefaultPluginHandler(callback $callback)
- * @method Smarty_Internal_TemplateBase registerDefaultTemplateHandler(callback $callback)
- * @method Smarty_Internal_TemplateBase registerResource(string $name, mixed $resource_handler)
- * @method Smarty_Internal_TemplateBase setAutoloadFilters(mixed $filters, string $type = null)
- * @method Smarty_Internal_TemplateBase setDebugTemplate(string $tpl_name)
- * @method Smarty_Internal_TemplateBase setDefaultModifiers(mixed $modifiers)
- * @method Smarty_Internal_TemplateBase setLiterals(mixed $literals)
- * @method Smarty_Internal_TemplateBase unloadFilter(string $type, string $name)
- * @method Smarty_Internal_TemplateBase unregisterCacheResource(string $name)
- * @method Smarty_Internal_TemplateBase unregisterObject(string $object_name)
- * @method Smarty_Internal_TemplateBase unregisterPlugin(string $type, string $name)
- * @method Smarty_Internal_TemplateBase unregisterFilter(string $type, mixed $callback)
- * @method Smarty_Internal_TemplateBase unregisterResource(string $name)
+ * @method \Smarty\Internal\TemplateBase registerCacheResource(string $name, \Smarty\CacheResource $resource_handler)
+ * @method \Smarty\Internal\TemplateBase registerClass(string $class_name, string $class_impl)
+ * @method \Smarty\Internal\TemplateBase registerDefaultConfigHandler(callback $callback)
+ * @method \Smarty\Internal\TemplateBase registerDefaultPluginHandler(callback $callback)
+ * @method \Smarty\Internal\TemplateBase registerDefaultTemplateHandler(callback $callback)
+ * @method \Smarty\Internal\TemplateBase registerResource(string $name, mixed $resource_handler)
+ * @method \Smarty\Internal\TemplateBase setAutoloadFilters(mixed $filters, string $type = null)
+ * @method \Smarty\Internal\TemplateBase setDebugTemplate(string $tpl_name)
+ * @method \Smarty\Internal\TemplateBase setDefaultModifiers(mixed $modifiers)
+ * @method \Smarty\Internal\TemplateBase setLiterals(mixed $literals)
+ * @method \Smarty\Internal\TemplateBase unloadFilter(string $type, string $name)
+ * @method \Smarty\Internal\TemplateBase unregisterCacheResource(string $name)
+ * @method \Smarty\Internal\TemplateBase unregisterObject(string $object_name)
+ * @method \Smarty\Internal\TemplateBase unregisterPlugin(string $type, string $name)
+ * @method \Smarty\Internal\TemplateBase unregisterFilter(string $type, mixed $callback)
+ * @method \Smarty\Internal\TemplateBase unregisterResource(string $name)
  */
-abstract class TemplateBase extends Smarty_Internal_Data
+abstract class TemplateBase extends \Smarty\Internal\Data
 {
     /**
      * Set this if you want different sets of cache files for the same
@@ -71,14 +71,14 @@ abstract class TemplateBase extends Smarty_Internal_Data
      *
      * @var int
      */
-    public $caching = Smarty::CACHING_OFF;
+    public $caching = \Smarty::CACHING_OFF;
 
     /**
      * check template for modifications?
      *
      * @var int
      */
-    public $compile_check = Smarty::COMPILECHECK_ON;
+    public $compile_check = \Smarty::COMPILECHECK_ON;
 
     /**
      * cache lifetime in seconds
@@ -109,8 +109,8 @@ abstract class TemplateBase extends Smarty_Internal_Data
      * @param mixed  $compile_id compile id to be used with this template
      * @param object $parent     next higher level of Smarty variables
      *
-     * @throws Exception
-     * @throws SmartyException
+     * @throws \Exception
+     * @throws \SmartyException
      * @return string rendered template output
      */
     public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null)
@@ -142,7 +142,7 @@ abstract class TemplateBase extends Smarty_Internal_Data
      * @api  Smarty::isCached()
      * @link https://www.smarty.net/docs/en/api.is.cached.tpl
      *
-     * @param null|string|\Smarty_Internal_Template $template   the resource handle of the template file or template
+     * @param null|string|\Smarty\Internal\Template $template   the resource handle of the template file or template
      *                                                          object
      * @param mixed                                 $cache_id   cache id to be used with this template
      * @param mixed                                 $compile_id compile id to be used with this template
@@ -176,14 +176,14 @@ abstract class TemplateBase extends Smarty_Internal_Data
         $saveVars = true;
         if ($template === null) {
             if (!$this->_isTplObj()) {
-                throw new SmartyException($function . '():Missing \'$template\' parameter');
+                throw new \SmartyException($function . '():Missing \'$template\' parameter');
             } else {
                 $template = $this;
             }
         } elseif (is_object($template)) {
-            /* @var Smarty_Internal_Template $template */
+            /* @var \Smarty\Internal\Template $template */
             if (!isset($template->_objType) || !$template->_isTplObj()) {
-                throw new SmartyException($function . '():Template object expected');
+                throw new \SmartyException($function . '():Template object expected');
             }
         } else {
             // get template object
@@ -203,16 +203,16 @@ abstract class TemplateBase extends Smarty_Internal_Data
                 isset($smarty->error_reporting) ? error_reporting($smarty->error_reporting) : null;
 
             if ($smarty->isMutingUndefinedOrNullWarnings()) {
-                $errorHandler = new Smarty_Internal_ErrorHandler();
+                $errorHandler = new \Smarty\Internal\ErrorHandler();
                 $errorHandler->activate();
             }
 
             if ($this->_objType === 2) {
-                /* @var Smarty_Internal_Template $this */
+                /* @var \Smarty\Internal\Template $this */
                 $template->tplFunctions = $this->tplFunctions;
                 $template->inheritance = $this->inheritance;
             }
-            /* @var Smarty_Internal_Template $parent */
+            /* @var \Smarty\Internal\Template $parent */
             if (isset($parent->_objType) && ($parent->_objType === 2) && !empty($parent->tplFunctions)) {
                 $template->tplFunctions = array_merge($parent->tplFunctions, $template->tplFunctions);
             }
@@ -223,7 +223,7 @@ abstract class TemplateBase extends Smarty_Internal_Data
                         $template->loadCached();
                     }
                     $result = $template->cached->isCached($template);
-                    Smarty_Internal_Template::$isCacheTplObj[ $template->_getTemplateId() ] = $template;
+                    \Smarty\Internal\Template::$isCacheTplObj[ $template->_getTemplateId() ] = $template;
                 } else {
                     return false;
                 }
@@ -234,8 +234,8 @@ abstract class TemplateBase extends Smarty_Internal_Data
                 }
                 ob_start();
                 $template->_mergeVars();
-                if (!empty(Smarty::$global_tpl_vars)) {
-                    $template->tpl_vars = array_merge(Smarty::$global_tpl_vars, $template->tpl_vars);
+                if (!empty(\Smarty::$global_tpl_vars)) {
+                    $template->tpl_vars = array_merge(\Smarty::$global_tpl_vars, $template->tpl_vars);
                 }
                 $result = $template->render(false, $function);
                 $template->_cleanUp();
@@ -243,10 +243,10 @@ abstract class TemplateBase extends Smarty_Internal_Data
                     $template->tpl_vars = $savedTplVars;
                     $template->config_vars = $savedConfigVars;
                 } else {
-                    if (!$function && !isset(Smarty_Internal_Template::$tplObjCache[ $template->templateId ])) {
+                    if (!$function && !isset(\Smarty\Internal\Template::$tplObjCache[ $template->templateId ])) {
                         $template->parent = null;
                         $template->tpl_vars = $template->config_vars = array();
-                        Smarty_Internal_Template::$tplObjCache[ $template->templateId ] = $template;
+                        \Smarty\Internal\Template::$tplObjCache[ $template->templateId ] = $template;
                     }
                 }
             }
@@ -259,7 +259,7 @@ abstract class TemplateBase extends Smarty_Internal_Data
                 error_reporting($_smarty_old_error_level);
             }
             return $result;
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             while (ob_get_level() > $level) {
                 ob_end_clean();
             }
@@ -286,7 +286,7 @@ abstract class TemplateBase extends Smarty_Internal_Data
      * @param bool     $cacheable  if true (default) this function is cache able
      * @param mixed    $cache_attr caching attributes if any
      *
-     * @return \Smarty|\Smarty_Internal_Template
+     * @return \Smarty|\Smarty\Internal\Template
      * @throws \SmartyException
      */
     public function registerPlugin($type, $name, $callback, $cacheable = true, $cache_attr = null)
@@ -321,7 +321,7 @@ abstract class TemplateBase extends Smarty_Internal_Data
      * @param callable    $callback
      * @param string|null $name optional filter name
      *
-     * @return \Smarty|\Smarty_Internal_Template
+     * @return \Smarty|\Smarty\Internal\Template
      * @throws \SmartyException
      */
     public function registerFilter($type, $callback, $name = null)
@@ -341,7 +341,7 @@ abstract class TemplateBase extends Smarty_Internal_Data
      * @param bool   $format                     smarty argument format, else traditional
      * @param array  $block_methods              list of block-methods
      *
-     * @return \Smarty|\Smarty_Internal_Template
+     * @return \Smarty|\Smarty\Internal\Template
      * @throws \SmartyException
      */
     public function registerObject(

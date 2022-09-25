@@ -16,13 +16,13 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class CaptureCompile extends Smarty_Internal_CompileBase
+class CaptureCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $shorttag_order = array('name');
 
@@ -30,7 +30,7 @@ class CaptureCompile extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $optional_attributes = array('name', 'assign', 'append');
 
@@ -38,14 +38,14 @@ class CaptureCompile extends Smarty_Internal_CompileBase
      * Compiles code for the {$smarty.capture.xxx}
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
      */
     public static function compileSpecialVariable(
         $args,
-        Smarty_Internal_TemplateCompilerBase $compiler,
+        \Smarty\Internal\TemplateCompilerBase $compiler,
         $parameter = null
     ) {
         return '$_smarty_tpl->smarty->ext->_capture->getBuffer($_smarty_tpl' .
@@ -56,12 +56,12 @@ class CaptureCompile extends Smarty_Internal_CompileBase
      * Compiles code for the {capture} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      * @param null                                  $parameter
      *
      * @return string compiled code
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter = null)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter = null)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args, $parameter, 'capture');
@@ -82,18 +82,18 @@ class CaptureCompile extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class CaptureCloseCompile extends Smarty_Internal_CompileBase
+class CaptureCloseCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Compiles code for the {/capture} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      * @param null                                  $parameter
      *
      * @return string compiled code
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args, $parameter, '/capture');

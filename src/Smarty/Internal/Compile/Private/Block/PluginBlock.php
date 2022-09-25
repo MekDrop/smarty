@@ -16,13 +16,13 @@ namespace Smarty\Internal\Compile\Private\Block;
  * @package    Smarty
  * @subpackage Compiler
  */
-class PluginBlock extends Smarty_Internal_CompileBase
+class PluginBlock extends \Smarty\Internal\CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $optional_attributes = array('_any');
 
@@ -37,7 +37,7 @@ class PluginBlock extends Smarty_Internal_CompileBase
      * Compiles code for the execution of block plugin
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      * @param string                                $tag       name of block plugin
      * @param string                                $function  PHP function name
@@ -46,7 +46,7 @@ class PluginBlock extends Smarty_Internal_CompileBase
      * @throws \SmartyCompilerException
      * @throws \SmartyException
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter, $tag, $function = null)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter, $tag, $function = null)
     {
         if (!isset($tag[ 5 ]) || substr($tag, -5) !== 'close') {
             // opening tag of block plugin
@@ -63,7 +63,7 @@ class PluginBlock extends Smarty_Internal_CompileBase
                 $callback = "\$_block_plugin{$this->nesting}{$callback[1]}";
             }
             if (isset($callable)) {
-                $output .= "if (!is_callable({$callable})) {\nthrow new SmartyException('block tag \'{$tag}\' not callable or registered');\n}\n";
+                $output .= "if (!is_callable({$callable})) {\nthrow new \SmartyException('block tag \'{$tag}\' not callable or registered');\n}\n";
             }
             $output .= "\$_smarty_tpl->smarty->_cache['_tag_stack'][] = array('{$tag}', {$_params});\n";
             $output .= "\$_block_repeat=true;\necho {$callback}({$_params}, null, \$_smarty_tpl, \$_block_repeat);\nwhile (\$_block_repeat) {\nob_start();?>";
@@ -104,14 +104,14 @@ class PluginBlock extends Smarty_Internal_CompileBase
     /**
      * Setup callback and parameter array
      *
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler
      * @param array                                 $_attr attributes
      * @param string                                $tag
      * @param string                                $function
      *
      * @return array
      */
-    public function setup(Smarty_Internal_TemplateCompilerBase $compiler, $_attr, $tag, $function)
+    public function setup(\Smarty\Internal\TemplateCompilerBase $compiler, $_attr, $tag, $function)
     {
         $_paramsArray = array();
         foreach ($_attr as $_key => $_value) {

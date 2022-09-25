@@ -28,7 +28,7 @@ class CacheResourceTestCommon extends PHPUnit_Smarty
         $this->assertEquals($a, $b);
     }
 
-    public function compiledPrefilter($text, Smarty_Internal_Template $tpl)
+    public function compiledPrefilter($text, \Smarty\Internal\Template $tpl)
     {
         $replace = $tpl->getTemplateVars('test');
         return str_replace('#', $replace ?? '', $text);

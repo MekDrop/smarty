@@ -16,7 +16,7 @@ namespace Smarty\Internal;
  * @package    Smarty
  * @subpackage Compiler
  */
-class SmartyTemplateCompiler extends Smarty_Internal_TemplateCompilerBase
+class SmartyTemplateCompiler extends \Smarty\Internal\TemplateCompilerBase
 {
     /**
      * Lexer class name
@@ -65,9 +65,9 @@ class SmartyTemplateCompiler extends Smarty_Internal_TemplateCompilerBase
      *
      * @param string $lexer_class  class name
      * @param string $parser_class class name
-     * @param Smarty $smarty       global instance
+     * @param \Smarty $smarty       global instance
      */
-    public function __construct($lexer_class, $parser_class, Smarty $smarty)
+    public function __construct($lexer_class, $parser_class, \Smarty $smarty)
     {
         parent::__construct($smarty);
         // get required plugins

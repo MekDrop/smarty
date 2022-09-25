@@ -18,17 +18,17 @@ namespace Smarty\Internal\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class StringResource extends Smarty_Resource
+class StringResource extends \Smarty\Resource
 {
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param Smarty_Template_Source   $source    source object
-     * @param Smarty_Internal_Template $_template template object
+     * @param \Smarty\Template\SourceTemplate   $source    source object
+     * @param \Smarty\Internal\Template $_template template object
      *
      * @return void
      */
-    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = null)
+    public function populate(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template = null)
     {
         $source->uid = $source->filepath = sha1($source->name . $source->smarty->_joined_template_dir);
         $source->timestamp = $source->exists = true;
@@ -39,11 +39,11 @@ class StringResource extends Smarty_Resource
      *
      * @uses decode() to decode base64 and urlencoded template_resources
      *
-     * @param Smarty_Template_Source $source source object
+     * @param \Smarty\Template\SourceTemplate $source source object
      *
      * @return string                 template source
      */
-    public function getContent(Smarty_Template_Source $source)
+    public function getContent(\Smarty\Template\SourceTemplate $source)
     {
         return $this->decode($source->name);
     }
@@ -86,11 +86,11 @@ class StringResource extends Smarty_Resource
      * Determine basename for compiled filename
      * Always returns an empty string.
      *
-     * @param Smarty_Template_Source $source source object
+     * @param \Smarty\Template\SourceTemplate $source source object
      *
      * @return string                 resource's basename
      */
-    public function getBasename(Smarty_Template_Source $source)
+    public function getBasename(\Smarty\Template\SourceTemplate $source)
     {
         return '';
     }

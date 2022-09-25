@@ -24,7 +24,7 @@ class ForeachRuntime
      *  - init item and key variables, named foreach property data if required
      *  - count total if required
      *
-     * @param \Smarty_Internal_Template $tpl
+     * @param \Smarty\Internal\Template $tpl
      * @param mixed                     $from       values to loop over
      * @param string                    $item       variable name
      * @param bool                      $needTotal  flag if we need to count values
@@ -35,7 +35,7 @@ class ForeachRuntime
      * @return mixed $from
      */
     public function init(
-        Smarty_Internal_Template $tpl,
+        \Smarty\Internal\Template $tpl,
         $from,
         $item,
         $needTotal = false,
@@ -64,7 +64,7 @@ class ForeachRuntime
                 $tpl->tpl_vars[ $item ]
             );
         }
-        $tpl->tpl_vars[ $item ] = new Smarty_Variable(null, $tpl->isRenderingCache);
+        $tpl->tpl_vars[ $item ] = new \Smarty\Variable(null, $tpl->isRenderingCache);
         if ($total === 0) {
             $from = null;
         } else {
@@ -75,7 +75,7 @@ class ForeachRuntime
                         $tpl->tpl_vars[ $key ]
                     );
                 }
-                $tpl->tpl_vars[ $key ] = new Smarty_Variable(null, $tpl->isRenderingCache);
+                $tpl->tpl_vars[ $key ] = new \Smarty\Variable(null, $tpl->isRenderingCache);
             }
         }
         if ($needTotal) {
@@ -102,7 +102,7 @@ class ForeachRuntime
             if (isset($properties[ 'show' ])) {
                 $namedProp[ 'show' ] = ($total > 0);
             }
-            $tpl->tpl_vars[ $namedVar ] = new Smarty_Variable($namedProp);
+            $tpl->tpl_vars[ $namedVar ] = new \Smarty\Variable($namedProp);
         }
         $this->stack[] = $saveVars;
         return $from;
@@ -118,17 +118,17 @@ class ForeachRuntime
      */
     public function count($value)
     {
-        if ($value instanceof IteratorAggregate) {
+        if ($value instanceof \IteratorAggregate) {
             // Note: getIterator() returns a Traversable, not an Iterator
             // thus rewind() and valid() methods may not be present
             return iterator_count($value->getIterator());
-        } elseif ($value instanceof Iterator) {
-            return $value instanceof Generator ? 1 : iterator_count($value);
-        } elseif ($value instanceof Countable) {
+        } elseif ($value instanceof \Iterator) {
+            return $value instanceof \Generator ? 1 : iterator_count($value);
+        } elseif ($value instanceof \Countable) {
             return count($value);
-        } elseif ($value instanceof PDOStatement) {
+        } elseif ($value instanceof \PDOStatement) {
             return $value->rowCount();
-        } elseif ($value instanceof Traversable) {
+        } elseif ($value instanceof \Traversable) {
             return iterator_count($value);
         }
         return count((array)$value);
@@ -139,10 +139,10 @@ class ForeachRuntime
      *
      * will be called by {break n} or {continue n} for the required number of levels
      *
-     * @param \Smarty_Internal_Template $tpl
+     * @param \Smarty\Internal\Template $tpl
      * @param int                       $levels number of levels
      */
-    public function restore(Smarty_Internal_Template $tpl, $levels = 1)
+    public function restore(\Smarty\Internal\Template $tpl, $levels = 1)
     {
         while ($levels) {
             $saveVars = array_pop($this->stack);

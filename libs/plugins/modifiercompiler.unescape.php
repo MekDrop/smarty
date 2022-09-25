@@ -14,11 +14,11 @@
  * @author Rodney Rehm
  *
  * @param array $params parameters
- * @param Smarty_Internal_TemplateCompilerBase $compiler
+ * @param \Smarty\Internal\TemplateCompilerBase $compiler
  *
  * @return string with compiled code
  */
-function smarty_modifiercompiler_unescape($params, Smarty_Internal_TemplateCompilerBase $compiler)
+function smarty_modifiercompiler_unescape($params, \Smarty\Internal\TemplateCompilerBase $compiler)
 {
     $compiler->template->_checkPlugins(
         array(

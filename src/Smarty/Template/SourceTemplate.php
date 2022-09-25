@@ -20,7 +20,7 @@ class SourceTemplate
     public $uid = null;
 
     /**
-     * Template Resource (Smarty_Internal_Template::$template_resource)
+     * Template Resource (\Smarty\Internal\Template::$template_resource)
      *
      * @var string
      */
@@ -71,21 +71,21 @@ class SourceTemplate
     /**
      * The Components an extended template is made of
      *
-     * @var \Smarty_Template_Source[]
+     * @var \Smarty\Template\SourceTemplate[]
      */
     public $components = null;
 
     /**
      * Resource Handler
      *
-     * @var \Smarty_Resource
+     * @var \Smarty\Resource
      */
     public $handler = null;
 
     /**
      * Smarty instance
      *
-     * @var Smarty
+     * @var \Smarty
      */
     public $smarty = null;
 
@@ -108,38 +108,38 @@ class SourceTemplate
      *
      * @var string
      */
-    public $compiler_class = 'Smarty_Internal_SmartyTemplateCompiler';
+    public $compiler_class = '\Smarty\Internal\SmartyTemplateCompiler';
 
     /**
      * Name of the Class to tokenize this resource's contents with
      *
      * @var string
      */
-    public $template_lexer_class = 'Smarty_Internal_Templatelexer';
+    public $template_lexer_class = '\Smarty\Internal\Templatelexer';
 
     /**
      * Name of the Class to parse this resource's contents with
      *
      * @var string
      */
-    public $template_parser_class = 'Smarty_Internal_Templateparser';
+    public $template_parser_class = '\Smarty\Internal\Templateparser';
 
     /**
      * create Source Object container
      *
-     * @param Smarty $smarty   Smarty instance this source object belongs to
+     * @param \Smarty $smarty   Smarty instance this source object belongs to
      * @param string $resource full template_resource
      * @param string $type     type of resource
      * @param string $name     resource name
      *
      * @throws   \SmartyException
-     * @internal param \Smarty_Resource $handler Resource Handler this source object communicates with
+     * @internal param \Smarty\Resource $handler Resource Handler this source object communicates with
      */
-    public function __construct(Smarty $smarty, $resource, $type, $name)
+    public function __construct(\Smarty $smarty, $resource, $type, $name)
     {
         $this->handler =
             isset($smarty->_cache[ 'resource_handlers' ][ $type ]) ? $smarty->_cache[ 'resource_handlers' ][ $type ] :
-                Smarty_Resource::load($smarty, $type);
+                \Smarty\Resource::load($smarty, $type);
         $this->smarty = $smarty;
         $this->resource = $resource;
         $this->type = $type;
@@ -150,16 +150,16 @@ class SourceTemplate
      * initialize Source Object for given resource
      * Either [$_template] or [$smarty, $template_resource] must be specified
      *
-     * @param Smarty_Internal_Template $_template         template object
-     * @param Smarty                   $smarty            smarty object
+     * @param \Smarty\Internal\Template $_template         template object
+     * @param \Smarty                   $smarty            smarty object
      * @param string                   $template_resource resource identifier
      *
-     * @return Smarty_Template_Source Source Object
-     * @throws SmartyException
+     * @return \Smarty\Template\SourceTemplate Source Object
+     * @throws \SmartyException
      */
     public static function load(
-        Smarty_Internal_Template $_template = null,
-        Smarty $smarty = null,
+        \Smarty\Internal\Template $_template = null,
+        \Smarty $smarty = null,
         $template_resource = null
     ) {
         if ($_template) {
@@ -167,7 +167,7 @@ class SourceTemplate
             $template_resource = $_template->template_resource;
         }
         if (empty($template_resource)) {
-            throw new SmartyException('Source: Missing  name');
+            throw new \SmartyException('Source: Missing  name');
         }
         // parse resource_name, load resource handler, identify unique resource name
         if (preg_match('/^([A-Za-z0-9_\-]{2,})[:]([\s\S]*)$/', $template_resource, $match)) {
@@ -180,10 +180,10 @@ class SourceTemplate
             $name = $template_resource;
         }
         // create new source  object
-        $source = new Smarty_Template_Source($smarty, $template_resource, $type, $name);
+        $source = new \Smarty\Template\SourceTemplate($smarty, $template_resource, $type, $name);
         $source->handler->populate($source, $_template);
         if (!$source->exists && isset($_template->smarty->default_template_handler_func)) {
-            Smarty_Internal_Method_RegisterDefaultTemplateHandler::_getDefaultTemplate($source);
+            \Smarty\Internal\Method\RegisterDefaultTemplateHandlerMethod::_getDefaultTemplate($source);
             $source->handler->populate($source, $_template);
         }
         return $source;

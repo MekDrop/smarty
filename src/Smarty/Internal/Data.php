@@ -17,19 +17,19 @@ namespace Smarty\Internal;
  * @subpackage Template
  *
  * @property int    $scope
- * @property Smarty $smarty
+ * @property \Smarty $smarty
  * The following methods will be dynamically loaded by the extension handler when they are called.
- * They are located in a corresponding Smarty_Internal_Method_xxxx class
+ * They are located in a corresponding \Smarty\Internal\Method\xxxx class
  *
  * @method mixed _getConfigVariable(string $varName, bool $errorEnable = true)
  * @method mixed getConfigVariable(string $varName, bool $errorEnable = true)
  * @method mixed getConfigVars(string $varName = null, bool $searchParents = true)
  * @method mixed getGlobal(string $varName = null)
  * @method mixed getStreamVariable(string $variable)
- * @method Smarty_Internal_Data clearAssign(mixed $tpl_var)
- * @method Smarty_Internal_Data clearAllAssign()
- * @method Smarty_Internal_Data clearConfig(string $varName = null)
- * @method Smarty_Internal_Data configLoad(string $config_file, mixed $sections = null, string $scope = 'local')
+ * @method \Smarty\Internal\Data clearAssign(mixed $tpl_var)
+ * @method \Smarty\Internal\Data clearAllAssign()
+ * @method \Smarty\Internal\Data clearConfig(string $varName = null)
+ * @method \Smarty\Internal\Data configLoad(string $config_file, mixed $sections = null, string $scope = 'local')
  */
 abstract class Data
 {
@@ -45,19 +45,19 @@ abstract class Data
      *
      * @var string
      */
-    public $template_class = 'Smarty_Internal_Template';
+    public $template_class = '\Smarty\Internal\Template';
 
     /**
      * template variables
      *
-     * @var Smarty_Variable[]
+     * @var \Smarty\Variable[]
      */
     public $tpl_vars = array();
 
     /**
      * parent template (if any)
      *
-     * @var Smarty|Smarty_Internal_Template|Smarty_Data
+     * @var \Smarty|\Smarty\Internal\Template|\Smarty\Data
      */
     public $parent = null;
 
@@ -71,18 +71,18 @@ abstract class Data
     /**
      * extension handler
      *
-     * @var Smarty_Internal_Extension_Handler
+     * @var \Smarty\Internal\Extension\HandlerExtension
      */
     public $ext = null;
 
     /**
-     * Smarty_Internal_Data constructor.
+     * \Smarty\Internal\Data constructor.
      *
      * Install extension handler
      */
     public function __construct()
     {
-        $this->ext = new Smarty_Internal_Extension_Handler();
+        $this->ext = new \Smarty\Internal\Extension\HandlerExtension();
         $this->ext->objType = $this->_objType;
     }
 
@@ -93,7 +93,7 @@ abstract class Data
      * @param mixed        $value   the value to assign
      * @param boolean      $nocache if true any output of this variable will be not cached
      *
-     * @return Smarty_Internal_Data current Smarty_Internal_Data (or Smarty or Smarty_Internal_Template) instance for
+     * @return \Smarty\Internal\Data current \Smarty\Internal\Data (or Smarty or \Smarty\Internal\Template) instance for
      *                              chaining
      */
     public function assign($tpl_var, $value = null, $nocache = false)
@@ -108,11 +108,11 @@ abstract class Data
                     /**
                      *
                      *
-                     * @var Smarty_Internal_Template $this
+                     * @var \Smarty\Internal\Template $this
                      */
                     $this->_assignInScope($tpl_var, $value, $nocache);
                 } else {
-                    $this->tpl_vars[ $tpl_var ] = new Smarty_Variable($value, $nocache);
+                    $this->tpl_vars[ $tpl_var ] = new \Smarty\Variable($value, $nocache);
                 }
             }
         }
@@ -131,7 +131,7 @@ abstract class Data
      * @param bool         $nocache if true any output of this variable will
      *                              be not cached
      *
-     * @return \Smarty_Internal_Data|\Smarty_Internal_Template|\Smarty
+     * @return \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty
      */
     public function append($tpl_var, $value = null, $merge = false, $nocache = false)
     {
@@ -145,7 +145,7 @@ abstract class Data
      * @param mixed   $value   the value to assign
      * @param boolean $nocache if true any output of this variable will be not cached
      *
-     * @return \Smarty_Internal_Data|\Smarty_Internal_Template|\Smarty
+     * @return \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty
      */
     public function assignGlobal($varName, $value = null, $nocache = false)
     {
@@ -159,7 +159,7 @@ abstract class Data
      * @param mixed   &$value  the referenced value to append
      * @param boolean $merge   flag if array elements shall be merged
      *
-     * @return \Smarty_Internal_Data|\Smarty_Internal_Template|\Smarty
+     * @return \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty
      */
     public function appendByRef($tpl_var, &$value, $merge = false)
     {
@@ -173,7 +173,7 @@ abstract class Data
      * @param         $value
      * @param boolean $nocache if true any output of this variable will be not cached
      *
-     * @return \Smarty_Internal_Data|\Smarty_Internal_Template|\Smarty
+     * @return \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty
      */
     public function assignByRef($tpl_var, &$value, $nocache = false)
     {
@@ -187,12 +187,12 @@ abstract class Data
      * @link https://www.smarty.net/docs/en/api.get.template.vars.tpl
      *
      * @param string                                                  $varName       variable name or null
-     * @param \Smarty_Internal_Data|\Smarty_Internal_Template|\Smarty $_ptr          optional pointer to data object
+     * @param \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty $_ptr          optional pointer to data object
      * @param bool                                                    $searchParents include parent templates?
      *
      * @return mixed variable value or or array of variables
      */
-    public function getTemplateVars($varName = null, Smarty_Internal_Data $_ptr = null, $searchParents = true)
+    public function getTemplateVars($varName = null, \Smarty\Internal\Data $_ptr = null, $searchParents = true)
     {
         return $this->ext->getTemplateVars->getTemplateVars($this, $varName, $_ptr, $searchParents);
     }
@@ -200,9 +200,9 @@ abstract class Data
     /**
      * Follow the parent chain an merge template and config variables
      *
-     * @param \Smarty_Internal_Data|null $data
+     * @param \Smarty\Internal\Data|null $data
      */
-    public function _mergeVars(Smarty_Internal_Data $data = null)
+    public function _mergeVars(\Smarty\Internal\Data $data = null)
     {
         if (isset($data)) {
             if (!empty($this->tpl_vars)) {
@@ -252,7 +252,7 @@ abstract class Data
     /**
      * Get Smarty object
      *
-     * @return Smarty
+     * @return \Smarty
      */
     public function _getSmartyObj()
     {

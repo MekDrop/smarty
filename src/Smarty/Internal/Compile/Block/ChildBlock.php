@@ -15,7 +15,7 @@ namespace Smarty\Internal\Compile\Block;
  *
  * @author Uwe Tews <uwe.tews@googlemail.com>
  */
-class ChildBlock extends Smarty_Internal_Compile_Child
+class ChildBlock extends \Smarty\Internal\Compile\ChildCompile
 {
     /**
      * Tag name

@@ -17,7 +17,7 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class DebugCompile extends Smarty_Internal_CompileBase
+class DebugCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Compiles code for the {debug} tag
@@ -35,7 +35,7 @@ class DebugCompile extends Smarty_Internal_CompileBase
         $compiler->tag_nocache = true;
         // display debug template
         $_output =
-            "<?php \$_smarty_debug = new Smarty_Internal_Debug;\n \$_smarty_debug->display_debug(\$_smarty_tpl);\n";
+            "<?php \$_smarty_debug = new \Smarty\Internal\Debug;\n \$_smarty_debug->display_debug(\$_smarty_tpl);\n";
         $_output .= "unset(\$_smarty_debug);\n?>";
         return $_output;
     }

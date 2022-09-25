@@ -10,6 +10,8 @@
 
 namespace Smarty\Internal\Resource;
 
+use Smarty\Resource\RecompiledResource;
+
 /**
  * Smarty Internal Plugin Resource Eval
  * Implements the strings as resource for Smarty template
@@ -18,17 +20,17 @@ namespace Smarty\Internal\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class EvalResource extends Smarty_Resource_Recompiled
+class EvalResource extends RecompiledResource
 {
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param Smarty_Template_Source   $source    source object
-     * @param Smarty_Internal_Template $_template template object
+     * @param \Smarty\Template\SourceTemplate   $source    source object
+     * @param \Smarty\Internal\Template $_template template object
      *
      * @return void
      */
-    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = null)
+    public function populate(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template = null)
     {
         $source->uid = $source->filepath = sha1($source->name);
         $source->timestamp = $source->exists = true;
@@ -39,11 +41,11 @@ class EvalResource extends Smarty_Resource_Recompiled
      *
      * @uses decode() to decode base64 and urlencoded template_resources
      *
-     * @param Smarty_Template_Source $source source object
+     * @param \Smarty\Template\SourceTemplate $source source object
      *
      * @return string                 template source
      */
-    public function getContent(Smarty_Template_Source $source)
+    public function getContent(\Smarty\Template\SourceTemplate $source)
     {
         return $this->decode($source->name);
     }
@@ -85,11 +87,11 @@ class EvalResource extends Smarty_Resource_Recompiled
     /**
      * Determine basename for compiled filename
      *
-     * @param Smarty_Template_Source $source source object
+     * @param \Smarty\Template\SourceTemplate $source source object
      *
      * @return string                 resource's basename
      */
-    public function getBasename(Smarty_Template_Source $source)
+    public function getBasename(\Smarty\Template\SourceTemplate $source)
     {
         return '';
     }

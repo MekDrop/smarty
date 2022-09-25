@@ -11,14 +11,14 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class AddAutoloadFiltersMethod extends Smarty_Internal_Method_SetAutoloadFilters
+class AddAutoloadFiltersMethod extends \Smarty\Internal\Method\SetAutoloadFilters
 {
     /**
      * Add autoload filters
      *
      * @api Smarty::setAutoloadFilters()
      *
-     * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
+     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param array                                                           $filters filters to load automatically
      * @param string                                                          $type    "pre", "output", … specify
      *                                                                                 the filter type to set.
@@ -26,10 +26,10 @@ class AddAutoloadFiltersMethod extends Smarty_Internal_Method_SetAutoloadFilters
      *                                                                                 $filters' keys as the
      *                                                                                 appropriate types
      *
-     * @return \Smarty|\Smarty_Internal_Template
+     * @return \Smarty|\Smarty\Internal\Template
      * @throws \SmartyException
      */
-    public function addAutoloadFilters(Smarty_Internal_TemplateBase $obj, $filters, $type = null)
+    public function addAutoloadFilters(\Smarty\Internal\TemplateBase $obj, $filters, $type = null)
     {
         $smarty = $obj->_getSmartyObj();
         if ($type !== null) {

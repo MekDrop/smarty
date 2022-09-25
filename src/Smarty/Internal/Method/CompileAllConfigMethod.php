@@ -11,7 +11,7 @@ namespace Smarty\Internal\Method;
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-class CompileAllConfigMethod extends Smarty_Internal_Method_CompileAllTemplates
+class CompileAllConfigMethod extends CompileAllTemplatesMethod
 {
     /**
      * Compile all config files
@@ -27,7 +27,7 @@ class CompileAllConfigMethod extends Smarty_Internal_Method_CompileAllTemplates
      * @return int number of template files recompiled
      */
     public function compileAllConfig(
-        Smarty $smarty,
+        \Smarty $smarty,
         $extension = '.conf',
         $force_compile = false,
         $time_limit = 0,

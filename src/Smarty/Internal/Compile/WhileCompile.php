@@ -16,19 +16,19 @@ namespace Smarty\Internal\Compile;
  * @package    Smarty
  * @subpackage Compiler
  */
-class WhileCompile extends Smarty_Internal_CompileBase
+class WhileCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Compiles code for the {while} tag
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
      * @throws \SmartyCompilerException
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
     {
         $compiler->loopNesting++;
         // check and get attributes
@@ -50,7 +50,7 @@ class WhileCompile extends Smarty_Internal_CompileBase
                 $compiler->setNocacheInVariable($var);
             }
             $prefixVar = $compiler->getNewPrefixVariable();
-            $assignCompiler = new Smarty_Internal_Compile_Assign();
+            $assignCompiler = new \Smarty\Internal\Compile\AssignCompile();
             $assignAttr = array();
             $assignAttr[][ 'value' ] = $prefixVar;
             if (is_array($parameter[ 'if condition' ][ 'var' ])) {
@@ -79,17 +79,17 @@ class WhileCompile extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class WhilecloseCompile extends Smarty_Internal_CompileBase
+class WhilecloseCompile extends \Smarty\Internal\CompileBase
 {
     /**
      * Compiles code for the {/while} tag
      *
      * @param array                                 $args     array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler)
     {
         $compiler->loopNesting--;
         // must endblock be nocache?

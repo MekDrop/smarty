@@ -8,7 +8,7 @@
  * @author     Uwe Tews
  */
 
-namespace Smarty\Internal\Compile\Private\Function;
+namespace Smarty\Internal\Compile\Private;
 
 /**
  * Smarty Internal Plugin Compile Function Plugin Class
@@ -16,13 +16,13 @@ namespace Smarty\Internal\Compile\Private\Function;
  * @package    Smarty
  * @subpackage Compiler
  */
-class PluginFunction extends Smarty_Internal_CompileBase
+class PluginFunction extends \Smarty\Internal\CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $required_attributes = array();
 
@@ -30,7 +30,7 @@ class PluginFunction extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $optional_attributes = array('_any');
 
@@ -38,7 +38,7 @@ class PluginFunction extends Smarty_Internal_CompileBase
      * Compiles code for the execution of function plugin
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      * @param string                                $tag       name of function plugin
      * @param string                                $function  PHP function name
@@ -47,7 +47,7 @@ class PluginFunction extends Smarty_Internal_CompileBase
      * @throws \SmartyCompilerException
      * @throws \SmartyException
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter, $tag, $function)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter, $tag, $function)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);

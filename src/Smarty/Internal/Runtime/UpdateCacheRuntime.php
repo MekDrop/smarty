@@ -14,24 +14,24 @@ class UpdateCacheRuntime
     /**
      * check client side cache
      *
-     * @param \Smarty_Template_Cached  $cached
-     * @param Smarty_Internal_Template $_template
+     * @param \Smarty\Template\CachedTemplate  $cached
+     * @param \Smarty\Internal\Template $_template
      * @param string                   $content
      */
-    public function cacheModifiedCheck(Smarty_Template_Cached $cached, Smarty_Internal_Template $_template, $content)
+    public function cacheModifiedCheck(\Smarty\Template\CachedTemplate $cached, \Smarty\Internal\Template $_template, $content)
     {
     }
 
     /**
      * Cache was invalid , so render from compiled and write to cache
      *
-     * @param \Smarty_Template_Cached   $cached
-     * @param \Smarty_Internal_Template $_template
+     * @param \Smarty\Template\CachedTemplate   $cached
+     * @param \Smarty\Internal\Template $_template
      * @param                           $no_output_filter
      *
      * @throws \Exception
      */
-    public function updateCache(Smarty_Template_Cached $cached, Smarty_Internal_Template $_template, $no_output_filter)
+    public function updateCache(\Smarty\Template\CachedTemplate $cached, \Smarty\Internal\Template $_template, $no_output_filter)
     {
         ob_start();
         if (!isset($_template->compiled)) {
@@ -43,7 +43,7 @@ class UpdateCacheRuntime
         }
         $this->removeNoCacheHash($cached, $_template, $no_output_filter);
         $compile_check = (int)$_template->compile_check;
-        $_template->compile_check = Smarty::COMPILECHECK_OFF;
+        $_template->compile_check = \Smarty::COMPILECHECK_OFF;
         if ($_template->_isSubTpl()) {
             $_template->compiled->unifunc = $_template->parent->compiled->unifunc;
         }
@@ -60,15 +60,15 @@ class UpdateCacheRuntime
     /**
      * Sanitize content and write it to cache resource
      *
-     * @param \Smarty_Template_Cached  $cached
-     * @param Smarty_Internal_Template $_template
+     * @param \Smarty\Template\CachedTemplate  $cached
+     * @param \Smarty\Internal\Template $_template
      * @param bool                     $no_output_filter
      *
      * @throws \SmartyException
      */
     public function removeNoCacheHash(
-        Smarty_Template_Cached $cached,
-        Smarty_Internal_Template $_template,
+        \Smarty\Template\CachedTemplate $cached,
+        \Smarty\Internal\Template $_template,
         $no_output_filter
     ) {
         $php_pattern = '/(<%|%>|<\?php|<\?|\?>|<script\s+language\s*=\s*[\"\']?\s*php\s*[\"\']?\s*>)/';
@@ -131,12 +131,12 @@ class UpdateCacheRuntime
     /**
      * Writes the content to cache resource
      *
-     * @param Smarty_Internal_Template $_template
+     * @param \Smarty\Internal\Template $_template
      * @param string                   $content
      *
      * @return bool
      */
-    public function writeCachedContent(Smarty_Internal_Template $_template, $content)
+    public function writeCachedContent(\Smarty\Internal\Template $_template, $content)
     {
         if ($_template->source->handler->recompiled || !$_template->caching
         ) {
@@ -153,12 +153,12 @@ class UpdateCacheRuntime
     /**
      * Write this cache object to handler
      *
-     * @param Smarty_Internal_Template $_template template object
+     * @param \Smarty\Internal\Template $_template template object
      * @param string                   $content   content to cache
      *
      * @return bool success
      */
-    public function write(Smarty_Internal_Template $_template, $content)
+    public function write(\Smarty\Internal\Template $_template, $content)
     {
         if (!$_template->source->handler->recompiled) {
             $cached = $_template->cached;

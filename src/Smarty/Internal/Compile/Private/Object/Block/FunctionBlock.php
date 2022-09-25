@@ -10,25 +10,27 @@
 
 namespace Smarty\Internal\Compile\Private\Object\Block;
 
+use Smarty\Internal\Compile\Private\Block\PluginBlock;
+
 /**
  * Smarty Internal Plugin Compile Object Block Function Class
  *
  * @package    Smarty
  * @subpackage Compiler
  */
-class FunctionBlock extends Smarty_Internal_Compile_Private_Block_Plugin
+class FunctionBlock extends PluginBlock
 {
     /**
      * Setup callback and parameter array
      *
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler
      * @param array                                 $_attr attributes
      * @param string                                $tag
      * @param string                                $method
      *
      * @return array
      */
-    public function setup(Smarty_Internal_TemplateCompilerBase $compiler, $_attr, $tag, $method)
+    public function setup(\Smarty\Internal\TemplateCompilerBase $compiler, $_attr, $tag, $method)
     {
         $_paramsArray = array();
         foreach ($_attr as $_key => $_value) {

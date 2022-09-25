@@ -16,18 +16,18 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class DqParseTree extends Smarty_Internal_ParseTree
+class DqParseTree extends \Smarty\Internal\ParseTree
 {
     /**
      * Create parse tree buffer for double quoted string subtrees
      *
      * @param object                    $parser  parser object
-     * @param Smarty_Internal_ParseTree $subtree parse tree buffer
+     * @param \Smarty\Internal\ParseTree $subtree parse tree buffer
      */
-    public function __construct($parser, Smarty_Internal_ParseTree $subtree)
+    public function __construct($parser, \Smarty\Internal\ParseTree $subtree)
     {
         $this->subtrees[] = $subtree;
-        if ($subtree instanceof Smarty_Internal_ParseTree_Tag) {
+        if ($subtree instanceof \Smarty\Internal\ParseTree\TagParseTree) {
             $parser->block_nesting_level = count($parser->compiler->_tag_stack);
         }
     }
@@ -35,22 +35,22 @@ class DqParseTree extends Smarty_Internal_ParseTree
     /**
      * Append buffer to subtree
      *
-     * @param \Smarty_Internal_Templateparser $parser
-     * @param Smarty_Internal_ParseTree       $subtree parse tree buffer
+     * @param \Smarty\Internal\Templateparser $parser
+     * @param \Smarty\Internal\ParseTree       $subtree parse tree buffer
      */
-    public function append_subtree(Smarty_Internal_Templateparser $parser, Smarty_Internal_ParseTree $subtree)
+    public function append_subtree(\Smarty\Internal\Templateparser $parser, \Smarty\Internal\ParseTree $subtree)
     {
         $last_subtree = count($this->subtrees) - 1;
-        if ($last_subtree >= 0 && $this->subtrees[ $last_subtree ] instanceof Smarty_Internal_ParseTree_Tag
+        if ($last_subtree >= 0 && $this->subtrees[ $last_subtree ] instanceof \Smarty\Internal\ParseTree\TagParseTree
             && $this->subtrees[ $last_subtree ]->saved_block_nesting < $parser->block_nesting_level
         ) {
-            if ($subtree instanceof Smarty_Internal_ParseTree_Code) {
+            if ($subtree instanceof \Smarty\Internal\ParseTree\CodeParseTree) {
                 $this->subtrees[ $last_subtree ]->data =
                     $parser->compiler->appendCode(
                         $this->subtrees[ $last_subtree ]->data,
                         '<?php echo ' . $subtree->data . ';?>'
                     );
-            } elseif ($subtree instanceof Smarty_Internal_ParseTree_DqContent) {
+            } elseif ($subtree instanceof DqContentParseTree) {
                 $this->subtrees[ $last_subtree ]->data =
                     $parser->compiler->appendCode(
                         $this->subtrees[ $last_subtree ]->data,
@@ -63,7 +63,7 @@ class DqParseTree extends Smarty_Internal_ParseTree
         } else {
             $this->subtrees[] = $subtree;
         }
-        if ($subtree instanceof Smarty_Internal_ParseTree_Tag) {
+        if ($subtree instanceof \Smarty\Internal\ParseTree\TagParseTree) {
             $parser->block_nesting_level = count($parser->compiler->_tag_stack);
         }
     }
@@ -71,24 +71,24 @@ class DqParseTree extends Smarty_Internal_ParseTree
     /**
      * Merge subtree buffer content together
      *
-     * @param \Smarty_Internal_Templateparser $parser
+     * @param \Smarty\Internal\Templateparser $parser
      *
      * @return string compiled template code
      */
-    public function to_smarty_php(Smarty_Internal_Templateparser $parser)
+    public function to_smarty_php(\Smarty\Internal\Templateparser $parser)
     {
         $code = '';
         foreach ($this->subtrees as $subtree) {
             if ($code !== '') {
                 $code .= '.';
             }
-            if ($subtree instanceof Smarty_Internal_ParseTree_Tag) {
+            if ($subtree instanceof \Smarty\Internal\ParseTree\TagParseTree) {
                 $more_php = $subtree->assign_to_var($parser);
             } else {
                 $more_php = $subtree->to_smarty_php($parser);
             }
             $code .= $more_php;
-            if (!$subtree instanceof Smarty_Internal_ParseTree_DqContent) {
+            if (!$subtree instanceof DqContentParseTree) {
                 $parser->compiler->has_variable_string = true;
             }
         }

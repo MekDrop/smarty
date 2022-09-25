@@ -26,20 +26,20 @@ class CreateDataMethod
      * @api  Smarty::createData()
      * @link https://www.smarty.net/docs/en/api.create.data.tpl
      *
-     * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty      $obj
-     * @param \Smarty_Internal_Template|\Smarty_Internal_Data|\Smarty_Data|\Smarty $parent next higher level of Smarty
+     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty      $obj
+     * @param \Smarty\Internal\Template|\Smarty\Internal\Data|\Smarty\Data|\Smarty $parent next higher level of Smarty
      *                                                                                     variables
      * @param string                                                               $name   optional data block name
      *
-     * @return \Smarty_Data data object
+     * @return \Smarty\Data data object
      */
-    public function createData(Smarty_Internal_TemplateBase $obj, Smarty_Internal_Data $parent = null, $name = null)
+    public function createData(\Smarty\Internal\TemplateBase $obj, \Smarty\Internal\Data $parent = null, $name = null)
     {
-        /* @var Smarty $smarty */
+        /* @var \Smarty $smarty */
         $smarty = $obj->_getSmartyObj();
-        $dataObj = new Smarty_Data($parent, $smarty, $name);
+        $dataObj = new \Smarty\Data($parent, $smarty, $name);
         if ($smarty->debugging) {
-            Smarty_Internal_Debug::register_data($dataObj);
+            \Smarty\Internal\Debug::register_data($dataObj);
         }
         return $dataObj;
     }

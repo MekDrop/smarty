@@ -14,14 +14,14 @@ class CacheModifyRuntime
     /**
      * check client side cache
      *
-     * @param \Smarty_Template_Cached   $cached
-     * @param \Smarty_Internal_Template $_template
+     * @param \Smarty\Template\CachedTemplate   $cached
+     * @param \Smarty\Internal\Template $_template
      * @param string                    $content
      *
      * @throws \Exception
      * @throws \SmartyException
      */
-    public function cacheModifiedCheck(Smarty_Template_Cached $cached, Smarty_Internal_Template $_template, $content)
+    public function cacheModifiedCheck(\Smarty\Template\CachedTemplate $cached, \Smarty\Internal\Template $_template, $content)
     {
         $_isCached = $_template->isCached() && !$_template->compiled->has_nocache_code;
         $_last_modified_date =

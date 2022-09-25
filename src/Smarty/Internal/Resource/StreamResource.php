@@ -11,6 +11,8 @@
 
 namespace Smarty\Internal\Resource;
 
+use Smarty\Resource\RecompiledResource;
+
 /**
  * Smarty Internal Plugin Resource Stream
  * Implements the streams as resource for Smarty template
@@ -19,17 +21,17 @@ namespace Smarty\Internal\Resource;
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class StreamResource extends Smarty_Resource_Recompiled
+class StreamResource extends RecompiledResource
 {
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param Smarty_Template_Source   $source    source object
-     * @param Smarty_Internal_Template $_template template object
+     * @param \Smarty\Template\SourceTemplate   $source    source object
+     * @param \Smarty\Internal\Template $_template template object
      *
      * @return void
      */
-    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = null)
+    public function populate(\Smarty\Template\SourceTemplate $source, \Smarty\Internal\Template $_template = null)
     {
         if (strpos($source->resource, '://') !== false) {
             $source->filepath = $source->resource;
@@ -44,14 +46,14 @@ class StreamResource extends Smarty_Resource_Recompiled
     /**
      * Load template's source from stream into current template object
      *
-     * @param Smarty_Template_Source $source source object
+     * @param \Smarty\Template\SourceTemplate $source source object
      *
      * @return string template source
      */
-    public function getContent(Smarty_Template_Source $source)
+    public function getContent(\Smarty\Template\SourceTemplate $source)
     {
         $t = '';
-        // the availability of the stream has already been checked in Smarty_Resource::fetch()
+        // the availability of the stream has already been checked in \Smarty\Resource::fetch()
         $fp = fopen($source->filepath, 'r+');
         if ($fp) {
             while (!feof($fp) && ($current_line = fgets($fp)) !== false) {

@@ -26,27 +26,27 @@ class GetTagsMethod
      * @api  Smarty::getTags()
      * @link https://www.smarty.net/docs/en/api.get.tags.tpl
      *
-     * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
-     * @param null|string|Smarty_Internal_Template                            $template
+     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
+     * @param null|string|\Smarty\Internal\Template                            $template
      *
      * @return array of tag/attributes
      * @throws \Exception
      * @throws \SmartyException
      */
-    public function getTags(Smarty_Internal_TemplateBase $obj, $template = null)
+    public function getTags(\Smarty\Internal\TemplateBase $obj, $template = null)
     {
-        /* @var Smarty $smarty */
+        /* @var \Smarty $smarty */
         $smarty = $obj->_getSmartyObj();
         if ($obj->_isTplObj() && !isset($template)) {
             $tpl = clone $obj;
         } elseif (isset($template) && $template->_isTplObj()) {
             $tpl = clone $template;
         } elseif (isset($template) && is_string($template)) {
-            /* @var Smarty_Internal_Template $tpl */
+            /* @var \Smarty\Internal\Template $tpl */
             $tpl = new $smarty->template_class($template, $smarty);
             // checks if template exists
             if (!$tpl->source->exists) {
-                throw new SmartyException("Unable to load template {$tpl->source->type} '{$tpl->source->name}'");
+                throw new \SmartyException("Unable to load template {$tpl->source->type} '{$tpl->source->name}'");
             }
         }
         if (isset($tpl)) {
@@ -55,11 +55,11 @@ class GetTagsMethod
             $tpl->_cache[ 'used_tags' ] = array();
             $tpl->smarty->merge_compiled_includes = false;
             $tpl->smarty->disableSecurity();
-            $tpl->caching = Smarty::CACHING_OFF;
+            $tpl->caching = \Smarty::CACHING_OFF;
             $tpl->loadCompiler();
             $tpl->compiler->compileTemplate($tpl);
             return $tpl->_cache[ 'used_tags' ];
         }
-        throw new SmartyException('Missing template specification');
+        throw new \SmartyException('Missing template specification');
     }
 }

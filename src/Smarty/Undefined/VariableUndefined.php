@@ -9,7 +9,7 @@ namespace Smarty\Undefined;
  * @package    Smarty
  * @subpackage Template
  */
-class VariableUndefined extends Smarty_Variable
+class VariableUndefined extends \Smarty\Variable
 {
     /**
      * Returns null for not existing properties

@@ -19,7 +19,7 @@ if (!defined('SMARTY_HELPER_FUNCTIONS_LOADED')) {
  * @author  Uwe Tews
  *             Usage:
  *                  require_once '...path/Autoloader.php';
- *                  Smarty_Autoloader::register();
+ *                  \Smarty\Autoloader::register();
  *             or
  *                  include '...path/bootstrap.php';
  *
@@ -49,7 +49,7 @@ class Autoloader
     public static $rootClasses = array('smarty' => 'Smarty.class.php');
 
     /**
-     * Registers Smarty_Autoloader backward compatible to older installations.
+     * Registers \Smarty\Autoloader backward compatible to older installations.
      *
      * @param bool $prepend Whether to prepend the autoloader or not.
      */
@@ -74,7 +74,7 @@ class Autoloader
     }
 
     /**
-     * Registers Smarty_Autoloader as an SPL autoloader.
+     * Registers \Smarty\Autoloader as an SPL autoloader.
      *
      * @param bool $prepend Whether to prepend the autoloader or not.
      */

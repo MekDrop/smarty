@@ -33,7 +33,7 @@ abstract class BaseResource
     public $exists = false;
 
     /**
-     * Template Compile Id (Smarty_Internal_Template::$compile_id)
+     * Template Compile Id (\Smarty\Internal\Template::$compile_id)
      *
      * @var string
      */
@@ -93,19 +93,19 @@ abstract class BaseResource
     /**
      * Process resource
      *
-     * @param Smarty_Internal_Template $_template template object
+     * @param \Smarty\Internal\Template $_template template object
      */
-    abstract public function process(Smarty_Internal_Template $_template);
+    abstract public function process(\Smarty\Internal\Template $_template);
 
     /**
      * get rendered template content by calling compiled or cached template code
      *
-     * @param \Smarty_Internal_Template $_template
+     * @param \Smarty\Internal\Template $_template
      * @param string                    $unifunc function with template code
      *
      * @throws \Exception
      */
-    public function getRenderedTemplateCode(Smarty_Internal_Template $_template, $unifunc = null)
+    public function getRenderedTemplateCode(\Smarty\Internal\Template $_template, $unifunc = null)
     {
         $smarty = &$_template->smarty;
         $_template->isRenderingCache = $this->isCache;
@@ -115,7 +115,7 @@ abstract class BaseResource
                 $unifunc = $this->unifunc;
             }
             if (empty($unifunc) || !function_exists($unifunc)) {
-                throw new SmartyException("Invalid compiled template for '{$_template->template_resource}'");
+                throw new \SmartyException("Invalid compiled template for '{$_template->template_resource}'");
             }
             if ($_template->startRenderCallbacks) {
                 foreach ($_template->startRenderCallbacks as $callback) {
@@ -127,7 +127,7 @@ abstract class BaseResource
                 call_user_func($callback, $_template);
             }
             $_template->isRenderingCache = false;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $_template->isRenderingCache = false;
             while (ob_get_level() > $level) {
                 ob_end_clean();

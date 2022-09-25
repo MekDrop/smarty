@@ -26,12 +26,12 @@ class UnregisterCacheResourceMethod
      * @api  Smarty::unregisterCacheResource()
      * @link https://www.smarty.net/docs/en/api.unregister.cacheresource.tpl
      *
-     * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
+     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      * @param                                                                 $name
      *
-     * @return \Smarty|\Smarty_Internal_Template
+     * @return \Smarty|\Smarty\Internal\Template
      */
-    public function unregisterCacheResource(Smarty_Internal_TemplateBase $obj, $name)
+    public function unregisterCacheResource(\Smarty\Internal\TemplateBase $obj, $name)
     {
         $smarty = $obj->_getSmartyObj();
         if (isset($smarty->registered_cache_resources[ $name ])) {

@@ -37,7 +37,7 @@ class ClearCacheMethod
      * @throws \SmartyException
      */
     public function clearCache(
-        Smarty $smarty,
+        \Smarty $smarty,
         $template_name,
         $cache_id = null,
         $compile_id = null,
@@ -46,7 +46,7 @@ class ClearCacheMethod
     ) {
         $smarty->_clearTemplateCache();
         // load cache resource and call clear
-        $_cache_resource = Smarty_CacheResource::load($smarty, $type);
+        $_cache_resource = \Smarty\CacheResource::load($smarty, $type);
         return $_cache_resource->clear($smarty, $template_name, $cache_id, $compile_id, $exp_time);
     }
 }

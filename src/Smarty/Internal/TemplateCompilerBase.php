@@ -16,8 +16,8 @@ namespace Smarty\Internal;
  * @package    Smarty
  * @subpackage Compiler
  *
- * @property Smarty_Internal_SmartyTemplateCompiler $prefixCompiledCode  = ''
- * @property Smarty_Internal_SmartyTemplateCompiler $postfixCompiledCode = ''
+ * @property \Smarty\Internal\SmartyTemplateCompiler $prefixCompiledCode  = ''
+ * @property \Smarty\Internal\SmartyTemplateCompiler $postfixCompiledCode = ''
  * @method   registerPostCompileCallback($callback, $parameter = array(), $key = null, $replace = false)
  * @method   unregisterPostCompileCallback($key)
  */
@@ -40,14 +40,14 @@ abstract class TemplateCompilerBase
     /**
      * Smarty object
      *
-     * @var Smarty
+     * @var \Smarty
      */
     public $smarty = null;
 
     /**
      * Parser object
      *
-     * @var Smarty_Internal_Templateparser
+     * @var \Smarty\Internal\Templateparser
      */
     public $parser = null;
 
@@ -103,7 +103,7 @@ abstract class TemplateCompilerBase
     /**
      * current template
      *
-     * @var Smarty_Internal_Template
+     * @var \Smarty\Internal\Template
      */
     public $template = null;
 
@@ -222,7 +222,7 @@ abstract class TemplateCompilerBase
     /**
      * parent compiler object for merged subtemplates and template functions
      *
-     * @var Smarty_Internal_TemplateCompilerBase
+     * @var \Smarty\Internal\TemplateCompilerBase
      */
     public $parent_compiler = null;
 
@@ -360,9 +360,9 @@ abstract class TemplateCompilerBase
     /**
      * Initialize compiler
      *
-     * @param Smarty $smarty global instance
+     * @param \Smarty $smarty global instance
      */
-    public function __construct(Smarty $smarty)
+    public function __construct(\Smarty $smarty)
     {
         $this->smarty = $smarty;
         $this->nocache_hash = str_replace(
@@ -378,17 +378,17 @@ abstract class TemplateCompilerBase
     /**
      * Method to compile a Smarty template
      *
-     * @param Smarty_Internal_Template                  $template template object to compile
+     * @param \Smarty\Internal\Template                  $template template object to compile
      * @param bool                                      $nocache  true is shall be compiled in nocache mode
-     * @param null|Smarty_Internal_TemplateCompilerBase $parent_compiler
+     * @param null|\Smarty\Internal\TemplateCompilerBase $parent_compiler
      *
      * @return bool true if compiling succeeded, false if it failed
      * @throws \Exception
      */
     public function compileTemplate(
-        Smarty_Internal_Template $template,
+        \Smarty\Internal\Template $template,
         $nocache = null,
-        Smarty_Internal_TemplateCompilerBase $parent_compiler = null
+        \Smarty\Internal\TemplateCompilerBase $parent_compiler = null
     ) {
         // get code frame of compiled template
         $_compiled_code = $template->smarty->ext->_codeFrame->create(
@@ -409,24 +409,24 @@ abstract class TemplateCompilerBase
     /**
      * Compile template source and run optional post filter
      *
-     * @param \Smarty_Internal_Template             $template
+     * @param \Smarty\Internal\Template             $template
      * @param null|bool                             $nocache flag if template must be compiled in nocache mode
-     * @param \Smarty_Internal_TemplateCompilerBase $parent_compiler
+     * @param \Smarty\Internal\TemplateCompilerBase $parent_compiler
      *
      * @return string
      * @throws \Exception
      */
     public function compileTemplateSource(
-        Smarty_Internal_Template $template,
+        \Smarty\Internal\Template $template,
         $nocache = null,
-        Smarty_Internal_TemplateCompilerBase $parent_compiler = null
+        \Smarty\Internal\TemplateCompilerBase $parent_compiler = null
     ) {
         try {
             // save template object in compiler class
             $this->template = $template;
             if ($this->smarty->debugging) {
                 if (!isset($this->smarty->_debug)) {
-                    $this->smarty->_debug = new Smarty_Internal_Debug();
+                    $this->smarty->_debug = new \Smarty\Internal\Debug();
                 }
                 $this->smarty->_debug->start_compile($this->template);
             }
@@ -460,7 +460,7 @@ abstract class TemplateCompilerBase
                 // we have array of inheritance templates by extends: resource
                 // generate corresponding source code sequence
                 $_content =
-                    Smarty_Internal_Compile_Extends::extendsSourceArrayCode($this->template);
+                    \Smarty\Internal\Compile\ExtendsCompile::extendsSourceArrayCode($this->template);
             } else {
                 // get template source
                 $_content = $this->template->source->getContent();
@@ -469,7 +469,7 @@ abstract class TemplateCompilerBase
             if (!empty($this->required_plugins[ 'compiled' ]) || !empty($this->required_plugins[ 'nocache' ])) {
                 $_compiled_code = '<?php ' . $this->compileRequiredPlugins() . "?>\n" . $_compiled_code;
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             if ($this->smarty->debugging) {
                 $this->smarty->_debug->end_compile($this->template);
             }
@@ -541,8 +541,8 @@ abstract class TemplateCompilerBase
      * @param array  $args      array with tag attributes
      * @param array  $parameter array with compilation parameter
      *
-     * @throws SmartyCompilerException
-     * @throws SmartyException
+     * @throws \SmartyCompilerException
+     * @throws \SmartyException
      * @return string compiled code
      */
     public function compileTag($tag, $args, $parameter = array())
@@ -731,7 +731,7 @@ abstract class TemplateCompilerBase
     /**
      * lazy loads internal compile plugin for tag and calls the compile method
      * compile objects cached for reuse.
-     * class name format:  Smarty_Internal_Compile_TagName
+     * class name format:  \Smarty\Internal\Compile\TagName
      * plugin filename format: Smarty_Internal_TagName.php
      *
      * @param string $tag    tag name
@@ -745,7 +745,7 @@ abstract class TemplateCompilerBase
      */
     public function callTagCompiler($tag, $args, $param1 = null, $param2 = null, $param3 = null)
     {
-        /* @var Smarty_Internal_CompileBase $tagCompiler */
+        /* @var \Smarty\Internal\CompileBase $tagCompiler */
         $tagCompiler = $this->getTagCompiler($tag);
         // compile this tag
         return $tagCompiler === false ? false : $tagCompiler->compile($args, $this, $param1, $param2, $param3);
@@ -759,7 +759,7 @@ abstract class TemplateCompilerBase
      *
      * @param string $tag tag name
      *
-     * @return bool|\Smarty_Internal_CompileBase tag compiler object or false if not found
+     * @return bool|\\Smarty\Internal\CompileBase tag compiler object or false if not found
      */
     public function getTagCompiler($tag)
     {
@@ -768,7 +768,7 @@ abstract class TemplateCompilerBase
             // lazy load internal compiler plugin
             $_tag = explode('_', $tag);
             $_tag = array_map('smarty_ucfirst_ascii', $_tag);
-            $class_name = 'Smarty_Internal_Compile_' . implode('_', $_tag);
+            $class_name = '\\Smarty\\Internal\\Compile\\' . implode('_', $_tag);
             if (class_exists($class_name)
                 && (!isset($this->smarty->security_policy) || $this->smarty->security_policy->isTrustedTag($tag, $this))
             ) {
@@ -1010,7 +1010,7 @@ abstract class TemplateCompilerBase
                 $this->template->tpl_vars[ $_var ] = clone $this->template->tpl_vars[ $_var ];
                 $this->template->tpl_vars[ $_var ]->nocache = true;
             } else {
-                $this->template->tpl_vars[ $_var ] = new Smarty_Variable(null, true);
+                $this->template->tpl_vars[ $_var ] = new \Smarty\Variable(null, true);
             }
         }
     }
@@ -1133,7 +1133,7 @@ abstract class TemplateCompilerBase
             echo ob_get_clean();
             flush();
         }
-        $e = new SmartyCompilerException($error_text);
+        $e = new \SmartyCompilerException($error_text);
         $e->setLine($line);
         $e->source = trim(preg_replace('![\t\r\n]+!', ' ', $match[ $line - 1 ]));
         $e->desc = $args;
@@ -1391,7 +1391,7 @@ abstract class TemplateCompilerBase
     }
 
     /**
-     * Compile code to call Smarty_Internal_Template::_checkPlugins()
+     * Compile code to call \Smarty\Internal\Template::_checkPlugins()
      * for required plugins
      *
      * @return string
@@ -1406,7 +1406,7 @@ abstract class TemplateCompilerBase
     }
 
     /**
-     * Compile code to call Smarty_Internal_Template::_checkPlugins
+     * Compile code to call \Smarty\Internal\Template::_checkPlugins
      *   - checks if plugin is callable require otherwise
      *
      * @param $requiredPlugins
@@ -1449,8 +1449,8 @@ abstract class TemplateCompilerBase
      * @param array  $args      array with tag attributes
      * @param array  $parameter array with compilation parameter
      *
-     * @throws SmartyCompilerException
-     * @throws SmartyException
+     * @throws \SmartyCompilerException
+     * @throws \SmartyException
      * @return string compiled code
      */
     private function compileTag2($tag, $args, $parameter)
@@ -1540,13 +1540,13 @@ abstract class TemplateCompilerBase
                 }
                 // check if tag is registered
                 foreach (array(
-                    Smarty::PLUGIN_COMPILER,
-                    Smarty::PLUGIN_FUNCTION,
-                    Smarty::PLUGIN_BLOCK,
+                    \Smarty::PLUGIN_COMPILER,
+                    \Smarty::PLUGIN_FUNCTION,
+                    \Smarty::PLUGIN_BLOCK,
                 ) as $plugin_type) {
                     if (isset($this->smarty->registered_plugins[ $plugin_type ][ $tag ])) {
                         // if compiler function plugin call it now
-                        if ($plugin_type === Smarty::PLUGIN_COMPILER) {
+                        if ($plugin_type === \Smarty::PLUGIN_COMPILER) {
                             $new_args = array();
                             foreach ($args as $key => $mixed) {
                                 if (is_array($mixed)) {
@@ -1567,7 +1567,7 @@ abstract class TemplateCompilerBase
                             );
                         }
                         // compile registered function or block function
-                        if ($plugin_type === Smarty::PLUGIN_FUNCTION || $plugin_type === Smarty::PLUGIN_BLOCK) {
+                        if ($plugin_type === \Smarty::PLUGIN_FUNCTION || $plugin_type === \Smarty::PLUGIN_BLOCK) {
                             return $this->callTagCompiler(
                                 'private_registered_' . $plugin_type,
                                 $args,
@@ -1579,7 +1579,7 @@ abstract class TemplateCompilerBase
                 }
                 // check plugins from plugins folder
                 foreach ($this->plugin_search_order as $plugin_type) {
-                    if ($plugin_type === Smarty::PLUGIN_COMPILER
+                    if ($plugin_type === \Smarty::PLUGIN_COMPILER
                         && $this->smarty->loadPlugin('smarty_compiler_' . $tag)
                         && (!isset($this->smarty->security_policy)
                             || $this->smarty->security_policy->isTrustedTag($tag, $this))
@@ -1603,7 +1603,7 @@ abstract class TemplateCompilerBase
                                 return $plugin_object->compile($args, $this);
                             }
                         }
-                        throw new SmartyException("Plugin '{$tag}' not callable");
+                        throw new \SmartyException("Plugin '{$tag}' not callable");
                     } else {
                         if ($function = $this->getPlugin($tag, $plugin_type)) {
                             if (!isset($this->smarty->security_policy)
@@ -1640,7 +1640,7 @@ abstract class TemplateCompilerBase
                     }
                     if ($found) {
                         // if compiler function plugin call it now
-                        if ($plugin_type === Smarty::PLUGIN_COMPILER) {
+                        if ($plugin_type === \Smarty::PLUGIN_COMPILER) {
                             $new_args = array();
                             foreach ($args as $key => $mixed) {
                                 if (is_array($mixed)) {
@@ -1691,21 +1691,21 @@ abstract class TemplateCompilerBase
                     }
                 }
                 // registered block tag ?
-                if (isset($this->smarty->registered_plugins[ Smarty::PLUGIN_BLOCK ][ $base_tag ])
-                    || isset($this->default_handler_plugins[ Smarty::PLUGIN_BLOCK ][ $base_tag ])
+                if (isset($this->smarty->registered_plugins[ \Smarty::PLUGIN_BLOCK ][ $base_tag ])
+                    || isset($this->default_handler_plugins[ \Smarty::PLUGIN_BLOCK ][ $base_tag ])
                 ) {
                     return $this->callTagCompiler('private_registered_block', $args, $parameter, $tag);
                 }
                 // registered function tag ?
-                if (isset($this->smarty->registered_plugins[ Smarty::PLUGIN_FUNCTION ][ $tag ])) {
+                if (isset($this->smarty->registered_plugins[ \Smarty::PLUGIN_FUNCTION ][ $tag ])) {
                     return $this->callTagCompiler('private_registered_function', $args, $parameter, $tag);
                 }
                 // block plugin?
-                if ($function = $this->getPlugin($base_tag, Smarty::PLUGIN_BLOCK)) {
+                if ($function = $this->getPlugin($base_tag, \Smarty::PLUGIN_BLOCK)) {
                     return $this->callTagCompiler('private_block_plugin', $args, $parameter, $tag, $function);
                 }
                 // function plugin?
-                if ($function = $this->getPlugin($tag, Smarty::PLUGIN_FUNCTION)) {
+                if ($function = $this->getPlugin($tag, \Smarty::PLUGIN_FUNCTION)) {
                     if (!isset($this->smarty->security_policy)
                         || $this->smarty->security_policy->isTrustedTag($tag, $this)
                     ) {
@@ -1713,14 +1713,14 @@ abstract class TemplateCompilerBase
                     }
                 }
                 // registered compiler plugin ?
-                if (isset($this->smarty->registered_plugins[ Smarty::PLUGIN_COMPILER ][ $tag ])) {
+                if (isset($this->smarty->registered_plugins[ \Smarty::PLUGIN_COMPILER ][ $tag ])) {
                     // if compiler function plugin call it now
                     $args = array();
-                    if (!$this->smarty->registered_plugins[ Smarty::PLUGIN_COMPILER ][ $tag ][ 1 ]) {
+                    if (!$this->smarty->registered_plugins[ \Smarty::PLUGIN_COMPILER ][ $tag ][ 1 ]) {
                         $this->tag_nocache = true;
                     }
                     return call_user_func_array(
-                        $this->smarty->registered_plugins[ Smarty::PLUGIN_COMPILER ][ $tag ][ 0 ],
+                        $this->smarty->registered_plugins[ \Smarty::PLUGIN_COMPILER ][ $tag ][ 0 ],
                         array(
                             $args,
                             $this
@@ -1738,7 +1738,7 @@ abstract class TemplateCompilerBase
                             return $plugin_object->compile($args, $this);
                         }
                     }
-                    throw new SmartyException("Plugin '{$tag}' not callable");
+                    throw new \SmartyException("Plugin '{$tag}' not callable");
                 }
             }
             $this->trigger_template_error("unknown tag '{$tag}'", null, true);

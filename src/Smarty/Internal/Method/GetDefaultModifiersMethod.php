@@ -25,11 +25,11 @@ class GetDefaultModifiersMethod
      *
      * @api Smarty::getDefaultModifiers()
      *
-     * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
+     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      *
      * @return array list of default modifiers
      */
-    public function getDefaultModifiers(Smarty_Internal_TemplateBase $obj)
+    public function getDefaultModifiers(\Smarty\Internal\TemplateBase $obj)
     {
         $smarty = $obj->_getSmartyObj();
         return $smarty->default_modifiers;

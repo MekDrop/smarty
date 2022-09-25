@@ -16,20 +16,20 @@ namespace Smarty\Internal\Compile\Private;
  * @package    Smarty
  * @subpackage Compiler
  */
-class ModifierPrivate extends Smarty_Internal_CompileBase
+class ModifierPrivate extends \Smarty\Internal\CompileBase
 {
     /**
      * Compiles code for modifier execution
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
      * @throws \SmartyCompilerException
      * @throws \SmartyException
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);

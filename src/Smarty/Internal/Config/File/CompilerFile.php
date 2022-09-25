@@ -57,7 +57,7 @@ class CompilerFile
     /**
      * Smarty object
      *
-     * @var Smarty_Internal_Template object
+     * @var \Smarty\Internal\Template object
      */
     public $template;
 
@@ -96,12 +96,12 @@ class CompilerFile
     /**
      * Method to compile Smarty config source.
      *
-     * @param Smarty_Internal_Template $template
+     * @param \Smarty\Internal\Template $template
      *
      * @return bool true if compiling succeeded, false if it failed
      * @throws \SmartyException
      */
-    public function compileTemplate(Smarty_Internal_Template $template)
+    public function compileTemplate(\Smarty\Internal\Template $template)
     {
         $this->template = $template;
         $this->template->compiled->file_dependency[ $this->template->source->uid ] =
@@ -112,12 +112,12 @@ class CompilerFile
             );
         if ($this->smarty->debugging) {
             if (!isset($this->smarty->_debug)) {
-                $this->smarty->_debug = new Smarty_Internal_Debug();
+                $this->smarty->_debug = new \Smarty\Internal\Debug();
             }
             $this->smarty->_debug->start_compile($this->template);
         }
         // init the lexer/parser to compile the config file
-        /* @var Smarty_Internal_ConfigFileLexer $this->lex */
+        /* @var \Smarty\Internal\ConfigFileLexer $this->lex */
         $this->lex = new $this->lexer_class(
             str_replace(
                 array(
@@ -129,7 +129,7 @@ class CompilerFile
             ) . "\n",
             $this
         );
-        /* @var Smarty_Internal_ConfigFileParser $this->parser */
+        /* @var \Smarty\Internal\ConfigFileParser $this->parser */
         $this->parser = new $this->parser_class($this->lex, $this);
         if (function_exists('mb_internal_encoding')
             && function_exists('ini_get')

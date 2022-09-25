@@ -14,11 +14,11 @@ class UpdateScopeRuntime
     /**
      * Update new assigned template or config variable in other effected scopes
      *
-     * @param Smarty_Internal_Template $tpl      data object
+     * @param \Smarty\Internal\Template $tpl      data object
      * @param string|null              $varName  variable name
      * @param int                      $tagScope tag scope to which bubble up variable value
      */
-    public function _updateScope(Smarty_Internal_Template $tpl, $varName, $tagScope = 0)
+    public function _updateScope(\Smarty\Internal\Template $tpl, $varName, $tagScope = 0)
     {
         if ($tagScope) {
             $this->_updateVarStack($tpl, $varName);
@@ -45,12 +45,12 @@ class UpdateScopeRuntime
     /**
      * Get array of objects which needs to be updated  by given scope value
      *
-     * @param Smarty_Internal_Template $tpl
+     * @param \Smarty\Internal\Template $tpl
      * @param int                      $mergedScope merged tag and template scope to which bubble up variable value
      *
      * @return array
      */
-    public function _getAffectedScopes(Smarty_Internal_Template $tpl, $mergedScope)
+    public function _getAffectedScopes(\Smarty\Internal\Template $tpl, $mergedScope)
     {
         $_stack = array();
         $ptr = $tpl->parent;
@@ -87,10 +87,10 @@ class UpdateScopeRuntime
      * Update variable in other scope
      *
      * @param array                     $tpl_vars template variable array
-     * @param \Smarty_Internal_Template $from
+     * @param \Smarty\Internal\Template $from
      * @param string                    $varName  variable name
      */
-    public function _updateVariableInOtherScope(&$tpl_vars, Smarty_Internal_Template $from, $varName)
+    public function _updateVariableInOtherScope(&$tpl_vars, \Smarty\Internal\Template $from, $varName)
     {
         if (!isset($tpl_vars[ $varName ])) {
             $tpl_vars[ $varName ] = clone $from->tpl_vars[ $varName ];
@@ -103,10 +103,10 @@ class UpdateScopeRuntime
     /**
      * Update variable in template local variable stack
      *
-     * @param \Smarty_Internal_Template $tpl
+     * @param \Smarty\Internal\Template $tpl
      * @param string|null               $varName variable name or null for config variables
      */
-    public function _updateVarStack(Smarty_Internal_Template $tpl, $varName)
+    public function _updateVarStack(\Smarty\Internal\Template $tpl, $varName)
     {
         $i = 0;
         while (isset($tpl->_cache[ 'varStack' ][ $i ])) {

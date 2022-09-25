@@ -18,7 +18,7 @@ namespace Smarty\Internal\ParseTree;
  * @subpackage Compiler
  * @ignore
  */
-class DqContentParseTree extends Smarty_Internal_ParseTree
+class DqContentParseTree extends \Smarty\Internal\ParseTree
 {
     /**
      * Create parse tree buffer with string content
@@ -33,11 +33,11 @@ class DqContentParseTree extends Smarty_Internal_ParseTree
     /**
      * Return content as double quoted string
      *
-     * @param \Smarty_Internal_Templateparser $parser
+     * @param \Smarty\Internal\Templateparser $parser
      *
      * @return string doubled quoted string
      */
-    public function to_smarty_php(Smarty_Internal_Templateparser $parser)
+    public function to_smarty_php(\Smarty\Internal\Templateparser $parser)
     {
         return '"' . $this->data . '"';
     }

@@ -16,13 +16,13 @@ namespace Smarty\Internal\Compile\Private\Registered;
  * @package    Smarty
  * @subpackage Compiler
  */
-class FunctionRegistered extends Smarty_Internal_CompileBase
+class FunctionRegistered extends \Smarty\Internal\CompileBase
 {
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
-     * @see Smarty_Internal_CompileBase
+     * @see \Smarty\Internal\CompileBase
      */
     public $optional_attributes = array('_any');
 
@@ -30,7 +30,7 @@ class FunctionRegistered extends Smarty_Internal_CompileBase
      * Compiles code for the execution of a registered function
      *
      * @param array                                 $args      array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
+     * @param \Smarty\Internal\TemplateCompilerBase $compiler  compiler object
      * @param array                                 $parameter array with compilation parameter
      * @param string                                $tag       name of function
      *
@@ -38,16 +38,16 @@ class FunctionRegistered extends Smarty_Internal_CompileBase
      * @throws \SmartyCompilerException
      * @throws \SmartyException
      */
-    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter, $tag)
+    public function compile($args, \Smarty\Internal\TemplateCompilerBase $compiler, $parameter, $tag)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
         unset($_attr[ 'nocache' ]);
-        if (isset($compiler->smarty->registered_plugins[ Smarty::PLUGIN_FUNCTION ][ $tag ])) {
-            $tag_info = $compiler->smarty->registered_plugins[ Smarty::PLUGIN_FUNCTION ][ $tag ];
+        if (isset($compiler->smarty->registered_plugins[ \Smarty::PLUGIN_FUNCTION ][ $tag ])) {
+            $tag_info = $compiler->smarty->registered_plugins[ \Smarty::PLUGIN_FUNCTION ][ $tag ];
             $is_registered = true;
         } else {
-            $tag_info = $compiler->default_handler_plugins[ Smarty::PLUGIN_FUNCTION ][ $tag ];
+            $tag_info = $compiler->default_handler_plugins[ \Smarty::PLUGIN_FUNCTION ][ $tag ];
             $is_registered = false;
         }
         // not cacheable?

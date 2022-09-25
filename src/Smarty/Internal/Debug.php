@@ -16,7 +16,7 @@ namespace Smarty\Internal;
  * @package    Smarty
  * @subpackage Debug
  */
-class Debug extends Smarty_Internal_Data
+class Debug extends \Smarty\Internal\Data
 {
     /**
      * template data
@@ -49,10 +49,10 @@ class Debug extends Smarty_Internal_Data
     /**
      * Start logging template
      *
-     * @param \Smarty_Internal_Template $template template
+     * @param \Smarty\Internal\Template $template template
      * @param null                      $mode     true: display   false: fetch  null: subtemplate
      */
-    public function start_template(Smarty_Internal_Template $template, $mode = null)
+    public function start_template(\Smarty\Internal\Template $template, $mode = null)
     {
         if (isset($mode) && !$template->_isSubTpl()) {
             $this->index++;
@@ -66,9 +66,9 @@ class Debug extends Smarty_Internal_Data
     /**
      * End logging of cache time
      *
-     * @param \Smarty_Internal_Template $template cached template
+     * @param \Smarty\Internal\Template $template cached template
      */
-    public function end_template(Smarty_Internal_Template $template)
+    public function end_template(\Smarty\Internal\Template $template)
     {
         $key = $this->get_key($template);
         $this->template_data[ $this->index ][ $key ][ 'total_time' ] +=
@@ -79,9 +79,9 @@ class Debug extends Smarty_Internal_Data
     /**
      * Start logging of compile time
      *
-     * @param \Smarty_Internal_Template $template
+     * @param \Smarty\Internal\Template $template
      */
-    public function start_compile(Smarty_Internal_Template $template)
+    public function start_compile(\Smarty\Internal\Template $template)
     {
         static $_is_stringy = array('string' => true, 'eval' => true);
         if (!empty($template->compiler->trace_uid)) {
@@ -109,9 +109,9 @@ class Debug extends Smarty_Internal_Data
     /**
      * End logging of compile time
      *
-     * @param \Smarty_Internal_Template $template
+     * @param \Smarty\Internal\Template $template
      */
-    public function end_compile(Smarty_Internal_Template $template)
+    public function end_compile(\Smarty\Internal\Template $template)
     {
         if (!empty($template->compiler->trace_uid)) {
             $key = $template->compiler->trace_uid;
@@ -128,9 +128,9 @@ class Debug extends Smarty_Internal_Data
     /**
      * Start logging of render time
      *
-     * @param \Smarty_Internal_Template $template
+     * @param \Smarty\Internal\Template $template
      */
-    public function start_render(Smarty_Internal_Template $template)
+    public function start_render(\Smarty\Internal\Template $template)
     {
         $key = $this->get_key($template);
         $this->template_data[ $this->index ][ $key ][ 'start_time' ] = microtime(true);
@@ -139,9 +139,9 @@ class Debug extends Smarty_Internal_Data
     /**
      * End logging of compile time
      *
-     * @param \Smarty_Internal_Template $template
+     * @param \Smarty\Internal\Template $template
      */
-    public function end_render(Smarty_Internal_Template $template)
+    public function end_render(\Smarty\Internal\Template $template)
     {
         $key = $this->get_key($template);
         $this->template_data[ $this->index ][ $key ][ 'render_time' ] +=
@@ -151,9 +151,9 @@ class Debug extends Smarty_Internal_Data
     /**
      * Start logging of cache time
      *
-     * @param \Smarty_Internal_Template $template cached template
+     * @param \Smarty\Internal\Template $template cached template
      */
-    public function start_cache(Smarty_Internal_Template $template)
+    public function start_cache(\Smarty\Internal\Template $template)
     {
         $key = $this->get_key($template);
         $this->template_data[ $this->index ][ $key ][ 'start_time' ] = microtime(true);
@@ -162,9 +162,9 @@ class Debug extends Smarty_Internal_Data
     /**
      * End logging of cache time
      *
-     * @param \Smarty_Internal_Template $template cached template
+     * @param \Smarty\Internal\Template $template cached template
      */
-    public function end_cache(Smarty_Internal_Template $template)
+    public function end_cache(\Smarty\Internal\Template $template)
     {
         $key = $this->get_key($template);
         $this->template_data[ $this->index ][ $key ][ 'cache_time' ] +=
@@ -174,25 +174,25 @@ class Debug extends Smarty_Internal_Data
     /**
      * Register template object
      *
-     * @param \Smarty_Internal_Template $template cached template
+     * @param \Smarty\Internal\Template $template cached template
      */
-    public function register_template(Smarty_Internal_Template $template)
+    public function register_template(\Smarty\Internal\Template $template)
     {
     }
 
     /**
      * Register data object
      *
-     * @param \Smarty_Data $data data object
+     * @param \Smarty\Data $data data object
      */
-    public static function register_data(Smarty_Data $data)
+    public static function register_data(\Smarty\Data $data)
     {
     }
 
     /**
      * Opens a window for the Smarty Debugging Console and display the data
      *
-     * @param Smarty_Internal_Template|Smarty $obj object to debug
+     * @param \Smarty\Internal\Template|\Smarty $obj object to debug
      * @param bool                            $full
      *
      * @throws \Exception
@@ -208,14 +208,14 @@ class Debug extends Smarty_Internal_Data
         $smarty = $obj->_getSmartyObj();
         // create fresh instance of smarty for displaying the debug console
         // to avoid problems if the application did overload the Smarty class
-        $debObj = new Smarty();
+        $debObj = new \Smarty();
         // copy the working dirs from application
         $debObj->setCompileDir($smarty->getCompileDir());
         // init properties by hand as user may have edited the original Smarty class
         $debObj->setPluginsDir(is_dir(dirname(__FILE__) . '/../plugins') ? dirname(__FILE__) .
                                                                            '/../plugins' : $smarty->getPluginsDir());
         $debObj->force_compile = false;
-        $debObj->compile_check = Smarty::COMPILECHECK_ON;
+        $debObj->compile_check = \Smarty::COMPILECHECK_ON;
         $debObj->left_delimiter = '{';
         $debObj->right_delimiter = '}';
         $debObj->security_policy = null;
@@ -230,7 +230,7 @@ class Debug extends Smarty_Internal_Data
         $debObj->autoload_filters = array();
         $debObj->default_modifiers = array();
         $debObj->escape_html = true;
-        $debObj->caching = Smarty::CACHING_OFF;
+        $debObj->caching = \Smarty::CACHING_OFF;
         $debObj->compile_id = null;
         $debObj->cache_id = null;
         // prepare information of assigned variables
@@ -240,7 +240,7 @@ class Debug extends Smarty_Internal_Data
         $_config_vars = $ptr->config_vars;
         ksort($_config_vars);
         $debugging = $smarty->debugging;
-        $_template = new Smarty_Internal_Template($debObj->debug_tpl, $debObj);
+        $_template = new \Smarty\Internal\Template($debObj->debug_tpl, $debObj);
         if ($obj->_isTplObj()) {
             $_template->assign('template_name', $obj->source->type . ':' . $obj->source->name);
         }
@@ -266,9 +266,9 @@ class Debug extends Smarty_Internal_Data
     /**
      * Recursively gets variables from all template/data scopes
      *
-     * @param Smarty_Internal_Template|Smarty_Data $obj object to debug
+     * @param \Smarty\Internal\Template|\Smarty\Data $obj object to debug
      *
-     * @return StdClass
+     * @return \StdClass
      */
     public function get_debug_vars($obj)
     {
@@ -323,7 +323,7 @@ class Debug extends Smarty_Internal_Data
             }
             $config_vars = array_merge($parent->config_vars, $config_vars);
         } else {
-            foreach (Smarty::$global_tpl_vars as $key => $var) {
+            foreach (\Smarty::$global_tpl_vars as $key => $var) {
                 if (!array_key_exists($key, $tpl_vars)) {
                     foreach ($var as $varkey => $varvalue) {
                         if ($varkey === 'value') {
@@ -350,11 +350,11 @@ class Debug extends Smarty_Internal_Data
     /**
      * Return key into $template_data for template
      *
-     * @param \Smarty_Internal_Template $template template object
+     * @param \Smarty\Internal\Template $template template object
      *
      * @return string key into $template_data
      */
-    private function get_key(Smarty_Internal_Template $template)
+    private function get_key(\Smarty\Internal\Template $template)
     {
         static $_is_stringy = array('string' => true, 'eval' => true);
         // calculate Uid if not already done
@@ -382,9 +382,9 @@ class Debug extends Smarty_Internal_Data
     /**
      * Ignore template
      *
-     * @param \Smarty_Internal_Template $template
+     * @param \Smarty\Internal\Template $template
      */
-    public function ignore(Smarty_Internal_Template $template)
+    public function ignore(\Smarty\Internal\Template $template)
     {
         // calculate Uid if not already done
         if ($template->source->uid === '') {
@@ -396,9 +396,9 @@ class Debug extends Smarty_Internal_Data
     /**
      * handle 'URL' debugging mode
      *
-     * @param Smarty $smarty
+     * @param \Smarty $smarty
      */
-    public function debugUrl(Smarty $smarty)
+    public function debugUrl(\Smarty $smarty)
     {
         if (isset($_SERVER[ 'QUERY_STRING' ])) {
             $_query_string = $_SERVER[ 'QUERY_STRING' ];

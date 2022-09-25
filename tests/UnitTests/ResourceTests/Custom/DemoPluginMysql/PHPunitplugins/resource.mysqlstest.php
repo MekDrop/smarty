@@ -10,7 +10,7 @@ class Smarty_Resource_Mysqlstest extends Smarty_Resource_Mysqls
         }
         catch
             (PDOException $e) {
-                throw new SmartyException('Mysql Resource failed: ' . $e->getMessage());
+                throw new \SmartyException('Mysql Resource failed: ' . $e->getMessage());
             }
         $this->fetch = $this->db->prepare('SELECT modified, source FROM templates WHERE name = :name');
     }

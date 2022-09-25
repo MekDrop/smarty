@@ -21,7 +21,7 @@ class Undefined
     public $class = null;
 
     /**
-     * Smarty_Internal_Undefined constructor.
+     * \Smarty\Internal\Undefined constructor.
      *
      * @param null|string $class name of undefined extension class
      */
@@ -31,15 +31,15 @@ class Undefined
     }
 
     /**
-     * Wrapper for obsolete class Smarty_Internal_Runtime_ValidateCompiled
+     * Wrapper for obsolete class \Smarty\Internal\Runtime\ValidateCompiledRuntime
      *
-     * @param \Smarty_Internal_Template $tpl
+     * @param \Smarty\Internal\Template $tpl
      * @param array                     $properties special template properties
      * @param bool                      $cache      flag if called from cache file
      *
      * @return bool false
      */
-    public function decodeProperties(Smarty_Internal_Template $tpl, $properties, $cache = false)
+    public function decodeProperties(\Smarty\Internal\Template $tpl, $properties, $cache = false)
     {
         if ($cache) {
             $tpl->cached->valid = false;
@@ -56,14 +56,14 @@ class Undefined
      * @param array  $args argument array
      *
      * @return mixed
-     * @throws SmartyException
+     * @throws \SmartyException
      */
     public function __call($name, $args)
     {
         if (isset($this->class)) {
-            throw new SmartyException("undefined extension class '{$this->class}'");
+            throw new \SmartyException("undefined extension class '{$this->class}'");
         } else {
-            throw new SmartyException(get_class($args[ 0 ]) . "->{$name}() undefined method");
+            throw new \SmartyException(get_class($args[ 0 ]) . "->{$name}() undefined method");
         }
     }
 }

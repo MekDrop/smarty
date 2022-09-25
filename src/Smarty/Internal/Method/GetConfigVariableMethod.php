@@ -23,13 +23,13 @@ class GetConfigVariableMethod
     /**
      * gets  a config variable value
      *
-     * @param \Smarty|\Smarty_Internal_Data|\Smarty_Internal_Template $data
+     * @param \Smarty|\Smarty\Internal\Data|\Smarty\Internal\Template $data
      * @param string                                                  $varName the name of the config variable
      * @param bool                                                    $errorEnable
      *
      * @return null|string  the value of the config variable
      */
-    public function getConfigVariable(Smarty_Internal_Data $data, $varName = null, $errorEnable = true)
+    public function getConfigVariable(\Smarty\Internal\Data $data, $varName = null, $errorEnable = true)
     {
         return $data->ext->configLoad->_getConfigVariable($data, $varName, $errorEnable);
     }

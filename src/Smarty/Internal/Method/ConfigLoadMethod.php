@@ -26,15 +26,15 @@ class ConfigLoadMethod
      * @api  Smarty::configLoad()
      * @link https://www.smarty.net/docs/en/api.config.load.tpl
      *
-     * @param \Smarty_Internal_Data|\Smarty_Internal_Template|\Smarty $data
+     * @param \Smarty\Internal\Data|\Smarty\Internal\Template|\Smarty $data
      * @param string                                                  $config_file filename
      * @param mixed                                                   $sections    array of section names, single
      *                                                                             section or null
      *
-     * @return \Smarty|\Smarty_Internal_Data|\Smarty_Internal_Template
+     * @return \Smarty|\Smarty\Internal\Data|\Smarty\Internal\Template
      * @throws \Exception
      */
-    public function configLoad(Smarty_Internal_Data $data, $config_file, $sections = null)
+    public function configLoad(\Smarty\Internal\Data $data, $config_file, $sections = null)
     {
         $this->_loadConfigFile($data, $config_file, $sections, null);
         return $data;
@@ -46,7 +46,7 @@ class ConfigLoadMethod
      * @api  Smarty::configLoad()
      * @link https://www.smarty.net/docs/en/api.config.load.tpl
      *
-     * @param \Smarty|\Smarty_Internal_Data|\Smarty_Internal_Template $data
+     * @param \Smarty|\Smarty\Internal\Data|\Smarty\Internal\Template $data
      * @param string                                                  $config_file filename
      * @param mixed                                                   $sections    array of section names, single
      *                                                                             section or null
@@ -55,16 +55,16 @@ class ConfigLoadMethod
      *
      * @throws \Exception
      */
-    public function _loadConfigFile(Smarty_Internal_Data $data, $config_file, $sections = null, $scope = 0)
+    public function _loadConfigFile(\Smarty\Internal\Data $data, $config_file, $sections = null, $scope = 0)
     {
         /* @var \Smarty $smarty */
         $smarty = $data->_getSmartyObj();
-        /* @var \Smarty_Internal_Template $confObj */
-        $confObj = new Smarty_Internal_Template($config_file, $smarty, $data, null, null, null, null, true);
-        $confObj->caching = Smarty::CACHING_OFF;
+        /* @var \Smarty\Internal\Template $confObj */
+        $confObj = new \Smarty\Internal\Template($config_file, $smarty, $data, null, null, null, null, true);
+        $confObj->caching = \Smarty::CACHING_OFF;
         $confObj->source->config_sections = $sections;
         $confObj->source->scope = $scope;
-        $confObj->compiled = Smarty_Template_Compiled::load($confObj);
+        $confObj->compiled = \Smarty\Template\CompiledTemplate::load($confObj);
         $confObj->compiled->render($confObj);
         if ($data->_isTplObj()) {
             $data->compiled->file_dependency[ $confObj->source->uid ] =
@@ -75,15 +75,15 @@ class ConfigLoadMethod
     /**
      * load config variables into template object
      *
-     * @param \Smarty_Internal_Template $tpl
+     * @param \Smarty\Internal\Template $tpl
      * @param array                     $new_config_vars
      */
-    public function _loadConfigVars(Smarty_Internal_Template $tpl, $new_config_vars)
+    public function _loadConfigVars(\Smarty\Internal\Template $tpl, $new_config_vars)
     {
         $this->_assignConfigVars($tpl->parent->config_vars, $tpl, $new_config_vars);
         $tagScope = $tpl->source->scope;
         if ($tagScope >= 0) {
-            if ($tagScope === Smarty::SCOPE_LOCAL) {
+            if ($tagScope === \Smarty::SCOPE_LOCAL) {
                 $this->_updateVarStack($tpl, $new_config_vars);
                 $tagScope = 0;
                 if (!$tpl->scope) {
@@ -94,7 +94,7 @@ class ConfigLoadMethod
                 $mergedScope = $tagScope | $tpl->scope;
                 if ($mergedScope) {
                     // update scopes
-                    /* @var \Smarty_Internal_Template|\Smarty|\Smarty_Internal_Data $ptr */
+                    /* @var \Smarty\Internal\Template|\Smarty|\Smarty\Internal\Data $ptr */
                     foreach ($tpl->smarty->ext->_updateScope->_getAffectedScopes($tpl->parent, $mergedScope) as $ptr) {
                         $this->_assignConfigVars($ptr->config_vars, $tpl, $new_config_vars);
                         if ($tagScope && $ptr->_isTplObj() && isset($tpl->_cache[ 'varStack' ])) {
@@ -110,10 +110,10 @@ class ConfigLoadMethod
      * Assign all config variables in given scope
      *
      * @param array                     $config_vars     config variables in scope
-     * @param \Smarty_Internal_Template $tpl
+     * @param \Smarty\Internal\Template $tpl
      * @param array                     $new_config_vars loaded config variables
      */
-    public function _assignConfigVars(&$config_vars, Smarty_Internal_Template $tpl, $new_config_vars)
+    public function _assignConfigVars(&$config_vars, \Smarty\Internal\Template $tpl, $new_config_vars)
     {
         // copy global config vars
         foreach ($new_config_vars[ 'vars' ] as $variable => $value) {
@@ -143,10 +143,10 @@ class ConfigLoadMethod
     /**
      * Update config variables in template local variable stack
      *
-     * @param \Smarty_Internal_Template $tpl
+     * @param \Smarty\Internal\Template $tpl
      * @param array                     $config_vars
      */
-    public function _updateVarStack(Smarty_Internal_Template $tpl, $config_vars)
+    public function _updateVarStack(\Smarty\Internal\Template $tpl, $config_vars)
     {
         $i = 0;
         while (isset($tpl->_cache[ 'varStack' ][ $i ])) {
@@ -158,13 +158,13 @@ class ConfigLoadMethod
     /**
      * gets  a config variable value
      *
-     * @param \Smarty|\Smarty_Internal_Data|\Smarty_Internal_Template $data
+     * @param \Smarty|\Smarty\Internal\Data|\Smarty\Internal\Template $data
      * @param string                                                  $varName the name of the config variable
      * @param bool                                                    $errorEnable
      *
      * @return null|string  the value of the config variable
      */
-    public function _getConfigVariable(Smarty_Internal_Data $data, $varName, $errorEnable = true)
+    public function _getConfigVariable(\Smarty\Internal\Data $data, $varName, $errorEnable = true)
     {
         $_ptr = $data;
         while ($_ptr !== null) {

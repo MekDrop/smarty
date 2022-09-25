@@ -25,11 +25,11 @@ class GetDebugTemplateMethod
      *
      * @api Smarty::getDebugTemplate()
      *
-     * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
+     * @param \Smarty\Internal\TemplateBase|\Smarty\Internal\Template|\Smarty $obj
      *
      * @return string
      */
-    public function getDebugTemplate(Smarty_Internal_TemplateBase $obj)
+    public function getDebugTemplate(\Smarty\Internal\TemplateBase $obj)
     {
         $smarty = $obj->_getSmartyObj();
         return $smarty->debug_tpl;

@@ -95,15 +95,15 @@ class CompileAllTemplatesMethod
                 $_smarty = clone $smarty;
                 //
                 $_smarty->_cache = array();
-                $_smarty->ext = new Smarty_Internal_Extension_Handler();
+                $_smarty->ext = new \Smarty\Internal\Extension\HandlerExtension();
                 $_smarty->ext->objType = $_smarty->_objType;
                 $_smarty->force_compile = $force_compile;
                 try {
-                    /* @var Smarty_Internal_Template $_tpl */
+                    /* @var \Smarty\Internal\Template $_tpl */
                     $_tpl = new $smarty->template_class($_file, $_smarty);
                     $_tpl->caching = Smarty::CACHING_OFF;
                     $_tpl->source =
-                        $isConfig ? Smarty_Template_Config::load($_tpl) : Smarty_Template_Source::load($_tpl);
+                        $isConfig ? \Smarty\Template\ConfigTemplate::load($_tpl) : \Smarty\Template\SourceTemplate::load($_tpl);
                     if ($_tpl->mustCompile()) {
                         $_tpl->compileTemplateSource();
                         $_count++;

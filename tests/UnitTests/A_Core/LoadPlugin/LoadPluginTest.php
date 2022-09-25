@@ -29,11 +29,11 @@ class LoadPluginTest extends PHPUnit_Smarty
     }
 
     /**
-     * loadPlugin test Smarty_Internal_Debug exists
+     * loadPlugin test \Smarty\Internal\Debug exists
      */
     public function testLoadPluginSmartyInternalDebug()
     {
-        $this->assertTrue($this->smarty->loadPlugin('Smarty_Internal_Debug') == true);
+        $this->assertTrue($this->smarty->loadPlugin('\\Smarty\\Internal\\Debug') == true);
     }
 
     /**
@@ -49,6 +49,6 @@ class LoadPluginTest extends PHPUnit_Smarty
      */
     public function testLoadPluginSmartyPluginCounter()
     {
-        $this->assertTrue($this->smarty->loadPlugin('Smarty_Function_Counter') == true);
+        $this->assertTrue($this->smarty->loadPlugin('\\Smarty\\Function\\Counter') == true);
     }
 }

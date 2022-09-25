@@ -17,7 +17,7 @@ namespace Smarty\Template;
  * @subpackage TemplateResources
  * @author     Uwe Tews
  */
-class ConfigTemplate extends Smarty_Template_Source
+class ConfigTemplate extends \Smarty\Template\SourceTemplate
 {
     /**
      * array of section names, single section or null
@@ -45,35 +45,35 @@ class ConfigTemplate extends Smarty_Template_Source
      *
      * @var string
      */
-    public $compiler_class = 'Smarty_Internal_Config_File_Compiler';
+    public $compiler_class = '\Smarty\Internal\Config\File\CompilerFile';
 
     /**
      * Name of the Class to tokenize this resource's contents with
      *
      * @var string
      */
-    public $template_lexer_class = 'Smarty_Internal_Configfilelexer';
+    public $template_lexer_class = '\Smarty\Internal\Configfilelexer';
 
     /**
      * Name of the Class to parse this resource's contents with
      *
      * @var string
      */
-    public $template_parser_class = 'Smarty_Internal_Configfileparser';
+    public $template_parser_class = '\Smarty\Internal\Configfileparser';
 
     /**
      * initialize Source Object for given resource
      * Either [$_template] or [$smarty, $template_resource] must be specified
      *
-     * @param Smarty_Internal_Template $_template         template object
-     * @param Smarty                   $smarty            smarty object
+     * @param \Smarty\Internal\Template $_template         template object
+     * @param \Smarty                   $smarty            smarty object
      * @param string                   $template_resource resource identifier
      *
-     * @return Smarty_Template_Config Source Object
-     * @throws SmartyException
+     * @return \Smarty\Template\ConfigTemplate Source Object
+     * @throws \SmartyException
      */
     public static function load(
-        Smarty_Internal_Template $_template = null,
+        \Smarty\Internal\Template $_template = null,
         Smarty $smarty = null,
         $template_resource = null
     ) {
@@ -83,18 +83,18 @@ class ConfigTemplate extends Smarty_Template_Source
             $template_resource = $_template->template_resource;
         }
         if (empty($template_resource)) {
-            throw new SmartyException('Source: Missing  name');
+            throw new \SmartyException('Source: Missing  name');
         }
         // parse resource_name, load resource handler
-        list($name, $type) = Smarty_Resource::parseResourceName($template_resource, $smarty->default_config_type);
+        list($name, $type) = \Smarty\Resource::parseResourceName($template_resource, $smarty->default_config_type);
         // make sure configs are not loaded via anything smarty can't handle
         if (isset($_incompatible_resources[ $type ])) {
-            throw new SmartyException("Unable to use resource '{$type}' for config");
+            throw new \SmartyException("Unable to use resource '{$type}' for config");
         }
-        $source = new Smarty_Template_Config($smarty, $template_resource, $type, $name);
+        $source = new \Smarty\Template\ConfigTemplate($smarty, $template_resource, $type, $name);
         $source->handler->populate($source, $_template);
         if (!$source->exists && isset($smarty->default_config_handler_func)) {
-            Smarty_Internal_Method_RegisterDefaultTemplateHandler::_getDefaultTemplate($source);
+            \Smarty\Internal\Method\RegisterDefaultTemplateHandlerMethod::_getDefaultTemplate($source);
             $source->handler->populate($source, $_template);
         }
         return $source;

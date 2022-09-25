@@ -5,7 +5,7 @@ namespace Smarty\Internal\Method;
 /**
  * Smarty Method MustCompile
  *
- * Smarty_Internal_Template::mustCompile() method
+ * \Smarty\Internal\Template::mustCompile() method
  *
  * @package    Smarty
  * @subpackage PluginsInternal
@@ -25,12 +25,12 @@ class MustCompileMethod
      * It does compare the timestamps of template source and the compiled templates and checks the force compile
      * configuration
      *
-     * @param \Smarty_Internal_Template $_template
+     * @param \Smarty\Internal\Template $_template
      *
      * @return bool
      * @throws \SmartyException
      */
-    public function mustCompile(Smarty_Internal_Template $_template)
+    public function mustCompile(\Smarty\Internal\Template $_template)
     {
         if (!$_template->source->exists) {
             if ($_template->_isSubTpl()) {
@@ -38,7 +38,7 @@ class MustCompileMethod
             } else {
                 $parent_resource = '';
             }
-            throw new SmartyException("Unable to load template {$_template->source->type} '{$_template->source->name}'{$parent_resource}");
+            throw new \SmartyException("Unable to load template {$_template->source->type} '{$_template->source->name}'{$parent_resource}");
         }
         if ($_template->mustCompile === null) {
             $_template->mustCompile = (!$_template->source->handler->uncompiled &&
