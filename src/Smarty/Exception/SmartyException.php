@@ -1,5 +1,6 @@
 <?php
 
+namespace Smarty\Exception;
 /**
  * Smarty exception class
  *
